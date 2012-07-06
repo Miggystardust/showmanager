@@ -1,0 +1,93 @@
+Please note that `rvm ruby ...` is only an alias to `rvm do ruby ...`,
+ it might work different as in earlier versions of RVM and will be shortly removed!
+ Also note that you do not have to prefix every command with `rvm`, they should just work by itself.
+`rvm do ruby script/rails ser` is deprecated, use `rvm all do ruby script/rails ser` or `rvm 1.9.2 do ruby script/rails ser` instead.
+/usr/local/rvm/rubies/ruby-1.9.2-p320/lib/ruby/site_ruby/1.9.1/rubygems/specification.rb:541:in `read': Interrupt
+	from /usr/local/rvm/rubies/ruby-1.9.2-p320/lib/ruby/site_ruby/1.9.1/rubygems/specification.rb:541:in `load'
+	from /usr/local/rvm/rubies/ruby-1.9.2-p320/lib/ruby/site_ruby/1.9.1/rubygems/specification.rb:269:in `block (2 levels) in _all'
+	from /usr/local/rvm/rubies/ruby-1.9.2-p320/lib/ruby/site_ruby/1.9.1/rubygems/specification.rb:268:in `each'
+	from /usr/local/rvm/rubies/ruby-1.9.2-p320/lib/ruby/site_ruby/1.9.1/rubygems/specification.rb:268:in `block in _all'
+	from /usr/local/rvm/rubies/ruby-1.9.2-p320/lib/ruby/site_ruby/1.9.1/rubygems/specification.rb:267:in `each'
+	from /usr/local/rvm/rubies/ruby-1.9.2-p320/lib/ruby/site_ruby/1.9.1/rubygems/specification.rb:267:in `_all'
+	from /usr/local/rvm/rubies/ruby-1.9.2-p320/lib/ruby/site_ruby/1.9.1/rubygems/specification.rb:410:in `each'
+	from /usr/local/rvm/rubies/ruby-1.9.2-p320/lib/ruby/site_ruby/1.9.1/rubygems/specification.rb:442:in `find'
+	from /usr/local/rvm/rubies/ruby-1.9.2-p320/lib/ruby/site_ruby/1.9.1/rubygems/specification.rb:442:in `find_by_path'
+	from /usr/local/rvm/rubies/ruby-1.9.2-p320/lib/ruby/site_ruby/1.9.1/rubygems.rb:206:in `try_activate'
+	from /usr/local/rvm/rubies/ruby-1.9.2-p320/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:59:in `rescue in require'
+	from /usr/local/rvm/rubies/ruby-1.9.2-p320/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:35:in `require'
+	from /retina/hubba/rails3-mongoid-devise/config/boot.rb:6:in `<top (required)>'
+	from <internal:lib/rubygems/custom_require>:29:in `require'
+	from <internal:lib/rubygems/custom_require>:29:in `require'
+	from script/rails:5:in `<main>'
+Please note that `rvm ruby ...` is only an alias to `rvm do ruby ...`,
+ it might work different as in earlier versions of RVM and will be shortly removed!
+ Also note that you do not have to prefix every command with `rvm`, they should just work by itself.
+`rvm do ruby script/rails server` is deprecated, use `rvm all do ruby script/rails server` or `rvm 1.9.2 do ruby script/rails server` instead.
+/retina/hubba/rails3-mongoid-devise/config/environment.rb:4:in `<top (required)>': uninitialized constant RAILS_DIR (NameError)
+	from /retina/hubba/rails3-mongoid-devise/config.ru:4:in `block in <main>'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/rack-1.4.1/lib/rack/builder.rb:51:in `instance_eval'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/rack-1.4.1/lib/rack/builder.rb:51:in `initialize'
+	from /retina/hubba/rails3-mongoid-devise/config.ru:1:in `new'
+	from /retina/hubba/rails3-mongoid-devise/config.ru:1:in `<main>'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/rack-1.4.1/lib/rack/builder.rb:40:in `eval'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/rack-1.4.1/lib/rack/builder.rb:40:in `parse_file'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/rack-1.4.1/lib/rack/server.rb:200:in `app'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/railties-3.2.6/lib/rails/commands/server.rb:46:in `app'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/rack-1.4.1/lib/rack/server.rb:301:in `wrapped_app'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/rack-1.4.1/lib/rack/server.rb:252:in `start'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/railties-3.2.6/lib/rails/commands/server.rb:70:in `start'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/railties-3.2.6/lib/rails/commands.rb:55:in `block in <top (required)>'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/railties-3.2.6/lib/rails/commands.rb:50:in `tap'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/railties-3.2.6/lib/rails/commands.rb:50:in `<top (required)>'
+	from script/rails:6:in `require'
+	from script/rails:6:in `<main>'
+=> Booting WEBrick
+=> Rails 3.2.6 application starting in development on http://0.0.0.0:3000
+=> Call with -d to detach
+=> Ctrl-C to shutdown server
+Exiting
+Please note that `rvm ruby ...` is only an alias to `rvm do ruby ...`,
+ it might work different as in earlier versions of RVM and will be shortly removed!
+ Also note that you do not have to prefix every command with `rvm`, they should just work by itself.
+`rvm do ruby script/rails console` is deprecated, use `rvm all do ruby script/rails console` or `rvm 1.9.2 do ruby script/rails console` instead.
+/usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `block in require': Interrupt
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:236:in `load_dependency'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/actionpack-3.2.6/lib/action_dispatch/http/parameters.rb:1:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/actionpack-3.2.6/lib/action_dispatch/http/request.rb:15:in `<class:Request>'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/actionpack-3.2.6/lib/action_dispatch/http/request.rb:12:in `<module:ActionDispatch>'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/actionpack-3.2.6/lib/action_dispatch/http/request.rb:11:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `block in require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:236:in `load_dependency'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/actionpack-3.2.6/lib/action_dispatch/routing/redirection.rb:1:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `block in require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:236:in `load_dependency'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/actionpack-3.2.6/lib/action_dispatch/routing/mapper.rb:5:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/devise-2.1.2/lib/devise/rails/routes.rb:30:in `<module:Routing>'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/devise-2.1.2/lib/devise/rails/routes.rb:4:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `block in require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:236:in `load_dependency'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/devise-2.1.2/lib/devise/rails.rb:1:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `block in require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:236:in `load_dependency'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/devise-2.1.2/lib/devise.rb:439:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `each'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:66:in `block in require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `each'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320@global/gems/bundler-1.1.4/lib/bundler/runtime.rb:55:in `require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320@global/gems/bundler-1.1.4/lib/bundler.rb:119:in `require'
+	from /retina/hubba/rails3-mongoid-devise/config/application.rb:13:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/railties-3.2.6/lib/rails/commands.rb:39:in `require'
+	from /usr/local/rvm/gems/ruby-1.9.2-p320/gems/railties-3.2.6/lib/rails/commands.rb:39:in `<top (required)>'
+	from script/rails:6:in `require'
+	from script/rails:6:in `<main>'

@@ -1,0 +1,17 @@
+<h2>File Upload</h2>
+
+<%= form_for :file_upload, :html => {:multipart => true} do |f| %>
+  <div><%= f.label "File to upload" %>
+  <%= f.file_field :my_file %><br /></div>
+  <div><%= f.label "Notes" %>
+  <%= f.text_field :notes %><br /></div>
+  <p></p>
+  <%= f.submit "Upload" %>
+<% end %>
+
+<h2>Files in Your Account</h2>
+<P>
+</P>
+<TABLE>
+<%= render(@assets) || "You have no files in your account!" %>
+</TABLE>

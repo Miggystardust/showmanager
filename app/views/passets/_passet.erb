@@ -1,0 +1,22 @@
+	<TR>
+		<TD>
+			<% if passet.kind.match("Audio file") -%>
+			<object type="application/x-shockwave-flash" data="/dewplayer/dewplayer-rect.swf" width="240" height="20" id="dewplayer" name="dewplayer">
+				<param name="wmode" value="transparent" />
+				<param name="movie" value="/dewplayer/dewplayer-rect.swf" /> 
+				<param name="flashvars" value="mp3=/uploads/download/<%=passet.uuid%>&amp;showtime=1" /> 
+			</object>
+			<% else -%>
+			<%= image_tag passet.thumb_path(100,100) %>
+			<% end -%>
+		</TD>
+		<TD>
+			<%=passet.filename%>
+		</TD>
+		<TD>
+		Attach to set
+		</TD>
+ 		<TD>
+    <%= button_to 'Remove', passet, :method=>:delete, :class=>:destroy %>
+		</TD>
+	</TR>

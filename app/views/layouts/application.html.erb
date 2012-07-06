@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubba Hubba: Stage Management</title>
+    <meta name="description" content="Hubba Hubba Stage Manager System">
+    <meta name="author" content="John Adams">
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= stylesheet_link_tag "main" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="page" class="page">
+      <div id="header">
+	<div id="headerimg" class="header2">
+	  <a href="http://www.hubbahubbarevue.com/" class="logo"><img src="http://www.hubbahubbarevue.com/wp-content/themes/hhr/images/logo.png" alt="Hubba Hubba Revue: Home of the San Francisco Bay Area&#039;s Biggest Burlesque Revue!"></a>
+	  </div>
+      </div>
+        <%= render 'layouts/navigation' %>
+        <%= render 'layouts/messages' %>
+      <div id="content" class="narrowcolumn" >
+	<div class="post">
+  	  <div class="entry">
+            <%= yield %>
+	  </div>
+	</div>
+      </div>
+      </div>
+    </div> <!--! end of #container -->
+  </body>
+</html>
