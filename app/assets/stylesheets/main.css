@@ -32,7 +32,7 @@ Author URI: http://www.infiniteset.com/
 }
 
 /* Begin Typography & Colors */
-body { font-size: 11px; font-family: Arial;  background: #d5d6d7 url('images/hhr_bg.jpg');  color: #333;  text-align: center;  background-color: #000;  }
+body { font-size: 11px; font-family: Arial;  background: #d5d6d7 url('images/hhr_bg.jpg');  color: #333;  text-align: left;  background-color: #000;  }
 #page {background-color: #000;  border: 1px solid #aa0000;  text-align: left;  color: #fff;  }
 #headerimg  {padding-top: 10px;  margin: 7px 9px 0;  height: 200px;  width: 740px; background-repeat: no-repeat;}
 	.header1 {background-image: url('http://www.hubbahubbarevue.com/wp-content/uploads/headers/header1.jpg')}
@@ -42,10 +42,10 @@ body { font-size: 11px; font-family: Arial;  background: #d5d6d7 url('images/hhr
 	.header5 {background-image: url('http://www.hubbahubbarevue.com/wp-content/uploads/headers/header5.jpg')}
 #content {font-size: 1.2em;  background-color: #000;  }
 #footer {}
-small {font-size: 0.9em;  line-height: 1.5em;  }
+#small {font-size: 0.9em;  line-height: 1.5em;  }
 
 h1, h2, h3 { font-weight: bold;  }
-h1 {font-size: 3em;  text-align: center;  }
+h1 {font-size: 20px;  text-align: left;  }
 h2 { font-size: 1.6em;  }
 h2.pagetitle {font-size: 1.6em;  }
 #sidebar h2 {font-size: 1.2em;}
@@ -72,7 +72,7 @@ h3 {font-size: 1.3em;}
  text-decoration: none;  }
 
 #wp-calendar caption {
- font: bold 1.3em 'Lucida Grande', Verdana, Arial, Sans-Serif;  text-align: center;  }
+ font: bold 14px 'Lucida Grande', Verdana, Arial, Sans-Serif;  text-align: center;  }
 
 #wp-calendar th {
  font-style: normal;  text-transform: capitalize;  }
@@ -103,7 +103,7 @@ body {margin: 0 0 20px 0;  padding: 0;  }
 
 
 /* Begin Headers */
-h1 { padding-top: 70px;  margin: 0;  }
+h1 { padding-top: 10px;  margin: 0;  }
 h2 { margin: 30px 0 0;  }
 h2.pagetitle { margin-top: 30px;  text-align: center; }
 #sidebar h2 { margin: 5px 0 0;  padding: 0;  }
@@ -162,43 +162,6 @@ ol li, #sidebar ul ol li {
  margin: 3px 0 0;  padding: 0;  }
 /* End Entry Lists */
 
-
-
-/* Begin Form Elements */
-#searchform {
- margin: 10px auto;  padding: 5px 3px;  text-align: center;  }
-
-#sidebar #searchform #s {
- width: 108px;  padding: 2px;  }
-
-#sidebar #searchsubmit {
- padding: 1px;  }
-
-.entry form { /* This is mainly for password protected posts, makes them look better. */
- text-align:center;  }
-
-select {
- width: 130px;  }
-
-#commentform input {
- width: 170px;  padding: 2px;  margin: 5px 5px 1px 0;  }
-
-#commentform {
- margin: 5px 10px 0 0;  }
-#commentform textarea {
- width: 100%;  padding: 2px;  }
-#respond:after {
-  content: "."; 
-     display: block; 
-     height: 0; 
-     clear: both; 
-     visibility: hidden;  }
-#commentform #submit {
- margin: 0 0 5px auto;  float: right;  }
-/* End Form Elements */
-
-
-
 /* Begin Comments*/
 .alt {
  margin: 0;  padding: 10px;  }
@@ -225,16 +188,6 @@ select {
 .commentmetadata {
  margin: 0;  display: block;  }
 /* End Comments */
-
-
-
-/* Begin Sidebar */
-#sidebar
-{padding: 20px 0 10px 0;  margin-left: 545px;  width: 190px;  }
-
-#sidebar form {
- margin: 0;  }
-/* End Sidebar */
 
 
 
@@ -327,3 +280,57 @@ a.hover {color:#FFFF8B; text-decoration: underline;}
 		.booking li .wpcf7-list-item {float: left; clear: both;}
 .calendar-table {background-color: #fff; color: #000;}
 .calendar-heading a {color: #000; text-decoration: underline;}
+
+
+/* ----------- My Form ----------- */
+.myform{
+        margin:0 auto;
+}
+
+/* ----------- stylized ----------- */
+#stylized{
+        background:#000000;
+}
+
+#stylized h1 {
+        font-size:20px;
+        font-weight:bold;
+}
+
+#stylized p{
+          font-size:14px;
+          color:#666666;
+}
+
+#stylized label{
+          display:block;
+          font-weight:bold;
+          text-align:right;
+          width:140px;
+          float:left;
+}
+
+#stylized .small{
+          color:#666666;
+          display:block;
+          font-size:12px;
+          font-weight:normal;
+          text-align:right;
+          width:140px;
+}
+
+#stylized input{
+          float:left;
+          font-size:22px;
+          padding:4px 2px;
+          width:400px;
+          margin:2px 0 20px 10px;
+}
+
+#stylized input#button{
+          float:center;
+          font-size:40px;
+          padding:4px 2px;
+          width:400px;
+          margin:2px 0 20px 10px;
+}

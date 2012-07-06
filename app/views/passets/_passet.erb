@@ -1,5 +1,5 @@
 	<TR>
-		<TD>
+		<TD ALIGN=CENTER>
 			<% if passet.kind.match("Audio file") -%>
 			<object type="application/x-shockwave-flash" data="/dewplayer/dewplayer-rect.swf" width="240" height="20" id="dewplayer" name="dewplayer">
 				<param name="wmode" value="transparent" />
@@ -11,10 +11,12 @@
 			<% end -%>
 		</TD>
 		<TD>
-			<%=passet.filename%>
+			<%=passet.filename%><BR>
+      <%=passet.created_at.localtime().asctime%><BR>
+      <i><%=time_ago_in_words(passet.created_at.localtime())%> ago</i>
 		</TD>
 		<TD>
-		Attach to set
+    <%= button_to 'Add to Set', passet, :method=>:addtoset, :class=> :addtoset %>
 		</TD>
  		<TD>
     <%= button_to 'Remove', passet, :method=>:delete, :class=>:destroy %>

@@ -1,17 +1,25 @@
-<h2>File Upload</h2>
-
-<%= form_for :file_upload, :html => {:multipart => true} do |f| %>
-  <div><%= f.label "File to upload" %>
-  <%= f.file_field :my_file %><br /></div>
-  <div><%= f.label "Notes" %>
-  <%= f.text_field :notes %><br /></div>
-  <p></p>
-  <%= f.submit "Upload" %>
+<div id="stylized" class="myform">
+<h1>File Upload</h1>
+<%= form_for :file_upload, :id=> "form", :html => {:multipart => true} do |f| %>
+<P>You can upload your music, photos, and videos here</P>  
+<label for="file_upload_File">File
+<span class="small">The file to Upload</span>
+</label>
+<%= f.file_field :my_file %>
+<br clear=all>
+<label for="file_upload_Notes">Notes
+<span class="small">Describe the file you're uploading (optional)</span>
+</label>
+<%= f.text_field :notes %>
+<br clear=all>
+<%= f.submit "Upload" %>
 <% end %>
-
-<h2>Files in Your Account</h2>
+</div>
+<br clear=all>
+<h1>Files in Your Account</h1>
 <P>
 </P>
 <TABLE>
 <%= render(@assets) || "You have no files in your account!" %>
 </TABLE>
+</div>

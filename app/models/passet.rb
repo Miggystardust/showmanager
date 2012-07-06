@@ -4,20 +4,18 @@ class Passet
 
    belongs_to :user
 
+   field :created_at => DateTime
+   field :created_by => String
+
    field :uuid, :type => String
-   
    field :filename, :type => String
    field :kind, :type => String
-
-   field :sound_cue, :type => String
-   field :light_cue, :type => String
-
    field :notes, :type => String
    
    # You can leave +height+ blank if you like.
    def thumb_path(w, h = nil)
       h ||= width / aspect_ratio
-      "/thumbs/#{uuid}-#{w.to_i}x#{h.to_i}.jpg"
+      "#{uuid}-#{w.to_i}x#{h.to_i}.jpg"
    end
 
    # Where to store images in the filesystem when they

@@ -9,7 +9,6 @@ module ImageTools
       return nil unless File.file?(source)
       height ||= width
       
-      logger "creating thumbnail for #{source}"
       img = Image.read(source).first
       rows, cols = img.rows, img.columns
       
@@ -21,7 +20,6 @@ module ImageTools
       img.thumbnail!(factor)
       img.crop!(CenterGravity, width, height)
       
-      FileUtils.mkdir_p(File.dirname(target))
       img.write(target) { self.quality = 75 }
     end
     

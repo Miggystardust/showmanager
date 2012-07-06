@@ -15,7 +15,7 @@ class PassetsController <  ApplicationController
 
     if p != nil
       logger.debug("Delete requestsed for Asset #{p.uuid}")
-      current_user.passets.delete(id: params[:id])
+      p.destroy
       FileUtils.rm "#{UPLOADS_DIR}/#{p.uuid}"
     end
     redirect_to :action => :index
@@ -48,7 +48,9 @@ class PassetsController <  ApplicationController
                     kind: fileinfo, 
                     sound_cue: params[:file_upload][:cue],	
                     light_cue: params[:file_upload][:cue],	
-                    pnotes: params[:file_upload][:notes])
+                    pnotes: params[:file_upload][:notes],
+                    created_at: Time.now(),
+                    created_by: current_user.actname)
 
     current_user.passets << @p
     
@@ -58,6 +60,9 @@ class PassetsController <  ApplicationController
     logger.debug("file is #{fileinfo}")
     FileUtils.cp tmp.path, @file
     FileUtils.rm tmp.path
+
+    flash[:notice] = "Upload Ok! Thanks! Now add the file to your set."
+    redirect_to :action => :index
   end
 
 end

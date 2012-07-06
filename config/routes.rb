@@ -8,13 +8,13 @@ Rails3MongoidDevise::Application.routes.draw do
   devise_for :users
 
   resources :users, :only => [:show, :index]
-
   resources :passets
-  
-  get "/assets/:uuid/:dims.jpg",
-    :controller => "images",
-    :action => "serve"
 
+  get "/assets/:uuid-:dims.jpg",
+    :controller => "images",
+    :action => "servethumb"
+
+  
   get "/thumbs/:uuid-:dims.jpg",
     :controller => "images",
     :action => "servethumb"
