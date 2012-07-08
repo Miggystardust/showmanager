@@ -10,14 +10,21 @@
   <% end %>
   <% if user_signed_in? %>
     <li class="page-item">
-    <%= link_to 'Your Content', :passets %>
+    <%= link_to "Upload a File", "/passets/new" %>
     </li>
     <li class="page-item">
-    <%= link_to 'Your Account', edit_user_registration_path %>
+    <%= link_to 'Your Files', :passets %>
     </li>
+    <li class="page-item">
+    <%= link_to 'Your Profile', edit_user_registration_path %>
+    </li>
+  <LI class="userinfo page-item">
+    Signed in as <I><%=current_user.actname %></I>
+  </li>
   <% else %>
     <li class="page-item">
     <%= link_to 'Sign up', new_user_registration_path %>
     </li>
   <% end %>
 </ul>
+

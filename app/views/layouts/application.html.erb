@@ -7,9 +7,19 @@
     <title>Hubba Hubba: Stage Management</title>
     <meta name="description" content="Hubba Hubba Stage Manager System">
     <meta name="author" content="John Adams">
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-	<%= stylesheet_link_tag "main" %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+  	<%= stylesheet_link_tag "main" %>
     <%= javascript_include_tag "application" %>
+    <!-- Add jQuery library -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+
+    <!-- Add mousewheel plugin (this is optional) -->
+    <%= javascript_include_tag "jquery.mousewheel-3.0.6.pack.js" %>
+
+    <!-- Add fancyBox -->
+    <%= stylesheet_link_tag "jquery.fancybox" %>
+    <%= javascript_include_tag "jquery.fancybox.pack.js?v=2.0.6" %>
+
     <%= csrf_meta_tags %>
   </head>
   <body>

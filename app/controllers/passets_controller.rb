@@ -7,7 +7,27 @@ class PassetsController <  ApplicationController
   before_filter :authenticate_user!
    
   def index
-    @assets = current_user.passets.all
+    @assets = current_user.passets.all.desc(:created_at)
+  end
+
+  def new
+    # just show 
+  end
+
+  def edit
+    @passet = current_user.passets.find(params[:id])
+  end
+
+  def update
+    @passet = current_user.passets.find(params[:id])
+    @passet.update_attributes(
+                              notes: params[:passet][:notes],
+                              sound_cue: params[:passet][:sound_cue],
+                              light_cue: params[:passet][:light_cue])
+    @passet.save!
+
+    flash[:notice] = "Updated information for #{@passet.filename}"
+    redirect_to :action => :index
   end
 
   def destroy
@@ -32,8 +52,8 @@ class PassetsController <  ApplicationController
 
     logger.debug("Got file #{tmp.path}")
     @uuid=`uuidgen`.strip
-    fileinfo = `file #{tmp.path}`.strip
-    
+    fileinfo = `file --mime #{tmp.path}`.strip.split[1].gsub(";","")
+
     @file = "#{UPLOADS_DIR}/#{@uuid}"
     
     # TODO: Only accept a limited number of extensions and types
@@ -46,8 +66,8 @@ class PassetsController <  ApplicationController
     @p = Passet.new(uuid: @uuid, 
                     filename: FileTools.sanitize_filename(params[:file_upload][:my_file].original_filename), 
                     kind: fileinfo, 
-                    sound_cue: params[:file_upload][:cue],	
-                    light_cue: params[:file_upload][:cue],	
+                    sound_cue: params[:file_upload][:sound_cue],	
+                    light_cue: params[:file_upload][:light_cue],	
                     pnotes: params[:file_upload][:notes],
                     created_at: Time.now(),
                     created_by: current_user.actname)

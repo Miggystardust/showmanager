@@ -1,25 +1,29 @@
-<div id="stylized" class="myform">
-<h1>File Upload</h1>
-<%= form_for :file_upload, :id=> "form", :html => {:multipart => true} do |f| %>
-<P>You can upload your music, photos, and videos here</P>  
-<label for="file_upload_File">File
-<span class="small">The file to Upload</span>
-</label>
-<%= f.file_field :my_file %>
-<br clear=all>
-<label for="file_upload_Notes">Notes
-<span class="small">Describe the file you're uploading (optional)</span>
-</label>
-<%= f.text_field :notes %>
-<br clear=all>
-<%= f.submit "Upload" %>
-<% end %>
-</div>
-<br clear=all>
 <h1>Files in Your Account</h1>
 <P>
 </P>
 <TABLE>
-<%= render(@assets) || "You have no files in your account!" %>
+<%= render(@assets) || render("nofiles") %>
 </TABLE>
 </div>
+
+<script>
+$(document).ready(function() {
+  /* This is basic - uses default settings */
+  $("a#single_image").fancybox();
+
+  /* Using custom settings */
+  $("a#inline").fancybox({
+    'hideOnContentClick': true
+  });
+
+  /* Apply fancybox to multiple items */
+  $("a.group").fancybox({
+    'transitionIn':'elastic',
+    'transitionOut':'elastic',
+    'speedIn':600, 
+    'speedOut':200, 
+    'overlayShow':false
+  });
+
+});
+</script>

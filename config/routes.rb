@@ -6,15 +6,22 @@ Rails3MongoidDevise::Application.routes.draw do
   root :to => "home#index"
 
   devise_for :users
+  resources :users, :only => [:show, :index, :edit]
 
-  resources :users, :only => [:show, :index]
+  post "/passets/new",
+    :controller => "passets", 
+    :action => "create";
+
   resources :passets
 
-  get "/assets/:uuid-:dims.jpg",
+  get "/s/:uuid-:dims.jpg",
     :controller => "images",
     :action => "servethumb"
 
-  
+  get "/sf/:uuid.jpg",
+    :controller => "images",
+    :action => "servefull"
+
   get "/thumbs/:uuid-:dims.jpg",
     :controller => "images",
     :action => "servethumb"

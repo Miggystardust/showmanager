@@ -1,27 +1,34 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
+<h2>Your Profile</h2>
+<div id="stylized" class="myform">
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
-<p><%= f.label :actname, "The name of your act / troupe" %><br />
-<%= f.text_field :actname %></p>
+<p><%= f.label :actname, "Act Name" %>
+<%= f.text_field :actname, :class => "textfield" %></p>
 
-<p><%= f.label :name %><br />
-<%= f.text_field :name %></p>
+<p><%= f.label :name %>
+<%= f.text_field :name, :class => "textfield" %></p>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
-
-  <div><%= f.submit "Update" %></div>
+  <div><%= f.label :email %>
+  <%= f.email_field :email, :class => "textfield" %></div>
+  <br clear=all>
+  <div><label for="user_password">Password
+  <span class="small">
+  Leave blank if you don't want to change your password.
+  </span>
+  </label>
+  <%= f.password_field :password, :autocomplete => "off", :class => "textfield" %></div>
+  <br clear=all>
+  <div><%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation, :class => "textfield" %></div>
+  <br clear=all>
+  <div><label for="current_password">Current Password
+  <span class="small">We need your current password to confirm your changes.</span>
+  </label>
+  <%= f.password_field :current_password, :class => "textfield" %></div>
+  <br clear=all>
+  <div><%= f.submit "Update", :class=>"uploadbutton" %></div>
 <% end %>
+</div>
 
 <h3>Cancel my account</h3>
 

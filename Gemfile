@@ -19,3 +19,5 @@ gem "mongoid", ">= 2.4.11"
 gem "devise", ">= 2.1.0"
 gem "rmagick", ">= 2.13.1"
 
+gem "taglib-ruby"
+

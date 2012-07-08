@@ -1,24 +1,34 @@
 	<TR>
 		<TD ALIGN=CENTER>
-			<% if passet.kind.match("Audio file") -%>
+			<% if passet.kind.match("audio/mpeg") -%>
 			<object type="application/x-shockwave-flash" data="/dewplayer/dewplayer-rect.swf" width="240" height="20" id="dewplayer" name="dewplayer">
 				<param name="wmode" value="transparent" />
 				<param name="movie" value="/dewplayer/dewplayer-rect.swf" /> 
 				<param name="flashvars" value="mp3=/uploads/download/<%=passet.uuid%>&amp;showtime=1" /> 
 			</object>
-			<% else -%>
-			<%= image_tag passet.thumb_path(100,100) %>
+			<% end -%>
+			<% if passet.kind.match("image/") -%>
+      <a id="single_image" href="http://retina.net:3000/sf/<%=passet.uuid%>.jpg" rel="">
+			<IMG SRC="<%="/s/#{passet.thumb_path(100,100)}" %>" WIDTH=100 HEIGHT=100>
+      </a>
 			<% end -%>
 		</TD>
 		<TD>
 			<%=passet.filename%><BR>
-      <%=passet.created_at.localtime().asctime%><BR>
-      <i><%=time_ago_in_words(passet.created_at.localtime())%> ago</i>
+      <div class="greyed">
+  			<%=passet.kind%><BR>
+      </div>
+      <%=passet.created_at.asctime%><BR>
+      <i><%=time_ago_in_words(passet.created_at)%> ago</i><br>
+     <% if @noedit == nil -%>
+      <a title="<%=passet.filename%>" href="/s/<%=passet.uuid%>?download=1" rel="">[ Download ]</a>
+      <%= link_to '[ Edit ]', edit_passet_path(passet) %>
+      <% end -%>
 		</TD>
 		<TD>
-    <%= button_to 'Add to Set', passet, :method=>:addtoset, :class=> :addtoset %>
+    <% if @noedit == nil -%>
+    <%= button_to 'Remove', passet, :method=>:delete, :class=>:destroy, :confirm => "Delete #{passet.filename}: Are you sure?" %>
+    <% end -%>
 		</TD>
- 		<TD>
-    <%= button_to 'Remove', passet, :method=>:delete, :class=>:destroy %>
-		</TD>
+
 	</TR>
