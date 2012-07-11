@@ -1,0 +1,384 @@
+/*
+Theme Name: Hubba Hubba Custom
+Theme URI: http://hubbahubbarevue.com/
+Description: 0.1
+Version: 0.1
+Author: Chris Tower / John Adams (upload site)
+Author URI: http://www.infiniteset.com/
+*/
+
+#flash_notice { 
+	/* green */
+	font-weight: bold;
+	font-size:16px;
+	color: #008800;
+}
+
+#flash_error, #flash_alert { 
+	/* red */
+	font-weight: bold;
+	font-size:16px;
+	color: #000000;
+	background: #ff6666;
+}
+
+
+ #error_explanation {
+		/* red */
+		font-weight: bold;
+		font-size:16px;
+		color: #000000;
+		background: #ff6666;
+}
+
+/* Begin Typography & Colors */
+body { font-size: 11px; font-family: Arial;  background: #d5d6d7 url( <%= asset_path 'hhr_bg.jpg' %>);  color: #333;  text-align: left;  background-color: #000;  }
+#page {background-color: #000;  border: 1px solid #aa0000;  text-align: left;  color: #fff;  }
+#headerimg  {padding-top: 10px;  margin: 7px 9px 0;  height: 200px;  width: 740px; background-repeat: no-repeat;}
+	.header1 {background-image: url('http://www.hubbahubbarevue.com/wp-content/uploads/headers/header1.jpg')}
+	.header2 {background-image: url('http://www.hubbahubbarevue.com/wp-content/uploads/headers/header2.jpg')}
+	.header3 {background-image: url('http://www.hubbahubbarevue.com/wp-content/uploads/headers/header3.jpg')}
+	.header4 {background-image: url('http://www.hubbahubbarevue.com/wp-content/uploads/headers/header4.jpg')}
+	.header5 {background-image: url('http://www.hubbahubbarevue.com/wp-content/uploads/headers/header5.jpg')}
+#content {font-size: 1.2em;  background-color: #000;  }
+#footer {}
+#small {font-size: 0.9em;  line-height: 1.5em;  }
+
+h1, h2, h3 { font-weight: bold;  }
+h1 {font-size: 20px;  text-align: left;  }
+h2 { font-size: 1.6em;  }
+h2.pagetitle {font-size: 1.6em;  }
+#sidebar h2 {font-size: 1.2em;}
+h3 {font-size: 1.3em;}
+.commentlist li, #commentform input, #commentform textarea {}
+.commentlist li { font-weight: bold; }
+
+.commentlist li .avatar { 
+ float: right;  border: 1px solid #eee;  padding: 2px;  background: #fff;  }
+
+.commentlist cite, .commentlist cite a {
+ font-weight: bold;  font-style: normal;  font-size: 1.1em;  }
+
+.commentlist p {
+ font-weight: normal;  line-height: 1.5em;  text-transform: none;  }
+
+
+.commentmetadata {font-weight: normal;  }
+
+
+#wp-calendar #prev a, #wp-calendar #next a {font-size: 9pt;  }
+
+#wp-calendar a {
+ text-decoration: none;  }
+
+#wp-calendar caption {
+ font: bold 14px 'Lucida Grande', Verdana, Arial, Sans-Serif;  text-align: center;  }
+
+#wp-calendar th {
+ font-style: normal;  text-transform: capitalize;  }
+/* End Typography & Colors */
+
+
+
+/* Begin Structure */
+body {margin: 0 0 20px 0;  padding: 0;  }
+#page { margin: 20px auto;  padding: 0;  width: 760px;  border: 1px solid #959596;  }
+#header {margin: 0 0 0 1px;  padding: 0;  height: 200px;  width: 758px;  }
+#headerimg { margin: 0;  height: 200px;  width: 100%;  }
+.narrowcolumn {   padding: 0 0 20px 45px;  margin: 0px 0 0;  width: 655px;  }
+  .narrowcolumn td { padding: 10px 10px 10px 10px; }
+	.narrowcolumn .postmetadata {padding-top: 5px;  }
+.widecolumn {padding: 10px 0 20px 0;  margin: 5px 0 0 150px;  width: 440px;  }
+	.widecolumn .post {margin: 0;  }
+	.widecolumn .postmetadata {margin: 30px 0;  }
+	.widecolumn .smallattachment {text-align: center;  float: left;  width: 128px;  margin: 5px 5px 5px 0px; }
+	.widecolumn .attachment {text-align: center;  margin: 5px 0px; }
+.post {margin: 0 0 40px;  text-align: justify;  }
+	.post hr {display: block;  }
+.postmetadata {clear: both; }
+.clear {clear: both; }
+#footer {padding: 0;  margin: 0 auto;  width: 760px;  clear: both;  }
+	#footer p { margin: 0;  padding: 20px 0;  text-align: center;  }
+
+
+
+/* Begin Headers */
+h1 { padding-top: 10px;  margin: 0;  }
+h2 { margin: 30px 0 0;  }
+h2.pagetitle { margin-top: 30px;  text-align: center; }
+#sidebar h2 { margin: 5px 0 0;  padding: 0;  }
+h3 { padding: 0;  margin: 30px 0 0;  }
+h3.comments {padding: 0;  margin: 40px auto 20px ;  }
+
+/* Begin Images */
+p img {padding: 0;  max-width: 100%;  }
+img.centered {display: block;  margin-left: auto;  margin-right: auto;  }
+img.alignright {padding: 4px;  margin: 0 0 2px 7px;  display: inline;  }
+img.alignleft {padding: 4px;  margin: 0 7px 2px 0;  display: inline;  }
+.alignright {float: right;  }
+.alignleft {float: left}
+
+
+
+/* Begin Lists
+
+ Special stylized non-IE bullets
+ Do not work in Internet Explorer, which merely default to normal bullets. */
+
+/*html>body .entry ul {
+ margin-left: 0px;  padding: 0 0 0 30px;  list-style: none;  padding-left: 10px;  text-indent: -10px;  }
+*/
+html>body .entry li {margin: 7px 0 8px 10px;  }
+#sidebar ul ul li:before {content: "\00BB \0020";  }
+
+.entry ol {
+ padding: 0 0 0 35px;  margin: 0;  }
+
+.entry ol li {
+ margin: 0;  padding: 0;  }
+
+.postmetadata ul, .postmetadata li {
+ display: inline;  list-style-type: none;  list-style-image: none;  }
+
+#sidebar ul, #sidebar ul ol {
+ margin: 0;  padding: 0;  }
+
+#sidebar ul li {
+ list-style-type: none;  list-style-image: none;  margin-bottom: 15px;  }
+
+#sidebar ul p, #sidebar ul select {
+ margin: 5px 0 8px;  }
+
+#sidebar ul ul, #sidebar ul ol {
+ margin: 5px 0 0 10px;  }
+
+#sidebar ul ul ul, #sidebar ul ol {
+ margin: 0 0 0 10px;  }
+
+ol li, #sidebar ul ol li {
+ list-style: decimal outside;  }
+
+#sidebar ul ul li, #sidebar ul ol li {
+ margin: 3px 0 0;  padding: 0;  }
+/* End Entry Lists */
+
+/* Begin Comments*/
+.alt {
+ margin: 0;  padding: 10px;  }
+
+.commentlist {
+ padding: 0;  text-align: justify;  }
+
+.commentlist li {
+ margin: 15px 0 10px;  padding: 5px 5px 10px 10px;  list-style: none; 
+ }
+.commentlist li ul li { 
+ margin-right: -5px;  margin-left: 10px; }
+
+.commentlist p {
+ margin: 10px 5px 10px 0; }
+.children { padding: 0; }
+
+#commentform p {
+ margin: 5px 0;  }
+
+.nocomments {
+ text-align: center;  margin: 0;  padding: 0;  }
+
+.commentmetadata {
+ margin: 0;  display: block;  }
+/* End Comments */
+
+
+
+/* Begin Calendar */
+#wp-calendar {
+ empty-cells: show;  margin: 10px auto 0;  width: 155px;  }
+
+#wp-calendar #next a {
+ padding-right: 10px;  text-align: right;  }
+
+#wp-calendar #prev a {
+ padding-left: 10px;  text-align: left;  }
+
+#wp-calendar a {
+ display: block;  }
+
+#wp-calendar caption {
+ text-align: center;  width: 100%;  }
+
+#wp-calendar td {
+ padding: 3px 0;  text-align: center;  }
+
+#wp-calendar td.pad:hover { /* Doesn't work in IE */
+ background-color: #fff; }
+/* End Calendar */
+
+
+
+/* Begin Various Tags & Classes */
+acronym, abbr, span.caps {
+ cursor: help;  }
+
+acronym, abbr {
+ border-bottom: 1px dashed #999;  }
+
+blockquote {
+ margin: 15px 30px 0 10px;  padding-left: 20px;  border-left: 5px solid #ddd;  }
+
+blockquote cite {
+ margin: 5px 0 0;  display: block;  }
+
+.center {
+ text-align: center;  }
+
+.hidden {
+ display: none;  }
+
+hr {
+ display: none;  }
+
+a img {
+ border: none;  }
+
+.navigation {
+ display: block;  text-align: center;  margin-top: 10px;  margin-bottom: 60px;  }
+/* End Various Tags & Classes*/
+
+
+
+/* Captions */
+.aligncenter, 
+	div.aligncenter {display: block;  margin-left: auto;  margin-right: auto; }
+.wp-caption {border: 1px solid #ddd;  text-align: center;  background-color: #f3f3f3;  padding-top: 4px;  margin: 10px;  -moz-border-radius: 3px;  -khtml-border-radius: 3px;  -webkit-border-radius: 3px;  border-radius: 3px; }
+.wp-caption img {margin: 0;  padding: 0;  border: 0 none; }
+.wp-caption p.wp-caption-text { font-size: 11px;  line-height: 17px;  padding: 0 4px 5px;  margin: 0; }
+/* End captions */
+
+/* Hubba Hubba Custom */
+.nav {overflow: hidden; list-style: none; display: block; margin: 0; padding-left: 40px; height: 50px; background-image: url('<%= asset_path 'nav_bg.png' %>');  background-repeat: repeat-x; }
+	.nav li {display: block; float: left; clear: none;}
+		.nav li a {display: block; float: left; clear: none; margin-right: 1em; font-size: 1.5em; padding: .5em; margin-top: .5em; background-image: url('<%=asset_path 'header_menu_right.gif'%>')}
+a, a.visited {color:#FFFF8B; text-decoration: none;}
+a.hover {color:#FFFF8B; text-decoration: underline;}
+.right {display: block; float: right;}
+.logo {float: right; display: block; margin-right: 1em;}
+
+#sidebar .calnk a {color:#FFFF8B; text-decoration: none;}
+/* performer page */
+#post-9 {width: 550px;}
+.pageTitle {margin: 0em; margin-bottom: 1em; padding: 0; font-size: 2.5em; text-align: left;}
+#performers {clear: both; margin: 0; padding: 0; margin-top: 1em; list-style-type: none;}
+	#performers li {float: left; margin-right: 1em; text-align: center;}
+.crew {}
+	.crew li {width: 8em; height: 11em}
+.booking {float: left; clear: both; list-style: none;}
+	.booking li {float: left; clear: both; list-style: none;}
+		.booking li * {display: block; float: left; clear: none; text-align: left;}
+		.booking li label {width: 10em; margin-right: 1em;}
+		.booking li span span {}
+		.booking li .wpcf7-list-item {float: left; clear: both;}
+.calendar-table {background-color: #fff; color: #000;}
+.calendar-heading a {color: #000; text-decoration: underline;}
+
+
+/* ----------- My Form ----------- */
+.myform{
+        margin:0 auto;
+}
+
+/* ----------- stylized ----------- */
+#stylized{
+        background:#000000;
+}
+
+#stylized h1 {
+        font-size:20px;
+        font-weight:bold;
+}
+
+#stylized p{
+          font-size:14px;
+          color:#bbbbbb;
+}
+
+#stylized label{
+          display:block;
+          font-weight:bold;
+          text-align:right;
+          width:200px;
+          float:left;
+}
+
+#stylized .small{
+          color:#bbbbbb;
+          display:block;
+          font-size:12px;
+          font-weight:normal;
+          text-align:right;
+          width:200px;
+}
+
+#stylized input#text {
+          float:left;
+          font-size:22px;
+          padding:4px 2px;
+          width:500px;
+          margin:2px 0 20px 10px;
+}
+
+.textfield
+{
+        padding:0px 8px;
+        width: 400px;
+        font-size:22px;
+}
+
+
+label { 
+         float:left;
+         padding:0px 10px;
+         width:400px;
+         margin:2px 0 20px 10px;
+}
+
+#stylized input#button{
+         float:center;
+         font-size:40px;
+         padding:0px 10px;
+         width:400px;
+         margin:2px 0 20px 10px;
+}
+
+.uploadbutton {
+  display: block;
+  height: 70px;
+  width: 175px;
+  margin-left: 229px;
+  font-size: 22px;
+  text-align: center;
+}
+
+.userinfo {
+  float: right;
+}
+
+div.greyed {
+  color: #888888;
+}
+
+.ui-datepicker {
+    background: #333;
+    border: 1px solid #555;
+    color: #EEE;
+}
+
+#progress {
+  margin: 8px;
+  width: 300px;
+  height: 19px;
+}
+
+.bar { 
+  background: green;
+}

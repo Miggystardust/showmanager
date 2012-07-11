@@ -8,10 +8,11 @@
     <meta name="description" content="Hubba Hubba Stage Manager System">
     <meta name="author" content="John Adams">
     <%= stylesheet_link_tag "application", :media => "all" %>
-  	<%= stylesheet_link_tag "main" %>
-    <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag "bootstrap.min"  %>
+
     <%= stylesheet_link_tag "blitzer/jquery-ui-1.8.21.custom" %>
 
+    <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "jquery.2.ui.widget.js" %>
     <%= javascript_include_tag "jquery.iframe-transport.js" %>
     <%= javascript_include_tag "jquery.fileupload.js" %>
@@ -23,9 +24,27 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div id="page" class="page">
-      <div id="header">
-	<div id="headerimg" class="header2">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="http://hubba.retina.net/">Hubba Show Manager</a>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="https://github.com/blueimp/jQuery-File-Upload/downloads">Downloads</a></li>
+                    <li><a href="https://blueimp.net">&copy; John Adams</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+</div>
 	  <a href="http://www.hubbahubbarevue.com/" class="logo"><img src="http://www.hubbahubbarevue.com/wp-content/themes/hhr/images/logo.png" alt="Hubba Hubba Revue: Home of the San Francisco Bay Area&#039;s Biggest Burlesque Revue!"></a>
 	  </div>
       </div>
