@@ -18,9 +18,14 @@
     <li class="page-item">
     <%= link_to 'Your Profile', edit_user_registration_path %>
     </li>
-  <LI class="userinfo page-item">
-    Signed in as <I><%=current_user.actname %></I>
-  </li>
+    <% if current_user.try(:admin?) -%>
+      <li class="page-item">
+      <%= link_to 'Show Admin', :shows %>
+      </li>
+    <% end -%>
+    <LI class="userinfo page-item">
+      Signed in as <I><%=current_user.actname %></I>
+    </li>
   <% else %>
     <li class="page-item">
     <%= link_to 'Sign up', new_user_registration_path %>

@@ -1,5 +1,8 @@
 	<TR>
 		<TD ALIGN=CENTER>
+      <% if defined? @adminindex -%>
+      Owner: <%=passet.created_by%><BR>
+      <% end -%>
 			<% if passet.kind.match("audio/mpeg") -%>
 			<object type="application/x-shockwave-flash" data="/dewplayer/dewplayer-rect.swf" width="240" height="20" id="dewplayer" name="dewplayer">
 				<param name="wmode" value="transparent" />
@@ -19,9 +22,10 @@
   			<%=passet.kind%><BR>
       </div>
       <%=passet.created_at.asctime%><BR>
+
       <i><%=time_ago_in_words(passet.created_at)%> ago</i><br>
      <% if @noedit == nil -%>
-      <a title="<%=passet.filename%>" href="/s/<%=passet.uuid%>?download=1" rel="">[ Download ]</a>
+      <a title="<%=passet.filename%>" href="/sf/<%=passet.uuid%>?download=1" rel="">[ Download ]</a>
       <%= link_to '[ Edit ]', edit_passet_path(passet) %>
       <% end -%>
 		</TD>

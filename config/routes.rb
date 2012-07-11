@@ -12,13 +12,34 @@ Rails3MongoidDevise::Application.routes.draw do
     :controller => "passets", 
     :action => "create";
 
+  resources :show_items
+
+  resources :passets do 
+   collection do
+     get :search
+     get :adminindex
+   end
+  end
+
   resources :passets
+  resources :shows
+
+  resources :shows do 
+   member do
+      get 'setlist'
+      post 'setlist'
+   end
+  end
 
   get "/s/:uuid-:dims.jpg",
     :controller => "images",
     :action => "servethumb"
 
   get "/sf/:uuid.jpg",
+    :controller => "images",
+    :action => "servefull"
+
+  get "/sf/:uuid",
     :controller => "images",
     :action => "servefull"
 

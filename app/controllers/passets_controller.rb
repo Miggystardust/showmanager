@@ -10,8 +10,20 @@ class PassetsController <  ApplicationController
     @assets = current_user.passets.all.desc(:created_at)
   end
 
+  def adminindex
+    if current_user.try(:admin?) 
+      @assets = Passet.all.desc(:created_at)
+      @adminindex = true
+      render :index
+    else 
+      flash[:error] = "You must be an administrator to use that function."
+      redirect_to "/"
+    end
+  end
+
   def new
-    # just show 
+    # this id is used for tracking the current upload
+    @uploaduuid = (0..29).to_a.map{|x| rand(10)}
   end
 
   def edit
@@ -23,6 +35,7 @@ class PassetsController <  ApplicationController
     @passet.update_attributes(
                               notes: params[:passet][:notes],
                               sound_cue: params[:passet][:sound_cue],
+                              stage_notes: params[:passet][:stage_notes],
                               light_cue: params[:passet][:light_cue])
     @passet.save!
 
@@ -44,7 +57,7 @@ class PassetsController <  ApplicationController
   def create
     if params[:file_upload][:my_file] == nil 
       flash[:error] = "You must specify a file to upload."
-      redirect_to :action => :index
+      redirect_to :action => :new
       return
     end
 
@@ -84,6 +97,23 @@ class PassetsController <  ApplicationController
     flash[:notice] = "Upload Ok! Thanks! Now add the file to your set."
     redirect_to :action => :index
   end
+
+  def search
+    return [] if params[:term].blank?
+    query = params[:term]
+
+    # normalize here
+    assets = Passet.any_of({filename: /#{query}/i}, {created_by: /#{query}/i}).asc(:filename).limit(10)
+
+    list = assets.map do |i|
+      { label: "#{i.created_by}: #{i.filename} (#{i.kind})", id: i.uuid } 
+    end
+    
+    # and specials... "INTERMISSION:" etc... 
+
+    render :json => list
+  end
+     
 
 end
   

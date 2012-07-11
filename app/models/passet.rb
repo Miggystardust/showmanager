@@ -11,6 +11,10 @@ class Passet
    field :filename, :type => String
    field :kind, :type => String
    field :notes, :type => String
+
+   field :sound_cue, :type => String
+   field :light_cue, :type => String
+   field :stage_notes, :type => String
    
    # You can leave +height+ blank if you like.
    def thumb_path(w, h = nil)
@@ -29,5 +33,5 @@ class Passet
      logger.debug("#{UPLOADS_DIR}/#{uuid} ---> #{image_path(w,h)} thumbnail create")
      ImageTools.thumbnail("#{UPLOADS_DIR}/#{uuid}", image_path(w,h), w.to_i, h.to_i)
    end
-     
+
 end

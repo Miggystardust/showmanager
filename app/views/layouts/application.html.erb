@@ -10,16 +10,16 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
   	<%= stylesheet_link_tag "main" %>
     <%= javascript_include_tag "application" %>
-    <!-- Add jQuery library -->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <%= stylesheet_link_tag "blitzer/jquery-ui-1.8.21.custom" %>
 
-    <!-- Add mousewheel plugin (this is optional) -->
-    <%= javascript_include_tag "jquery.mousewheel-3.0.6.pack.js" %>
+    <%= javascript_include_tag "jquery.2.ui.widget.js" %>
+    <%= javascript_include_tag "jquery.iframe-transport.js" %>
+    <%= javascript_include_tag "jquery.fileupload.js" %>
+    <%= javascript_include_tag "jquery-ui-timepicker-addon.js" %>
 
     <!-- Add fancyBox -->
     <%= stylesheet_link_tag "jquery.fancybox" %>
     <%= javascript_include_tag "jquery.fancybox.pack.js?v=2.0.6" %>
-
     <%= csrf_meta_tags %>
   </head>
   <body>
