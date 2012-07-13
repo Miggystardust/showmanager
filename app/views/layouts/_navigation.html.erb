@@ -25,7 +25,7 @@
               <LI CLASS="pull-right"><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></LI>
               <li class="divider-vertical"></li>
               <LI CLASS="pull-right"><span class="navbar-text">
-                  <I>Signed in as <%=current_user.actname %>
+                  <I>Signed in as <%=current_user.actname %> (<%=current_user.email%>)
                   <% if current_user.try(:admin?) -%>(admin)<% end -%>
                   </I>
               </span>

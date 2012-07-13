@@ -20,4 +20,4 @@ gem "devise", ">= 2.1.0"
 gem "rmagick", ">= 2.13.1"
 
 gem "taglib-ruby"
-
+gem "factory_girl"
