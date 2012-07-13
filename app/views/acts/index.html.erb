@@ -1,0 +1,7 @@
+<H1> Your Acts </h1>
+  <%=link_to 'Create a new act...', new_act_path %>
+	
+	<TABLE>
+	<%= render(@acts) || render("nofiles") %>
+	</TABLE>
+	
