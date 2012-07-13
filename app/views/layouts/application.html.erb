@@ -1,63 +1,31 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
     <title>Hubba Hubba: Stage Management</title>
     <meta name="description" content="Hubba Hubba Stage Manager System">
     <meta name="author" content="John Adams">
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= stylesheet_link_tag "main"  %>
     <%= stylesheet_link_tag "bootstrap.min"  %>
-
+    <%= stylesheet_link_tag "bootstrap-responsive.min"  %>
+    <!--[if lt IE 7]><link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-ie6.min.css"><![endif]-->
+    <%= stylesheet_link_tag "bootstrap-image-gallery.min.css" %>
+    <%= stylesheet_link_tag "jquery.fileupload-ui.css" %>
     <%= stylesheet_link_tag "blitzer/jquery-ui-1.8.21.custom" %>
-
     <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag "jquery.2.ui.widget.js" %>
-    <%= javascript_include_tag "jquery.iframe-transport.js" %>
-    <%= javascript_include_tag "jquery.fileupload.js" %>
-    <%= javascript_include_tag "jquery-ui-timepicker-addon.js" %>
 
     <!-- Add fancyBox -->
     <%= stylesheet_link_tag "jquery.fancybox" %>
-    <%= javascript_include_tag "jquery.fancybox.pack.js?v=2.0.6" %>
     <%= csrf_meta_tags %>
-  </head>
+  </head>  
   <body>
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="http://hubba.retina.net/">Hubba Show Manager</a>
-            <div class="nav-collapse">
-                <ul class="nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="https://github.com/blueimp/jQuery-File-Upload/downloads">Downloads</a></li>
-                    <li><a href="https://blueimp.net">&copy; John Adams</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container">
-</div>
-	  <a href="http://www.hubbahubbarevue.com/" class="logo"><img src="http://www.hubbahubbarevue.com/wp-content/themes/hhr/images/logo.png" alt="Hubba Hubba Revue: Home of the San Francisco Bay Area&#039;s Biggest Burlesque Revue!"></a>
-	  </div>
-      </div>
-        <%= render 'layouts/navigation' %>
-        <%= render 'layouts/messages' %>
-      <div id="content" class="narrowcolumn" >
-	<div class="post">
-  	  <div class="entry">
-            <%= yield %>
-	  </div>
-	</div>
-      </div>
-      </div>
-    </div> <!--! end of #container -->
+  <%= render 'layouts/navigation' %>
+  <div class="container">
+    <%= render 'layouts/messages' %>
+    <%= yield %>
+  </div>
   </body>
 </html>

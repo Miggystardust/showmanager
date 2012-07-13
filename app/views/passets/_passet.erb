@@ -11,7 +11,7 @@
 			</object>
 			<% end -%>
 			<% if passet.kind.match("image/") -%>
-      <a id="single_image" href="http://retina.net:3000/sf/<%=passet.uuid%>.jpg" rel="">
+      <a id="single_image" href="/sf/<%=passet.uuid%>.jpg" rel="">
 			<IMG SRC="<%="/s/#{passet.thumb_path(100,100)}" %>" WIDTH=100 HEIGHT=100>
       </a>
 			<% end -%>

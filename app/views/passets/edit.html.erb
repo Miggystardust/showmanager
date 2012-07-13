@@ -1,0 +1,42 @@
+<di id="stylized" class="myform">
+<h2>Edit: <%=@passet.filename%> </h2>
+<%= form_for (@passet) do |f| %>
+
+<TABLE>
+<% @noedit = 1 %>
+<%= render(@passet) %>
+</TABLE>
+
+<label for="file_upload_Notes">Notes
+<span class="small">Describe the file you're uploading (optional)</span>
+</label>
+<%= f.text_field :notes, :class => "textfield"  %>
+<br clear=all>
+
+<label for="file_upload_Sound_cue">Sound Cue
+<span class="small">When should we start this song? (i.e. Posted on stage, when seated, etc.) Also, tell us how it ends. Fade out? Stop at a certain time? </span>
+</label>
+<%= f.text_field :sound_cue, :class=>"textfield" %>
+<br clear=all>
+
+<label for="file_upload_Sound_cue">Light Cue
+<span class="small">Any notes for the lighting guy?</span>
+</label>
+<%= f.text_field :light_cue, :class => "textfield" %>
+<br clear=all>
+
+<label for="file_upload_stage_notes">Stage Notes
+<span class="small">Information about any props goes here</span>
+</label>
+<%= f.text_field :stage_notes, :class => "textfield" %>
+<br clear=all>
+
+<%= f.submit "Save", :class => "uploadbutton" %>
+<% end %>
+</div>
+<br clear=all>
+
+<%= button_to 'Delete this Asset', @passet, :method=>:delete, :class=>"uploadbutton", :confirm => "Delete #{@passet.filename}: Are you sure?" %>
+<script>
+   $( ".ui-datepicker" ).datepicker({ altFormat: "yyyy-mm-dd" });
+</script>

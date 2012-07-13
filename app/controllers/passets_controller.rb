@@ -22,8 +22,7 @@ class PassetsController <  ApplicationController
   end
 
   def new
-    # this id is used for tracking the current upload
-    @uploaduuid = (0..29).to_a.map{|x| rand(10)}
+
   end
 
   def edit
@@ -55,33 +54,34 @@ class PassetsController <  ApplicationController
   end 
 
   def create
-    if params[:file_upload][:my_file] == nil 
+    if params[:files] == nil 
       flash[:error] = "You must specify a file to upload."
       redirect_to :action => :new
-      return
+      @response = {"error" => "No Files specified"}
+      render :json => [@response].to_json
     end
 
-    tmp = params[:file_upload][:my_file].tempfile
+    # this id is used for tracking the current upload
+    @uuid = `uuidgen`.strip
+
+    tmp = params[:files][0].tempfile
 
     logger.debug("Got file #{tmp.path}")
-    @uuid=`uuidgen`.strip
     fileinfo = `file --mime #{tmp.path}`.strip.split[1].gsub(";","")
+    filename = FileTools.sanitize_filename(params[:files][0].original_filename)
 
     @file = "#{UPLOADS_DIR}/#{@uuid}"
-    
-    # TODO: Only accept a limited number of extensions and types
-    # mp3, mov, mp4, mp3, avi
-    # block m4p (they are protected)
+
     # TODO: Additional filename sanitization
     # TODO: Use md5 to find out if we've seen this before, don't allow dupes?
     
     # build the object
     @p = Passet.new(uuid: @uuid, 
-                    filename: FileTools.sanitize_filename(params[:file_upload][:my_file].original_filename), 
+                    filename: filename,
                     kind: fileinfo, 
-                    sound_cue: params[:file_upload][:sound_cue],	
-                    light_cue: params[:file_upload][:light_cue],	
-                    pnotes: params[:file_upload][:notes],
+#                    sound_cue: params[:file_upload][:sound_cue],	
+#                    light_cue: params[:file_upload][:light_cue],	
+#                    pnotes: params[:file_upload][:notes],
                     created_at: Time.now(),
                     created_by: current_user.actname)
 
@@ -89,13 +89,22 @@ class PassetsController <  ApplicationController
     
     # move it into place
     # TODO: Distribute data across directories
-    logger.debug("copy #{tmp.path} to #{@file}")
-    logger.debug("file is #{fileinfo}")
     FileUtils.cp tmp.path, @file
+    fsize = File.size(tmp.path)
     FileUtils.rm tmp.path
 
-    flash[:notice] = "Upload Ok! Thanks! Now add the file to your set."
-    redirect_to :action => :index
+    logger.debug("copy #{tmp.path} to #{@file} size = #{fsize}")
+
+    @response = {
+      "name" => filename,
+      "size" => fsize,
+      "url" => "/sf/#{@p.uuid}",
+      "thumbnail_url" => @p.icon,
+      "delete_url" => " /", #picture_path(:id => id),
+      "delete_type" => "DELETE"
+    }
+
+    render :json => [@response].to_json
   end
 
   def search

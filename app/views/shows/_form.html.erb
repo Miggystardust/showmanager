@@ -1,0 +1,24 @@
+
+<label for="show_door_time">Door Date/Time
+<span class="small">What time the Doors open at</span>
+</label>
+<%= f.text_field :door_time, :class => "textfield" %>
+<br clear=all>
+
+<label for="show_show_date">Show Date/Time
+<span class="small">The time the show starts <BR>in the form YYYY-MM-DD HH:MM</span>
+</label>
+<%= f.text_field :show_date, :class => "textfield", :id => "datepicker" %>
+<br clear=all>
+
+<label for="show_title">Title
+<span class="small">The title of the show</span>
+</label>
+<%= f.text_field :title, :class => "textfield" %>
+<br clear=all>
+
+<label for="show_venue">Venue
+<span class="small">Where the show is</span>
+</label>
+<%= f.text_field :venue, :class => "textfield" %>
+<br clear=all>

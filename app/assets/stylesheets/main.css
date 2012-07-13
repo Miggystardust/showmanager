@@ -1,0 +1,27 @@
+@charset 'UTF-8';
+
+body{
+  padding-top: 60px;
+}
+
+.logocontainer { 
+  width:760px;
+  text-decoration:none;
+  position:relative;
+  display:block;
+  border:1px solid #666;
+  padding:3px;
+  margin-right:5px;
+  float:left;
+}
+
+.logocontainer span.logotitle {
+  position:absolute;
+  top:40px;
+  right:20px;
+  align:right;
+  filter:alpha(opacity=90);
+  -moz-opacity:0.9;
+  -khtml-opacity: 0.9;
+  opacity: 0.9;
+}
