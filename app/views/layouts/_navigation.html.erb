@@ -6,14 +6,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="http://hubba.retina.net/">Hubba Show Manager</a>
+      <a class="brand" href="/">Hubba Show Manager</a>
       <div class="nav-collapse">
          <ul class="nav">
           <li><a href="/">Home</a></li>
             <% if user_signed_in? %>
             <li><%= link_to "Upload Files", "/passets/new" %></li>
-            <li><%= link_to 'Your Files and Cues', :passets %></li>
-            <li><%= link_to 'Your Profile', edit_user_registration_path %></li>
+            <li><%= link_to 'Files', :passets %></li>
+            <li><%= link_to 'Acts', :acts %></li>
+            <li><%= link_to 'Profile', edit_user_registration_path %></li>
               <% if current_user.try(:admin?) -%>
                 <li class="divider-vertical"></li>
                 <li><%= link_to 'Show Admin', :shows %></li>

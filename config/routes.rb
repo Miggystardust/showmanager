@@ -12,7 +12,12 @@ Rails3MongoidDevise::Application.routes.draw do
     :controller => "passets", 
     :action => "create";
 
+  post "/acts/new",
+    :controller => "acts", 
+    :action => "create";
+
   resources :show_items
+  resources :acts
 
   resources :passets do 
    collection do

@@ -5,7 +5,8 @@ class User
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
+         
+  has_many :acts
   has_many :passets
   
   ## Database authenticatable
