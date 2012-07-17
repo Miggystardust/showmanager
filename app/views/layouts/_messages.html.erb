@@ -1,4 +1,3 @@
 <% flash.each do |name, msg| %>
-  <% amap = {"info" => "alert-info", "error" => "alert-error", "warning" => "", "notice" => "alert-success", "alert" => "alert-error", "" => "alert-error"}  %>
-  <%= content_tag :div, msg, :class => "alert #{amap[name]}" if msg.is_a?(String) %>
+  <%= content_tag :div, msg, :class => "alert alert-#{name}" if msg.is_a?(String) %>
 <% end %>

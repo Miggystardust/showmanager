@@ -9,9 +9,7 @@ Obviously, you'll need one of these.
 
 Show system
 - add intermissions
-
 - header/footer
-
 - "Cast" notes / sound / tech etc...
 
 - Should output a really nice pdf like thing that looks like current sheets
@@ -38,3 +36,11 @@ like...
 So maybe we have a "kind" field that tells us what this is (note, act, etc.)
 
 Compute that from assets.
+
+
+--------------
+work remaining
+--------------
+
+In Act editor, 
+

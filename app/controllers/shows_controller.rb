@@ -2,76 +2,93 @@ class ShowsController < ApplicationController
   protect_from_forgery
 
   before_filter :authenticate_user!
-
+  before_filter do 
+     redirect_to :new_user_session_path unless current_user && current_user.admin?
+  end
+   
+  # GET /shows
+  # GET /shows.json
   def index
-    @shows = Show.all.desc(:show_time)
+    @shows = Show.all.desc(:door_time)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @shows }
+    end
   end
 
-  def setlist
+  # GET /shows/1
+  # GET /shows/1.json
+  def show
     @show = Show.find(params[:id])
-    # this overloading is a bit gross, should move into it's own call
-    if params[:additem] 
-      if params[:additem][:uuid] != nil
-        @s = ShowItems.new(kind: "asset",
-                          uuid: params[:additem][:uuid])
-        @s.save!
-        flash[:notice] = "Item added."
-      end
-    end
 
-    # if we are adding here, add to the model...
-    @show_items = ShowItems.where(:show_id => params[:id])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @show }
+    end
   end
 
-  def create
-    @s = Show.new(title: params[:show][:title],
-                  show_time: params[:show][:show_time],
-                  door_time: params[:show][:door_time],
-                  venue: params[:show][:venue])
-    begin 
-      @s.save!
-      flash[:notice] = "Show created."
-    rescue Mongoid::Errors::InvalidTime
-      flash[:error] = "Invalid Date."
-    rescue Mongoid::Errors::Validations
-      flash[:error] = "Save Failed. All fields are required."
-    end
+  # GET /shows/new
+  # GET /shows/new.json
+  def new
+    @show = Show.new
 
-    redirect_to :action => :index
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @show }
+    end
   end
 
+  # GET /shows/1/edit
   def edit
     @show = Show.find(params[:id])
   end
 
+  # POST /shows
+  # POST /shows.json
+  def create
+    @show = Show.new(params[:show])
+
+    respond_to do |format|
+    begin
+      if @show.save
+        format.html { redirect_to @show, notice: 'Show was successfully created.' }
+        format.json { render json: @show, status: :created, location: @show }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @show.errors, status: :unprocessable_entity }
+      end
+    rescue Mongoid::Errors::InvalidTime
+        flash[:error] = "Invalid Date Format."
+    end
+    end
+  end
+
+  # PUT /shows/1
+  # PUT /shows/1.json
   def update
     @show = Show.find(params[:id])
 
-    @show.update_attributes(title: params[:show][:title],
-                            show_time: params[:show][:show_time],
-                            door_time: params[:show][:door_time],
-                            venue: params[:show][:venue])
-    begin 
-      @show.save!
-      flash[:notice] = "Changes Saved."
-    rescue Mongoid::Errors::InvalidTime
-      flash[:error] = "Invalid Date."
-    rescue Mongoid::Errors::Validations
-      flash[:error] = "Save Failed. All fields are required."
+    respond_to do |format|
+      if @show.update_attributes(params[:show])
+        format.html { redirect_to @show, notice: 'Show was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @show.errors, status: :unprocessable_entity }
+      end
     end
-
-    redirect_to :action => :index
-
   end
 
+  # DELETE /shows/1
+  # DELETE /shows/1.json
   def destroy
-    s = Show.find(params[:id])
+    @show = Show.find(params[:id])
+    @show.destroy
 
-    if s != nil
-      s.destroy
+    respond_to do |format|
+      format.html { redirect_to shows_url }
+      format.json { head :no_content }
     end
-    flash[:notice] = "Show removed."
-    redirect_to :action => :index
-  end 
-
+  end
 end

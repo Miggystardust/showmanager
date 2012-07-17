@@ -48,10 +48,11 @@ class User
   # run 'rake db:mongoid:create_indexes' to create indexes
   index :email, :unique => true
   field :name
-  validates_presence_of :name
-  validates_presence_of :actname
-
-  field :actname, :type => String
   
-  attr_accessible :name, :actname, :email, :password, :password_confirmation, :remember_me
+  validates_presence_of :name
+  validates_presence_of :username
+
+  field :username, :type => String
+  
+  attr_accessible :name, :username, :email, :password, :password_confirmation, :remember_me
 end

@@ -1,24 +1,58 @@
+<script>
 
-<label for="show_door_time">Door Date/Time
-<span class="small">What time the Doors open at</span>
-</label>
-<%= f.text_field :door_time, :class => "textfield" %>
-<br clear=all>
+$(function() {
+  $( ".datepicker" ).datetimepicker({
+    showButtonPanel: true,
+    dateFormat: "yy-mm-dd",
+    timeFormat: "hh:mm"
+  });
+});
+</script>
+<%= form_for @show, :html => { :class => "form-horizontal" } do |f| %>
+ <fieldset>
+ <% if @show.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@show.errors.count, "error") %> prohibited this show from being saved:</h2>
 
-<label for="show_show_date">Show Date/Time
-<span class="small">The time the show starts <BR>in the form YYYY-MM-DD HH:MM</span>
-</label>
-<%= f.text_field :show_date, :class => "textfield", :id => "datepicker" %>
-<br clear=all>
+      <ul>
+      <% @show.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<label for="show_title">Title
-<span class="small">The title of the show</span>
-</label>
-<%= f.text_field :title, :class => "textfield" %>
-<br clear=all>
+  <div class="control-group">
+    <%= f.label :title, "Title", :class=>"control-label" %>
+    <div class="controls">
+    <%= f.text_field :title, :class=>"input-xlarge" %>
+    </div>
+  </div>
 
-<label for="show_venue">Venue
-<span class="small">Where the show is</span>
-</label>
-<%= f.text_field :venue, :class => "textfield" %>
-<br clear=all>
+  <div class="control-group">
+    <%= f.label :venue, "Venue", :class => "control-label" %>
+    <div class="controls">
+     <%= f.text_field :venue, :class => "input-xlarge" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :door_time, "Door Time", :class => "control-label" %>
+    <div class="controls">
+    <%= f.text_field :door_time, :class => "input-xlarge datepicker" %>
+  </div>
+<BR>
+  <div class="control-group">
+    <%= f.label :show_time, "Show Time", :class => "control-label" %>
+    <div class="controls">
+    <%= f.text_field :show_time, :class => "input-xlarge datepicker" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+    <%= f.submit "Submit", :class => "btn-primary" %>
+    </div>
+  </div>
+</fieldset>
+<% end %>

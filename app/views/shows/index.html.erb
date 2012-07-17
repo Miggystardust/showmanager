@@ -1,62 +1,30 @@
-<script>
-$(function() {
-  $( ".datepicker" ).datetimepicker({
-    showButtonPanel: true,
-    dateFormat: "yy-mm-dd",
-    timeFormat: "hh:mm"
-  });
-});
-</script>
-<h2>Add Show</h2>
-<div id="stylized" class="myform">
-<%= form_for :show, :id=> "form" do |f| %>
+<h1>Shows</h1>
 
-<label for="show_door_time">Door Date/Time
-<span class="small">What time the Doors open at<BR>
-  in the form YYYY-MM-DD HH:MM.<br>
-  Remember to use 24-hour time.
-</span>
-</label>
-<%= f.text_field :door_time, :class => "textfield datepicker" %>
-<br clear=all>
+<% if @shows.length == 0 -%>
+There are no shows on file. Create one. 
 
-<label for="show_show_time">Show Date/Time
-<span class="small">The time the show starts <BR>
-  in the form YYYY-MM-DD HH:MM.<br>
-  Remember to use 24-hour time.
-</span>
-</label>
-<%= f.text_field :show_time, :class => "textfield datepicker" %>
-<br clear=all>
+<% else %>
+<table class="table table-striped">
+  <tr>
+    <th>Title</th>
+    <th>Venue</th>
+    <th>Door time</th>
+    <th>Show time</th>
+  </tr>
 
-<label for="show_title">Title
-<span class="small">The title of the show</span>
-</label>
-<%= f.text_field :title, :class => "textfield" %>
-<br clear=all>
-
-<label for="show_venue">Venue
-<span class="small">Where the show is</span>
-</label>
-<%= f.text_field :venue, :class => "textfield" %>
-<br clear=all>
-
-<%= f.submit "Add Show", :class => "uploadbutton" %>
-</div>
-
+<% @shows.each do |show| %>
+  <tr>
+    <td><%= show.title %></td>
+    <td><%= show.venue %></td>
+    <td><%= show.door_time %></td>
+    <td><%= show.show_time %></td>
+    <td><%= link_to 'Show', show %></td>
+    <td><%= link_to 'Edit', edit_show_path(show) %></td>
+    <td><%= link_to 'Destroy', show, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
 <% end %>
-<h2>Shows</h2>
-<P>
-</P>
-<TABLE>
-<% if @shows.length > 0 -%>
-<TR>
-<TH>Doors</TH>
-<TH>Name</TH>
-<TH>Venue</TH>
-<TH COLSPAN=2>&nbsp;</TH>
-</TR>
-<% end -%>
-<%= render(@shows) || render("nofiles") %>
-</TABLE>
+</table>
+<% end %>
+<br />
 
+<%= link_to 'New Show', new_show_path %>

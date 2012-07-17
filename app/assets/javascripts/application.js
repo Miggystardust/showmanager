@@ -13,6 +13,7 @@
 // jna note: Order here is very important, do not use require_tree, it's worthless.
 //
 //= require jquery-1.7.2.min.js
+//= require jquery-ui-1.8.21.custom.min.js
 //= require jquery.ui.widget.js
 //= require jquery-ui-timepicker-addon.js
 //= require tmpl.min.js

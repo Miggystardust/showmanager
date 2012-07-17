@@ -3,11 +3,12 @@ class ShowItems
    
   belongs_to :show
 
-  validates_presence_of :kind
-  validates_presence_of :cue_id
- 
+  validates_presence_of :kind, :act_id, :time
+   
   field :kind, :type => String
-  field :cue_id, :type => String
+  field :act_id, :type => String
+  field :passet_id, :type => String
+  field :time, :type => Time
 
   # extra note from the showadmin
   field :note, :type => String

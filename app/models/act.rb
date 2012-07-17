@@ -6,16 +6,17 @@ class Act
    belongs_to :user
    has_many :passets
 
-   validates_presence_of :stage_name, :contact_phone_number
+   validates_presence_of :stage_name, :contact_phone_number, :short_description, :length
+   validates_numericality_of :length
    
-   field :stage_name, :type => :String
+   field :stage_name, :type => String
    field :names_of_performers, :type => String
    field :contact_phone_number, :type => String
-   field :length, :type => String         # length in minutes
+   field :length, :type => Integer     # length in minutes
    field :short_description, :type => String
+
    field :sound_cue, :type => String
    field :prop_placement, :type => String
-   # (Stage left & right refer to the perspective of being on stage and facing the audience. Upstage is further away from the audience & downstage closer), :String
 
    field :lighting_info, :type => String
    field :clean_up, :type => String

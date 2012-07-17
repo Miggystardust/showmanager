@@ -83,7 +83,7 @@ class PassetsController <  ApplicationController
 #                    light_cue: params[:file_upload][:light_cue],	
 #                    pnotes: params[:file_upload][:notes],
                     created_at: Time.now(),
-                    created_by: current_user.actname)
+                    created_by: current_user)
 
     current_user.passets << @p
     

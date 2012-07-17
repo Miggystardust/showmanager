@@ -1,8 +1,9 @@
 class Show
-   # A show, consisting of many things...
+   # A show, consisting of many show items...
+   # essentially the spreadsheet joyce makes now.
    include Mongoid::Document
 
-   has_many :show_items
+   has_many :acts
 
    validates_presence_of :title
    validates_presence_of :show_time

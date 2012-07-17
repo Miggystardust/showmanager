@@ -1,47 +1,6 @@
-<script>
-$(function() {
-  $( ".datepicker" ).datetimepicker({
-    showButtonPanel: true,
-    dateFormat: "yy-mm-dd",
-    timeFormat: "hh:mm"
-  });
-});
-</script>
-<h2>Edit Show</h2>
-<div id="stylized" class="myform">
-<%= form_for (@show), :id=> "form" do |f| %>
+<h1>Editing show</h1>
 
-<label for="show_door_time">Door Date/Time
-<span class="small">What time the Doors open at<BR>
-  in the form YYYY-MM-DD HH:MM.<br>
-  Remember to use 24-hour time.
-</span>
-</label>
-<%= f.text_field :door_time, :class => "textfield datepicker" %>
-<br clear=all>
+<%= render 'form' %>
 
-<label for="show_show_time">Show Date/Time
-<span class="small">The time the show starts <BR>
-  in the form YYYY-MM-DD HH:MM.<br>
-  Remember to use 24-hour time.
-</span>
-</label>
-<%= f.text_field :show_time, :class => "textfield datepicker" %>
-<br clear=all>
-
-<label for="show_title">Title
-<span class="small">The title of the show</span>
-</label>
-<%= f.text_field :title, :class => "textfield" %>
-<br clear=all>
-
-<label for="show_venue">Venue
-<span class="small">Where the show is</span>
-</label>
-<%= f.text_field :venue, :class => "textfield" %>
-<br clear=all>
-
-<%= f.submit "Save Changes", :class => "uploadbutton" %>
-</div>
-
-<% end %>
+<%= link_to 'Show', @show %> |
+<%= link_to 'Back', shows_path %>

@@ -16,8 +16,17 @@
             <li><%= link_to 'Acts', :acts %></li>
             <li><%= link_to 'Profile', edit_user_registration_path %></li>
               <% if current_user.try(:admin?) -%>
-                <li class="divider-vertical"></li>
-                <li><%= link_to 'Show Admin', :shows %></li>
+			  <li class="dropdown" id="menu1">
+			    <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+			      Manage
+			      <b class="caret"></b>
+			    </a>
+			    <ul class="dropdown-menu">
+			      <li><a href="#">Acts</a></li>
+			      <li><a href="#">Users</a></li>
+			      <li><a href="/shows">Shows</a></li>
+			    </ul>
+			  </li>
               <% end -%>
             <% else %>
               <li><%= link_to 'Sign up', new_user_registration_path %></li>
@@ -26,7 +35,7 @@
               <LI CLASS="pull-right"><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></LI>
               <li class="divider-vertical"></li>
               <LI CLASS="pull-right"><span class="navbar-text">
-                  <I>Signed in as <%=current_user.actname %> (<%=current_user.email%>)
+                  <I>Signed in as <%=current_user.username %> (<%=current_user.email%>)
                   <% if current_user.try(:admin?) -%>(admin)<% end -%>
                   </I>
               </span>
