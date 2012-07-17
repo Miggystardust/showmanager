@@ -1,0 +1,81 @@
+<script>
+$(function() {
+  $( ".datepicker" ).datetimepicker({
+    showButtonPanel: true,
+    dateFormat: "yy-mm-dd",
+    timeFormat: "hh:mm"
+  });
+});
+</script>
+<h2>Add Show</h2>
+
+<%= form_for :show, { :id=> "form", :html => {  :class=>"form-horizontal" } }  do |f| %>
+
+<div class="control-group">
+ <%= f.label :title, "Title", :class=>"control-label required datepicker" %>
+ <div class="controls">
+	<%= f.text_field :title, :class => "textfield datepicker" %>
+ <P>
+  The show's title.
+  </P>
+ </div>
+</div>
+
+<div class="control-group">
+ <%= f.label :venue, "Venue", :class=>"control-label required datepicker" %>
+ <div class="controls">
+	<%= f.text_field :venue, :class => "textfield datepicker" %>
+ <P>
+  The show's venue.
+  </P>
+ </div>
+</div>
+
+
+<div class="control-group">
+ <%= f.label :door_time, "Doors Date/Time", :class=>"control-label required datepicker" %>
+ <div class="controls">
+	<%= f.text_field :door_time, :class => "textfield datepicker" %>
+ <P>
+  What time the Doors open at
+  in the form YYYY-MM-DD HH:MM.
+  Remember to use 24-hour time.
+  </P>
+ </div>
+</div>
+
+<div class="control-group">
+ <%= f.label :show_time, "Show Date/Time", :class=>"control-label required datepicker" %>
+ <div class="controls">
+	<%= f.text_field :show_time, :class => "textfield datepicker" %>
+ <P>
+  What time the Show Starts at
+  in the form YYYY-MM-DD HH:MM.
+  Remember to use 24-hour time.
+  </P>
+ </div>
+</div>
+
+<div class="control-group">
+ <div class="controls">
+	<%= f.submit "Add Show", :class=>"btn-primary" %>
+ </div>
+</div>
+
+
+<% end %>
+<h2>Shows</h2>
+<P>
+</P>
+<TABLE>
+<% if @shows.length > 0 -%>
+<TR>
+<TH>Doors</TH>
+<TH>Name</TH>
+<TH>Venue</TH>
+<TH COLSPAN=2>&nbsp;</TH>
+</TR>
+<% end -%>
+<%= render(@shows) || render("nofiles") %>
+</TABLE>
+
