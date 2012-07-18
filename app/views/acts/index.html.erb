@@ -1,26 +1,40 @@
+<% if @showowner -%>
+<h1>All Acts - Admin</h1>
+<% else -%>
 <h1>Your Acts</h1>
-
+<% end -%>
 <% if @acts.length > 0 -%>
 <table class="table table-striped">
   <tr>
+	<% if @showowner %>
+    <th>Owner</th>
+	<% end %>
     <th>Stage Name</th>
     <th>Short Description</th>
     <th colspan=3>Actions</th>
   </tr>
 
-<% @acts.each do |act| %>
+<% @acts.each do |act| -%>
   <tr>
+	<% if @showowner -%>
+    <td>
+	<% if act.user_id != nil -%>
+    <%= User.find(act.user_id).name %>
+	<% end -%>
+    </td>
+	<% end -%>
 	<td><%=act.stage_name%></td>
 	<td><%=act.short_description%></td>
 <!--    <td><%= link_to 'Show', act %></td> !-->
     <td><%= link_to 'Edit', edit_act_path(act) %></td>
     <td><%= link_to 'Destroy', act, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
-<% end %>
+<% end -%>
 </table>
-<% else %>
-<H3> You don't have any acts. Create one! </h3>
-<% end %>
 <br />
-
 <%= link_to 'New Act', new_act_path %>
+<% else -%>
+<P>
+<H3> You don't have any acts. <%= link_to "Create one!", new_act_path %> </h3>
+</p>
+<% end -%>

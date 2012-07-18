@@ -12,12 +12,12 @@
     </div>
   <% end %>
 
-
-
 <div class="well">
 <P>
-This for might look long, but it's not that bad. The more information you can
-provide the better, but only a few fields are
+This for might look long, but it's not that bad!
+</P>
+<P>
+The more information you can provide the better, but only a few fields are
 required. If you need more room, just drag and make the boxes
 bigger. We'll save all your info. 
 </p>
@@ -67,17 +67,17 @@ bigger. We'll save all your info.
 <div class="control-group">
  <%= f.label :music, "Audio", :class=>"control-label" %>
  <div class="controls">
-	<%= f.select :music, @user_musics %>
-	<P>Upload your music <%= link_to "here", passets_new_path %> before creating your act and it will appear here.
+	<%= f.select :music, @user_musics, :class =>"input-xxlarge" %>
+	<P>Upload your music <%= link_to "here", passets_new_path %> before creating your act and it will appear in the list above.
     <BR>Remember, one track per act.
  </div>
 </div>
 
 <div class="control-group">
  <%= f.label :image, "Image/Video", :class=>"control-label" %>
- <div class="controls">
+ <div class="controls input-xxlarge">
 	<%= f.select :image, @user_imgs %>
-	<P>Upload images or video here <%= link_to "here", passets_new_path %> before creating your act and they will appear here.
+	<P>Upload images or video here <%= link_to "here", passets_new_path %> before creating your act and they will appear in the list above.
  </div>
 </div>
 
@@ -96,11 +96,10 @@ If you change your mind, update the system! </p>
 </div>
 
 <div class="control-group">
- <%= f.label :prop_placement, "Prop Notes? Whatand where should they be placed?", :class=>"control-label" %>
+ <%= f.label :prop_placement, "Prop Notes? What and where should they be placed?", :class=>"control-label" %>
  <div class="controls">
    <%= f.text_area :prop_placement, :class=>"input-xlarge", :rows=>2, :cols=>200 %>
    <P>
-
    Use stage directions here.<BR>
    Stage left and Stage Right refer
    to the perspective of being on stage and facing the
@@ -109,8 +108,6 @@ If you change your mind, update the system! </p>
 
    Upstage is further away from the audience and downstage
    closer.<BR>
-
-
    </p>
  </div>
 </div>

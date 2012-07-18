@@ -29,8 +29,10 @@ class User
   field :last_sign_in_at,    :type => Time
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
+  
+  field :username, :type => String, :unique => true
 
-  field :admin,              :type => Boolean, :default => false
+  field :admin, :type => Boolean, :default => false
 
   ## Confirmable
   # field :confirmation_token,   :type => String
@@ -46,13 +48,17 @@ class User
   ## Token authenticatable
   # field :authentication_token, :type => String
   # run 'rake db:mongoid:create_indexes' to create indexes
-  index :email, :unique => true
+  index :email, unique: true
+  index :username, unique: true
   field :name
   
   validates_presence_of :name
   validates_presence_of :username
-
-  field :username, :type => String
+  
+  validate do |user|
+      user.errors.add :username, 'must be unique' if User.where(username => :email).count > 0
+  end
   
   attr_accessible :name, :username, :email, :password, :password_confirmation, :remember_me
+  attr_protected :admin
 end

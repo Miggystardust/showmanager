@@ -17,8 +17,12 @@ Rails3MongoidDevise::Application.routes.draw do
     :action => "create";
 
   resources :show_items
-  resources :acts
-
+  resources :acts do
+    collection do
+      get :adminindex
+    end
+  end
+  
   resources :passets do 
    collection do
      get :search

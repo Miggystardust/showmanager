@@ -4,7 +4,7 @@ class ActsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_cache_buster
   before_filter :build_user_selects
-    
+      
   def build_user_selects
     # we build this every pass because we use them in most operations
     @user_imgs = [['None',0]]
@@ -36,12 +36,19 @@ class ActsController < ApplicationController
   end
 
   def adminindex
-    @acts = Act.acts.all
-
+    if current_user.try(:admin?) == false
+      flash[:error] = "You must be an administrator to do that."
+      redirect_to :index
+    end
+    
+    @acts = Act.all
+    @showowner = true
+      
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :action => "index" }
       format.json { render json: @acts }
     end
+    
   end
 
   # GET /acts/1
@@ -69,6 +76,12 @@ class ActsController < ApplicationController
   # GET /acts/1/edit
   def edit
     @act = Act.find(params[:id])
+    
+    if @act.id != current_user.id and current_user.try(:admin?) == false
+      flash[:error] = "You don't own that Act."
+      redirect_to "/acts/"
+    end
+    
   end
 
   # POST /acts
