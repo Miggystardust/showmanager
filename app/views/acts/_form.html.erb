@@ -15,12 +15,15 @@
 
 
 <div class="well">
-
-This for might look long, but it's not. The more information you can
-give us about your act, the better, but only a few fields are
+<P>
+This for might look long, but it's not that bad. The more information you can
+provide the better, but only a few fields are
 required. If you need more room, just drag and make the boxes
-bigger. We'll save all your info. Starred files (*) are required.
-
+bigger. We'll save all your info. 
+</p>
+<P>
+	Starred files (*) are required.
+</p>
 </div>
 
 <div class="control-group">
@@ -61,6 +64,22 @@ bigger. We'll save all your info. Starred files (*) are required.
  </div>
 </div>
 
+<div class="control-group">
+ <%= f.label :music, "Audio", :class=>"control-label" %>
+ <div class="controls">
+	<%= f.select :music, @user_musics %>
+	<P>Upload your music <%= link_to "here", passets_new_path %> before creating your act and it will appear here.
+    <BR>Remember, one track per act.
+ </div>
+</div>
+
+<div class="control-group">
+ <%= f.label :image, "Image/Video", :class=>"control-label" %>
+ <div class="controls">
+	<%= f.select :image, @user_imgs %>
+	<P>Upload images or video here <%= link_to "here", passets_new_path %> before creating your act and they will appear here.
+ </div>
+</div>
 
 <div class="control-group">
  <%= f.label :sound_cue, "Sound Cue: When should we start your music?", :class=>"control-label" %>

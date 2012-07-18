@@ -15,6 +15,9 @@ class Act
    field :length, :type => Integer     # length in minutes
    field :short_description, :type => String
 
+   field :music, :type => String
+   field :image, :type => String # image or video... 
+   
    field :sound_cue, :type => String
    field :prop_placement, :type => String
 

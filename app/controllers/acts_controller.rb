@@ -1,7 +1,28 @@
 class ActsController < ApplicationController
   protect_from_forgery
 
+  before_filter :authenticate_user!
   before_filter :set_cache_buster
+  before_filter :build_user_selects
+    
+  def build_user_selects
+    # we build this every pass because we use them in most operations
+    @user_imgs = [['None',0]]
+    @user_musics = [['None',0],["We'll make our own",1]]
+    
+    ui = current_user.passets.where(kind: /^image\//)
+    ui.each do |u|
+      logger.debug(u.id)
+      @user_imgs << [u.filename,u.id]
+    end
+    
+    um = current_user.passets.where(kind: /^audio\//)
+    um.each do |u|
+      logger.debug(u.id)
+      @user_imgs << [u.filename,u.id]
+    end
+    
+  end
 
   # GET /acts
   # GET /acts.json
@@ -38,7 +59,7 @@ class ActsController < ApplicationController
   # GET /acts/new.json
   def new
     @act = Act.new
-
+        
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @act }
@@ -54,6 +75,8 @@ class ActsController < ApplicationController
   # POST /acts.json
   def create
     @act = Act.new(params[:act])
+    
+    current_user.passets.where()
 
     respond_to do |format|
       if @act.save
