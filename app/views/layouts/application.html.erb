@@ -15,11 +15,13 @@
     <%= stylesheet_link_tag "bootstrap-image-gallery.min.css" %>
     <%= stylesheet_link_tag "jquery.fileupload-ui.css" %>
     <%= stylesheet_link_tag "blitzer/jquery-ui-1.8.21.custom" %>
+    <%= stylesheet_link_tag "DT_bootstrap" %>
     <%= javascript_include_tag "application" %>
 
     <!-- Add fancyBox -->
     <%= stylesheet_link_tag "jquery.fancybox" %>
     <%= csrf_meta_tags %>
+	<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
   </head>  
   <body>
   <%= render 'layouts/navigation' %>

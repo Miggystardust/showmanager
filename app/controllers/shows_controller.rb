@@ -42,6 +42,17 @@ class ShowsController < ApplicationController
   # GET /shows/1/edit
   def edit
     @show = Show.find(params[:id])
+    @show_items = ShowItem.where(show_id: params[:id])
+  end
+
+  # GET /shows/1/items
+  def items
+    @show_items = ShowItem.where(show_id: params[:id])
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @show_items }
+    end
   end
 
   # POST /shows

@@ -1,8 +1,12 @@
 	<TR>
+    <% if defined? @adminindex -%>
+    <TD>
+    <%=User.find(passet.created_by).name %><BR>
+    <a href="mailto:<%=User.find(passet.created_by).email %>"><%=User.find(passet.created_by).email %></a>
+    </TD>
+    <% end -%>
+
 		<TD ALIGN=CENTER>
-      <% if defined? @adminindex -%>
-      Owner: <%=passet.created_by%><BR>
-      <% end -%>
 			<% if passet.kind.match("audio/mpeg") -%>
 			<object type="application/x-shockwave-flash" data="/dewplayer/dewplayer-rect.swf" width="240" height="20" id="dewplayer" name="dewplayer">
 				<param name="wmode" value="transparent" />

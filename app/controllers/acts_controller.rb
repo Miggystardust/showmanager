@@ -3,23 +3,30 @@ class ActsController < ApplicationController
 
   before_filter :authenticate_user!
   before_filter :set_cache_buster
-  before_filter :build_user_selects
+  before_filter :build_user_selects, :except => [ :destroy ]
       
   def build_user_selects
     # we build this every pass because we use them in most operations
     @user_imgs = [['None',0]]
     @user_musics = [['None',0],["We'll make our own",1]]
     
-    ui = current_user.passets.where(kind: /^image\//)
+    if current_user.try(:admin?) 
+      # admins get to see everything.
+      ui = Passet.where(kind: /^image\//)
+      um = Passet.where(kind: /^audio\//)
+    else 
+      ui = current_user.passets.where(kind: /^image\//)
+      um = current_user.passets.where(kind: /^audio\//)
+    end
+
     ui.each do |u|
       logger.debug(u.id)
       @user_imgs << [u.filename,u.id]
     end
     
-    um = current_user.passets.where(kind: /^audio\//)
     um.each do |u|
       logger.debug(u.id)
-      @user_imgs << [u.filename,u.id]
+      @user_musics << [u.filename,u.id]
     end
     
   end
@@ -46,7 +53,15 @@ class ActsController < ApplicationController
       
     respond_to do |format|
       format.html { render :action => "index" }
-      format.json { render json: @acts }
+      format.json { 
+        # this format is used to drive the show editing page. It is a digusting O(n) query. I do not care.
+        # talk to me when we have 100k users. 
+        @actarray = []
+        @acts.each { |a| 
+          @actarray << [a.user.name, a.stage_name, a.short_description, a.length, "<button class=\"btn btn-success actadder\" id=\"#{a._id}\"><i class=\"icon-plus icon-white\"></i> Add</button>"]
+        }
+        render json: { 'aaData' => @actarray }
+      }
     end
     
   end

@@ -32,4 +32,6 @@
 //= require locale.js
 //= require main.js
 //= require jquery_ujs
+//= require jquery.dataTables.min.js
+//= require DT_bootstrap.js
 

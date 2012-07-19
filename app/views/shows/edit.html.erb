@@ -1,6 +1,148 @@
 <h1>Editing show</h1>
 
-<%= render 'form' %>
+<div id="editFormToggle">
+<P><span class="ui-icon ui-icon-triangle-1-e toggle-icon" style="vertical-align:middle"></span><span id="toggle-txt">Edit Show Details</span></P>
+</div>
 
-<%= link_to 'Show', @show %> |
-<%= link_to 'Back', shows_path %>
+<div id="metadataform" style="display:none">
+<%= render 'form' %>
+</div>
+
+<h3>Available Acts</h3>
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="actslist">
+<thead>
+ <TH>Owner</TH>
+ <TH>Stage/Act Name</TH>
+ <TH>Short Description</TH>
+ <TH>Duration</TH>
+ <TH>Add</TH>
+</thead>
+<tbody>
+<!-- data -->
+</tbody>
+</table>
+<HR>
+<h3>Show Schedule</h3>
+
+<button class="btn btn-info">
+<i class="icon-plus icon-white"></i> Add Note/Intermission
+</button>
+
+<TABLE id="sort" NAME="setlist" CLASS="table table-striped" >
+<thead>
+<TR>
+<TH>&nbsp</TH>
+<TH>Time</TH>
+<TH>Act</TH>
+<TH>Duration</TH>
+<TH>Sound</TH>
+<TH>Light + Stage</TH>
+<TH>Notes</TH>
+</TR>
+</thead>
+<tbody>
+
+<TR>
+<TD><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+</TD>
+<TD>1</TD>
+<TD>1</TD>
+<TD>1</TD>
+<TD>1</TD>
+<TD>1</TD>
+<TD>1</TD>
+<TD>
+<button class="btn btn-danger">
+Remove
+</button>
+</TD>
+</TR>
+
+</tbody>
+</TABLE>
+
+
+<script>
+
+$.extend( $.fn.dataTableExt.oStdClasses, {
+    "sSortAsc": "header headerSortDown",
+    "sSortDesc": "header headerSortUp",
+    "sSortable": "header"
+} );
+
+$.extend( $.fn.dataTableExt.oStdClasses, {
+    "sWrapper": "dataTables_wrapper form-inline"
+} );
+
+
+/* set up acts datatable */
+$(document).ready(function() {
+  $('#actslist').dataTable( {
+      "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+      "sAjaxSource": "/acts/adminindex.json",
+      "sPagination": "bootstrap",
+      "iDisplayLength": 5,
+      "oLanguage": {
+		"sLengthMenu": "Show&nbsp;<select size=1 name=actslist_length aria-controls=\"actslist\"><option value='5'>5</option><option value='10'>10</option><option value='15'>15</option></select>&nbsp;records per page"
+	  },
+      "fnServerData": function ( sSource, aoData, fnCallback ) {
+        $.ajax({'datatype':'json',
+                'type':'GET',
+                'url':sSource,
+                'data':aoData,
+                'success':function(json) {               
+                   fnCallback(json);
+                   /* recall selectors to enable UI after ajax */
+                   $(".actadder").click(function(e) {
+						var actdata = {
+							'show_id':'<%=@show.id%>',
+							'kind':'32',
+							'act_id':e.target.id,
+							"authenticity_token" : AUTH_TOKEN
+							};
+							
+					     $.ajax({
+							type: 'POST',
+							dataType: 'json',
+							url: '/show_items.json',
+							contentType: 'application/json',
+							data: JSON.stringify(actdata)
+					   })
+                   });
+                }
+        });
+      }
+   })
+});
+       
+/* set up the lower table */
+var fixHelper = function(e, ui) {
+  ui.children().each(function() {
+    $(this).width($(this).width());
+  });
+  return ui;
+};
+
+$("#sort tbody").sortable({
+  helper: fixHelper
+}).disableSelection();
+
+/* add act clicks */
+$(document).ready( function () { 
+
+  $("#editFormToggle").click( function (e) {
+	e.preventDefault();
+	$(".toggle-icon").toggleClass('ui-icon-triangle-1-e');		
+	$(".toggle-icon").toggleClass('ui-icon-triangle-1-s');
+	$("#metadataform").slideToggle();
+
+	if ($(".toggle-icon").hasClass("ui-icon-triangle-1-s")) { 
+		$("#toggle-txt").html("Hide Details");
+	} else {
+		$("#toggle-txt").html("Edit Show Details");
+	}
+  });
+});
+
+
+</script>

@@ -3,7 +3,7 @@ class Show
    # essentially the spreadsheet joyce makes now.
    include Mongoid::Document
 
-   has_many :acts
+   has_many :show_items
 
    validates_presence_of :title
    validates_presence_of :show_time

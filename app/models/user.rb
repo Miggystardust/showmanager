@@ -15,7 +15,9 @@ class User
 
   validates_presence_of :email
   validates_presence_of :encrypted_password
-  
+
+  field :phone_number,       :type => String, :default => ""  
+
   ## Recoverable
   field :reset_password_token,   :type => String
   field :reset_password_sent_at, :type => Time
@@ -54,10 +56,6 @@ class User
   
   validates_presence_of :name
   validates_presence_of :username
-  
-  validate do |user|
-      user.errors.add :username, 'must be unique' if User.where(username => :email).count > 0
-  end
   
   attr_accessible :name, :username, :email, :password, :password_confirmation, :remember_me
   attr_protected :admin

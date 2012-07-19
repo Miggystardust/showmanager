@@ -1,0 +1,52 @@
+
+div.dataTables_length label {
+	float: left;
+	text-align: left;
+}
+
+div.dataTables_length select {
+	width: 75px;
+}
+
+div.dataTables_filter label {
+	float: right;
+}
+
+div.dataTables_info {
+	padding-top: 8px;
+}
+
+div.dataTables_paginate {
+	float: right;
+	margin: 0;
+}
+
+table.table {
+	clear: both;
+	margin-bottom: 6px !important;
+}
+
+table.table thead .header,
+table.table thead .headerSortUp,
+table.table thead .headerSortDown,
+table.table thead .headerSortUpDisabled,
+table.table thead .headerSortDownDisabled {
+	cursor: pointer;
+	*cursor: hand;
+}
+
+table.table thead .header { background: url('/assets/sort_both.png') no-repeat center right; }
+table.table thead .headerSortUp { background: url('/assets/sort_asc.png') no-repeat center right; }
+table.table thead .headerSortDown { background: url('/assets/sort_desc.png') no-repeat center right; }
+
+table.table thead .headerSortUpDisabled { background: url('/assets/sort_asc_disabled.png') no-repeat center right; }
+table.table thead .headerSortDownDisabled { background: url('/assets/sort_desc_disabled.png') no-repeat center right; }
+
+table.dataTable th:active {
+	outline: none;
+}
+
+#editFormToggle {
+	cursor: pointer;
+	*cursor: hand;
+}

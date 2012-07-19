@@ -31,11 +31,7 @@ class PassetsController <  ApplicationController
 
   def update
     @passet = current_user.passets.find(params[:id])
-    @passet.update_attributes(
-                              notes: params[:passet][:notes],
-                              sound_cue: params[:passet][:sound_cue],
-                              stage_notes: params[:passet][:stage_notes],
-                              light_cue: params[:passet][:light_cue])
+    @passet.update_attributes(notes: params[:passet][:notes])
     @passet.save!
 
     flash[:notice] = "Updated information for #{@passet.filename}"
@@ -79,11 +75,8 @@ class PassetsController <  ApplicationController
     @p = Passet.new(uuid: @uuid, 
                     filename: filename,
                     kind: fileinfo, 
-#                    sound_cue: params[:file_upload][:sound_cue],	
-#                    light_cue: params[:file_upload][:light_cue],	
-#                    pnotes: params[:file_upload][:notes],
                     created_at: Time.now(),
-                    created_by: current_user)
+                    created_by: current_user.id)
 
     current_user.passets << @p
     

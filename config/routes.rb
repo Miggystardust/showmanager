@@ -16,7 +16,6 @@ Rails3MongoidDevise::Application.routes.draw do
     :controller => "acts", 
     :action => "create";
 
-  resources :show_items
   resources :acts do
     collection do
       get :adminindex
@@ -30,15 +29,15 @@ Rails3MongoidDevise::Application.routes.draw do
    end
   end
 
-  resources :passets
-  resources :shows
-
   resources :shows do 
    member do
+      get 'items' 
       get 'setlist'
       post 'setlist'
    end
   end
+
+  resources :show_items
 
   get "/s/:uuid-:dims.jpg",
     :controller => "images",
