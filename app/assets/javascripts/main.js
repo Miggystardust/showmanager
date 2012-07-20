@@ -33,11 +33,11 @@ $(function () {
         $('#fileupload').fileupload('option', {
             url: '//hubba.retina.net/passets/new',
             maxFileSize: 25000000,
-            acceptFileTypes: /(\.|\/)(gif|jpe?g|png|mov|mp4|m4v|mp3)$/i,
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png|mov|mp4|m4a|m4v|mp3)$/i,
             process: [
                 {
                     action: 'load',
-                    fileTypes: /^image\/(gif|jpe?g|png|mpv|m4v|mp3)$/,
+                    fileTypes: /^image\/(gif|jpe?g|png|mov|mp4|m4a|m4v|mp3)$/,
                     maxFileSize: 25000000 // 20MB
                 },
                 {
