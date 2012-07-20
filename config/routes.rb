@@ -32,8 +32,7 @@ Rails3MongoidDevise::Application.routes.draw do
   resources :shows do 
    member do
       get 'items' 
-      get 'setlist'
-      post 'setlist'
+      get 'show_items'
    end
   end
 

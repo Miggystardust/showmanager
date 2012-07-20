@@ -16,6 +16,7 @@ class ShowItem
   field :act_id, :type => String
   
   # might use this.
+  field :duration, :type => Integer
   field :time, :type => Time
 
   # extra note from the showadmin
