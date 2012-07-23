@@ -7,9 +7,9 @@
   <%= form_for @show_item, :html => { :class => "form-horiziontal" } do |f| -%>
   <div class='modal-body'>
     <div class="control-group">
-      <%= f.label :duration, "Length (in Minutes)", :class=>"control-label", :value => 0 %>
+      <%= f.label :duration, "Length (in Minutes)", :class=>"control-label" %>
       <div class="controls">
-        <%= f.text_field :note, :class=>"input-xlarge" %>
+        <%= f.text_field :duration, :class=>"input-xlarge" %>
       </div>
     </div>
     <div class="control-group">
@@ -55,9 +55,31 @@
       $('#modal-form-submit').on('click', function(e){
       // We don't want this to act as a link so cancel the link action
         e.preventDefault();
-        alert('submit');
-      });
 
+        $("#noteModal").modal('hide');
+
+        var actdata = {
+          "authenticity_token" : AUTH_TOKEN,
+          'show_id':'<%=@show.id%>',
+          'kind' : 0,
+          'act_id' : 0 ,
+          'note': show_item_note.value,
+          'duration': show_item_duration.value
+        };
+
+        console.log(actdata);
+
+        $.ajax({
+          type: 'POST',
+              dataType: 'json',
+              url: '/show_items.json',
+              contentType: 'application/json',
+              data: JSON.stringify(actdata),
+              success: function() { 
+                 showDT.fnReloadAjax();
+              }
+          });
+        });
     });
   //]]>
 </script>

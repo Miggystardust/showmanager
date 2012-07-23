@@ -15,6 +15,8 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+require 'taglib'
+
 module Rails3MongoidDevise
   class Application < Rails::Application
 

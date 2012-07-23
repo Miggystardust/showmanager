@@ -1,22 +1,25 @@
-<div class="hero-unit">
-  <div class="logocontainer">
-    <img src="http://www.hubbahubbarevue.com/wp-content/uploads/headers/header<%=rand(4)+1%>.jpg" style="display: block">
-    <span class='logotitle'><%=image_tag "logo.png" %></span>
-  </div>
-  <br clear=all>
-  <h2>Welcome to the Hubba Hubba show manager. </h2>
+<header class="jumbotron masthead">
+<div class="inner">
+  <h1>Hubba Show Manager</h1>
   <p>
-    The Hubba show manager allows you to upload content for your act
-    and for our stage manager and tech team to prepare the show. We'll 
-    keep your music around forever (or until you tell us to remove it!) 
-    and you'll never have to deal with plastic CD's ever again.
+    No more CDs. No More mistakes. Simple stage management.
   </p>
-  <h3>We're better than CDs!</h3>
+  <p class="download-info">
+  <% if user_signed_in? == false -%>
+  <a href="/users/sign_up" class="button btn-primary btn-large" onclick="window.location('/users/signup');" rel="nofollow">Sign Up</a> 
+  <% end %>
+  <a href="/passets/new" class="button btn-success btn-large" onclick="window.location('/passets/new');" rel="nofollow">Upload Your Music</a>
+  <a href="/acts/new" class="button btn-warning btn-large" onclick="window.location('/acts/new');" rel="nofollow">Create an Act</a>
+  <% if user_signed_in? %>
+  <a href="/users/sign_out" data-method="delete" rel="nofollow" class="button btn-danger btn-large" onclick="window.location('/users/sign_out')">Logout</a>
+  <% end -%>
+  <h3>It's easy!</h3>
   <P>
-	The show manager accepts music, video, and images. Once you've uploaded your content, you won't ever have to upload it again.
+  <UL>
+    <LI><a href="/users/sign_up">Sign up</a> and create an account to track your music and sets</LI>
+    <LI><a href="">Upload</a> your music</LI> 
+    <LI><a href="">Create an Act</A> containing your music.
+  </UL>
   </p>
-  <p>
-  </p>
- </div>
-</div>
 
+</div>

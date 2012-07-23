@@ -38,6 +38,14 @@ Rails3MongoidDevise::Application.routes.draw do
 
   resources :show_items
 
+  # this is a non-standard endpoint thanks to 
+  # datatables
+
+  post "/show_items/update_seq", 
+    :controller => "show_items",
+    :action => "update_seq"
+
+
   get "/s/:uuid-:dims.jpg",
     :controller => "images",
     :action => "servethumb"

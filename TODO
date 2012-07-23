@@ -6,20 +6,19 @@ u.save!
 
 
 Obviously, you'll need one of these.
+------------------------------------------------------------
 
 Show system
 - add intermissions
 - header/footer
-- "Cast" notes / sound / tech etc...
-- Should output a really nice pdf like thing that looks like current sheets (maybe CSS print mode...)
-  But ideally, fuck printing. We want this to be on ipads!
+- "Cast" notes / sound / tech etc... ( DONE ) 
+- Should output a really nice pdf like thing that looks like current sheets (maybe CSS print mode...) (PUTOFF)
+  But ideally, fuck printing. We want this to be on ipads! 
+- use ajax-- It would be fucking awesome if we could make this a LIVE SCREEN, accessible from ipad.
 - needs to be able to reorder the show.
-- needs to be able to add 'acts' that are not part of the system! important.
 - should auto compute time
-- Extract Mp3 data via tagging...
+- Extract Mp3 data via tagging... (DONE)
 - Allow download of entire thing as a zipfile.
-
-It would be fucking awesome if we could make this a LIVE SCREEN, accessible from ipad.
 
 like...
 

@@ -63,10 +63,24 @@ class PassetsController <  ApplicationController
     tmp = params[:files][0].tempfile
 
     logger.debug("Got file #{tmp.path}")
-    fileinfo = `file --mime #{tmp.path}`.strip.split[1].gsub(";","")
+    
     filename = FileTools.sanitize_filename(params[:files][0].original_filename)
+    fileinfo = determine_mime_type(filename)
 
     @file = "#{UPLOADS_DIR}/#{@uuid}"
+
+    song_artist = ""
+    song_title = ""
+
+    if fileinfo.match(/^audio\//)
+      title = TagLib::MPEG::File.open(tmp.path) do |file|
+        tag = file.tag
+        song_artist = tag.artist
+        song_title = tag.title
+      end
+    end
+
+    logger.debug("Got: #{song_artist},#{song_title}")
 
     # TODO: Additional filename sanitization
     # TODO: Use md5 to find out if we've seen this before, don't allow dupes?
@@ -76,7 +90,10 @@ class PassetsController <  ApplicationController
                     filename: filename,
                     kind: fileinfo, 
                     created_at: Time.now(),
-                    created_by: current_user.id)
+                    created_by: current_user.id,
+                    song_artist: song_artist,
+                    song_title: song_title,
+                    )
 
     current_user.passets << @p
     
@@ -116,6 +133,33 @@ class PassetsController <  ApplicationController
     render :json => list
   end
      
-
+  private
+  
+  def determine_mime_type(filename)
+    ext = filename.split(".")[1].downcase()
+    case ext
+    when 'jpg'
+      fileinfo = "image/jpeg"
+    when 'jpeg'
+      fileinfo = "image/jpeg"
+    when 'png'
+      fileinfo = "image/png"
+    when 'gif'
+      fileinfo = "image/gif"
+    when 'mp3'
+      fileinfo = "audio/mp3"
+    when 'm4a'
+      fileinfo = "audio/mp4"
+    when 'mp4'
+      fileinfo = "video/mp4"
+    when 'm4v'
+      fileinfo = "video/mp4"
+    when 'mov'
+      fileinfo = "video/quicktime"
+    else
+      fileinfo = "application/octet-stream"
+    end
+    fileinfo
+  end
 end
   

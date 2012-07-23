@@ -12,6 +12,10 @@ class Passet
    field :kind, :type => String
    field :notes, :type => String
 
+   # these fields are available if tagging has suceeded
+   field :song_artist, :type => String
+   field :song_title, :type => String
+
    field :sound_cue, :type => String
    field :light_cue, :type => String
    field :stage_notes, :type => String

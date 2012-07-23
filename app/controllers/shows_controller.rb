@@ -60,17 +60,19 @@ class ShowsController < ApplicationController
 
   # AJAX endpoint
   def show_items
-    @show_items = ShowItem.where(show_id: params[:id])
-
+    @show_items = ShowItem.where(show_id: params[:id]).asc(:seq)
+    @show = Show.find(params[:id])
+    
+    itemtime = @show.door_time
     respond_to do |format|
       format.html { render :action => "index" }
       format.json { 
         # this format drives the show display index
         @si = []
         @show_items.each { |s|
-          removeme = "<button class=\"btn btn-danger siremove\" id=\"#{s._id}\"><i class=\"icon-minus icon-white\"></i> Remove</button>"
-
-          # seq, time, act data, duration, sound, light+stage, notes
+          removeme = "<button class=\"btn btn-danger btn-small siremove\" id=\"#{s._id}\"><i class=\"icon-minus icon-white\"></i> Remove</button> "
+          editact = "<button class=\"btn btn-warning btn-small editact\" id=\"#{s._id}\"><i class=\"icon-share-alt icon-white\"></i> Edit Act</button>" 
+          # seq, time, act data, sound, light+stage, notes
           if s.kind != 0
             # this is an asset. 
             if s.act_id != 0
@@ -84,15 +86,97 @@ class ShowsController < ApplicationController
             else
               actinfo = "<B>#{act.stage_name}</B><BR>#{act.short_description}"
 
-              @si << [s.seq,s.time,actinfo,act.length,act.sound_cue,"LIGHTS: #{act.lighting_info}<BR>STAGE: #{act.prop_placement}",act.extra_notes,removeme]
+              sound = ""
+              if act.music != ""
+                if act.music != 0 
+                  p = Passet.where(_id:act.music)[0]
+                  if p
+                    if p.song_artist != ""
+                      sound = sound + "<B>#{p.song_artist}</B><BR>"
+                    end
+                    if p.song_title != ""
+                      sound = sound + "<EM>#{p.song_title}</EM><BR>"
+                    end
+                    # If we have no tags, then use the filename.
+                    sound = sound + "#{p.filename}<BR>"
+                  else
+                    sound = "None<BR>"
+                  end
+                end
+              else
+                sound = "Not Specified<BR>"
+              end
+
+              if act.sound_cue == ""
+                sound = sound + "<B>CUE:</B> Not specified"
+              else
+                sound = sound + "<B>CUE:</B> #{act.sound_cue}"
+              end
+              
+              # build the stage instructions from all the fields
+              stage = ""
+              
+              if act.mc_intro != ""
+                stage += "<B>MC INTRO:</B> #{act.mc_intro}<BR>"
+              end
+              
+              if act.image != "" and act.image != '0'
+                p = Passet.where(_id:act.image)[0]
+                if p
+                  stage += "<B>IMAGE:</B> #{p.filename}<BR>"
+                else
+                  stage += "<B>IMAGE:</B> <font color=\"#ff0000\">Image not on file</font><BR>"
+                end                
+              end
+              
+              if act.lighting_info != ""
+                stage += "<B>LIGHTS:</B> #{act.lighting_info}<BR>"
+              end
+              
+              if act.prop_placement != ""
+                stage += "<B>STAGE:</B> #{act.prop_placement}<BR>"
+              end
+              
+              if act.clean_up != ""
+                stage += "<B>CLEANUP:</B> #{act.clean_up}<BR>"
+              end
+
+              @si << { "DT_RowId" => s._id,
+                "0" => s.seq,
+                "1" => itemtime.strftime("%l:%M %P"),
+                "2" => actinfo,
+                "3" => sound,
+                "4" => stage,
+                "5" => act.extra_notes,
+                "6" => removeme + editact,
+              }
+              
+              logger.debug("add act with length #{act.length}")
+              if act.length != nil
+                  itemtime = itemtime + (act.length * 60)
+              end
             end
 
           else
             # note
-            @si << [s.seq,s.time,'--',0,'--','--',s.note,removeme]
+            @si << { "DT_RowId" => s._id,
+              "0" => s.seq,
+              "1" => itemtime.strftime("%l:%M %P"),
+              "2" => "--",
+              "3" => "--",
+              "4" => "--",
+              "5" => "<B>" + s.note + "</B>",
+              "6" => removeme,
+            }
+            logger.debug("add note with length #{s.duration} #{s}")
+            
+            if s.duration != nil
+                itemtime = itemtime + (s.duration * 60)
+            end
           end
+
         }
-        render json: { 'aaData' => @si }
+        render json: { 'iTotalRecords' => @si.length, 'aaData' => @si }
       }
     end
   end
@@ -121,13 +205,15 @@ class ShowsController < ApplicationController
   # PUT /shows/1.json
   def update
     @show = Show.find(params[:id])
+    @show_items = ShowItem.where(show_id: params[:id]) 
+    @show_item = ShowItem.new
 
     respond_to do |format|
       if @show.update_attributes(params[:show])
-        format.html { redirect_to @show, notice: 'Show was successfully updated.' }
+        format.html { redirect_to "/shows/#{@show.id}/edit", notice: 'Show details were successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { redirect_to "/shows/#{@show.id}/edit"}
         format.json { render json: @show.errors, status: :unprocessable_entity }
       end
     end

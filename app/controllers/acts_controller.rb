@@ -8,7 +8,7 @@ class ActsController < ApplicationController
   def build_user_selects
     # we build this every pass because we use them in most operations
     @user_imgs = [['None',0]]
-    @user_musics = [['None',0],["We'll make our own",1]]
+    @user_musics = [['None',0],["-- band or single performer, no playback --",1]]
     
     if current_user.try(:admin?) 
       # admins get to see everything.
@@ -26,7 +26,13 @@ class ActsController < ApplicationController
     
     um.each do |u|
       logger.debug(u.id)
-      @user_musics << [u.filename,u.id]
+      name = u.filename
+
+      if u.song_title and u.song_artist
+        name = "#{u.song_artist}: #{u.song_title} (#{u.filename})"
+      end
+
+      @user_musics << [name,u.id]
     end
     
   end

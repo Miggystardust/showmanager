@@ -1,4 +1,4 @@
-class Act
+ class Act
    # An Act that a user owns, comprised of many assets and people
    # possibly not part of this system.
    include Mongoid::Document

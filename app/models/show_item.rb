@@ -15,7 +15,14 @@ class ShowItem
   # act_id is zero if note.
   field :act_id, :type => String
   
-  # might use this.
+  # The way we handle times is as follows:
+  #
+  # if a time is set here, we use it, That's a 'fixed' time reference. 
+  # else 
+  #   if this is an asset, we use the duratio n from the asset.
+  #   else 
+  #   this is a note, use the duration from here
+  #
   field :duration, :type => Integer
   field :time, :type => Time
 

@@ -21,7 +21,8 @@ $(function() {
       <% end %>
       </ul>
     </div>
-  <% end %>
+  <% logger.debug ("did show errors") 
+     end %>
 
   <div class="control-group">
     <%= f.label :title, "Title", :class=>"control-label" %>
@@ -52,7 +53,7 @@ $(function() {
 
   <div class="control-group">
     <div class="controls">
-    <%= f.submit "Submit", :class => "btn-primary" %>
+    <%= f.submit "Save Details", :class => "btn-primary" %>
     </div>
   </div>
 </fieldset>

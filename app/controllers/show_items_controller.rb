@@ -42,11 +42,72 @@ class ShowItemsController < ApplicationController
     @show_item = ShowItem.find(params[:id])
   end
 
+  def update_seq
+    # this handler takes care of row reordering from datatables.
+    if params[:fromPosition] == params[:toPosition]
+      render :text => "Not Modified",:status => 304
+      return
+    end
+    
+    if is_numeric?(params[:fromPosition]) == false or is_numeric?(params[:toPosition]) == false or params[:id] == ""
+      render :text => "Invalid Request",:status => 400
+      return
+    end
+    
+    @item = ShowItem.find(params[:id])
+    if @item == nil
+      headers['Status'] = 404
+      render :text => "Show Item Not Found",:status => 404
+      return
+    end
+    
+    from_id = nil
+    to_id = nil
+
+    @items = ShowItem.where(show_id: @item.show_id)
+    @items.each { |i| 
+      if i.seq.to_i == params[:toPosition].to_i
+          to_id = i
+      end
+      if i.seq.to_i == params[:fromPosition].to_i
+          from_id = i
+      end
+    }
+    
+    if from_id != nil and to_id != nil
+      to_id.seq = params[:fromPosition].to_i
+      to_id.save!
+      from_id.seq = params[:toPosition].to_i
+      from_id.save!
+    else 
+      render :text => "Not Found - f:#{from_id} t:#{to_id} sid:#{@item.show_id} pf:#{params[:toPosition]} pt: #{params[:fromPosition]}", :status => 404
+      return
+    end
+
+    render :text => "Ok",:status => 200
+    
+  end
+
   # POST /show_items
   # POST /show_items.json
   def create
     @show_item = ShowItem.new(params[:show_item])
 
+    # figure out the max ID.
+    seq = 0
+    @show_items = ShowItem.where(show_id: params[:show_id])
+    if @show_items
+      @show_items.each { |s| 
+        logger.debug("found show")
+        if s.seq > seq
+          seq = s.seq
+        end
+      }
+    end
+    seq = seq + 1
+
+    @show_item.seq = seq
+    
     respond_to do |format|
       if @show_item.save
         format.html { redirect_to @show_item, notice: 'Show item was successfully created.' }
@@ -84,5 +145,11 @@ class ShowItemsController < ApplicationController
       format.html { redirect_to show_items_url }
       format.json { head :no_content }
     end
+  end
+  
+  private
+  
+  def is_numeric?(s)
+    s.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
   end
 end
