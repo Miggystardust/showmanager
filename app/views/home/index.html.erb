@@ -2,17 +2,14 @@
 <div class="inner">
   <h1>Hubba Show Manager</h1>
   <p>
-    No more CDs. No More mistakes. Simple stage management.
+    No more CDs. No more mistakes. Simple stage management.
   </p>
   <p class="download-info">
   <% if user_signed_in? == false -%>
   <a href="/users/sign_up" class="button btn-primary btn-large" onclick="window.location('/users/signup');" rel="nofollow">Sign Up</a> 
   <% end %>
   <a href="/passets/new" class="button btn-success btn-large" onclick="window.location('/passets/new');" rel="nofollow">Upload Your Music</a>
-  <a href="/acts/new" class="button btn-warning btn-large" onclick="window.location('/acts/new');" rel="nofollow">Create an Act</a>
-  <% if user_signed_in? %>
-  <a href="/users/sign_out" data-method="delete" rel="nofollow" class="button btn-danger btn-large" onclick="window.location('/users/sign_out')">Logout</a>
-  <% end -%>
+  <a href="/acts/new" class="button btn-info btn-large" onclick="window.location('/acts/new');" rel="nofollow">Create an Act</a>
   <h3>It's easy!</h3>
   <P>
   <UL>
