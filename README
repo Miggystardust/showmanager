@@ -1,4 +1,3 @@
-
 Hubba Show Manager
 ------------------------
 Tested under passenger, nginx, ruby 1.9.2, and mongoDB 2.0.7-rc0
@@ -35,5 +34,3 @@ this dedication to be an overt act of relinquishment in perpetuity of
 all present and future rights to this code under copyright law.
 
 Released under the APACHE Open Source License.
-
-
