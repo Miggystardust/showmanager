@@ -1,28 +1,26 @@
-
 Hubba Show Manager
 ------------------------
-
-Requires apache-upload-fileprogress module and all of the gems in the gitfile. 
-Tested under passenger, apache, on Mac OS X
+Tested under passenger, nginx, ruby 1.9.2, and mongoDB 2.0.7-rc0
 
 This project is largely based on rails3-mongoid-devise for authentication.
 
-Rails3-Mongoid-Devise
-========================
+Installation procedure:
 
-You can use this project as a starting point for a Rails web
-application. It requires Rails 3 and uses Mongoid http://mongoid.org/
-for data storage and Devise http://github.com/plataformatec/devise for
-user management and authentication.
-________________________
+1) Start up Mongo locally on standard ports
+2) Adjust config/environments as needed for your environemnt
+3) In the app's root dir, do a 'bundle install' to install all the gems. 
+4) Start the app under either ruby script/rails server, nginx+passenger, or apache+passenger.
 
-See the README file on GitHub
+Configuring a webserver to work with Rails is beyond the scope of this
+documentation. You should consult the appropriate sites and Phusion
+Passenger documentation.
 
-For more information, please see the updated README file on GitHub:
+________________________________________________________________________________________________
 
+More information about devise:
 http://github.com/railsapps/rails3-mongoid-devise
 
-________________________
+________________________________________________________________________________________________
 
 Public Domain Dedication
 
@@ -35,5 +33,4 @@ at large and to the detriment of our heirs and successors. We intend
 this dedication to be an overt act of relinquishment in perpetuity of
 all present and future rights to this code under copyright law.
 
-
-
+Released under the APACHE Open Source License.

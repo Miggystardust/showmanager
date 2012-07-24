@@ -1,16 +1,36 @@
-showmanager
-===========
+Hubba Show Manager
+------------------------
+Tested under passenger, nginx, ruby 1.9.2, and mongoDB 2.0.7-rc0
 
-This is a Rails3 based show manager that manages assets for the Hubba Hubba Burlesque show. 
+This project is largely based on rails3-mongoid-devise for authentication.
 
-It's based largely on rails3-mongo-devise.
+Installation procedure:
 
-It requires MongoDB and Ruby 1.9.2.
+1) Start up Mongo locally on standard ports
+2) Adjust config/environments as needed for your environemnt
+3) In the app's root dir, do a 'bundle install' to install all the gems. 
+4) Start the app under either ruby script/rails server, nginx+passenger, or apache+passenger.
 
-It's also not ready for public use, so if I were you, I wouldn't bother downloading it just yet!
-I'm keeping files here for my own use.
+Configuring a webserver to work with Rails is beyond the scope of this
+documentation. You should consult the appropriate sites and Phusion
+Passenger documentation.
 
---
-John Adams
-7/5/2012
+________________________________________________________________________________________________
 
+More information about devise:
+http://github.com/railsapps/rails3-mongoid-devise
+
+________________________________________________________________________________________________
+
+Public Domain Dedication
+
+This work is a compilation and derivation from other previously
+released works. With the exception of various included works, which
+may be restricted by other licenses, the author or authors of this
+code dedicate any and all copyright interest in this code to the
+public domain. We make this dedication for the benefit of the public
+at large and to the detriment of our heirs and successors. We intend
+this dedication to be an overt act of relinquishment in perpetuity of
+all present and future rights to this code under copyright law.
+
+Released under the APACHE Open Source License.
