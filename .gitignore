@@ -18,3 +18,4 @@ rerun.txt
 pickle-email-*.html
 /uploads
 /thumbs
+/public/assets
