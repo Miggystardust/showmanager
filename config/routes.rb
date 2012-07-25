@@ -5,7 +5,12 @@ Rails3MongoidDevise::Application.routes.draw do
   
   root :to => "home#index"
 
-  devise_for :users
+  devise_scope :user do
+    get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
+  end
+
+  devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
+
   resources :users, :only => [:show, :index, :edit]
 
   post "/passets/new",
@@ -63,5 +68,10 @@ Rails3MongoidDevise::Application.routes.draw do
     :action => "servethumb"
 
   get 'uploads/download/:fn' => 'uploads#download'
+
+  # policy wonking
+  get '/about/privacy'
+  get '/about/tos'
+  get '/about/support'
 
 end

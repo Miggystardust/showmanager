@@ -4,7 +4,7 @@ class User
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
          
   has_many :acts
   has_many :passets
@@ -12,6 +12,10 @@ class User
   ## Database authenticatable
   field :email,              :type => String, :default => ""
   field :encrypted_password, :type => String, :default => ""
+
+  ## OmniAuth Integration
+  field :provider,           :type => String, :default => ""
+  field :uid,                :type => String, :default => ""
 
   validates_presence_of :email
   validates_presence_of :encrypted_password
@@ -57,6 +61,32 @@ class User
   validates_presence_of :name
   validates_presence_of :username
   
-  attr_accessible :name, :username, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :username, :email, :password, :password_confirmation, :remember_me, :uid, :provider
   attr_protected :admin
+
+  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+    logger.debug("find for fb :provider => #{auth.provider}, :uid => #{auth.uid}")
+    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    unless user
+      logger.debug("need to create.")
+      user = User.create(username:auth.extra.raw_info.name,
+                         name:auth.extra.raw_info.name,
+                         provider:auth.provider,
+                         uid:auth.uid,
+                         email:auth.info.email,
+                         password:Devise.friendly_token[0,20]
+                         )
+      user.save!
+    end
+    user
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
+
 end

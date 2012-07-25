@@ -21,3 +21,5 @@ gem "rmagick", ">= 2.13.1"
 
 gem "taglib-ruby"
 gem "factory_girl"
+
+gem "omniauth-facebook"
