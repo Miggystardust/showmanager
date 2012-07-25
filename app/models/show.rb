@@ -4,6 +4,7 @@ class Show
    include Mongoid::Document
 
    has_many :show_items
+   references_many :show_items, :dependent => :delete
 
    validates_presence_of :title
    validates_presence_of :show_time

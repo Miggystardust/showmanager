@@ -9,5 +9,9 @@ THUMBS_DIR = "#{Rails.root}/thumbs"
 SHORT_TIME_FMT = "%a %b %d, %Y %I:%M %p"
 TIME_ONLY_FMT = "%I:%M %p"
 
+# FB Integration
+FACEBOOK_APP_ID = '308336679243664'
+
 # Initialize the rails application
 Rails3MongoidDevise::Application.initialize!
+

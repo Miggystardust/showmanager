@@ -64,7 +64,13 @@ class ActsController < ApplicationController
         # talk to me when we have 100k users. 
         @actarray = []
         @acts.each { |a| 
-          @actarray << [a.user.name, a.stage_name, a.short_description, a.length, "<button class=\"btn btn-success actadder\" id=\"#{a._id}\"><i class=\"icon-plus icon-white\"></i> Add</button>"]
+          un = "<font color=#ff0000>Deleted User</font>"
+
+          if a.user != nil
+            un = a.user.name
+          end
+
+          @actarray << [un, a.stage_name, a.short_description, a.length, "<button class=\"btn btn-success actadder\" id=\"#{a._id}\"><i class=\"icon-plus icon-white\"></i> Add</button>"]
         }
         render json: { 'aaData' => @actarray }
       }

@@ -19,7 +19,13 @@
 	<% if @showowner -%>
     <td>
 	<% if act.user_id != nil -%>
-    <%= User.find(act.user_id).name %>
+    <% begin 
+        u = User.find(act.user_id) 
+    %>
+        u.name
+    <% rescue %>
+        <font color="#ff0000">Deleted User</font>
+     <% end %>
 	<% end -%>
     </td>
 	<% end -%>
