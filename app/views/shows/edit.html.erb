@@ -163,13 +163,14 @@ $(document).ready(function() {
       }
     });
 
-  $("#showlist tbody").delegate("td", "click", function() {
-      if ($(".siremove", this)[0] != undefined) { 
-        var clicked_id = $(".siremove", this)[0].id;
+  $("#showlist").delegate("button", "click", function() {
+      if ($(this).attr("class").indexOf("siremove") != -1) { 
+        var clicked_id = $(this).attr("id");
+
         var actdata = {
           "authenticity_token" : AUTH_TOKEN
         };
-      
+
         $.ajax({
           type: 'DELETE',
               dataType: 'json',
@@ -180,7 +181,12 @@ $(document).ready(function() {
                 showDT.fnReloadAjax();
               }
           });
-      }
+       }
+
+       if ($(this).attr("class").indexOf("editact") != -1) { 
+         var clicked_id = $(this).attr("id");
+         window.location.href="/acts/" + clicked_id + "/edit";
+       }
     });
 
 

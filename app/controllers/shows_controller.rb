@@ -72,7 +72,7 @@ class ShowsController < ApplicationController
         @si = []
         @show_items.each { |s|
           removeme = "<button class=\"btn btn-danger btn-small siremove\" id=\"#{s._id}\"><i class=\"icon-minus icon-white\"></i> Remove</button> "
-          editact = "<button class=\"btn btn-warning btn-small editact\" id=\"#{s._id}\"><i class=\"icon-share-alt icon-white\"></i> Edit Act</button>" 
+          editact = "<button class=\"btn btn-warning btn-small editact\" id=\"#{s.act_id}\"><i class=\"icon-share-alt icon-white\"></i> Edit Act</button>" 
           # seq, time, act data, sound, light+stage, notes
           if s.kind != 0
             # this is an asset. 
