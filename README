@@ -22,6 +22,15 @@ http://github.com/railsapps/rails3-mongoid-devise
 
 ________________________________________________________________________________________________
 
+To make someone an admin:
+
+u = User.where(email: "jna@retina.net")[0]
+u.admin = true
+u.save!
+
+Obviously, you'll need one of these.
+------------------------------------------------------------
+
 Public Domain Dedication
 
 This work is a compilation and derivation from other previously

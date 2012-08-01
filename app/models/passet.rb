@@ -15,11 +15,9 @@ class Passet
    # these fields are available if tagging has suceeded
    field :song_artist, :type => String
    field :song_title, :type => String
+   field :song_length, :type => Integer
+   field :song_bitrate, :type => Integer
 
-   field :sound_cue, :type => String
-   field :light_cue, :type => String
-   field :stage_notes, :type => String
-   
    # You can leave +height+ blank if you like.
    def thumb_path(w, h = nil)
      h ||= width / aspect_ratio

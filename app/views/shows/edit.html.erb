@@ -1,6 +1,7 @@
 
-<h1>Editing show</h1>
+<h3>Editing show: <%=@show.title%>, doors @ <%=@show.venue %>: <%=@show.door_time.strftime(SHORT_TIME_FMT)%></h3>
 
+<hr>
 <div id="editFormToggle">
 <% if @show.errors.count > 0 %>
 <P><span class="ui-icon ui-icon-triangle-1-s toggle-icon" style="vertical-align:middle"></span><span id="toggle-txt">Hide Show Details</span></P>
@@ -28,7 +29,7 @@
  <TH>Owner</TH>
  <TH>Stage/Act Name</TH>
  <TH>Short Description</TH>
- <TH>Duration</TH>
+ <TH>Performer Length + Music</TH>
  <TH>Add</TH>
 </thead>
 <tbody>
@@ -78,6 +79,7 @@ $.extend( $.fn.dataTableExt.oStdClasses, {
 $(document).ready(function() {
 
   $("#noteModal").modal('hide');
+  $("#durationModal").modal('hide');
 
   $("#addNoteBtn").on('click', function(e) { 
     e.preventDefault();
@@ -188,12 +190,18 @@ $(document).ready(function() {
          var clicked_id = $(this).attr("id");
          window.location.href="/acts/" + clicked_id + "/edit";
        }
+
+       if ($(this).attr("class").indexOf("editduration") != -1) { 
+         var clicked_id = $(this).attr("id");
+         $("#durationModal").modal('show'); 
+       }
+
     });
 
 
   /* add act clicks */
   $(document).ready( function () { 
-	  $("#refreshBtn").click( function (e) {
+	    $("#refreshBtn").click( function (e) {
           e.preventDefault();
           showDT.fnReloadAjax();
       });

@@ -1,8 +1,21 @@
 <h2>Sign up</h2>
 
+
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {  :class=>"form-horizontal" } ) do |f| %>
   <%= devise_error_messages! %>
 <fieldset>
+
+<div class="control-group">
+ <div class="controls">
+  <a href="<%=omniauth_authorize_path(resource_name, 'facebook') %>" class="btn  btn-info">Sign in with Facebook</a>
+  <P>
+    Do you have a Facebook account?<BR>
+    Sign in with Facebook and you won't have to fill out this form!
+  </P>
+ </div>
+</div>
+
+
 <div class="control-group">
  <%= f.label :username, "Username", :class=>"control-label" %>
  <div class="controls">

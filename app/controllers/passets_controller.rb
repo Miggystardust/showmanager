@@ -77,12 +77,17 @@ class PassetsController <  ApplicationController
 
     song_artist = ""
     song_title = ""
+    song_length = 0
+    song_bitrate = 0
 
     if fileinfo.match(/^audio\//)
       title = TagLib::MPEG::File.open(tmp.path) do |file|
         tag = file.tag
+        prop = file.audio_properties
         song_artist = tag.artist
         song_title = tag.title
+        song_length = prop.length
+        song_bitrate = prop.bitrate
       end
     end
 
@@ -99,6 +104,8 @@ class PassetsController <  ApplicationController
                     created_by: current_user.id,
                     song_artist: song_artist,
                     song_title: song_title,
+                    song_length: song_length,
+                    song_bitrate: song_bitrate
                     )
 
     current_user.passets << @p

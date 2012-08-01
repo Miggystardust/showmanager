@@ -19,9 +19,9 @@ class ShowItem
   #
   # if a time is set here, we use it, That's a 'fixed' time reference. 
   # else 
-  #   if this is an asset, we use the duratio n from the asset.
+  #   if this is an asset, we use the duration from the asset.
   #   else 
-  #   this is a note, use the duration from here
+  #     this is a note, use the duration from here
   #
   field :duration, :type => Integer
   field :time, :type => Time

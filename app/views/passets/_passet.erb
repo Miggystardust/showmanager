@@ -27,14 +27,12 @@
 		</TD>
 		<TD>
 			<%=passet.filename%><BR>
-      <% if passet.song_artist != nil %><%= passet.song_artist %> <BR> <% end %>
-      <% if passet.song_title != nil %><%= passet.song_title %> <BR> <% end %>
+      <I><% if passet.song_artist != nil %><%= passet.song_artist %> - <% end %>
+      <% if passet.song_title != nil %><%= passet.song_title %> <BR> <% end %></I>
       <div class="greyed">
-  			<%=passet.kind%><BR>
+  			<%=passet.kind%>, <%=sec_to_time(passet.song_length) %> long, <%=passet.song_bitrate%>Kbit bitrate<BR>
       </div>
-      <%=passet.created_at.asctime%><BR>
-
-      <i><%=time_ago_in_words(passet.created_at)%> ago</i><br>
+      <%=passet.created_at.asctime%> <i>(<%=time_ago_in_words(passet.created_at)%> ago)</i><br>
      <% if @noedit == nil -%>
       <a title="<%=passet.filename%>" href="/sf/<%=passet.uuid%>?download=1" rel="">[ Download ]</a>
       <%= link_to '[ Edit ]', edit_passet_path(passet) %>

@@ -20,7 +20,7 @@
               <li><%= link_to "Upload", "/passets/new" %></li>
               <li><%= link_to 'Files', :passets %></li>
               <li><%= link_to 'Acts', :acts %></li>
-              <li><%= link_to 'Profile', edit_user_registration_path %></li>
+              <li><%= link_to 'Profile', "/settings/edit" %></li>
             </ul>
            </li>
               <% if current_user.try(:admin?) -%>

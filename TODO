@@ -1,13 +1,3 @@
-To make someone an admin:
-
-u = User.where(email: "jna@retina.net")[0]
-u.admin = true
-u.save!
-
-
-Obviously, you'll need one of these.
-------------------------------------------------------------
-
 DONE
 ------------------------------------------------------------------------------
 Show system
@@ -19,25 +9,43 @@ Show system
 - needs to be able to reorder the show. (DONE)
 - should auto compute time (DONE)
 - Extract Mp3 data via tagging... (DONE)
+- Automatically extract length from music files and use as default act length if 
+  possible - P3 (DONE)
+- Facebook Auth: If user auths with facebook they should not see password fields on profile page (DONE)
 
+------------------------------------------------------------------------------
 Remaining work
 ------------------------------------------------------------------------------
 
-- Allow download of entire thing as a zipfile.
+- Length changes: Make these overrides that save with the show item not a modificatiokn
+  of the act - P1
 
-Facebook Auth:
-
-- If user auths with facebook they should not see password fields on profile page
+- Try to make notes more readable on edit show and show display fields - P2
 
 Printing: 
 
-- Need to write a screen for printing the show - current system does not have any CSS
-  for printers, this sucks.
-- header/footer
+- Need to write a screen for printing the show w/header+footer- current system does not have any CSS
+  for printers, this sucks. P1
+
+- Performer Set List Printing -- Time and Person for use around the space.  P1
+
+EXTRA:
+
+- Multi-asset support
+  - Need ability to upload more than one song, more than one  P3
+
+- Allow download of entire thing as a zipfile.
 
 ------------------------------------------------------------------------------
 BUGS
 ------------------------------------------------------------------------------
 - There might be bugs in row-reordering I can't tell. 
 - Want to be able to edit a notes field after the fact, you can't.
-- Want to be able to show and edit act durations on edit page
+- Time fields need to be larger, they are squished
+
+------------------------------------------------------------------------------
+SECURITY
+------------------------------------------------------------------------------
+- Should probably offer the ability to disable the download box to
+  prevent us being used as a warez/free music site
+

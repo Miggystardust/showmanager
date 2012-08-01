@@ -1,4 +1,6 @@
 class ActsController < ApplicationController
+  include ApplicationHelper
+
   protect_from_forgery
 
   before_filter :authenticate_user!
@@ -70,7 +72,16 @@ class ActsController < ApplicationController
             un = a.user.name
           end
 
-          @actarray << [un, a.stage_name, a.short_description, a.length, "<button class=\"btn btn-success actadder\" id=\"#{a._id}\"><i class=\"icon-plus icon-white\"></i> Add</button>"]
+          # get asset details if any
+          musicinfo = ""
+          if a.music != '0' and a.music != '1' and a.music != nil
+            p = Passet.where(_id:a.music)[0]
+            if p != nil
+              musicinfo = "<BR><I>#{p.song_artist} - #{p.song_title} (#{sec_to_time(p.song_length)})</I>"
+            end
+          end
+
+          @actarray << [un, a.stage_name, a.short_description, a.length.to_s + " min." +  musicinfo, "<button class=\"btn btn-success actadder\" id=\"#{a._id}\"><i class=\"icon-plus icon-white\"></i> Add</button>"]
         }
         render json: { 'aaData' => @actarray }
       }

@@ -11,7 +11,16 @@ Rails3MongoidDevise::Application.routes.draw do
 
   devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
 
-  resources :users, :only => [:show, :index, :edit]
+#  resources :users, :only => [:show, :index, :edit]
+
+  # overriding devise here to deal with users w/o passwords
+  get "/settings/edit",
+    :controller => "settings",
+    :action => "edit";
+
+  post "/settings/update",
+    :controller => "settings",
+    :action => "update";
 
   post "/passets/new",
     :controller => "passets", 

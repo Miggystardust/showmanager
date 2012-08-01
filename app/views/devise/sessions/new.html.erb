@@ -3,6 +3,17 @@
 <div id="stylized" class="myform">
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form-horizontal" } ) do |f| %>
   <fieldset>
+<div class="control-group">
+ <div class="controls">
+  <P>
+    If you have signed in with facebook before, 
+    just click the Button.<BR>
+    No need to enter your password.
+  </P>
+  <a href="<%=omniauth_authorize_path(resource_name, 'facebook') %>" class="btn  btn-info">Sign in with Facebook</a>
+ </div>
+</div>
+
   <div class="control-group"> 
     <%= f.label :email, :class=>"control-label" %>
     <div class="controls">
@@ -29,7 +40,7 @@
 
   <div class="control-group">
     <div class="controls">
-      <%= f.submit "Sign in", :class => "btn-primary" %>
+      <%= f.submit "Sign in wth your Password", :class => "btn btn-primary" %>
     </div>
   </div>
 <% end %>
