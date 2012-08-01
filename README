@@ -5,6 +5,7 @@ Tested under passenger, nginx, ruby 1.9.2, and mongoDB 2.0.7-rc0
 This project is largely based on rails3-mongoid-devise for authentication.
 
 Installation procedure:
+________________________________________________________________________________________________
 
 1. Start up Mongo locally on standard ports
 2. Adjust config/environments as needed for your environemnt
@@ -15,6 +16,7 @@ Configuring a webserver to work with Rails is beyond the scope of this
 documentation. You should consult the appropriate sites and Phusion
 Passenger documentation.
 
+Open Source
 ________________________________________________________________________________________________
 
 Devise and OmniAuth are the primary authentication mechnanisms in this
@@ -25,9 +27,9 @@ This software makes extensive use of DataTables for JQuery and the
 plugins TableTools, Row reordering, and others.
 
 http://www.datatables.net/download/
-________________________________________________________________________________________________
 
-*Creating Admins*
+Creating Admins
+________________________________________________________________________________________________
 
 To make someone an admin:
 
@@ -36,9 +38,9 @@ u.admin = true
 u.save!
 
 Obviously, you'll need one of these.
-------------------------------------------------------------
 
-*Public Domain Dedication*
+Public Domain Dedication
+------------------------------------------------------------
 
 This work is a compilation and derivation from other previously
 released works. With the exception of various included works, which
