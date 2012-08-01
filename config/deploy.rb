@@ -1,3 +1,5 @@
+load 'deploy/assets'
+
 ssh_options[:keys] = %w(/Users/jna/.ec2/jna-ec2.pem)
 ssh_options[:user] = 'ubuntu'
 #ssh_options[:verbose] = :debug
@@ -40,6 +42,7 @@ namespace :deploy do
   end
   
   task :restart, :roles => :app, :except => { :no_release => true } do
+    # passenger will pick up the code when this exists
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 end
@@ -68,6 +71,15 @@ namespace :ec2 do
     run_local "scp -i '#{privkey}' ubuntu@#{host}:.ssh/authorized_keys #{pubkey}"
   end
 end
+
+desc "install the necessary prerequisites"
+
+task :bundle_install, :roles => :app do
+  run "cd #{release_path} && bundle install"
+
+end
+
+after "deploy:update_code", :bundle_install
 
 task :sudo_test do
   run "#{try_sudo} whoami"
