@@ -39,14 +39,20 @@ class PassetsController <  ApplicationController
   end
 
   def destroy
-    p = current_user.passets.find(params[:id])
+    # todo - ensure ownership here. 
+    p = Passet.find(params[:id])
 
     if p != nil
-      logger.debug("Delete requestsed for Asset #{p.uuid}")
+      logger.debug("Delete requested for Asset #{p.uuid}, #{request.referer}")
       p.destroy
       FileUtils.rm "#{UPLOADS_DIR}/#{p.uuid}"
     end
-    redirect_to :action => :index
+
+    if request.referer.match(/\/adminindex$/) 
+      redirect_to :action => :adminindex
+    else
+      redirect_to :action => :index
+    end
   end 
 
   def create

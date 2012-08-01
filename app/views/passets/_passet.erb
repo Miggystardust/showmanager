@@ -1,11 +1,16 @@
 	<TR>
     <% if defined? @adminindex -%>
     <TD>
-    <%=User.find(passet.created_by).name %><BR>
-    <a href="mailto:<%=User.find(passet.created_by).email %>"><%=User.find(passet.created_by).email %></a>
+    <% begin 
+          @u = User.find(passet.created_by) 
+    -%>
+          <%=@u.name %><BR>
+          <a href="mailto:<%=@u.email %>"><%=@u.email %></a>
+    <% rescue -%>
+       <font color="#ff0000">Deleted User</font>
+    <% end -%>
     </TD>
     <% end -%>
-
 		<TD ALIGN=CENTER>
 			<% if passet.kind.match(/^audio\//) -%>
 			<object type="application/x-shockwave-flash" data="/dewplayer/dewplayer-rect.swf" width="240" height="20" id="dewplayer" name="dewplayer">
@@ -37,7 +42,7 @@
 		</TD>
 		<TD>
     <% if @noedit == nil -%>
-    <%= button_to 'Remove', passet, :method=>:delete, :class=>:destroy, :confirm => "Delete #{passet.filename}: Are you sure?" %>
+    <%= button_to 'Remove',  passet, :method=>:delete, :class=>:destroy, :data => {:confirm => "Delete #{passet.filename}: Are you sure?"} %>
     <% end -%>
 		</TD>
 

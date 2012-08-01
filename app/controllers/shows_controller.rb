@@ -71,8 +71,9 @@ class ShowsController < ApplicationController
         # this format drives the show display index
         @si = []
         @show_items.each { |s|
-          removeme = "<button class=\"btn btn-danger btn-small siremove\" id=\"#{s._id}\"><i class=\"icon-minus icon-white\"></i> Remove</button> "
-          editact = "<button class=\"btn btn-warning btn-small editact\" id=\"#{s.act_id}\"><i class=\"icon-share-alt icon-white\"></i> Edit Act</button>" 
+          removeme = "<button class=\"btn btn-danger btn-mini siremove\" id=\"#{s._id}\"><i class=\"icon-minus icon-white\"></i> Remove</button>&nbsp;"
+          editact = "<button class=\"btn btn-success btn-mini editact\" id=\"#{s.act_id}\"><i class=\"icon-pencil icon-white\"></i> Edit</button>&nbsp;" 
+          editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s.act_id}\"><i class=\"icon-time icon-white\"></i> Length</button>&nbsp;" 
           # seq, time, act data, sound, light+stage, notes
           if s.kind != 0
             # this is an asset. 
@@ -144,15 +145,14 @@ class ShowsController < ApplicationController
 
               @si << { "DT_RowId" => s._id,
                 "0" => s.seq,
-                "1" => itemtime.strftime("%l:%M %P"),
+                "1" => "#{itemtime.strftime("%l:%M %P")}<BR>+#{act.length} min",
                 "2" => actinfo,
                 "3" => sound,
                 "4" => stage,
                 "5" => act.extra_notes,
-                "6" => removeme + editact,
+                "6" => removeme + editact + editdur,
               }
               
-              logger.debug("add act with length #{act.length}")
               if act.length != nil
                   itemtime = itemtime + (act.length * 60)
               end
@@ -167,7 +167,7 @@ class ShowsController < ApplicationController
               "3" => "--",
               "4" => "--",
               "5" => "<B>" + s.note + "</B>",
-              "6" => removeme,
+              "6" => removeme + editdur,
             }
             logger.debug("add note with length #{s.duration} #{s}")
             

@@ -155,7 +155,14 @@ class ActsController < ApplicationController
     @act.destroy
 
     respond_to do |format|
-      format.html { redirect_to acts_url }
+      format.html {
+        if request.referer.match(/\/adminindex$/) 
+          redirect_to :action => :adminindex
+        else
+          redirect_to :action => :index
+        end
+      }
+
       format.json { head :no_content }
     end
   end
