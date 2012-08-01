@@ -1,13 +1,18 @@
 ssh_options[:keys] = %w(/Users/jna/.ec2/jna-ec2.pem)
+ssh_options[:user] = 'ubuntu'
+#ssh_options[:verbose] = :debug
+#set :scm_verbose, true
 
-set :application, "hubba.retina.net"
-set :repository,  "git@github.com:netik/showmanager"
+default_run_options[:pty] = true 
 
 set :scm, :git
-set :deploy_via, :copy
+set :application, "hubba.retina.net"
+set :repository,  "https://github.com/netik/showmanager.git"
 
-set :user, "ubuntu"
+set :deploy_via, :remote_cache
 set :deploy_to, "/retina/hubba/showmanager-cap"
+set :user, "ubuntu"
+set :runner, "ubuntu"
 
 set :use_sudo, true
 
@@ -22,6 +27,10 @@ role :app, "hubba.retina.net"
 
 # If you are using Passenger mod_rails uncomment this:
 namespace :deploy do
+  task :before_update_code, :roles => :app do 
+    run "whoami" 
+  end 
+
   task :start do
     run "sudo service nginx start"
   end
