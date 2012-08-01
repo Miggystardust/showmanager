@@ -20,11 +20,14 @@ Passenger documentation.
 Creating Admins
 ===============
 
-To make someone an admin:
+To make someone an admin, start the rails console, then:
 
 ```ruby
+
+u = User.where(email: 'you@example.com')[0]
 u.admin = true
 u.save!
+
 ```
 
 Obviously, you'll need one of these.
