@@ -1,4 +1,4 @@
-Hubba Show Manager
+*Hubba Show Manager*
 ------------------------
 Tested under passenger, nginx, ruby 1.9.2, and mongoDB 2.0.7-rc0
 
@@ -6,10 +6,10 @@ This project is largely based on rails3-mongoid-devise for authentication.
 
 Installation procedure:
 
-1) Start up Mongo locally on standard ports
-2) Adjust config/environments as needed for your environemnt
-3) In the app's root dir, do a 'bundle install' to install all the gems. 
-4) Start the app under either ruby script/rails server, nginx+passenger, or apache+passenger.
+1. Start up Mongo locally on standard ports
+2. Adjust config/environments as needed for your environemnt
+3. In the app's root dir, do a 'bundle install' to install all the gems. 
+4. Start the app under either ruby script/rails server, nginx+passenger, or apache+passenger.
 
 Configuring a webserver to work with Rails is beyond the scope of this
 documentation. You should consult the appropriate sites and Phusion
@@ -17,12 +17,28 @@ Passenger documentation.
 
 ________________________________________________________________________________________________
 
-More information about devise:
+Devise and OmniAuth are the primary authentication mechnanisms in this
+code, starting with the base package:
 http://github.com/railsapps/rails3-mongoid-devise
 
+This software makes extensive use of DataTables for JQuery and the
+plugins TableTools, Row reordering, and others.
+
+http://www.datatables.net/download/
 ________________________________________________________________________________________________
 
-Public Domain Dedication
+*Creating Admins*
+
+To make someone an admin:
+
+u = User.where(email: "jna@retina.net")[0]
+u.admin = true
+u.save!
+
+Obviously, you'll need one of these.
+------------------------------------------------------------
+
+*Public Domain Dedication*
 
 This work is a compilation and derivation from other previously
 released works. With the exception of various included works, which

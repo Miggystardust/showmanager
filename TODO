@@ -3,31 +3,42 @@ DONE
 Show system
 - add intermissions (DONE)
 - "Cast" notes / sound / tech etc... ( DONE ) 
-- Should output a really nice pdf like thing that looks like current sheets (maybe CSS print mode...) (PUTOFF)
-  But ideally, fuck printing. We want this to be on ipads! 
-- use ajax-- It would be fucking awesome if we could make this a LIVE SCREEN, accessible from ipad. (DONE, but want a read-only screen for ipads on /show) (DONE)
+
+- Should output a really nice pdf like thing that looks like current
+  sheets (maybe CSS print mode...) (PUTOFF)
+
+- But ideally, fuck printing. We want this to be on ipads! (WORKING)
+
+- use ajax-- It would be fucking awesome if we could make this a LIVE
+  SCREEN, accessible from ipad. (DONE, but want a read-only screen for
+  ipads on /show) (DONE)
+
 - needs to be able to reorder the show. (DONE)
 - should auto compute time (DONE)
 - Extract Mp3 data via tagging... (DONE)
-- Automatically extract length from music files and use as default act length if 
-  possible - P3 (DONE)
-- Facebook Auth: If user auths with facebook they should not see password fields on profile page (DONE)
+
+- Automatically extract length from music files and use as default act
+  length if possible - P3 (DONE)
+
+- Facebook Auth: If user auths with facebook they should not see
+  password fields on profile page (DONE)
 
 ------------------------------------------------------------------------------
 Remaining work
 ------------------------------------------------------------------------------
 
-- Length changes: Make these overrides that save with the show item not a modificatiokn
-  of the act - P1
+- Length changes: Make these overrides that save with the show item
+  not a modificatiokn of the act - P1
 
 - Try to make notes more readable on edit show and show display fields - P2
 
 Printing: 
 
-- Need to write a screen for printing the show w/header+footer- current system does not have any CSS
-  for printers, this sucks. P1
+- Need to write a screen for printing the show w/header+footer-
+  current system does not have any CSS for printers, this sucks. P1
 
-- Performer Set List Printing -- Time and Person for use around the space.  P1
+- Performer Set List Printing -- Time and Person for use around the
+  space.  P1
 
 EXTRA:
 
@@ -40,12 +51,15 @@ EXTRA:
 BUGS
 ------------------------------------------------------------------------------
 - There might be bugs in row-reordering I can't tell. 
+
 - Want to be able to edit a notes field after the fact, you can't.
+
 - Time fields need to be larger, they are squished
 
 ------------------------------------------------------------------------------
 SECURITY
 ------------------------------------------------------------------------------
+
 - Should probably offer the ability to disable the download box to
   prevent us being used as a warez/free music site
 
