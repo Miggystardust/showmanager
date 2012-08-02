@@ -35,6 +35,7 @@
 //= require jquery.dataTables.min.js
 //= require jquery.dataTables.rowReordering.js
 //= require DT_bootstrap.js
+//= require TableTools.min.js
 
 // extend datatables with reload
 // can put these on settimer later on if need be.

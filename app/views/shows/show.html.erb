@@ -1,6 +1,7 @@
+<%=stylesheet_link_tag "TableTools.css"%>
+
 <p id="notice"><%= notice %></p>
 <h3><%= @show.title %> @ <%= @show.venue %></h3>
-
 <P>
   <b>Door time:</b>
   <%= @show.door_time.strftime(SHORT_TIME_FMT) %>
@@ -46,24 +47,36 @@ $(document).ready(function() {
   var intervalId;
 
   showDT = $('#showlist').dataTable( {
-      "sDom": "<'row'<'span12'l><'span12'f>r>t<'row'<'span6'i><'span12'p>>",
-        "sAjaxSource": "/shows/<%=@show.id%>/show_items.json",
-        "sPagination": "bootstrap",
-        "iDisplayLength": 100,
-        "oLanguage": {
+      "sDom": "T<'row'<'span12'l><'span12'f>r>t<'row'<'span6'i><'span12'p>>",
+        "oTableTools": {
+          "sSwfPath": "/assets/copy_csv_xls_pdf.swf",
+            "aButtons": [
+                       "copy",
+                       "print",
+                       {
+                         "sExtends": "pdf",
+                           "sPdfOrientation": "landscape",
+                           "sPdfMessage": "<%= @show.title %> @ <%= @show.venue %> Doors: <%= @show.door_time.strftime(SHORT_TIME_FMT) %> / Show: <%= @show.show_time.strftime(SHORT_TIME_FMT)%>"
+                           },
+                       ]
+            },
+      "sAjaxSource": "/shows/<%=@show.id%>/show_items.json",
+      "sPagination": "bootstrap",
+      "iDisplayLength": 100,
+      "oLanguage": {
         "sLengthMenu": "Show&nbsp;<select size=1 name=actslist_length aria-controls=\"actslist\"><option value='10'>10</option><option value='50'>50</option><option value='100'>100</option></select>&nbsp;records per page"
-          },
+      },
         "fnServerData": function ( sSource, aoData, fnCallback ) {
           $.ajax({'datatype':'json',
                 'type':'GET',
                 'url':sSource,
                 'data':aoData,
                 'success':function(json) {               
-                    fnCallback(json);
-                    if (! intervalId) { 
-                      intervalId = setInterval(function() { showDT.fnReloadAjax(); }, 2000);
-                    }
-
+                fnCallback(json);
+                if (! intervalId) { 
+                  intervalId = setInterval(function() { showDT.fnReloadAjax(); }, 2000);
+                }
+                
               }});
         }
     });

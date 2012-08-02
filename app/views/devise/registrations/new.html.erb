@@ -7,11 +7,12 @@
 
 <div class="control-group">
  <div class="controls">
-  <a href="<%=omniauth_authorize_path(resource_name, 'facebook') %>" class="btn  btn-info">Sign in with Facebook</a>
   <P>
     Do you have a Facebook account?<BR>
-    Sign in with Facebook and you won't have to fill out this form!
+    Sign in with Facebook and you won't have to fill out this form!<BR>
+    We will never spam your wall or post without your permission.
   </P>
+  <a href="<%=omniauth_authorize_path(resource_name, 'facebook') %>" border=0 alt="Sign in with Facebook"><img src="/assets/facebook-login.png"></a>
  </div>
 </div>
 
