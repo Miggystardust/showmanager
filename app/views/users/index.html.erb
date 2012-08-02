@@ -1,9 +1,17 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
-<ul class="users">
-  <% @users.each do |user| %>
-    <li>
-      <%= link_to user.name, user %> signed up <%= user.created_at.to_date %>
-    </li>
-  <% end %>
-</ul>
+<h1>Users</h1>
+<TABLE CLASS="table table-striped">
+<TR>
+<TH>Username</TH>
+<TH>Email</TH>
+<TH>Last Login</TH>
+<TH>Admin?</TH>
+</TR>
+<% @users.each do |user| %>
+<TR>
+  <TD><%= link_to user.name, user %></TD>
+  <TD><%= user.email %></TD>
+  <TD><%= user.last_sign_in_at %></TD>
+  <TD><%= user.admin %></TD>
+</TR>
+<% end %>
+</TABLE>

@@ -35,7 +35,6 @@
       <%=passet.created_at.asctime%> <i>(<%=time_ago_in_words(passet.created_at)%> ago)</i><br>
      <% if @noedit == nil -%>
       <a title="<%=passet.filename%>" href="/sf/<%=passet.uuid%>?download=1" rel="">[ Download ]</a>
-      <%= link_to '[ Edit ]', edit_passet_path(passet) %>
       <% end -%>
 		</TD>
 		<TD>
