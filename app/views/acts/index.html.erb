@@ -1,5 +1,5 @@
 <% if @showowner -%>
-<h1>All Acts - Admin</h1>
+<h1>Admin: All Performers, All Acts</h1>
 <% else -%>
 <h1>Your Acts</h1>
 <% end -%>
@@ -11,6 +11,8 @@
 	<% end %>
     <th>Stage Name</th>
     <th>Short Description</th>
+    <th>Music?</th>
+    <th>Image/Video?</th>
     <th colspan=3>Actions</th>
   </tr>
 
@@ -31,6 +33,8 @@
 	<% end -%>
 	<td><%=act.stage_name%></td>
 	<td><%=act.short_description%></td>
+  <td><%=act.music_s %></td>
+  <td><%=act.image_s %></td>
   <td><%= link_to 'Edit', edit_act_path(act) %></td>
   <td><%= link_to 'Destroy', act, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>

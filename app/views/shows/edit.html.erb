@@ -126,10 +126,6 @@ $(document).ready(function() {
 		sURL:"/show_items/update_seq"
 	});
 
- /* wireup some ajax reloads on these tables - when this was enabled we were getting duplicate rows... */
-  /* setInterval(showDT.fnReloadAjax(), 3000);
-  setInterval(actsDT.fnReloadAjax(), 3000);*/
-
   /* set up the lower table */
   var fixHelper = function(e, ui) {
     ui.children().each(function() {

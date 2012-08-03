@@ -26,4 +26,39 @@
    field :mc_intro, :type => String
    field :run_through, :type => String
    field :extra_notes, :type => String
+
+   def music_s
+     if self.music == nil
+       return "Not specified"
+     elsif self.music == "0"
+       return "None"
+     elsif self.music == "1"
+       return "No Playback"
+     else
+       p = Passet.find(self.music)
+       if p
+         return "#{p.song_artist} - #{p.song_title}"
+       else
+         return "Asset not found"
+       end
+     end
+   end
+
+   def image_s
+     if self.image == nil
+       return "Not specified"
+     else
+       if self.image == "0"
+         return "None"
+       end
+
+       p = Passet.find(self.image)
+       if p 
+         return p.filename
+       else
+         return "Asset not found"
+       end
+     end
+   end
+
 end

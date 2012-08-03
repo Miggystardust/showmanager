@@ -3,6 +3,7 @@
 <TR>
 <TH>Username</TH>
 <TH>Email</TH>
+<TH>Phone</TH>
 <TH>Last Login</TH>
 <TH>Provider</TH>
 <TH>Admin?</TH>
@@ -11,8 +12,9 @@
 <TR>
   <TD><%= link_to user.name, user %></TD>
   <TD><%= user.email %></TD>
+  <TD><%= user.phone_number %></TD>
   <TD><%= user.last_sign_in_at %></TD>
-  <TD><%= user.provider %></TD>
+  <TD><%= user.provider != "" ? user.provider : "local" %></TD>
   <TD><%= user.admin %></TD>
 </TR>
 <% end %>
