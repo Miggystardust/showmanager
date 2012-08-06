@@ -4,11 +4,6 @@ Remaining work
 
 - Try to make notes more readable on edit show and show display fields - P3
 
-Printing: 
-
-- Performer Set List Printing -- Time and Person for use around the
-  space.  P1
-
 EXTRA:
 
 - Multi-asset support
@@ -34,6 +29,11 @@ SECURITY
 
 DONE
 ------------------------------------------------------------------------------
+Printing: 
+
+- Performer Set List Printing -- Time and Person for use around the
+  space.  P1 (DONE)
+
 Show system
 
 - Length changes: Make these overrides that save with the show item
