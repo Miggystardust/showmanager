@@ -2,12 +2,11 @@
 itemtime = @show.door_time
 %>
 <div class=masthead>
-<P><%= @show.title %></P>
+<P><%= @show.title %> - <%= @show.door_time.strftime("%A, %B %e")%></P>
+
+<P>Doors at <%= @show.door_time.strftime(TIME_ONLY_FMT) %> / Show at <%= @show.show_time.strftime(TIME_ONLY_FMT) %></P>
+
 <P>&nbsp;</p>
-
-<P>Doors at <%= @show.door_time.strftime(TIME_ONLY_FMT) %></p>
-<P>Show at <%= @show.show_time.strftime(TIME_ONLY_FMT) %></P>
-
 
 <% @show_items.each { |s| -%>
 <P>
