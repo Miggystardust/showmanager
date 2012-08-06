@@ -73,7 +73,7 @@ class ShowsController < ApplicationController
         @show_items.each { |s|
           removeme = "<button class=\"btn btn-danger btn-mini siremove\" id=\"#{s._id}\"><i class=\"icon-minus icon-white\"></i> Remove</button>&nbsp;"
           editact = "<button class=\"btn btn-success btn-mini editact\" id=\"#{s.act_id}\"><i class=\"icon-pencil icon-white\"></i> Edit</button>&nbsp;" 
-          editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s.act_id}\"><i class=\"icon-time icon-white\"></i> Length</button>&nbsp;" 
+          editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s._id}\"><i class=\"icon-time icon-white\"></i> Length</button>&nbsp;" 
           # seq, time, act data, sound, light+stage, notes
           if s.kind != 0
             # this is an asset. 
@@ -145,7 +145,7 @@ class ShowsController < ApplicationController
 
               @si << { "DT_RowId" => s._id,
                 "0" => s.seq,
-                "1" => "#{itemtime.strftime("%l:%M %P")}<BR>+#{act.length} min",
+                "1" => "#{itemtime.strftime("%l:%M %P")}<BR>+#{s.duration} min",
                 "2" => actinfo,
                 "3" => sound,
                 "4" => stage,
@@ -153,8 +153,8 @@ class ShowsController < ApplicationController
                 "6" => removeme + editact + editdur,
               }
               
-              if act.length != nil
-                  itemtime = itemtime + (act.length * 60)
+              if s.duration != nil
+                  itemtime = itemtime + (s.duration * 60)
               end
             end
 
@@ -162,14 +162,13 @@ class ShowsController < ApplicationController
             # note
             @si << { "DT_RowId" => s._id,
               "0" => s.seq,
-              "1" => itemtime.strftime("%l:%M %P"),
+              "1" => "#{itemtime.strftime("%l:%M %P")}<BR>+#{s.duration} min",
               "2" => "--",
               "3" => "--",
               "4" => "--",
               "5" => "<B>" + s.note + "</B>",
               "6" => removeme + editdur,
             }
-            logger.debug("add note with length #{s.duration} #{s}")
             
             if s.duration != nil
                 itemtime = itemtime + (s.duration * 60)

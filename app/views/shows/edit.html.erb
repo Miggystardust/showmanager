@@ -189,6 +189,7 @@ $(document).ready(function() {
 
        if ($(this).attr("class").indexOf("editduration") != -1) { 
          var clicked_id = $(this).attr("id");
+         show_item_id.value = clicked_id;
          $("#durationModal").modal('show'); 
        }
 

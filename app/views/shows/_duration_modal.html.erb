@@ -7,6 +7,7 @@
   <%= form_for @show_item, :html => { :class => "form-horiziontal" } do |f| -%>
   <div class='modal-body'>
     <div class="control-group">
+      <input type="hidden" name="show_item_id" id="show_item_id">
       <%= f.label :duration, "Length (in Minutes)", :class=>"control-label" %>
       <div class="controls">
         <%= f.text_field :duration, :class=>"input-xlarge" %>
@@ -18,7 +19,7 @@
     <%= f.hidden_field :act_id, :value=> 0  %>
     <%= f.hidden_field :kind, :value=> 0  %>
     <%= f.hidden_field :show_id, :value=> @show.id  %>
-    <button class="btn btn-primary" id="modal-form-submit">Change Duration</button>
+    <button class="btn btn-primary" id="duration-modal-submit">Change Duration</button>
   </div>
   <% end -%>
 </div>
@@ -46,31 +47,27 @@
         "show" : true // this parameter ensures the modal is shown immediately
       });
 
-      $('#modal-form-submit').on('click', function(e){
+      $('#duration-modal-submit').on('click', function(e){
       // We don't want this to act as a link so cancel the link action
         e.preventDefault();
 
         $("#durationModal").modal('hide');
 
-        var actdata = {
+        var sidata = {
           "authenticity_token" : AUTH_TOKEN,
-          'show_id':'<%=@show.id%>',
-          'kind' : 0,
-          'act_id' : 0 ,
-          'note': show_item_note.value,
-          'duration': show_item_duration.value
+          'duration': show_item_duration[1].value
         };
 
-        console.log(actdata);
+        console.log(sidata);
 
         $.ajax({
-          type: 'POST',
-              dataType: 'json',
-              url: '/show_items.json',
+          type: 'PUT',
+              datatype: 'json',
+              url: '/show_items/' + show_item_id.value + '.json',
               contentType: 'application/json',
-              data: JSON.stringify(actdata),
+              data: JSON.stringify(sidata),
               success: function() { 
-                 showDT.fnReloadAjax();
+                showDT.fnReloadAjax();
               }
           });
         });

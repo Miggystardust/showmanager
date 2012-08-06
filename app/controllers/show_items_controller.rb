@@ -107,7 +107,13 @@ class ShowItemsController < ApplicationController
     seq = seq + 1
 
     @show_item.seq = seq
-    
+
+    if params[:show_item][:act_id] != 0 
+      # if an act_id is supplied, we'll pull the duration from the user's input.
+      act = Act.find(params[:show_item][:act_id])
+      @show_item.duration = act.length
+    end
+
     respond_to do |format|
       if @show_item.save
         format.html { redirect_to @show_item, notice: 'Show item was successfully created.' }

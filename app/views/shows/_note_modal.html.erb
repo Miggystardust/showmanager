@@ -45,6 +45,7 @@
           // remove event listeners on the buttons
           $("#noteModal a.btn").unbind();
       });
+
       // finally, wire up the actual modal functionality and show the dialog
       $("#noteModal").modal({
         "backdrop" : "static",
@@ -56,16 +57,17 @@
       // We don't want this to act as a link so cancel the link action
         e.preventDefault();
 
-        $("#noteModal").modal('hide');
-
+        // first instance is  the add box, second instance is the length box.
         var actdata = {
           "authenticity_token" : AUTH_TOKEN,
           'show_id':'<%=@show.id%>',
           'kind' : 0,
           'act_id' : 0 ,
           'note': show_item_note.value,
-          'duration': show_item_duration.value
+          'duration': show_item_duration[0].value
         };
+
+        $("#noteModal").modal('hide');
 
         console.log(actdata);
 
