@@ -17,6 +17,26 @@ class ShowsController < ApplicationController
     end
   end
 
+  # GET /shows/1/perfindex...
+  # this is list of all performers in this show
+  def perfindex
+    @show = Show.find(params[:id])
+    @show_items = ShowItem.where(show_id: params[:id]) 
+    @si_act = Hash.new
+
+    # prefetch the acts in this show
+    @show_items.each{ |si|
+      act = nil
+      if si.kind != 0
+        # this is an asset. 
+        if si.act_id != 0
+          act = Act.find(si.act_id)
+        end
+      end
+      @si_act[si.act_id] = act
+    }
+  end
+
   # GET /shows/1
   # GET /shows/1.json
   def show

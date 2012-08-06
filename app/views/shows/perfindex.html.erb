@@ -1,0 +1,28 @@
+<%
+itemtime = @show.door_time
+%>
+<div class=masthead>
+<P><%= @show.title %></P>
+<P>&nbsp;</p>
+
+<P>Doors at <%= @show.door_time.strftime(TIME_ONLY_FMT) %></p>
+<P>Show at <%= @show.show_time.strftime(TIME_ONLY_FMT) %></P>
+
+
+<% @show_items.each { |s| -%>
+<P>
+<% if @si_act[s.act_id] -%>
+<B><%=itemtime.strftime(TIME_ONLY_FMT) %></b> - <%=@si_act[s.act_id].stage_name %>
+<% else %>
+<B><%=itemtime.strftime(TIME_ONLY_FMT) %></b> - <%=s.note %>
+<% end %>
+</p>
+
+<% 
+  if s.duration != nil 
+    itemtime = itemtime + (s.duration * 60)
+  end
+%>
+
+<% } -%>
+</div>

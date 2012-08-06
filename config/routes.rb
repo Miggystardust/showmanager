@@ -45,6 +45,7 @@ Rails3MongoidDevise::Application.routes.draw do
 
   resources :shows do 
    member do
+      get 'perfindex' 
       get 'items' 
       get 'show_items'
    end
