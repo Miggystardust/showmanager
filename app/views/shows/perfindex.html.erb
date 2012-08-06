@@ -14,7 +14,7 @@ itemtime = @show.door_time
 <% if @si_act[s.act_id] -%>
 <B><%=itemtime.strftime(TIME_ONLY_FMT) %></b> - <%=@si_act[s.act_id].stage_name %>
 <% else %>
-<B><%=itemtime.strftime(TIME_ONLY_FMT) %></b> - <%=s.note %>
+<B><%=itemtime.strftime(TIME_ONLY_FMT) %></b> - <I><%=s.note %></I>
 <% end %>
 </p>
 
