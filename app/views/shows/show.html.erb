@@ -1,4 +1,5 @@
 <%=stylesheet_link_tag "TableTools.css", :media => "all" %>
+<%= render 'emerg_modal' %>
 
 <p id="notice"><%= notice %></p>
 <h3><%= @show.title %> @ <%= @show.venue %></h3>
@@ -9,11 +10,19 @@
   <%= @show.show_time.strftime(SHORT_TIME_FMT) %>
 </p>
 
-<h3>Show Schedule</h3>
+<div class="alert alert-error" id="emergdiv" style="display: none;">
+<div id="emergmsg"></div>
+</div>
+
 <P>
 <button class="btn btn-success btn-small" id="refreshBtn">
 <i class="icon-refresh icon-white"></i> Refresh </button>
+<button class="btn btn-danger btn-small" id="emergBtn">
+<i class="icon-fire icon-white"></i> Emergency Msg </button>
 </p>
+<h3>Show Schedule</h3>
+
+
 <table cellpadding="0" cellspacing="0"  class="table table-bordered dataTable" id="showlist">
 <thead>
      <TR>
@@ -103,14 +112,14 @@ $(document).ready(function() {
                 'success':function(json) {               
                 fnCallback(json);
                 if (! intervalId) { 
-                  intervalId = setInterval(function() { showDT.fnReloadAjax(); }, 2000);
+                  intervalId = setInterval(function() { showDT.fnReloadAjax(); }, 1500);
                 }
                 
               }});
         }
     });
 
- /* wireup some ajax reloads on these tables - when this was enabled we were getting duplicate rows... */
+  /* wireup some ajax reloads on these tables - when this was enabled we were getting duplicate rows... */
 
   /* set up the lower table */
   var fixHelper = function(e, ui) {
@@ -168,14 +177,31 @@ $(document).ready(function() {
       }
     });
 
+    $("#emergModal").modal('hide');
 
-  /* add act clicks */
-  $(document).ready( function () { 
+	  $("#emergBtn").click( function (e) {
+      e.preventDefault();
+      showDT.fnReloadAjax();
+      $('#emergModal').modal('show');
+      $(':input:visible:enabled:first').focus();
+    });
+
 	  $("#refreshBtn").click( function (e) {
           e.preventDefault();
           showDT.fnReloadAjax();
-      });
     });
-  });
+
+    /* set up a timer to fetch this via json every second */
+    emergIntervalId = setInterval(function(data) {
+      $.getJSON("/shows/<%=@show.id%>.json", function(data) { 
+        if (data['emergency_msg'] == null || data['emergency_msg'] == "") { 
+          $("div#emergdiv").hide();
+        } else { 
+          $("div#emergmsg").text(data['emergency_msg']);
+          $("div#emergdiv").show();
+        };
+      });
+   }, 1000);
+   }); 
   
 </script>

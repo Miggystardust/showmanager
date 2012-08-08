@@ -16,6 +16,7 @@ class Show
 
    field :show_time, :type => Time
    field :door_time, :type => Time
-
+   
+   field :emergency_msg, :type => String
    # an item is either an 'intermission' a 'note' or some shit. 
 end
