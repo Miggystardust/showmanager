@@ -37,7 +37,11 @@
      else
        p = Passet.find(self.music)
        if p
-         return "#{p.song_artist} - #{p.song_title}"
+         if p.song_artist != "" and p.song_title != ""
+           return "#{p.song_artist} - #{p.song_title}"
+         else
+           return p.filename
+         end
        else
          return "Asset not found"
        end
