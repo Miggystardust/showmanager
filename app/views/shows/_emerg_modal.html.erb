@@ -19,6 +19,7 @@
   <div class='modal-footer'>
     <%= f.hidden_field :show_id, :value=> @show.id  %>
     <button class="btn btn-primary" id="emerg-form-submit">Update Message</button>
+    <button class="btn btn-primary" id="emerg-form-remove">Remove Message</button>
   </div>
   <% end -%>
 </div>
@@ -54,7 +55,7 @@
         // first instance is  the add box, second instance is the length box.
         var actdata = {
           "authenticity_token" : AUTH_TOKEN,
-          'emergency_msg': show_emergency_msg.value,
+          'emergency_msg': "EMERGENCY: (<%=current_user.name%>) " + show_emergency_msg.value,
         };
 
         $("#emergModal").modal('hide');
@@ -71,6 +72,32 @@
               }
           });
         });
+
+      $('#emerg-form-remove').on('click', function(e){
+      // We don't want this to act as a link so cancel the link action
+        e.preventDefault();
+
+        // first instance is  the add box, second instance is the length box.
+        var actdata = {
+          "authenticity_token" : AUTH_TOKEN,
+          'emergency_msg': "",
+        };
+
+        $("#emergModal").modal('hide');
+
+        // update the record
+        $.ajax({
+          type: 'PUT',
+              dataType: 'json',
+              url: '/shows/<%=@show.id%>.json',
+              contentType: 'application/json',
+              data: JSON.stringify(actdata),
+              success: function() { 
+                 showDT.fnReloadAjax();
+              }
+          });
+        });
+
     });
   //]]>
 </script>
