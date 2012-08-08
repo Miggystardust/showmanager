@@ -115,7 +115,7 @@ class ActsController < ApplicationController
   def edit
     @act = Act.find(params[:id])
     
-    if @act.id != current_user.id and current_user.try(:admin?) == false
+    if @act.user_id != current_user.id and current_user.try(:admin?) == false
       flash[:error] = "You don't own that Act."
       redirect_to "/acts/"
     end
