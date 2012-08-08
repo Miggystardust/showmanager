@@ -21,7 +21,7 @@ class ShowsController < ApplicationController
   # this is list of all performers in this show
   def perfindex
     @show = Show.find(params[:id])
-    @show_items = ShowItem.where(show_id: params[:id]) 
+    @show_items = ShowItem.where(show_id: params[:id]).asc(:seq)
     @si_act = Hash.new
 
     # prefetch the acts in this show

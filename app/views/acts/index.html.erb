@@ -17,28 +17,9 @@
   </tr>
 
 <% @acts.each do |act| -%>
-  <tr>
-	<% if @showowner -%>
-    <td>
-	<% if act.user_id != nil -%>
-    <% begin 
-        u = User.find(act.user_id) 
-    %>
-        <%=u.name %>
-    <% rescue %>
-        <font color="#ff0000">Deleted User</font>
-     <% end %>
-	<% end -%>
-    </td>
-	<% end -%>
-	<td><%=act.stage_name%></td>
-	<td><%=act.short_description%></td>
-  <td><%=act.music_s %></td>
-  <td><%=act.image_s %></td>
-  <td><%= link_to 'Edit', edit_act_path(act) %></td>
-  <td><%= link_to 'Destroy', act, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<%=render act %>
 <% end -%>
+
 </table>
 <br />
 <%= link_to 'New Act', new_act_path %>

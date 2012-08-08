@@ -17,10 +17,10 @@
                 <b class="caret"></b>
                 </a>
              <ul class="dropdown-menu">
-              <li><%= link_to "Upload", "/passets/new" %></li>
-              <li><%= link_to 'Files', :passets %></li>
-              <li><%= link_to 'Acts', :acts %></li>
-              <li><%= link_to 'Profile', "/settings/edit" %></li>
+              <li><a href="/passets/new"><i class="icon-arrow-up"></i>Upload</a></li>
+              <li><a href="/passets/"><i class="icon-file"></i>Files</a></li>
+              <li><a href="/acts/"><i class="icon-music"></i>Acts</a></li>
+              <li><a href="/settings/edit/"><i class="icon-wrench"></i>Profile</a></li>
             </ul>
            </li>
               <% if current_user.try(:admin?) -%>

@@ -1,4 +1,83 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-<p>User: <%= @user.name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
+<h1>User: <%= @user.username %> (<%=@user._id %>)</h1>
+<form class="form-horizontal">
+<fieldset>
+    <legend>User</legend>
+
+    <div class="control-group">
+      <label class="control-label" for="name">Name</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge disabled" id="name" value="<%=@user.name%>">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="email">Email</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge disabled" id="email" value="<%=@user.email%>">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="provider">Provider</label>
+      </label>
+      <div class="controls">
+        <input type="text" class="input-xlarge disabled" id="provider" value="<%= @user.provider == "" ? "Local" : @user.provider  %>">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="last_ip">Last IP</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge disabled" id="last_ip" value="<%=@user.last_sign_in_ip%>">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="sic">Sign In Count</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge disabled" id="sic" value="<%=@user.sign_in_count%>">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="admin">Admin?</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge disabled" id="admin" value="<%=@user.admin%>">
+      </div>
+    </div>
+
+  </fieldset>
+</form>
+
+
+<h2>Acts</h2>
+<table class="table table-striped">
+  <tr>
+	<% if @showowner %>
+    <th>Owner</th>
+	<% end %>
+    <th>Stage Name</th>
+    <th>Short Description</th>
+    <th>Music?</th>
+    <th>Image/Video?</th>
+    <th colspan=3>Actions</th>
+  </tr>
+<% @user.acts.each { |act| %>
+<%=render act %>
+<% } %>
+</table>
+
+<h2>Passets</h2>
+<TABLE CLASS="table table-striped">
+<TR>
+<% if defined? @adminindex -%>
+<TH>Owner</TH>
+<% end -%>
+<TH WIDTH=200>Preview</TH>
+<TH>File</TH>
+<TH>Actions</TH>
+</TR>
+<% @user.passets.each { |passet| %>
+<%= render :partial => '/passets/passet', :locals => { :passet => passet } %>
+<% } %>
+</TABLE>
