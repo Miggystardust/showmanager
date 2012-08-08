@@ -33,6 +33,13 @@
     </div>
 
     <div class="control-group">
+      <label class="control-label" for="last_sign_in_at">Last Sign In</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge disabled" id="last_sign_in_at" value="<%=@user.last_sign_in_at%>">
+      </div>
+    </div>
+
+    <div class="control-group">
       <label class="control-label" for="sic">Sign In Count</label>
       <div class="controls">
         <input type="text" class="input-xlarge disabled" id="sic" value="<%=@user.sign_in_count%>">
