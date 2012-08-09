@@ -3,6 +3,11 @@
 <% else -%>
 <h1>Your Acts</h1>
 <% end -%>
+<P>
+</p>
+<P>
+<a href="/acts/new" class="btn btn-primary"><i class="icon-white icon-plus-sign"></i>&nbsp;Create Act</a>
+</P>
 <% if @acts.length > 0 -%>
 <table class="table table-striped">
   <tr>
@@ -22,7 +27,6 @@
 
 </table>
 <br />
-<%= link_to 'New Act', new_act_path %>
 <% else -%>
 <P>
 <H3> You don't have any acts. <%= link_to "Create one!", new_act_path %> </h3>

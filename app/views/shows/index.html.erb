@@ -4,6 +4,10 @@
 There are no shows on file. Create one. 
 
 <% else %>
+<P>
+</p>
+<P><a href="/shows/new" class="btn btn-primary"><i class="icon-white icon-plus-sign"></i>&nbsp;Create Show</a>
+</P>
 <table class="table table-striped">
   <tr>
     <th>Title</th>
@@ -30,4 +34,3 @@ There are no shows on file. Create one.
 <% end %>
 <br />
 
-<%= link_to 'New Show', new_show_path %>
