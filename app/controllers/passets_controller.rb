@@ -7,7 +7,7 @@ class PassetsController <  ApplicationController
   before_filter :authenticate_user!
 
   # this tends to explode on file upload, turning it off. 
-  skip_before_filter :verify_authenticity_token :only => [:new]   
+  skip_before_filter :verify_authenticity_token,  :only => [:new]   
 
   def index
     @assets = current_user.passets.all.desc(:created_at)
