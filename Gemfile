@@ -23,3 +23,6 @@ gem "taglib-ruby"
 gem "factory_girl"
 
 gem "omniauth-facebook"
+
+gem "newrelic_rpm"
+
