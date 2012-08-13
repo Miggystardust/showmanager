@@ -115,6 +115,7 @@ GEM
       rspec (>= 2.9)
     multi_json (1.3.6)
     multipart-post (1.1.5)
+    newrelic_rpm (3.4.1)
     nokogiri (1.5.4)
     oauth2 (0.8.0)
       faraday (~> 0.8)
@@ -218,6 +219,7 @@ DEPENDENCIES
   launchy (>= 2.1.0)
   mongoid (>= 2.4.11)
   mongoid-rspec (>= 1.4.4)
+  newrelic_rpm
   omniauth-facebook
   rails (= 3.2.6)
   rmagick (>= 2.13.1)

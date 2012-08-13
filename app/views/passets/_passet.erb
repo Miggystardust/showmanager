@@ -13,11 +13,25 @@
     <% end -%>
 		<TD ALIGN=CENTER>
 			<% if passet.kind.match(/^audio\//) -%>
+      
+      <% if passet.kind.match(/mp4$/) -%>
+
+      <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" height="24" width="240"> 
+
+      <param name="src" value="/uploads/download/<%=passet.uuid%>">
+      <param name="autoplay" value="false">
+      <param name="type" value="<%=passet.kind%>" height="24" width="240">
+
+      <embed src="/uploads/download/<%=passet.uuid%>" height="24" width="240" type="<%=passet.kind%>" pluginspage="http://www.apple.com/quicktime/download/"></embed> 
+
+</object> 
+      <% else -%>
 			<object type="application/x-shockwave-flash" data="/dewplayer/dewplayer-rect.swf" width="240" height="20" id="dewplayer" name="dewplayer">
 				<param name="wmode" value="transparent" />
 				<param name="movie" value="/dewplayer/dewplayer-rect.swf" /> 
 				<param name="flashvars" value="mp3=/uploads/download/<%=passet.uuid%>&amp;showtime=1" /> 
 			</object>
+      <% end -%>
 			<% end -%>
 			<% if passet.kind.match(/^image\//) -%>
       <a id="single_image" href="/sf/<%=passet.uuid%>.jpg" rel="">
