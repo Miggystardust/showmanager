@@ -10,5 +10,5 @@
 <% end -%>
 </TABLE>
 
-Download: <a href="<%=@zipfile%>"><%=@zipfile%></a> (<%=bytes_to_bp(@zipstat.size)%>)
+Download: <a href="<%=@zipfile%>"><%=@zipfile%></a> (<%=number_to_human_size(@zipstat.size, :precision => 3)%> / <%=number_with_delimiter(@zipstat.size)%> bytes)
 

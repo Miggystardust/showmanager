@@ -12,22 +12,22 @@ module ApplicationHelper
     # return a file size in binary prefix notation, SI units
     bprefix = Array.new
     
-    bprefix[1] = "KiBi"
-    bprefix[2] = "MiBi"
-    bprefix[3] = "GiBi"
-    bprefix[4] = "TiBi"
-    bprefix[5] = "PiBi"
-    bprefix[6] = "EiBi"
-    bprefix[7] = "ZiBi"
-    bprefix[8] = "YiBi"
+    bprefix[0] = "KiBi"
+    bprefix[1] = "MiBi"
+    bprefix[2] = "GiBi"
+    bprefix[3] = "TiBi"
+    bprefix[4] = "PiBi"
+    bprefix[5] = "EiBi"
+    bprefix[6] = "ZiBi"
+    bprefix[7] = "YiBi"
     
-    i = 0
+    i = 1
     bprefix.each{ |k|
       v = 1024 ** i
-      i = i + 1
-      if sz < v
-        return sprintf("%.02f %s", sz.to_f / v.to_f, k)
+      if sz < 1024 ** (i+1)
+        return sprintf("%.03f %s", sz.to_f / v.to_f, k)
       end
+      i = i + 1
     }
   end
 
