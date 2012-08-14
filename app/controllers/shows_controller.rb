@@ -102,7 +102,7 @@ class ShowsController < ApplicationController
     }
 
     # what follows is a series of disgusting system calls.
-    system("mkdir #{Rails.root}/tmp/#{@show.id}")
+    logexec("mkdir #{Rails.root}/tmp/#{@show.id}")
 
     @filelist.each_pair do |id,fn|
       # poor sanitization here. 
@@ -112,11 +112,11 @@ class ShowsController < ApplicationController
       fn = fn.gsub("`","")
       fn = fn.gsub(";","")
 
-      system("cp #{UPLOADS_DIR}/#{id} #{Rails.root}/tmp/#{@show.id}/#{fn}")
+      logexec("cp #{UPLOADS_DIR}/#{id} #{Rails.root}/tmp/#{@show.id}/#{fn}")
     end
-    system("cd #{Rails.root}/tmp; zip -9 -r #{@show.id}.zip #{@show.id}")
-    system("mv #{Rails.root}/tmp/#{@show.id}.zip #{Rails.root}/public/zips")
-    system("rm -rf #{Rails.root}/tmp/#{@show.id}")
+    logexec("cd #{Rails.root}/tmp; zip -9 -r #{@show.id}.zip #{@show.id}")
+    logexec("mv #{Rails.root}/tmp/#{@show.id}.zip #{Rails.root}/public/zips")
+    logexec("rm -rf #{Rails.root}/tmp/#{@show.id}")
 
     @zipstat = File.stat("#{Rails.root}/public/zips/#{@show.id}.zip")
     @zipfile = "/zips/#{@show.id}.zip"
@@ -293,4 +293,12 @@ class ShowsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def logexec(command)
+    r = system(command)
+    logger.info("#{command} / result=#{r}")
+  end
+
 end
