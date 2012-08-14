@@ -10,4 +10,5 @@
 <% end -%>
 </TABLE>
 
-Download: <a href="<%=@zipfile%>"><%=@zipfile%></a> <%=@zipstat.size%> bytes.
+Download: <a href="<%=@zipfile%>"><%=@zipfile%></a> (<%=bytes_to_bp(@zipstat.size)%>)
+
