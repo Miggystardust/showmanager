@@ -79,6 +79,49 @@ class ShowsController < ApplicationController
     end
   end
 
+  def download
+    # create a zip file of an entire show. 
+    @show_items = ShowItem.where(show_id: params[:id]).asc(:seq)
+    @show = Show.find(params[:id])
+    @filelist = Hash.new
+
+    @show_items.each { |s| 
+      begin 
+        a = Act.find(s.act_id)
+        if a 
+          p = Passet.find(a.music)
+          @filelist[p.uuid] = p.filename
+
+          p = Passet.find(a.image)
+          @filelist[p.uuid] = p.filename
+        end
+      rescue BSON::InvalidObjectId
+        # we silently skip the item if we can't locate the act or if the
+        # ID in question is invalid (i.e. 0 or 1)
+      end
+    }
+
+    # what follows is a series of disgusting system calls.
+    system("mkdir #{Rails.root}/tmp/#{@show.id}")
+
+    @filelist.each_pair do |id,fn|
+      # poor sanitization here. 
+      fn = fn.gsub(" ","_")
+      fn = fn.gsub("\\","")
+      fn = fn.gsub("'","")
+      fn = fn.gsub("`","")
+      fn = fn.gsub(";","")
+
+      system("cp #{UPLOADS_DIR}/#{id} #{Rails.root}/tmp/#{@show.id}/#{fn}")
+    end
+    system("cd #{Rails.root}/tmp; zip -9 -r #{@show.id}.zip #{@show.id}")
+    system("mv #{Rails.root}/tmp/#{@show.id}.zip #{Rails.root}/public/zips")
+    system("rm -rf #{Rails.root}/tmp/#{@show.id}")
+
+    @zipstat = File.stat("#{Rails.root}/public/zips/#{@show.id}.zip")
+    @zipfile = "/zips/#{@show.id}.zip"
+  end
+
   # AJAX endpoint
   def show_items
     @show_items = ShowItem.where(show_id: params[:id]).asc(:seq)

@@ -1,0 +1,13 @@
+<h1>Download Show: <%=@show.title%></h1>
+
+
+<TABLE class="table table-striped">
+<% @filelist.each_pair do |id,fn| -%>
+<TR>
+  <TD><%=id%></TD>
+  <TD><%=fn%></TD>
+</TR>
+<% end -%>
+</TABLE>
+
+Download: <a href="<%=@zipfile%>"><%=@zipfile%></a> <%=@zipstat.size%> bytes.

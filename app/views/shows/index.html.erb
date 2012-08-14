@@ -14,7 +14,7 @@ There are no shows on file. Create one.
     <th>Venue</th>
     <th>Door time</th>
     <th>Show time</th>
-    <th colspan=4>Actions</th>
+    <th colspan=5>Actions</th>
   </tr>
 
 <% @shows.each do |show| %>
@@ -26,6 +26,7 @@ There are no shows on file. Create one.
 
     <td><%= link_to 'Live View', show %></td>
     <td><%= link_to 'Performer List', perfindex_show_path(show) %></td>
+    <td><%= link_to 'Download Media', download_show_path(show) %></td>
     <td><%= link_to 'Edit', edit_show_path(show) %></td>
     <td><%= link_to 'Destroy', show, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>

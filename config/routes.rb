@@ -48,6 +48,7 @@ Rails3MongoidDevise::Application.routes.draw do
       get 'perfindex' 
       get 'items' 
       get 'show_items'
+      get 'download'
    end
   end
 
