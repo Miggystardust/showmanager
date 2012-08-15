@@ -5,7 +5,7 @@
     <% begin 
        u = User.find(act.user_id) 
        %>
-    <%=u.name %>
+    <a href="/users/<%=act.user_id %>"><%=@u.name %></a><BR>
     <% rescue %>
     <font color="#ff0000">Deleted User</font>
     <% end %>
