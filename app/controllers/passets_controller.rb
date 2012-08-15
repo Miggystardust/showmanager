@@ -5,6 +5,7 @@ class PassetsController <  ApplicationController
   protect_from_forgery
 
   before_filter :authenticate_user!
+  before_filter :verify_admin, :only => [:update, :edit] 
 
   # this tends to explode on file upload, turning it off. 
   skip_before_filter :verify_authenticity_token,  :only => [:new]   
@@ -29,16 +30,18 @@ class PassetsController <  ApplicationController
   end
 
   def edit
-    @passet = current_user.passets.find(params[:id])
+    @passet = Passet.find(params[:id])
+    @adminindex = true
   end
 
   def update
-    @passet = current_user.passets.find(params[:id])
-    @passet.update_attributes(notes: params[:passet][:notes])
+    @passet = Passet.find(params[:id])
+    @passet.update_attributes(params[:passet])
     @passet.save!
 
     flash[:notice] = "Updated information for #{@passet.filename}"
-    redirect_to :action => :index
+    # only admins can ever do this, so go back there. 
+    redirect_to :action => :adminindex
   end
 
   def destroy
@@ -177,5 +180,12 @@ class PassetsController <  ApplicationController
     end
     fileinfo
   end
+
+  def verify_admin
+    if current_user.try(:admin?) == false
+      flash[:error] = "You must be an administrator to use that function."
+      redirect_to "/passets/"
+    end
+ end
 end
   

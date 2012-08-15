@@ -11,23 +11,23 @@ class ActsController < ApplicationController
     # we build this every pass because we use them in most operations
     @user_imgs = [['None',0]]
     @user_musics = [['None',0],["-- band or single performer, no playback --",1]]
-    
+
     if current_user.try(:admin?) 
       # admins get to see everything.
       ui = Passet.where(kind: /^image\//)
       um = Passet.where(kind: /^audio\//)
+      ua = Passet.where(kind: /^application\/octet-stream$/) # ew!
     else 
       ui = current_user.passets.where(kind: /^image\//)
       um = current_user.passets.where(kind: /^audio\//)
+      ua = current_user.passets.where(kind: /^application\/octet-stream$/)  
     end
 
     ui.each do |u|
-      logger.debug(u.id)
       @user_imgs << [u.filename,u.id]
     end
     
     um.each do |u|
-      logger.debug(u.id)
       name = u.filename
 
       if u.song_title and u.song_artist
@@ -36,7 +36,13 @@ class ActsController < ApplicationController
 
       @user_musics << [name,u.id]
     end
-    
+
+    # stuff these in music I guess. 
+    # not really sure what to do here. 
+    ua.each do |u|
+      @user_musics << [u.filename,u.id]
+    end
+
   end
 
   # GET /acts

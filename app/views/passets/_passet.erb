@@ -4,7 +4,7 @@
     <% begin 
           @u = User.find(passet.created_by) 
     -%>
-          <%=@u.name %><BR>
+          <a href="/users/<%=passet.created_by%>"><%=@u.name %></a><BR>
           <a href="mailto:<%=@u.email %>"><%=@u.email %></a>
     <% rescue -%>
        <font color="#ff0000">Deleted User</font>
@@ -18,13 +18,19 @@
 
       <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" height="24" width="240"> 
 
-      <param name="src" value="/uploads/download/<%=passet.uuid%>">
-      <param name="autoplay" value="false">
-      <param name="type" value="<%=passet.kind%>" height="24" width="240">
+      <param name="src" value="/uploads/download/<%=passet.uuid%>"/>
+      <param name="AUTOPLAY" value="0"/>
+      <param name="AUTOSTART" value="0"/>
+      <param name="type" value="<%=passet.kind%>" height="24" width="240"/>
 
-      <embed src="/uploads/download/<%=passet.uuid%>" height="24" width="240" type="<%=passet.kind%>" pluginspage="http://www.apple.com/quicktime/download/"></embed> 
+      </object>
+      <embed src="/uploads/download/<%=passet.uuid%>" height="24" width="240" type="<%=passet.kind%>" pluginspage="http://www.apple.com/quicktime/download/" autoplay="0" autostart="0">
+      <param name="src" value="/uploads/download/<%=passet.uuid%>"/>
+      <param name="AUTOPLAY" value="0"/>
+      <param name="AUTOSTART" value="0"/>
+      <param name="type" value="<%=passet.kind%>" height="24" width="240"/>
+      </embed> 
 
-</object> 
       <% else -%>
 			<object type="application/x-shockwave-flash" data="/dewplayer/dewplayer-rect.swf" width="240" height="20" id="dewplayer" name="dewplayer">
 				<param name="wmode" value="transparent" />
@@ -51,10 +57,19 @@
       <a title="<%=passet.filename%>" href="/sf/<%=passet.uuid%>?download=1" rel="">[ Download ]</a>
       <% end -%>
 		</TD>
+
 		<TD>
-    <% if @noedit == nil -%>
-    <%= button_to 'Remove',  passet, :method=>:delete, :class=>:destroy, :data => {:confirm => "Delete #{passet.filename}: Are you sure?"} %>
+    <div class="btn-group">
+    <% if defined? @adminindex -%>
+      <a href="/passets/<%=passet.id%>/edit" class="btn btn-primary">Edit</a>
     <% end -%>
+    </TD>
+
+    <TD>
+    <% if @noedit == nil -%>
+    <%= button_to 'Remove',  passet, :method=>:delete, :class=>"btn btn-danger", :data => {:confirm => "Delete #{passet.filename}: Are you sure?"} %>
+    <% end -%>
+    </div>
 		</TD>
 
 	</TR>

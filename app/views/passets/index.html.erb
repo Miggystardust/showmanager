@@ -8,6 +8,8 @@
 <P>
 <a href="/passets/new" class="btn btn-primary"><i class="icon-white icon-arrow-up"></i>&nbsp;Upload Additional Files</a>
 </P>
+
+<% if @assets.count > 0 -%>
 <TABLE CLASS="table table-striped">
 <TR>
 <% if defined? @adminindex -%>
@@ -15,9 +17,9 @@
 <% end -%>
 <TH WIDTH=200>Preview</TH>
 <TH>File</TH>
-<TH>Actions</TH>
+<TH COLSPAN=2>Actions</TH>
 </TR>
-
+<% end -%>
 <%= render(@assets) || render("nofiles") %>
 </TABLE>
 
