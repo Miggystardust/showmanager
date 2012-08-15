@@ -2,13 +2,14 @@
 	<% if @showowner -%>
   <td>
 	  <% if act.user_id != nil -%>
-    <% begin 
-       u = User.find(act.user_id) 
-       %>
-    <a href="/users/<%=act.user_id %>"><%=@u.name %></a><BR>
-    <% rescue %>
+    <% u = User.find(act.user_id) 
+
+       if u != nil
+    -%>
+    <a href="/users/<%=act.user_id %>"><%=u.name %></a><BR>
+    <% else -%>
     <font color="#ff0000">Deleted User</font>
-    <% end %>
+	  <% end -%>
 	  <% end -%>
   </td>
 	<% end -%>
