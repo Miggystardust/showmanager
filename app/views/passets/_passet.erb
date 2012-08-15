@@ -12,7 +12,7 @@
     </TD>
     <% end -%>
 		<TD ALIGN=CENTER>
-			<% if passet.kind.match(/^audio\//) -%>
+			<% if passet.is_audio? -%>
       
       <% if passet.kind.match(/mp4$/) -%>
 
@@ -39,7 +39,7 @@
 			</object>
       <% end -%>
 			<% end -%>
-			<% if passet.kind.match(/^image\//) -%>
+			<% if passet.is_image? -%>
       <a id="single_image" href="/sf/<%=passet.uuid%>.jpg" rel="">
 			<IMG SRC="<%="/s/#{passet.thumb_path(100,100)}" %>" WIDTH=100 HEIGHT=100>
       </a>
@@ -50,7 +50,10 @@
       <I><% if passet.song_artist != nil %><%= passet.song_artist %> - <% end %>
       <% if passet.song_title != nil %><%= passet.song_title %> <BR> <% end %></I>
       <div class="greyed">
-  			<%=passet.kind%>, <%=sec_to_time(passet.song_length) %> long, <%=passet.song_bitrate%>Kbit bitrate<BR>
+  			<%=passet.kind%>
+        <% if passet.is_audio? and passet.song_length > 0 -%>
+        , <%=sec_to_time(passet.song_length) %> long, <%=passet.song_bitrate%>Kbit bitrate<BR>
+        <% end -%>
       </div>
       <%=passet.created_at.asctime%> <i>(<%=time_ago_in_words(passet.created_at)%> ago)</i><br>
      <% if @noedit == nil -%>

@@ -44,4 +44,12 @@ class Passet
      end
    end
 
+   def is_image?
+     return  self.kind.starts_with?("image/")
+   end
+
+   def is_audio?
+     return  self.kind.starts_with?("audio/")
+   end
+
 end

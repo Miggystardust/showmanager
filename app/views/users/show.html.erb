@@ -74,7 +74,7 @@
 <% } %>
 </table>
 
-<h2>Passets</h2>
+<h2>Assets</h2>
 <TABLE CLASS="table table-striped">
 <TR>
 <% if defined? @adminindex -%>
@@ -82,7 +82,7 @@
 <% end -%>
 <TH WIDTH=200>Preview</TH>
 <TH>File</TH>
-<TH>Actions</TH>
+<TH COLSPAN=3>Actions</TH>
 </TR>
 <% @user.passets.each { |passet| %>
 <%= render :partial => '/passets/passet', :locals => { :passet => passet } %>
