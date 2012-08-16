@@ -6,7 +6,7 @@
    belongs_to :user
    has_many :passets
 
-   validates_presence_of :stage_name, :short_description, :length
+   validates_presence_of :stage_name, :contact_phone_number, :short_description, :length
    validates_numericality_of :length
    
    field :stage_name, :type => String
