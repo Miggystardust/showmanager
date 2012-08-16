@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'rails', '3.2.6'
+gem 'rails', '3.2.8'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -15,7 +15,7 @@ gem "cucumber-rails", ">= 1.3.0", :group => :test, :require => false
 gem "capybara", ">= 1.1.2", :group => :test
 gem "launchy", ">= 2.1.0", :group => :test
 gem "bson_ext", ">= 1.6.4"
-gem "mongoid", ">= 2.4.11"
+gem "mongoid", "= 2.4.12"
 gem "devise", ">= 2.1.0"
 gem "rmagick", ">= 2.13.1"
 
