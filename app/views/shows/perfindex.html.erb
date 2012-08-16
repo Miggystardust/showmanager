@@ -1,7 +1,7 @@
 <%
 itemtime = @show.door_time
 %>
-<div class=masthead>
+<div class="perfindex">
 <P><%= @show.title %> - <%= @show.door_time.strftime("%A, %B %e")%></P>
 
 <P>Doors at <%= @show.door_time.strftime(TIME_ONLY_FMT) %> / Show at <%= @show.show_time.strftime(TIME_ONLY_FMT) %></P>
