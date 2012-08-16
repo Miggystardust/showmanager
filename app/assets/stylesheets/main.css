@@ -99,3 +99,9 @@ body{
   line-height: 18px;
   color: #333;
 }
+
+@media print { 
+ .noprint { 
+    display: none;
+ }
+}
