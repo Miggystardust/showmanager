@@ -10,5 +10,7 @@
 <% end -%>
 </TABLE>
 
-Download: <a href="<%=@zipfile%>"><%=@zipfile%></a> (<%=number_to_human_size(@zipstat.size, :precision => 3)%> / <%=number_with_delimiter(@zipstat.size)%> bytes)
+<P>There are <b><%=@stat_acts%> acts</b> in this show, with <b><%=@stat_music%> audio files</b>, and <b><%=@stat_images%> image or video files</b>. </P>
+<P>Download: <a href="<%=@zipfile%>"><%=@zipfile%></a> (<%=number_to_human_size(@zipstat.size, :precision => 3)%> / <%=number_with_delimiter(@zipstat.size)%> bytes)</p>
+
 

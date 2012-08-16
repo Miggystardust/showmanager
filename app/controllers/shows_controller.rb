@@ -85,15 +85,23 @@ class ShowsController < ApplicationController
     @show = Show.find(params[:id])
     @filelist = Hash.new
 
+    @stat_acts = 0
+    @stat_music = 0
+    @stat_images = 0
+
     @show_items.each { |s| 
       begin 
         a = Act.find(s.act_id)
         if a 
+          @stat_acts += 1
+
           p = Passet.find(a.music)
           @filelist[p.uuid] = p.filename
+          @stat_music += 1
 
           p = Passet.find(a.image)
           @filelist[p.uuid] = p.filename
+          @stat_images += 1
         end
       rescue BSON::InvalidObjectId
         # we silently skip the item if we can't locate the act or if the
