@@ -134,9 +134,24 @@ class ShowsController < ApplicationController
         # this format drives the show display index
         @si = []
         @show_items.each { |s|
-          removeme = "<button class=\"btn btn-danger btn-mini siremove\" id=\"#{s._id}\"><i class=\"icon-minus icon-white\"></i> Remove</button>&nbsp;"
-          editact = "<button class=\"btn btn-success btn-mini editact\" id=\"#{s.act_id}\"><i class=\"icon-pencil icon-white\"></i> Edit</button>&nbsp;" 
-          editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s._id}\"><i class=\"icon-time icon-white\"></i> Length</button>&nbsp;" 
+          # menus are built based on a number of items and we must provide them over Ajax to datatables
+          markact = ""
+          editact = ""
+          editdur = ""
+          removeme = ""
+
+          if params[:m] == nil
+            removeme = "<button class=\"btn btn-danger btn-mini siremove\" id=\"#{s._id}\"><i class=\"icon-minus icon-white\"></i> Remove</button>&nbsp;"
+            editact = "<button class=\"btn btn-success btn-mini editact\" id=\"#{s.act_id}\"><i class=\"icon-pencil icon-white\"></i> Edit</button>&nbsp;" 
+            editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s._id}\"><i class=\"icon-time icon-white\"></i> Length</button>&nbsp;" 
+          else 
+            if s.id.to_s == @show.highlighted_row.to_s
+              markact = "<button class=\"btn btn-info btn-mini unmarkitem\" id=\"#{s._id}\"><i class=\"icon-ban-circle icon-white\"></i> Unmark</button>&nbsp;" 
+            else
+              markact = "<button class=\"btn btn-info btn-mini markitem\" id=\"#{s._id}\"><i class=\"icon-flag icon-white\"></i> Mark</button>&nbsp;" 
+            end
+          end
+
           # seq, time, act data, sound, light+stage, notes
           if s.kind != 0
             # this is an asset. 
@@ -213,7 +228,7 @@ class ShowsController < ApplicationController
                 "3" => sound,
                 "4" => stage,
                 "5" => act.extra_notes,
-                "6" => removeme + editact + editdur,
+                "6" => removeme + editact + editdur + markact
               }
               
               if s.duration != nil
@@ -230,7 +245,7 @@ class ShowsController < ApplicationController
               "3" => "--",
               "4" => "--",
               "5" => "<B>" + s.note + "</B>",
-              "6" => removeme + editdur,
+              "6" => removeme + editdur + markact
             }
             
             if s.duration != nil

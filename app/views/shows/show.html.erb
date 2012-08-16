@@ -39,6 +39,7 @@
      <TH>Sound</TH>
      <TH>Light + Stage</TH>
      <TH>Notes</TH>
+     <TH>Actions</TH>
      </TR>
 </thead>
 <tbody>
@@ -105,7 +106,7 @@ $(document).ready(function() {
                            },
                        ]
             },
-      "sAjaxSource": "/shows/<%=@show.id%>/show_items.json",
+      "sAjaxSource": "/shows/<%=@show.id%>/show_items.json?m=1",
       "sPagination": "bootstrap",
       "iDisplayLength": 100,
       "oLanguage": {
@@ -119,7 +120,7 @@ $(document).ready(function() {
                 'success':function(json) {               
                    fnCallback(json);
                    if (! intervalId) { 
-                     intervalId = setInterval(function() { showDT.fnReloadAjax(); }, 30000);
+                     intervalId = setInterval(function() { showDT.fnReloadAjax(); }, 2000);
                     }
 
                    /* highlight row on callback */
@@ -127,7 +128,6 @@ $(document).ready(function() {
 
                    for ( var i=0 ; i < aTrs.length ; i++ )
                    {
-                     console.log(aTrs[i].id + "==" +json.highlighted);
                      if ( aTrs[i].id == json.highlighted )
                      {
                          $(aTrs[i]).addClass('highlighted');
@@ -151,14 +151,48 @@ $(document).ready(function() {
     helper: fixHelper
         }).disableSelection();
   
-  /* this code doesn't work - I guess I need a better way to delegate the click */
-  $("#showlist tbody").delegate("td", "click", function(event) {
-      /* $(showDT.fnSettings().aoData).each(function (){
-        $(this.nTr).removeClass('highlighted');
-      });
-     $(event.target.parentNode).addClass('highlighted');
-  */
-  });
+  $("#showlist tbody").delegate("td", "click", function() {
+      if ($(".markitem", this)[0] != undefined) { 
+        var clicked_id = $(".markitem", this)[0].id;
+        var showdata = {
+          'id':'<%=@show.id%>',
+          'highlighted_row': clicked_id,
+          "authenticity_token" : AUTH_TOKEN
+        };
+      
+        $.ajax({
+          type: 'PUT',
+              dataType: 'json',
+              url: '/shows/<%=@show.id%>.json',
+              contentType: 'application/json',
+              data: JSON.stringify(showdata),
+              success: function() { 
+                showDT.fnReloadAjax();
+              }
+          });
+      }
+
+      if ($(".unmarkitem", this)[0] != undefined) { 
+        var clicked_id = $(".unmarkitem", this)[0].id;
+        var showdata = {
+          'id':'<%=@show.id%>',
+          'highlighted_row': '0',
+          "authenticity_token" : AUTH_TOKEN
+        };
+      
+        $.ajax({
+          type: 'PUT',
+              dataType: 'json',
+              url: '/shows/<%=@show.id%>.json',
+              contentType: 'application/json',
+              data: JSON.stringify(showdata),
+              success: function() { 
+                showDT.fnReloadAjax();
+              }
+          });
+      }
+
+    });
 
   $("#emergModal").modal('hide');
       
@@ -184,7 +218,7 @@ $(document).ready(function() {
           $("div#emergdiv").show();
         };
       });
-   }, 30000);
+   }, 2000);
    }); 
   
 </script>
