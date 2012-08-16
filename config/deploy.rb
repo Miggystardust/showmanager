@@ -61,6 +61,9 @@ namespace :gems do
   task :install do
     run "cd #{deploy_to}/current && RAILS_ENV=production bundle install"
   end
+  task :update do
+    run "cd #{deploy_to}/current && RAILS_ENV=production bundle update"
+  end
 end
 
 # don't need to do this all the time do we 
