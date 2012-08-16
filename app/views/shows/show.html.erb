@@ -122,12 +122,13 @@ $(document).ready(function() {
                      intervalId = setInterval(function() { showDT.fnReloadAjax(); }, 30000);
                     }
 
-                    /* highlight row on callback */
+                   /* highlight row on callback */
                    var aTrs = showDT.fnGetNodes();
-      
+
                    for ( var i=0 ; i < aTrs.length ; i++ )
                    {
-                     if ( $(aTrs[i]).id == json.highlighted_row )
+                     console.log(aTrs[i].id + "==" +json.highlighted);
+                     if ( aTrs[i].id == json.highlighted )
                      {
                          $(aTrs[i]).addClass('highlighted');
                      }
