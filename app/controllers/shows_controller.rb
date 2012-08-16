@@ -239,7 +239,7 @@ class ShowsController < ApplicationController
           end
 
         }
-        render json: { 'iTotalRecords' => @si.length, 'aaData' => @si }
+        render json: { 'iTotalRecords' => @si.length, 'aaData' => @si, 'highlighted' => @show.highlighted_row }
       }
     end
   end

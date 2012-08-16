@@ -1,5 +1,12 @@
 <%=stylesheet_link_tag "TableTools.css", :media => "all" %>
 <%= render 'emerg_modal' %>
+<style>
+
+.highlighted { 
+  background-color: #ECFFB3;
+};
+
+</style>
 
 <p id="notice"><%= notice %></p>
 <h3><%= @show.title %> @ <%= @show.venue %></h3>
@@ -110,16 +117,26 @@ $(document).ready(function() {
                 'url':sSource,
                 'data':aoData,
                 'success':function(json) {               
-                fnCallback(json);
-                if (! intervalId) { 
-                  intervalId = setInterval(function() { showDT.fnReloadAjax(); }, 1500);
-                }
-                
-              }});
+                   fnCallback(json);
+                   if (! intervalId) { 
+                     intervalId = setInterval(function() { showDT.fnReloadAjax(); }, 30000);
+                    }
+
+                    /* highlight row on callback */
+                   var aTrs = showDT.fnGetNodes();
+      
+                   for ( var i=0 ; i < aTrs.length ; i++ )
+                   {
+                     if ( $(aTrs[i]).id == json.highlighted_row )
+                     {
+                         $(aTrs[i]).addClass('highlighted');
+                     }
+                   }
+                }});
         }
     });
-
-  /* wireup some ajax reloads on these tables - when this was enabled we were getting duplicate rows... */
+      
+/* wireup some ajax reloads on these tables - when this was enabled we were getting duplicate rows... */
 
   /* set up the lower table */
   var fixHelper = function(e, ui) {
@@ -133,60 +150,25 @@ $(document).ready(function() {
     helper: fixHelper
         }).disableSelection();
   
-  /* this delegated event handler works, but needs to go down one level. */
-  $("#actslist tbody").delegate("td", "click", function() {
-      if ($(".actadder", this)[0] != undefined) { 
-        var clicked_id = $(".actadder", this)[0].id;
-        var actdata = {
-          'show_id':'<%=@show.id%>',
-          'kind': '32',
-          'act_id': clicked_id,
-          "authenticity_token" : AUTH_TOKEN
-        };
+  /* this code doesn't work - I guess I need a better way to delegate the click */
+  $("#showlist tbody").delegate("td", "click", function(event) {
+      /* $(showDT.fnSettings().aoData).each(function (){
+        $(this.nTr).removeClass('highlighted');
+      });
+     $(event.target.parentNode).addClass('highlighted');
+  */
+  });
+
+  $("#emergModal").modal('hide');
       
-        $.ajax({
-          type: 'POST',
-              dataType: 'json',
-              url: '/show_items.json',
-              contentType: 'application/json',
-              data: JSON.stringify(actdata),
-              success: function() { 
-                showDT.fnReloadAjax();
-              }
-          });
-      }
-    });
-
-  $("#showlist tbody").delegate("td", "click", function() {
-      if ($(".siremove", this)[0] != undefined) { 
-        var clicked_id = $(".siremove", this)[0].id;
-        var actdata = {
-          "authenticity_token" : AUTH_TOKEN
-        };
-      
-        $.ajax({
-          type: 'DELETE',
-              dataType: 'json',
-              url: '/show_items/' + clicked_id + '.json',
-              contentType: 'application/json',
-              data: JSON.stringify(actdata),
-              success: function() { 
-                showDT.fnReloadAjax();
-              }
-          });
-      }
-    });
-
-    $("#emergModal").modal('hide');
-
-	  $("#emergBtn").click( function (e) {
+  $("#emergBtn").click( function (e) {
       e.preventDefault();
       showDT.fnReloadAjax();
       $('#emergModal').modal('show');
       $(':input:visible:enabled:first').focus();
-    });
+  });
 
-	  $("#refreshBtn").click( function (e) {
+  $("#refreshBtn").click( function (e) {
           e.preventDefault();
           showDT.fnReloadAjax();
     });
@@ -201,7 +183,7 @@ $(document).ready(function() {
           $("div#emergdiv").show();
         };
       });
-   }, 1000);
+   }, 30000);
    }); 
   
 </script>
