@@ -85,6 +85,14 @@ class ShowsController < ApplicationController
     @show = Show.find(params[:id])
     @filelist = Hash.new
 
+    @safe_title = @show.title
+    @safe_title = @safe_title.gsub(" ","_")
+    @safe_title = @safe_title.gsub("\\","")
+    @safe_title = @safe_title.gsub("'","")
+    @safe_title = @safe_title.gsub("`","")
+    @safe_title = @safe_title.gsub(";","")
+    @safe_title = @safe_title.gsub(":","")
+
     @stat_acts = 0
     @stat_music = 0
     @stat_images = 0
@@ -110,7 +118,7 @@ class ShowsController < ApplicationController
     }
 
     # what follows is a series of disgusting system calls.
-    logexec("mkdir #{Rails.root}/tmp/#{@show.id}")
+    logexec("mkdir #{Rails.root}/tmp/#{@safe_title}")
 
     @filelist.each_pair do |id,fn|
       # poor sanitization here. 
@@ -119,15 +127,16 @@ class ShowsController < ApplicationController
       fn = fn.gsub("'","")
       fn = fn.gsub("`","")
       fn = fn.gsub(";","")
+      fn = fn.gsub(":","")
 
-      logexec("cp #{UPLOADS_DIR}/#{id} #{Rails.root}/tmp/#{@show.id}/#{fn}")
+      logexec("cp #{UPLOADS_DIR}/#{id} #{Rails.root}/tmp/#{@safe_title}/#{fn}")
     end
-    logexec("cd #{Rails.root}/tmp; zip -9 -r #{@show.id}.zip #{@show.id}")
-    logexec("mv #{Rails.root}/tmp/#{@show.id}.zip #{Rails.root}/public/zips")
-    logexec("rm -rf #{Rails.root}/tmp/#{@show.id}")
+    logexec("cd #{Rails.root}/tmp; zip -9 -r #{@safe_title}.zip #{@safe_title}")
+    logexec("mv #{Rails.root}/tmp/#{@safe_title}.zip #{Rails.root}/public/zips")
+    logexec("rm -rf #{Rails.root}/tmp/#{@safe_title}")
 
-    @zipstat = File.stat("#{Rails.root}/public/zips/#{@show.id}.zip")
-    @zipfile = "/zips/#{@show.id}.zip"
+    @zipstat = File.stat("#{Rails.root}/public/zips/#{@safe_title}.zip")
+    @zipfile = "/zips/#{@safe_title}.zip"
   end
 
   # AJAX endpoint
