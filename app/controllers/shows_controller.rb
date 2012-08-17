@@ -85,8 +85,7 @@ class ShowsController < ApplicationController
     @show = Show.find(params[:id])
     @filelist = Hash.new
 
-    @safe_title = @show.title
-    @safe_title = @safe_title.gsub(" ","_")
+    @safe_title = @show.title.gsub(" ","_")
     @safe_title = @safe_title.gsub("\\","")
     @safe_title = @safe_title.gsub("'","")
     @safe_title = @safe_title.gsub("`","")
@@ -120,7 +119,11 @@ class ShowsController < ApplicationController
     # what follows is a series of disgusting system calls.
     logexec("mkdir #{Rails.root}/tmp/#{@safe_title}")
 
+    seq = 0
+
     @filelist.each_pair do |id,fn|
+      seq = seq + 1
+
       # poor sanitization here. 
       fn = fn.gsub(" ","_")
       fn = fn.gsub("\\","")
@@ -129,7 +132,7 @@ class ShowsController < ApplicationController
       fn = fn.gsub(";","")
       fn = fn.gsub(":","")
 
-      logexec("cp #{UPLOADS_DIR}/#{id} #{Rails.root}/tmp/#{@safe_title}/#{fn}")
+      logexec("cp #{UPLOADS_DIR}/#{id} #{Rails.root}/tmp/#{@safe_title}/#{sprintf("%02d",seq)}_#{fn}")
     end
     logexec("cd #{Rails.root}/tmp; zip -9 -r #{@safe_title}.zip #{@safe_title}")
     logexec("mv #{Rails.root}/tmp/#{@safe_title}.zip #{Rails.root}/public/zips")
