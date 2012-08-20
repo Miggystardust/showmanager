@@ -6,6 +6,14 @@
   background-color: #ECFFB3;
 };
 
+.emergmsg {
+    background-color: #c0c0c0;
+    position:fixed;
+    top:0;
+    width:90%;
+    z-index:100;
+}
+
 </style>
 
 <p id="notice"><%= notice %></p>
@@ -17,9 +25,17 @@
   <%= @show.show_time.strftime(SHORT_TIME_FMT) %>
 </p>
 
-<div class="alert alert-error" id="emergdiv" style="display: none;">
+<div class="alert alert-error emergmsg" id="emergdiv" style="display: none;">
 <div id="emergmsg"></div>
 </div>
+<script>
+$(window).scroll(function(e){ 
+  $el = $('.emergmsg'); 
+  if ($(this).scrollTop() > 50 && $el.css('position') != 'fixed'){ 
+    $('.emergmsg').css({'position': 'fixed', 'top': '60px', 'width': '90%'}); 
+  } 
+});
+</script>
 
 <P>
 <button class="btn btn-success btn-small" id="refreshBtn">
