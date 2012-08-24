@@ -89,7 +89,7 @@ class ActsController < ApplicationController
 
           # type 1 is the add-to-showpage which shows an add button 
           # type 2 is adminindex. which shows the owner and edit/update buttons
-          if params[:type].to_i == 2 
+          if params[:type].to_i == 2
             @actarray << [un, a.stage_name, a.short_description, a.length.to_s + " min." +  musicinfo, 
                           "<a class=\"btn btn-success\" href=\"/acts/#{a._id}/edit\" id=\"#{a._id}\"><i class=\"icon-pencil icon-white\"></i> Edit</a>&nbsp;<a class=\"btn btn-danger\" href=\"/acts/#{a._id}\" data-confirm=\"Are you sure?\" data-method=\"delete\" rel=\"nofollow\"><i class=\"icon-remove icon-white\"></i> Delete</a>",
                          ]

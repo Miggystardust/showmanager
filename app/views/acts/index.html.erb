@@ -13,28 +13,39 @@
 
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="actslist">
 <thead>
-<tr>
   <th>Owner</th>
   <th>Stage Name</th>
   <th>Short Description</th>
   <th>Music?</th>
   <th>Actions</th>
-</tr>
 </thead>
 <tbody>
 <!-- data -->
 </tbody>
 </table>
+</div>
 <br />
 
 <script>
+
 /* set up acts datatable */
+$.extend( $.fn.dataTableExt.oStdClasses, {
+  "sSortAsc": "header headerSortDown",
+  "sSortDesc": "header headerSortUp",
+  "sSortable": "header"
+} );
+
+$.extend( $.fn.dataTableExt.oStdClasses, {
+  "sWrapper": "dataTables_wrapper form-inline"
+} );
+
 $(document).ready(function() {
+
   actsDT = $('#actslist').dataTable( {
       "sDom": "<'row'<'span6'l><'span12'f>r>t<'row'<'span12'i><'span12'p>>",
       "sAjaxSource": "/acts/adminindex.json?type=2",
-      "sPagination": "bootstrap",
-      "iDisplayLength": 5,
+      "sPaginationType": "bootstrap",
+      "iDisplayLength": 10,
       "oLanguage": {
       "sLengthMenu": "Show&nbsp;<select size=1 name=actslist_length aria-controls=\"actslist\"><option value='5'>5</option><option \
 value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;records per page"
@@ -49,6 +60,15 @@ value='10'>10</option><option value='15'>15</option><option value='30'>30</optio
             }})
           }
   });
+
+  var fixHelper = function(e, ui) {
+    ui.children().each(function() {
+        $(this).width($(this).width());
+      });
+    return ui;
+  };
+
+
 });
 
 </script>
