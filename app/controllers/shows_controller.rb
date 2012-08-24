@@ -13,7 +13,14 @@ class ShowsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @shows }
+      format.json { 
+        # drive datatables  
+        @showarray = []
+        @shows.each { |show|
+            @showarray << [show.title, show.venue, show.door_time.strftime(SHORT_TIME_FMT), show.show_time.strftime(SHORT_TIME_FMT),show.id]
+        }          
+        render json: { 'aaData' => @showarray }
+      }
     end
   end
 
