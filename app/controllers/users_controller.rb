@@ -4,7 +4,18 @@ class UsersController < ApplicationController
   def index
     if current_user.try(:admin?) 
       @users = User.all
-      render :index
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { 
+          # drive datatables  
+          @usersarray = []
+          @users.each { |user|
+            @usersarray << [user.username, user.email, user.phone_number, user.last_sign_in_at.strftime(SHORT_TIME_FMT), user.provider, user.admin, user.id]
+          }          
+          render json: { 'aaData' => @usersarray }
+        }
+      end
+
     else 
       flash[:error] = "You must be an administrator to use that function."
       redirect_to "/"

@@ -1,21 +1,79 @@
 <h1>Users</h1>
-<TABLE CLASS="table table-striped">
-<TR>
-<TH>Username</TH>
-<TH>Email</TH>
-<TH>Phone</TH>
-<TH>Last Login</TH>
-<TH>Provider</TH>
-<TH>Admin?</TH>
-</TR>
-<% @users.each do |user| %>
-<TR>
-  <TD><%= link_to user.name, user %></TD>
-  <TD><%= user.email %></TD>
-  <TD><%= user.phone_number %></TD>
-  <TD><%= user.last_sign_in_at %></TD>
-  <TD><%= user.provider != "" ? user.provider : "local" %></TD>
-  <TD><%= user.admin %></TD>
-</TR>
-<% end %>
-</TABLE>
+
+<% if @users.length == 0 -%>
+There are no shows on file. Create one. 
+
+<% else %>
+<div id="usersTable">
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="userslist">
+<thead>
+  <tr>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Last Login</th>
+    <th>Provider</th>
+    <th>Admin?</th>
+    <th>Actions</th>
+  </tr>
+</thead>
+<tbody>
+<!-- data -->
+</tbody>
+</table>
+</div>
+
+<script>
+$.extend( $.fn.dataTableExt.oStdClasses, {
+  "sSortAsc": "header headerSortDown",
+  "sSortDesc": "header headerSortUp",
+  "sSortable": "header"
+} );
+
+$.extend( $.fn.dataTableExt.oStdClasses, {
+  "sWrapper": "dataTables_wrapper form-inline"
+} );
+
+$(document).ready(function() {
+  usersDT = $('#userslist').dataTable( {
+      "sDom": "<'row'<'span6'l><'span12'f>r>t<'row'<'span12'i><'span12'p>>",
+      "sAjaxSource": "/users.json",
+      "sPaginationType": "bootstrap",
+      "iDisplayLength": 30,
+      "oLanguage": {
+      "sLengthMenu": "Show&nbsp;<select size=1 name=actslist_length aria-controls=\"actslist\"><option value='5'>5</option><option \
+value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;records per page"
+    },
+     "fnServerData": function ( sSource, aoData, fnCallback ) {
+        $.ajax({'datatype':'json',
+                'type':'GET',
+                'url':sSource,
+                'data':aoData,
+                'success':function(json) {
+                   fnCallback(json);
+            }})
+     },
+     "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+      var id = $('td:eq(6)',nRow).html();
+      var content = $('td:eq(6)',nRow).html();
+      console.log(content);
+      if (content.indexOf("btn") == -1) { 
+        $('td:eq(6)', nRow).html('&nbsp;<a class="btn btn-primary btn-mini" href="/users/' + id + '"><i class="icon-white icon-eye-open"></i> Show</a>' +
+        '&nbsp;<a class="btn btn-danger btn-mini" href="/users/' + id + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="icon-remove icon-white"></i> Delete</a>');
+     }
+     }
+  });
+
+  var fixHelper = function(e, ui) {
+    ui.children().each(function() {
+        $(this).width($(this).width());
+      });
+    return ui;
+  };
+
+
+});
+
+</script>
+
+<% end -%>
