@@ -26,3 +26,5 @@ gem "omniauth-facebook"
 
 gem "newrelic_rpm"
 
+gem "cancan"
+

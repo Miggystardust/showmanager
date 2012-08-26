@@ -8,7 +8,10 @@ class User
          
   has_many :acts
   has_many :passets
-  
+
+  # Role-Based Access Control
+  references_and_referenced_in_many :roles
+
   ## Database authenticatable
   field :email,              :type => String, :default => ""
   field :encrypted_password, :type => String, :default => ""
@@ -62,7 +65,16 @@ class User
   validates_presence_of :username
   
   attr_accessible :name, :username, :email, :password, :password_confirmation, :remember_me, :uid, :provider
-  attr_protected :admin
+  attr_protected :admin, :roles
+
+  def has_role?(role_sym)
+    roles.each { |r| 
+      if r.name.underscore.to_sym == role_sym
+        return true
+      end
+    }
+    false
+  end
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     logger.debug("find for fb :provider => #{auth.provider}, :uid => #{auth.uid}")

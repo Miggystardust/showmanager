@@ -2,6 +2,7 @@ class ActsController < ApplicationController
   include ApplicationHelper
 
   protect_from_forgery
+#  load_and_authorize_resource
 
   before_filter :authenticate_user!
   before_filter :set_cache_buster
@@ -48,22 +49,12 @@ class ActsController < ApplicationController
   # GET /acts
   # GET /acts.json
   def index
-    @acts = current_user.acts.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @acts }
+    if current_user.admin
+      @acts = Act.all
+      @showowner = true
+    else
+      @acts = current_user.acts.all
     end
-  end
-
-  def adminindex
-    if current_user.try(:admin?) == false
-      flash[:error] = "You must be an administrator to do that."
-      redirect_to :index
-    end
-    
-    @acts = Act.all
-    @showowner = true
       
     respond_to do |format|
       format.html { render :action => "index" }
@@ -75,7 +66,7 @@ class ActsController < ApplicationController
           un = "<font color=#ff0000>Deleted User</font>"
 
           if a.user != nil
-            un = a.user.name
+            un = a.user.name + "<br>" + a.user.email
           end
 
           # get asset details if any
@@ -87,8 +78,9 @@ class ActsController < ApplicationController
             end
           end
 
+          # TODO: REFACTOR
           # type 1 is the add-to-showpage which shows an add button 
-          # type 2 is adminindex. which shows the owner and edit/update buttons
+          # type 2 is standard index. which shows the owner and edit/update buttons
           if params[:type].to_i == 2
             @actarray << [un, a.stage_name, a.short_description, a.length.to_s + " min." +  musicinfo, 
                           "<a class=\"btn btn-success\" href=\"/acts/#{a._id}/edit\" id=\"#{a._id}\"><i class=\"icon-pencil icon-white\"></i> Edit</a>&nbsp;<a class=\"btn btn-danger\" href=\"/acts/#{a._id}\" data-confirm=\"Are you sure?\" data-method=\"delete\" rel=\"nofollow\"><i class=\"icon-remove icon-white\"></i> Delete</a>",
