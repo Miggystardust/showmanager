@@ -17,20 +17,22 @@ Configuring a webserver to work with Rails is beyond the scope of this
 documentation. You should consult the appropriate sites and Phusion
 Passenger documentation.
 
-Creating Admins
+Initialization
 ===============
 
-To make someone an admin, start the rails console, then:
-
-```ruby
-
-u = User.where(email: 'you@example.com')[0]
-u.admin = true
-u.save!
+Because we're using roles, we need to seed the database before we can 
+start. do:
 
 ```
+   export RAILS_ENV=production
+   rake db:seed
+```
 
-Obviously, you'll need one of these.
+NOTE: running rake db:seed will DROP THE DATABASE, so never run this
+task against a production system.
+
+It will also generate a random 8 character password and an admin account
+which you can use to set things up.
 
 Public Domain Dedication
 ========================
