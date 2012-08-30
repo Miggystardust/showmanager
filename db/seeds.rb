@@ -5,10 +5,30 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-puts 'EMPTY THE MONGODB DATABASE'
+
+def random_password(size = 8)
+  chars = (('a'..'z').to_a + ('0'..'9').to_a) - %w(i o 0 1 l 0)
+  (1..size).collect{|a| chars[rand(chars.size)] }.join
+end
+
+puts 'Empty MongoDB...'
+
 Mongoid.master.collections.reject { |c| c.name =~ /^system/}.each(&:drop)
-puts 'SETTING UP DEFAULT USER LOGIN'
-user = User.create! :name => 'First User', :email => 'user@example.com', :password => 'please', :password_confirmation => 'please'
-puts 'New user created: ' << user.name
-user2 = User.create! :name => 'Second User', :email => 'user2@example.com', :password => 'please', :password_confirmation => 'please'
-puts 'New user created: ' << user2.name
+
+puts 'Configure Roles...'
+
+r = Role.create! :name => 'admin', :description => "Full Admin Access"
+r1 = Role.create! :name => 'stage_manager', :description => "All Access except User edits and Passet Edit"
+r2 = Role.create! :name => 'crew', :description => "Read Only Show Access"
+
+puts 'Create Admin User...'
+password = random_password(8)
+
+user = User.create! :username => 'admin', :name => 'Admin User', :email => 'admin@example.com', :password => password, :password_confirmation => password
+
+# have to set these seperately because of mass-assignment protection
+user.admin = true
+user.roles << r1
+user.save!
+
+puts "New Admin user created: email: #{user.email} p: #{user.password}"
