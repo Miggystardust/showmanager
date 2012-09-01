@@ -129,8 +129,10 @@ class ActsController < ApplicationController
     @act.length = sec_to_mmss(@act.length)
     @return_to=""
 
-    if params[:return_to].match(/\A[0-9a-f]+\z/) 
-      @return_to = params[:return_to]
+    if params[:return_to]
+      if params[:return_to].match(/\A[0-9a-f]+\z/) 
+        @return_to = params[:return_to]
+      end
     end
   end
 
@@ -160,26 +162,25 @@ class ActsController < ApplicationController
   def update
     @act = Act.find(params[:id])
 
+    if params[:return_to] 
+      if params[:return_to].match(/\A[0-9a-f]+\z/)
+        @return_to = params[:return_to]
+      end
+    end
+
     respond_to do |format|
       if @act.update_attributes(params[:act])
         format.html { 
-          if params[:return_to] != ""
-            if params[:return_to].match(/\A[0-9a-f]+\z/)
-              redirect_to "/shows/#{params[:return_to]}/edit", notice: 'Act was successfully updated.'
-              return
-            end
+          if @return_to
+            redirect_to "/shows/#{@return_to}/edit", notice: 'Act was successfully updated.'
+            return
           end
           redirect_to "/acts/", notice: 'Act was successfully updated.'
         }
 
         format.json { head :no_content }
       else
-        format.html { 
-          if params[:return_to].match(/\A[0-9a-f]+\z/) 
-            @return_to = params[:return_to]
-          end
-          render action: "edit"
-        }
+        format.html { render action: "edit" }
         format.json { render json: @act.errors, status: :unprocessable_entity }
       end
     end
