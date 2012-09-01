@@ -144,6 +144,7 @@ If you change your mind, update the system! </p>
 <div class="control-group">
   <div class="controls">
 	<% if @act.id != nil %>
+    <INPUT TYPE="HIDDEN" NAME="return_to" VALUE="<%=@return_to%>">
     <%= f.submit "Update Act", :class => "btn-primary" %>
 	<% else %>
     <%= f.submit "Create Act", :class => "btn-primary" %>

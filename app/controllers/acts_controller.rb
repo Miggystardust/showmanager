@@ -127,7 +127,11 @@ class ActsController < ApplicationController
     end
 
     @act.length = sec_to_mmss(@act.length)
-    
+    @return_to=""
+
+    if params[:return_to].match(/\A[0-9a-f]+\z/) 
+      @return_to = params[:return_to]
+    end
   end
 
   # POST /acts
@@ -158,10 +162,24 @@ class ActsController < ApplicationController
 
     respond_to do |format|
       if @act.update_attributes(params[:act])
-        format.html { redirect_to "/acts/", notice: 'Act was successfully updated.' }
+        format.html { 
+          if params[:return_to] != ""
+            if params[:return_to].match(/\A[0-9a-f]+\z/)
+              redirect_to "/shows/#{params[:return_to]}/edit", notice: 'Act was successfully updated.'
+              return
+            end
+          end
+          redirect_to "/acts/", notice: 'Act was successfully updated.'
+        }
+
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { 
+          if params[:return_to].match(/\A[0-9a-f]+\z/) 
+            @return_to = params[:return_to]
+          end
+          render action: "edit"
+        }
         format.json { render json: @act.errors, status: :unprocessable_entity }
       end
     end

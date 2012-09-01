@@ -185,7 +185,7 @@ $(document).ready(function() {
 
        if ($(this).attr("class").indexOf("editact") != -1) { 
          var clicked_id = $(this).attr("id");
-         window.location.href="/acts/" + clicked_id + "/edit";
+         window.location.href="/acts/" + clicked_id + "/edit?return_to=<%=@show.id%>";
        }
 
        if ($(this).attr("class").indexOf("editduration") != -1) { 
