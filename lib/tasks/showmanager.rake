@@ -1,7 +1,6 @@
-# repair durations in the database
 namespace :showmanager do
-  desc "Repair the DB"
-  task :durfix do
+  task :durfix => :environment do
+    # repair durations in the database
     acts=Act.find(:all)
     acts.each { |a| 
       a.length = a.length * 60
@@ -16,4 +15,5 @@ namespace :showmanager do
         s.save!
       end
     }
+  end
 end
