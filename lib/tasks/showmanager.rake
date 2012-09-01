@@ -4,7 +4,7 @@ namespace :showmanager do
   task :durfix do
     acts=Act.find(:all)
     acts.each { |a| 
-      a. length = a.length * 60
+      a.length = a.length * 60
       a.save!
     }  
   

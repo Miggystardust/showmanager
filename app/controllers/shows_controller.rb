@@ -1,6 +1,8 @@
 class ShowsController < ApplicationController
   protect_from_forgery
 
+  include ApplicationHelper
+
   before_filter :authenticate_user!
   before_filter do 
      redirect_to :new_user_session_path unless current_user && current_user.admin?
@@ -250,7 +252,7 @@ class ShowsController < ApplicationController
 
               @si << { "DT_RowId" => s._id,
                 "0" => s.seq,
-                "1" => "#{itemtime.strftime("%l:%M %P")}<BR>+#{s.duration} min",
+                "1" => "#{itemtime.strftime("%l:%M %P")}<BR>+#{sec_to_time(s.duration.to_i)}",
                 "2" => actinfo,
                 "3" => sound,
                 "4" => stage,
@@ -259,7 +261,7 @@ class ShowsController < ApplicationController
               }
               
               if s.duration != nil
-                  itemtime = itemtime + (s.duration * 60)
+                  itemtime = itemtime + s.duration.to_i
               end
             end
 
@@ -267,7 +269,7 @@ class ShowsController < ApplicationController
             # note
             @si << { "DT_RowId" => s._id,
               "0" => s.seq,
-              "1" => "#{itemtime.strftime("%l:%M %P")}<BR>+#{s.duration} min",
+              "1" => "#{itemtime.strftime("%l:%M %P")}<BR>+#{sec_to_time(s.duration.to_i)}",
               "2" => "--",
               "3" => "--",
               "4" => "--",
@@ -276,7 +278,7 @@ class ShowsController < ApplicationController
             }
             
             if s.duration != nil
-                itemtime = itemtime + (s.duration * 60)
+                itemtime = itemtime + s.duration
             end
           end
 

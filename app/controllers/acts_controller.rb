@@ -7,7 +7,7 @@ class ActsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_cache_buster
   before_filter :build_user_selects, :except => [ :destroy ]
-      
+  
   def build_user_selects
     # we build this every pass because we use them in most operations
     @user_imgs = [['None',0]]
@@ -74,19 +74,19 @@ class ActsController < ApplicationController
           if a.music != '0' and a.music != '1' and a.music != nil
             p = Passet.where(_id:a.music)[0]
             if p != nil
-              musicinfo = "<BR><I>#{p.song_artist} - #{p.song_title} (#{sec_to_time(p.song_length)})</I>"
+              musicinfo = "<BR><I>#{p.song_artist} - #{p.song_title} (#{sec_to_mmss(p.song_length)})</I>"
             end
           end
 
-          # TODO: REFACTOR
+          # TODO: REFACTOR, move the button code to the view.
           # type 1 is the add-to-showpage which shows an add button 
           # type 2 is standard index. which shows the owner and edit/update buttons
           if params[:type].to_i == 2
-            @actarray << [un, a.stage_name, a.short_description, a.length.to_s + " min." +  musicinfo, 
+            @actarray << [un, a.stage_name, a.short_description + " (" + sec_to_time(a.length) + ")", musicinfo, 
                           "<a class=\"btn btn-success\" href=\"/acts/#{a._id}/edit\" id=\"#{a._id}\"><i class=\"icon-pencil icon-white\"></i> Edit</a>&nbsp;<a class=\"btn btn-danger\" href=\"/acts/#{a._id}\" data-confirm=\"Are you sure?\" data-method=\"delete\" rel=\"nofollow\"><i class=\"icon-remove icon-white\"></i> Delete</a>",
                          ]
           else
-            @actarray << [un, a.stage_name, a.short_description, a.length.to_s + " min." +  musicinfo, "<button class=\"btn btn-success actadder\" id=\"#{a._id}\"><i class=\"icon-plus icon-white\"></i> Add</button>"]
+            @actarray << [un, a.stage_name, a.short_description + " (" + sec_to_time(a.length) + ")", musicinfo, "<button class=\"btn btn-success actadder\" id=\"#{a._id}\"><i class=\"icon-plus icon-white\"></i> Add</button>"]
           end
         }
         render json: { 'aaData' => @actarray }
@@ -125,6 +125,8 @@ class ActsController < ApplicationController
       flash[:error] = "You don't own that Act."
       redirect_to "/acts/"
     end
+
+    @act.length = sec_to_mmss(@act.length)
     
   end
 

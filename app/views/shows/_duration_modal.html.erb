@@ -6,9 +6,12 @@
 
   <%= form_for @show_item, :html => { :class => "form-horiziontal" } do |f| -%>
   <div class='modal-body'>
+    <div class="alert alert-danger" style='display: none' id='durflash'>
+      Length must be in the form MM:SS
+    </div>
     <div class="control-group">
       <input type="hidden" name="show_item_id" id="show_item_id">
-      <%= f.label :duration, "Length (in Minutes)", :class=>"control-label" %>
+      <%= f.label :duration, "New Length (in the form MM:SS)", :class=>"control-label" %>
       <div class="controls">
         <%= f.text_field :duration, :class=>"input-xlarge" %>
       </div>
@@ -35,6 +38,7 @@
         });
 
       });
+
       // remove the event listeners when the dialog is hidden
       $("#durationModal").bind("hide", function() {
           // remove event listeners on the buttons
@@ -48,14 +52,35 @@
       });
 
       $('#duration-modal-submit').on('click', function(e){
-      // We don't want this to act as a link so cancel the link action
         e.preventDefault();
 
-        $("#durationModal").modal('hide');
+        dur = show_item_duration[1].value
+        durm = -1
+        durs = -1
 
+        if (dur.indexOf(":") > -1) {
+          dpart = dur.split(":");
+          durm_i = parseInt(dpart[0]);
+          durs_i = parseInt(dpart[1]);
+
+          if ((durs_i >= 0) && (durs_i <= 59)) { 
+            durm = durm_i; 
+            durs = durs_i;
+          }
+        }
+
+        if ((durm == -1) || (durs == -1)) { 
+          $("#durflash").show();
+          return;
+        }
+
+        // passed validations
+        $("#durflash").modal('hide');
+        $("#durationModal").modal('hide');
+  
         var sidata = {
           "authenticity_token" : AUTH_TOKEN,
-          'duration': show_item_duration[1].value
+          "duration":  (durm * 60) + durs,
         };
 
         console.log(sidata);

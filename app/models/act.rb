@@ -6,8 +6,9 @@
    belongs_to :user
    has_many :passets
 
+   before_validation :length_to_seconds
+
    validates_presence_of :stage_name, :short_description, :length
-   validates_numericality_of :length
    
    field :stage_name, :type => String
    field :names_of_performers, :type => String
@@ -26,6 +27,16 @@
    field :mc_intro, :type => String
    field :run_through, :type => String
    field :extra_notes, :type => String
+
+   def length_s
+     if self.length == nil
+       "00:00"
+     else
+       m = (self.length/60).floor
+       s = self.length % 60 
+       sprintf("%d:%2d",m,s)
+     end
+   end
 
    def music_s
      if self.music == nil
@@ -62,6 +73,32 @@
        else
          return "Asset not found"
        end
+     end
+   end
+
+   def length_to_seconds
+     if self.length == nil 
+       # we'll let rails complain about this for us. 
+       return
+     end
+
+     if self.length.is_a?(Fixnum)
+       return
+     end
+
+     if self.length.match(/\A\d+:\d+\z/)
+       p = self.length.split(":")
+
+       if p[1].to_i > 59
+         errors.add(:act,"Length must be in the form MM:SS")
+         return
+       end
+
+       t = (p[0].to_i * 60) + p[1].to_i
+
+       self.length = t
+     else 
+       errors.add(:act,"Length must be in the form MM:SS")
      end
    end
 

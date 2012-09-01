@@ -23,7 +23,7 @@ class ShowItem
   #   else 
   #     this is a note, use the duration from here
   #
-  field :duration, :type => Integer
+  field :duration, :type => Integer    # in seconds
 
   # not used yet... 
   field :time, :type => Time
