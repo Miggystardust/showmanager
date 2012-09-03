@@ -19,7 +19,7 @@ module ApplicationHelper
   def bytes_to_bp(sz)
     # return a file size in binary prefix notation, SI units
     bprefix = Array.new
-    
+
     bprefix[0] = "KiBi"
     bprefix[1] = "MiBi"
     bprefix[2] = "GiBi"
@@ -28,7 +28,7 @@ module ApplicationHelper
     bprefix[5] = "EiBi"
     bprefix[6] = "ZiBi"
     bprefix[7] = "YiBi"
-    
+
     i = 1
     bprefix.each{ |k|
       v = 1024 ** i

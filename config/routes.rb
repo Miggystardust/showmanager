@@ -2,7 +2,7 @@ Rails3MongoidDevise::Application.routes.draw do
   authenticated :user do
     root :to => 'home#index'
   end
-  
+
   root :to => "home#index"
 
   devise_scope :user do
@@ -23,11 +23,11 @@ Rails3MongoidDevise::Application.routes.draw do
     :action => "update";
 
   post "/passets/new",
-    :controller => "passets", 
+    :controller => "passets",
     :action => "create";
 
   post "/acts/new",
-    :controller => "acts", 
+    :controller => "acts",
     :action => "create";
 
   resources :acts do
@@ -35,18 +35,18 @@ Rails3MongoidDevise::Application.routes.draw do
       get :adminindex
     end
   end
-  
-  resources :passets do 
+
+  resources :passets do
    collection do
      get :search
      get :adminindex
    end
   end
 
-  resources :shows do 
+  resources :shows do
    member do
-      get 'perfindex' 
-      get 'items' 
+      get 'perfindex'
+      get 'items'
       get 'show_items'
       get 'download'
    end
@@ -54,10 +54,10 @@ Rails3MongoidDevise::Application.routes.draw do
 
   resources :show_items
 
-  # this is a non-standard endpoint thanks to 
+  # this is a non-standard endpoint thanks to
   # datatables
 
-  post "/show_items/update_seq", 
+  post "/show_items/update_seq",
     :controller => "show_items",
     :action => "update_seq"
 

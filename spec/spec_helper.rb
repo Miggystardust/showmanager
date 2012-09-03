@@ -5,7 +5,7 @@ require 'rspec/rails'
 require 'email_spec'
 require 'rspec/autorun'
 
-Devise.stretches = 1 
+Devise.stretches = 1
 #Rails.logger.level = 4
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -34,7 +34,7 @@ RSpec.configure do |config|
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
-  config.infer_base_class_for_anonymous_controllers = false  
+  config.infer_base_class_for_anonymous_controllers = false
 
   # Clean up the database
   require 'database_cleaner'

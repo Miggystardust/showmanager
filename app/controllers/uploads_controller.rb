@@ -1,4 +1,4 @@
-class UploadsController < ApplicationController 
+class UploadsController < ApplicationController
   protect_from_forgery
 
   before_filter :authenticate_user!
@@ -13,5 +13,5 @@ class UploadsController < ApplicationController
         send_file "#{UPLOADS_DIR}/#{@p.uuid}", :type => @p.kind
       end
   end
-  
+
 end

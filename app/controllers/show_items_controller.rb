@@ -1,6 +1,6 @@
 class ShowItemsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter do 
+  before_filter do
      redirect_to :new_user_session_path unless current_user && current_user.admin?
   end
 
@@ -48,24 +48,24 @@ class ShowItemsController < ApplicationController
       render :text => "Not Modified",:status => 304
       return
     end
-    
+
     if is_numeric?(params[:fromPosition]) == false or is_numeric?(params[:toPosition]) == false or params[:id] == ""
       render :text => "Invalid Request",:status => 400
       return
     end
-    
+
     @item = ShowItem.find(params[:id])
     if @item == nil
       headers['Status'] = 404
       render :text => "Show Item Not Found",:status => 404
       return
     end
-    
+
     from_id = nil
     to_id = nil
 
     @items = ShowItem.where(show_id: @item.show_id)
-    @items.each { |i| 
+    @items.each { |i|
       if i.seq.to_i == params[:toPosition].to_i
           to_id = i
       end
@@ -73,19 +73,19 @@ class ShowItemsController < ApplicationController
           from_id = i
       end
     }
-    
+
     if from_id != nil and to_id != nil
       to_id.seq = params[:fromPosition].to_i
       to_id.save!
       from_id.seq = params[:toPosition].to_i
       from_id.save!
-    else 
+    else
       render :text => "Not Found - f:#{from_id} t:#{to_id} sid:#{@item.show_id} pf:#{params[:toPosition]} pt: #{params[:fromPosition]}", :status => 404
       return
     end
 
     render :text => "Ok",:status => 200
-    
+
   end
 
   # POST /show_items
@@ -97,8 +97,7 @@ class ShowItemsController < ApplicationController
     seq = 0
     @show_items = ShowItem.where(show_id: params[:show_id])
     if @show_items
-      @show_items.each { |s| 
-        logger.debug("found show")
+      @show_items.each { |s|
         if s.seq > seq
           seq = s.seq
         end
@@ -154,9 +153,9 @@ class ShowItemsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   private
-  
+
   def is_numeric?(s)
     s.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
   end

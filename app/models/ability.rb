@@ -15,7 +15,7 @@ class Ability
   #   can :update, Article, :published => true
   #
   # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
-  
+
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     #

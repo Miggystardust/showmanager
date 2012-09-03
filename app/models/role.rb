@@ -9,4 +9,4 @@ class Role
   references_and_referenced_in_many :users
 end
 
-  
+

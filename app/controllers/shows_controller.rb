@@ -4,10 +4,10 @@ class ShowsController < ApplicationController
   include ApplicationHelper
 
   before_filter :authenticate_user!
-  before_filter do 
+  before_filter do
      redirect_to :new_user_session_path unless current_user && current_user.admin?
   end
-   
+
   # GET /shows
   # GET /shows.json
   def index
@@ -15,12 +15,12 @@ class ShowsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { 
-        # drive datatables  
+      format.json {
+        # drive datatables
         @showarray = []
         @shows.each { |show|
             @showarray << [show.title, show.venue, show.door_time.strftime(SHORT_TIME_FMT), show.show_time.strftime(SHORT_TIME_FMT),show.id]
-        }          
+        }
         render json: { 'aaData' => @showarray }
       }
     end
@@ -37,7 +37,7 @@ class ShowsController < ApplicationController
     @show_items.each{ |si|
       act = nil
       if si.kind != 0
-        # this is an asset. 
+        # this is an asset.
         if si.act_id != 0
           act = Act.find(si.act_id)
         end
@@ -50,7 +50,7 @@ class ShowsController < ApplicationController
   # GET /shows/1.json
   def show
     @show = Show.find(params[:id])
-    @show_items = ShowItem.where(show_id: params[:id]) 
+    @show_items = ShowItem.where(show_id: params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -72,7 +72,7 @@ class ShowsController < ApplicationController
   # GET /shows/1/edit
   def edit
     @show = Show.find(params[:id])
-    @show_items = ShowItem.where(show_id: params[:id]) 
+    @show_items = ShowItem.where(show_id: params[:id])
 
     # we keep one of these in reserve for the modal if it's needed.
     @show_item = ShowItem.new
@@ -89,7 +89,7 @@ class ShowsController < ApplicationController
   end
 
   def download
-    # create a zip file of an entire show. 
+    # create a zip file of an entire show.
     @show_items = ShowItem.where(show_id: params[:id]).asc(:seq)
     @show = Show.find(params[:id])
     @filelist = Hash.new
@@ -105,10 +105,10 @@ class ShowsController < ApplicationController
     @stat_music = 0
     @stat_images = 0
 
-    @show_items.each { |s| 
-      begin 
+    @show_items.each { |s|
+      begin
         a = Act.find(s.act_id)
-        if a 
+        if a
           @stat_acts += 1
 
           p = Passet.find(a.music)
@@ -133,7 +133,7 @@ class ShowsController < ApplicationController
     @filelist.each_pair do |id,fn|
       seq = seq + 1
 
-      # poor sanitization here. 
+      # poor sanitization here.
       fn = fn.gsub(" ","_")
       fn = fn.gsub("\\","")
       fn = fn.gsub("'","")
@@ -155,11 +155,11 @@ class ShowsController < ApplicationController
   def show_items
     @show_items = ShowItem.where(show_id: params[:id]).asc(:seq)
     @show = Show.find(params[:id])
-    
+
     itemtime = @show.door_time
     respond_to do |format|
       format.html { render :action => "index" }
-      format.json { 
+      format.json {
         # this format drives the show display index
         @si = []
         @show_items.each { |s|
@@ -171,25 +171,25 @@ class ShowsController < ApplicationController
 
           if params[:m] == nil
             removeme = "<button class=\"btn btn-danger btn-mini siremove\" id=\"#{s._id}\"><i class=\"icon-minus icon-white\"></i> Remove</button>&nbsp;"
-            editact = "<button class=\"btn btn-success btn-mini editact\" id=\"#{s.act_id}\"><i class=\"icon-pencil icon-white\"></i> Edit</button>&nbsp;" 
-            editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s._id}\"><i class=\"icon-time icon-white\"></i> Length</button>&nbsp;" 
-          else 
+            editact = "<button class=\"btn btn-success btn-mini editact\" id=\"#{s.act_id}\"><i class=\"icon-pencil icon-white\"></i> Edit</button>&nbsp;"
+            editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s._id}\"><i class=\"icon-time icon-white\"></i> Length</button>&nbsp;"
+          else
             if s.id.to_s == @show.highlighted_row.to_s
-              markact = "<button class=\"btn btn-info btn-mini unmarkitem\" id=\"#{s._id}\"><i class=\"icon-ban-circle icon-white\"></i> Unmark</button>&nbsp;" 
+              markact = "<button class=\"btn btn-info btn-mini unmarkitem\" id=\"#{s._id}\"><i class=\"icon-ban-circle icon-white\"></i> Unmark</button>&nbsp;"
             else
-              markact = "<button class=\"btn btn-info btn-mini markitem\" id=\"#{s._id}\"><i class=\"icon-flag icon-white\"></i> Mark</button>&nbsp;" 
+              markact = "<button class=\"btn btn-info btn-mini markitem\" id=\"#{s._id}\"><i class=\"icon-flag icon-white\"></i> Mark</button>&nbsp;"
             end
           end
 
           # seq, time, act data, sound, light+stage, notes
           if s.kind != 0
-            # this is an asset. 
+            # this is an asset.
             if s.act_id != 0
               act = Act.find(s.act_id)
             end
-            
+
             if act == nil
-              # something is seriously wrong. 
+              # something is seriously wrong.
               actinfo = "<B>Cannot find Act ID #{s.act_id}, record #{s._id}</B>"
               @si << [s.seq,s.time,'--',0,'--','--',actinfo,'']
             else
@@ -197,7 +197,7 @@ class ShowsController < ApplicationController
 
               sound = ""
               if act.music != ""
-                if act.music != 0 
+                if act.music != 0
                   p = Passet.where(_id:act.music)[0]
                   if p
                     if p.song_artist != ""
@@ -221,31 +221,31 @@ class ShowsController < ApplicationController
               else
                 sound = sound + "<B>CUE:</B> #{act.sound_cue}"
               end
-              
+
               # build the stage instructions from all the fields
               stage = ""
-              
+
               if act.mc_intro != ""
                 stage += "<B>MC INTRO:</B> #{act.mc_intro}<BR>"
               end
-              
+
               if act.image != "" and act.image != '0'
                 p = Passet.where(_id:act.image)[0]
                 if p
                   stage += "<B>IMAGE:</B> #{p.filename}<BR>"
                 else
                   stage += "<B>IMAGE:</B> <font color=\"#ff0000\">Image not on file</font><BR>"
-                end                
+                end
               end
-              
+
               if act.lighting_info != ""
                 stage += "<B>LIGHTS:</B> #{act.lighting_info}<BR>"
               end
-              
+
               if act.prop_placement != ""
                 stage += "<B>STAGE:</B> #{act.prop_placement}<BR>"
               end
-              
+
               if act.clean_up != ""
                 stage += "<B>CLEANUP:</B> #{act.clean_up}<BR>"
               end
@@ -259,7 +259,7 @@ class ShowsController < ApplicationController
                 "5" => act.extra_notes,
                 "6" => removeme + editact + editdur + markact
               }
-              
+
               if s.duration != nil
                   itemtime = itemtime + s.duration.to_i
               end
@@ -276,7 +276,7 @@ class ShowsController < ApplicationController
               "5" => "<B>" + s.note + "</B>",
               "6" => removeme + editdur + markact
             }
-            
+
             if s.duration != nil
                 itemtime = itemtime + s.duration
             end
@@ -312,7 +312,7 @@ class ShowsController < ApplicationController
   # PUT /shows/1.json
   def update
     @show = Show.find(params[:id])
-    @show_items = ShowItem.where(show_id: params[:id]) 
+    @show_items = ShowItem.where(show_id: params[:id])
     @show_item = ShowItem.new
 
     respond_to do |format|

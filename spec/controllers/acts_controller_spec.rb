@@ -37,7 +37,7 @@ describe ActsController do
       :short_description => 'Binky\'s act'
     }
   end
-  
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ActsController. Be sure to keep this updated too.
@@ -167,7 +167,7 @@ describe ActsController do
 
     it "redirects to the acts list" do
       act = Act.create! valid_attributes
-      delete :destroy, {:id => act._id } 
+      delete :destroy, {:id => act._id }
       response.should redirect_to(acts_url)
     end
   end

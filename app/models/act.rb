@@ -9,7 +9,7 @@
    before_validation :length_to_seconds
 
    validates_presence_of :stage_name, :short_description, :length
-   
+
    field :stage_name, :type => String
    field :names_of_performers, :type => String
    field :contact_phone_number, :type => String
@@ -17,8 +17,8 @@
    field :short_description, :type => String
 
    field :music, :type => String
-   field :image, :type => String # image or video... 
-   
+   field :image, :type => String # image or video...
+
    field :sound_cue, :type => String
    field :prop_placement, :type => String
 
@@ -33,7 +33,7 @@
        "00:00"
      else
        m = (self.length/60).floor
-       s = self.length % 60 
+       s = self.length % 60
        sprintf("%d:%2d",m,s)
      end
    end
@@ -68,7 +68,7 @@
        end
 
        p = Passet.find(self.image)
-       if p 
+       if p
          return p.filename
        else
          return "Asset not found"
@@ -77,8 +77,8 @@
    end
 
    def length_to_seconds
-     if self.length == nil 
-       # we'll let rails complain about this for us. 
+     if self.length == nil
+       # we'll let rails complain about this for us.
        return
      end
 
@@ -97,7 +97,7 @@
        t = (p[0].to_i * 60) + p[1].to_i
 
        self.length = t
-     else 
+     else
        errors.add(:act,"Length must be in the form MM:SS")
      end
    end

@@ -1,5 +1,5 @@
 class Passet
-   # individual assets assigned to a user 
+   # individual assets assigned to a user
    include Mongoid::Document
 
    belongs_to :user
@@ -35,12 +35,12 @@ class Passet
      logger.debug("#{UPLOADS_DIR}/#{uuid} ---> #{image_path(w,h)} thumbnail create")
      ImageTools.thumbnail("#{UPLOADS_DIR}/#{uuid}", image_path(w,h), w.to_i, h.to_i)
    end
-   
+
    def icon
      if self.kind.starts_with?("audio/")
        "/assets/audio.png"
      else
-       "/s/#{self.thumb_path(100,100)}" 
+       "/s/#{self.thumb_path(100,100)}"
      end
    end
 

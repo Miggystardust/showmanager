@@ -25,7 +25,7 @@ describe ShowItemsController do
   it "should have a current_user" do
     subject.current_user != nil
   end
-  
+
   # This should return the minimal set of attributes required to create a valid
   # ShowItem. As you add validations to ShowItem, be sure to
   # update the return value of this method accordingly.
@@ -38,7 +38,7 @@ describe ShowItemsController do
       :duration => 120
     }
   end
-  
+
   describe "GET index" do
     it "assigns all show_items as @show_items" do
       show_item = ShowItem.create! valid_attributes

@@ -5,7 +5,7 @@ ssh_options[:user] = 'ubuntu'
 #ssh_options[:verbose] = :debug
 #set :scm_verbose, true
 
-default_run_options[:pty] = true 
+default_run_options[:pty] = true
 
 set :scm, :git
 set :application, "hubba.retina.net"
@@ -39,18 +39,18 @@ namespace :deploy do
     end
   end
 
-  task :before_update_code, :roles => :app do 
-    run "whoami" 
-  end 
+  task :before_update_code, :roles => :app do
+    run "whoami"
+  end
 
   task :start do
     run "sudo service nginx start"
   end
-  
+
   task :stop do
     run "sudo service nginx stop"
   end
-  
+
   task :restart, :roles => :app, :except => { :no_release => true } do
     # passenger will pick up the code when this exists
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
@@ -66,7 +66,7 @@ namespace :gems do
   end
 end
 
-# don't need to do this all the time do we 
+# don't need to do this all the time do we
 # after :deploy, "gems:install"
 
 

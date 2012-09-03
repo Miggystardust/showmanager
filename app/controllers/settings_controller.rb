@@ -7,10 +7,10 @@ class SettingsController < ApplicationController
     @user = User.find(current_user.id)
 
     email_changed = @user.email != params[:user][:email]
-    
-    if params[:user][:password] == nil 
+
+    if params[:user][:password] == nil
       password_changed = false
-    else 
+    else
       password_changed = !params[:user][:password].empty?
     end
 
@@ -19,7 +19,7 @@ class SettingsController < ApplicationController
                            else
                              @user.update_without_password(params[:user])
                            end
-    
+
     if successfully_updated
       # Sign in the user bypassing validation in case his password changed
       sign_in @user, :bypass => true

@@ -1,5 +1,5 @@
 class ImagesController < ActionController::Base
-  
+
   # for development use, serve thumbs via ruby. We'd normally route
   # these via apache
   def servethumb
@@ -7,7 +7,7 @@ class ImagesController < ActionController::Base
 
     logger.debug "serve: #{fn}, uuid: #{params[:uuid]}"
 
-    if File.exist?(fn) == false 
+    if File.exist?(fn) == false
       @image = Passet.where({:uuid => params["uuid"]})[0]
       if @image == nil
         raise ActionController::RoutingError.new('Image Not Found (srv)')
@@ -18,9 +18,9 @@ class ImagesController < ActionController::Base
     end
 
     send_file "#{fn}", :type=>"image/jpeg",
-                       :x_sendfile=>true, 
-                       :stream => true, 
-                       :buffer_size => 4096, 
+                       :x_sendfile=>true,
+                       :stream => true,
+                       :buffer_size => 4096,
                        :disposition => 'inline'
   end
 
@@ -36,16 +36,16 @@ class ImagesController < ActionController::Base
 
     disposition = params[:download] == "1" ? "attachment" : "inline"
 
-    if File.exist?(fn) == false 
+    if File.exist?(fn) == false
       raise ActionController::RoutingError.new('Image Not Found (srv)')
     else
       send_file "#{fn}", :type => p[0].kind,
-                         :x_sendfile => true, 
-                         :stream => true, 
-                         :buffer_size => 8192, 
+                         :x_sendfile => true,
+                         :stream => true,
+                         :buffer_size => 8192,
                          :disposition => disposition,
                          :filename => p[0].filename
     end
   end
-  
+
 end

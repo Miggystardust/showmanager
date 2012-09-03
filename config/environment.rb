@@ -10,7 +10,7 @@ else
 end
 
 # our shortened time format
-# Sun Jan 1, 2012 5:00 PM 
+# Sun Jan 1, 2012 5:00 PM
 SHORT_TIME_FMT = "%a %b %d, %Y %I:%M %p"
 TIME_ONLY_FMT = "%I:%M %p"
 

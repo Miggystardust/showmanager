@@ -5,7 +5,7 @@ class User
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
-         
+
   has_many :acts
   has_many :passets
 
@@ -23,7 +23,7 @@ class User
   validates_presence_of :email
   validates_presence_of :encrypted_password
 
-  field :phone_number,       :type => String, :default => ""  
+  field :phone_number,       :type => String, :default => ""
 
   ## Recoverable
   field :reset_password_token,   :type => String
@@ -38,7 +38,7 @@ class User
   field :last_sign_in_at,    :type => Time
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
-  
+
   field :username, :type => String, :unique => true
 
   field :admin, :type => Boolean, :default => false
@@ -60,15 +60,15 @@ class User
   index :email, unique: true
   index :username, unique: true
   field :name
-  
+
   validates_presence_of :name
   validates_presence_of :username
-  
+
   attr_accessible :name, :username, :email, :password, :password_confirmation, :remember_me, :uid, :provider
   attr_protected :admin, :roles
 
   def has_role?(role_sym)
-    roles.each { |r| 
+    roles.each { |r|
       if r.name.underscore.to_sym == role_sym
         return true
       end

@@ -1,25 +1,25 @@
 require 'fileutils'
 
 class PassetsController <  ApplicationController
-  
+
   protect_from_forgery
 
   before_filter :authenticate_user!
-  before_filter :verify_admin, :only => [:update, :edit] 
+  before_filter :verify_admin, :only => [:update, :edit]
 
-  # this tends to explode on file upload, turning it off. 
-  skip_before_filter :verify_authenticity_token,  :only => [:new]   
+  # this tends to explode on file upload, turning it off.
+  skip_before_filter :verify_authenticity_token,  :only => [:new]
 
   def index
     @assets = current_user.passets.all.desc(:created_at)
   end
 
   def adminindex
-    if current_user.try(:admin?) 
+    if current_user.try(:admin?)
       @assets = Passet.all.desc(:created_at)
       @adminindex = true
       render :index
-    else 
+    else
       flash[:error] = "You must be an administrator to use that function."
       redirect_to "/"
     end
@@ -40,12 +40,12 @@ class PassetsController <  ApplicationController
     @passet.save!
 
     flash[:notice] = "Updated information for #{@passet.filename}"
-    # only admins can ever do this, so go back there. 
+    # only admins can ever do this, so go back there.
     redirect_to :action => :adminindex
   end
 
   def destroy
-    # todo - ensure ownership here. 
+    # todo - ensure ownership here.
     p = Passet.find(params[:id])
 
     if p != nil
@@ -54,15 +54,15 @@ class PassetsController <  ApplicationController
       FileUtils.rm "#{UPLOADS_DIR}/#{p.uuid}"
     end
 
-    if request.referer.match(/\/adminindex$/) 
+    if request.referer.match(/\/adminindex$/)
       redirect_to :action => :adminindex
     else
       redirect_to :action => :index
     end
-  end 
+  end
 
   def create
-    if params[:files] == nil 
+    if params[:files] == nil
       flash[:error] = "You must specify a file to upload."
       redirect_to :action => :new
       @response = {"error" => "No Files specified"}
@@ -75,7 +75,7 @@ class PassetsController <  ApplicationController
     tmp = params[:files][0].tempfile
 
     logger.debug("Got file #{tmp.path}")
-    
+
     filename = FileTools.sanitize_filename(params[:files][0].original_filename)
     fileinfo = determine_mime_type(filename)
 
@@ -101,11 +101,11 @@ class PassetsController <  ApplicationController
 
     # TODO: Additional filename sanitization
     # TODO: Use md5 to find out if we've seen this before, don't allow dupes?
-    
+
     # build the object
-    @p = Passet.new(uuid: @uuid, 
+    @p = Passet.new(uuid: @uuid,
                     filename: filename,
-                    kind: fileinfo, 
+                    kind: fileinfo,
                     created_at: Time.now(),
                     created_by: current_user.id,
                     song_artist: song_artist,
@@ -115,7 +115,7 @@ class PassetsController <  ApplicationController
                     )
 
     current_user.passets << @p
-    
+
     # move it into place
     # TODO: Distribute data across directories
     FileUtils.cp tmp.path, @file
@@ -144,16 +144,16 @@ class PassetsController <  ApplicationController
     assets = Passet.any_of({filename: /#{query}/i}, {created_by: /#{query}/i}).asc(:filename).limit(10)
 
     list = assets.map do |i|
-      { label: "#{i.created_by}: #{i.filename} (#{i.kind})", id: i.uuid } 
+      { label: "#{i.created_by}: #{i.filename} (#{i.kind})", id: i.uuid }
     end
-    
-    # and specials... "INTERMISSION:" etc... 
+
+    # and specials... "INTERMISSION:" etc...
 
     render :json => list
   end
-     
+
   private
-  
+
   def determine_mime_type(filename)
     ext = filename.split(".")[1].downcase()
     case ext
@@ -188,4 +188,4 @@ class PassetsController <  ApplicationController
     end
  end
 end
-  
+
