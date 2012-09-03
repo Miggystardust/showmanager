@@ -20,24 +20,29 @@ require 'spec_helper'
 
 describe ShowItemsController do
 
+  login_admin
+
+  it "should have a current_user" do
+    subject.current_user != nil
+  end
+  
   # This should return the minimal set of attributes required to create a valid
   # ShowItem. As you add validations to ShowItem, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {
+      :kind => 0,
+      :seq => 1,
+      :note => 'test note',
+      :act_id => 0,
+      :duration => 120
+    }
   end
   
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # ShowItemsController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
-
   describe "GET index" do
     it "assigns all show_items as @show_items" do
       show_item = ShowItem.create! valid_attributes
-      get :index, {}, valid_session
+      get :index
       assigns(:show_items).should eq([show_item])
     end
   end
@@ -45,14 +50,14 @@ describe ShowItemsController do
   describe "GET show" do
     it "assigns the requested show_item as @show_item" do
       show_item = ShowItem.create! valid_attributes
-      get :show, {:id => show_item.to_param}, valid_session
+      get :show, {:id => show_item.to_param}
       assigns(:show_item).should eq(show_item)
     end
   end
 
   describe "GET new" do
     it "assigns a new show_item as @show_item" do
-      get :new, {}, valid_session
+      get :new
       assigns(:show_item).should be_a_new(ShowItem)
     end
   end
@@ -60,7 +65,7 @@ describe ShowItemsController do
   describe "GET edit" do
     it "assigns the requested show_item as @show_item" do
       show_item = ShowItem.create! valid_attributes
-      get :edit, {:id => show_item.to_param}, valid_session
+      get :edit, {:id => show_item.to_param}
       assigns(:show_item).should eq(show_item)
     end
   end
@@ -69,18 +74,18 @@ describe ShowItemsController do
     describe "with valid params" do
       it "creates a new ShowItem" do
         expect {
-          post :create, {:show_item => valid_attributes}, valid_session
+          post :create, {:show_item => valid_attributes}
         }.to change(ShowItem, :count).by(1)
       end
 
       it "assigns a newly created show_item as @show_item" do
-        post :create, {:show_item => valid_attributes}, valid_session
+        post :create, {:show_item => valid_attributes}
         assigns(:show_item).should be_a(ShowItem)
         assigns(:show_item).should be_persisted
       end
 
       it "redirects to the created show_item" do
-        post :create, {:show_item => valid_attributes}, valid_session
+        post :create, {:show_item => valid_attributes}
         response.should redirect_to(ShowItem.last)
       end
     end
@@ -89,14 +94,14 @@ describe ShowItemsController do
       it "assigns a newly created but unsaved show_item as @show_item" do
         # Trigger the behavior that occurs when invalid params are submitted
         ShowItem.any_instance.stub(:save).and_return(false)
-        post :create, {:show_item => {}}, valid_session
+        post :create, {:show_item => {}}
         assigns(:show_item).should be_a_new(ShowItem)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         ShowItem.any_instance.stub(:save).and_return(false)
-        post :create, {:show_item => {}}, valid_session
+        post :create, {:show_item => {}}
         response.should render_template("new")
       end
     end
@@ -111,18 +116,18 @@ describe ShowItemsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         ShowItem.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => show_item.to_param, :show_item => {'these' => 'params'}}, valid_session
+        put :update, {:id => show_item.to_param, :show_item => {'these' => 'params'}}
       end
 
       it "assigns the requested show_item as @show_item" do
         show_item = ShowItem.create! valid_attributes
-        put :update, {:id => show_item.to_param, :show_item => valid_attributes}, valid_session
+        put :update, {:id => show_item.to_param, :show_item => valid_attributes}
         assigns(:show_item).should eq(show_item)
       end
 
       it "redirects to the show_item" do
         show_item = ShowItem.create! valid_attributes
-        put :update, {:id => show_item.to_param, :show_item => valid_attributes}, valid_session
+        put :update, {:id => show_item.to_param, :show_item => valid_attributes}
         response.should redirect_to(show_item)
       end
     end
@@ -132,7 +137,7 @@ describe ShowItemsController do
         show_item = ShowItem.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         ShowItem.any_instance.stub(:save).and_return(false)
-        put :update, {:id => show_item.to_param, :show_item => {}}, valid_session
+        put :update, {:id => show_item.to_param, :show_item => {}}
         assigns(:show_item).should eq(show_item)
       end
 
@@ -140,7 +145,7 @@ describe ShowItemsController do
         show_item = ShowItem.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         ShowItem.any_instance.stub(:save).and_return(false)
-        put :update, {:id => show_item.to_param, :show_item => {}}, valid_session
+        put :update, {:id => show_item.to_param, :show_item => {}}
         response.should render_template("edit")
       end
     end
@@ -150,13 +155,13 @@ describe ShowItemsController do
     it "destroys the requested show_item" do
       show_item = ShowItem.create! valid_attributes
       expect {
-        delete :destroy, {:id => show_item.to_param}, valid_session
+        delete :destroy, {:id => show_item.to_param}
       }.to change(ShowItem, :count).by(-1)
     end
 
     it "redirects to the show_items list" do
       show_item = ShowItem.create! valid_attributes
-      delete :destroy, {:id => show_item.to_param}, valid_session
+      delete :destroy, {:id => show_item.to_param}
       response.should redirect_to(show_items_url)
     end
   end

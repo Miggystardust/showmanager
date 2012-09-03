@@ -19,25 +19,35 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe ActsController do
+  include Devise::TestHelpers
+
+  login_admin
+
+  it "should have a current_user" do
+    subject.current_user != nil
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Act. As you add validations to Act, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {
+      :stage_name => 'Binky',
+      :length => 600,
+      :short_description => 'Binky\'s act'
+    }
   end
   
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ActsController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
 
   describe "GET index" do
     it "assigns all acts as @acts" do
       act = Act.create! valid_attributes
-      get :index, {}, valid_session
+      act.save
+
+      get :index
       assigns(:acts).should eq([act])
     end
   end
@@ -45,14 +55,14 @@ describe ActsController do
   describe "GET show" do
     it "assigns the requested act as @act" do
       act = Act.create! valid_attributes
-      get :show, {:id => act.to_param}, valid_session
+      get :show, {:id => act.to_param}
       assigns(:act).should eq(act)
     end
   end
 
   describe "GET new" do
     it "assigns a new act as @act" do
-      get :new, {}, valid_session
+      get :new
       assigns(:act).should be_a_new(Act)
     end
   end
@@ -60,7 +70,7 @@ describe ActsController do
   describe "GET edit" do
     it "assigns the requested act as @act" do
       act = Act.create! valid_attributes
-      get :edit, {:id => act.to_param}, valid_session
+      get :edit, {:id => act.to_param}
       assigns(:act).should eq(act)
     end
   end
@@ -69,19 +79,19 @@ describe ActsController do
     describe "with valid params" do
       it "creates a new Act" do
         expect {
-          post :create, {:act => valid_attributes}, valid_session
+          post :create, {:act => valid_attributes}
         }.to change(Act, :count).by(1)
       end
 
       it "assigns a newly created act as @act" do
-        post :create, {:act => valid_attributes}, valid_session
+        post :create, {:act => valid_attributes}
         assigns(:act).should be_a(Act)
         assigns(:act).should be_persisted
       end
 
-      it "redirects to the created act" do
-        post :create, {:act => valid_attributes}, valid_session
-        response.should redirect_to(Act.last)
+      it "redirects to the acts list after create" do
+        post :create, {:act => valid_attributes}
+        response.should redirect_to(acts_url)
       end
     end
 
@@ -89,14 +99,14 @@ describe ActsController do
       it "assigns a newly created but unsaved act as @act" do
         # Trigger the behavior that occurs when invalid params are submitted
         Act.any_instance.stub(:save).and_return(false)
-        post :create, {:act => {}}, valid_session
+        post :create, {:act => {}}
         assigns(:act).should be_a_new(Act)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Act.any_instance.stub(:save).and_return(false)
-        post :create, {:act => {}}, valid_session
+        post :create, {:act => {}}
         response.should render_template("new")
       end
     end
@@ -111,20 +121,21 @@ describe ActsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Act.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => act.to_param, :act => {'these' => 'params'}}, valid_session
+        put :update, {:id => act.to_param, :act => {'these' => 'params'}}
       end
 
       it "assigns the requested act as @act" do
         act = Act.create! valid_attributes
-        put :update, {:id => act.to_param, :act => valid_attributes}, valid_session
+        put :update, {:id => act.to_param, :act => valid_attributes}
         assigns(:act).should eq(act)
       end
 
-      it "redirects to the act" do
+      it "redirects to the acts list" do
         act = Act.create! valid_attributes
-        put :update, {:id => act.to_param, :act => valid_attributes}, valid_session
-        response.should redirect_to(act)
+        put :update, {:id => act.to_param, :act => valid_attributes}
+        response.should redirect_to(acts_url)
       end
+
     end
 
     describe "with invalid params" do
@@ -132,7 +143,7 @@ describe ActsController do
         act = Act.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Act.any_instance.stub(:save).and_return(false)
-        put :update, {:id => act.to_param, :act => {}}, valid_session
+        put :update, {:id => act.to_param, :act => {}}
         assigns(:act).should eq(act)
       end
 
@@ -140,7 +151,7 @@ describe ActsController do
         act = Act.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Act.any_instance.stub(:save).and_return(false)
-        put :update, {:id => act.to_param, :act => {}}, valid_session
+        put :update, {:id => act.to_param, :act => {}}
         response.should render_template("edit")
       end
     end
@@ -150,13 +161,13 @@ describe ActsController do
     it "destroys the requested act" do
       act = Act.create! valid_attributes
       expect {
-        delete :destroy, {:id => act.to_param}, valid_session
+        delete :destroy, {:id => act._id }
       }.to change(Act, :count).by(-1)
     end
 
     it "redirects to the acts list" do
       act = Act.create! valid_attributes
-      delete :destroy, {:id => act.to_param}, valid_session
+      delete :destroy, {:id => act._id } 
       response.should redirect_to(acts_url)
     end
   end

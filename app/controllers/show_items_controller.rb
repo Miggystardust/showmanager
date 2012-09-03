@@ -108,10 +108,12 @@ class ShowItemsController < ApplicationController
 
     @show_item.seq = seq
 
-    if params[:show_item][:act_id] != 0 
-      # if an act_id is supplied, we'll pull the duration from the user's input.
-      act = Act.find(params[:show_item][:act_id])
-      @show_item.duration = act.length
+    if @show_item.act_id != nil
+      if @show_item.act_id != "0"
+        # if an act_id is supplied, we'll pull the duration from the user's input.
+        act = Act.find(@show_item.act_id)
+        @show_item.duration = act.length
+      end
     end
 
     respond_to do |format|

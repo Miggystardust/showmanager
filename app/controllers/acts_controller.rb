@@ -123,7 +123,7 @@ class ActsController < ApplicationController
     
     if @act.user_id != current_user.id and current_user.try(:admin?) == false
       flash[:error] = "You don't own that Act."
-      redirect_to "/acts/"
+      redirect_to "/acts"
     end
 
     @act.length = sec_to_mmss(@act.length)
@@ -148,7 +148,7 @@ class ActsController < ApplicationController
         current_user.acts << @act
         current_user.save!
         
-        format.html { redirect_to "/acts/", notice: 'Act was successfully created.' }
+        format.html { redirect_to "/acts", notice: 'Act was successfully created.' }
         format.json { render json: @act, status: :created, location: @act }
       else
         format.html { render action: "new" }
@@ -175,7 +175,7 @@ class ActsController < ApplicationController
             redirect_to "/shows/#{@return_to}/edit", notice: 'Act was successfully updated.'
             return
           end
-          redirect_to "/acts/", notice: 'Act was successfully updated.'
+          redirect_to "/acts", notice: 'Act was successfully updated.'
         }
 
         format.json { head :no_content }
@@ -194,7 +194,7 @@ class ActsController < ApplicationController
 
     respond_to do |format|
       format.html {
-        if request.referer.match(/\/adminindex$/) 
+        if request.referer and request.referer.match(/\/adminindex$/) 
           redirect_to :action => :adminindex
         else
           redirect_to :action => :index

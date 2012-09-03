@@ -5,6 +5,9 @@ require 'rspec/rails'
 require 'email_spec'
 require 'rspec/autorun'
 
+Devise.stretches = 1 
+#Rails.logger.level = 4
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
@@ -35,6 +38,7 @@ RSpec.configure do |config|
 
   # Clean up the database
   require 'database_cleaner'
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.orm = "mongoid"
@@ -43,5 +47,8 @@ RSpec.configure do |config|
   config.before(:each) do
     DatabaseCleaner.clean
   end
+
+  config.include Devise::TestHelpers, :type => :controller
+  config.extend ControllerMacros, :type => :controller
 
 end
