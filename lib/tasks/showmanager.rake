@@ -1,6 +1,7 @@
 namespace :showmanager do
   task :durfix => :environment do
-    # repair durations in the database
+    # convert old-style durations which were minute based to new style, which
+    # are seconds based
     acts=Act.find(:all)
     acts.each { |a| 
       a.length = a.length * 60

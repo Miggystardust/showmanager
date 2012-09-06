@@ -1,5 +1,5 @@
 <h2>Your Profile</h2>
-<% if @user.provider != nil %>
+<% if @user.provider.blank? == false %>
     <div class="alert alert-info">
       <B>Heads up!</B> Your login is currently connected to your Facebook account. 
     </div>
@@ -43,7 +43,7 @@
   <%= f.text_field :phone_number, :class=>"input-xlarge"  %>
   </div>
 </div>
-<% if @user.provider == nil -%>
+<% if @user.provider.blank? == true -%>
 <div class="control-group">
  <%= f.label :password, :class => "control-label" %>
  <div class="controls">
