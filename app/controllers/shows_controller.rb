@@ -278,7 +278,7 @@ class ShowsController < ApplicationController
             }
 
             if s.duration != nil
-                itemtime = itemtime + s.duration
+                itemtime = itemtime + s.duration.to_i
             end
           end
 
