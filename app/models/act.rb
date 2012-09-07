@@ -86,6 +86,11 @@
        return
      end
 
+     if self.length.is_a?(Float)
+       errors.add(:act,"Length must be in the form MM:SS. Do not enter lengths with decimal points.")
+       return
+     end
+
      if self.length.match(/\A\d+:\d+\z/)
        p = self.length.split(":")
 
