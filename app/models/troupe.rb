@@ -1,8 +1,11 @@
 class Troupe
   include Mongoid::Document
-  has_many :users
 
-  field :troupe_name, :type => String
+  belongs_to :user
+
+  validates_presence_of :name, :description, :private
+
+  field :name, :type => String
   field :description, :type => String
-
+  field :private, :type => Boolean
 end

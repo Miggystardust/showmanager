@@ -1,28 +1,33 @@
 <header class="jumbotron masthead">
 <div class="inner">
-  <h1>Hubba Show Manager</h1>
+  <h1>troupeIt Show Manager</h1>
   <p>
     No more CDs. No more mistakes. Simple stage management.
   </p>
   <p class="download-info">
-  <% if user_signed_in? == false -%>
-  <a href="/users/sign_in" class="button btn-primary btn-large" rel="nofollow">Login</a>
-  <a href="/users/sign_up" class="button btn-primary btn-large" rel="nofollow">Sign Up</a>
-  <% end %>
+    <% if user_signed_in? == false -%>
+    <a href="/users/sign_in" class="button btn-primary btn-large" rel="nofollow">Login</a>
+    <a href="/users/sign_up" class="button btn-primary btn-large" rel="nofollow">Sign Up</a>
+    <% end %>
   </p>
-  <p class="download-info">
-  <a href="/passets/new" class="button btn-success btn-large" onclick="window.location('/passets/new');" rel="nofollow">Upload Your Music</a>
-  </p>
-  <p class="download-info">
-  <a href="/acts/new" class="button btn-info btn-large" onclick="window.location('/acts/new');" rel="nofollow">Create an Act</a>
-</p>
-  <h3>It's easy!</h3>
-  <P>
-  <UL>
-    <LI><a href="/users/sign_up">Sign up</a> or <%= link_to 'Login', new_user_session_path %> and create an account to track your music and sets</LI>
-    <LI><a href="">Upload</a> your music</LI> 
-    <LI><a href="">Create an Act</A> containing your music.
-  </UL>
-  </p>
+  <div class="row-fluid">
+    <div class="span6">
+      Performer?
+
+      <p class="download-info">
+        <a href="/passets/new" class="button btn-success btn-large" onclick="window.location('/passets/new');" rel="nofollow">Upload Your Music</a>
+      </p>
+      <p class="download-info">
+        <a href="/acts/new" class="button btn-info btn-large" onclick="window.location('/acts/new');" rel="nofollow">Create an Act</a>
+      </p>
+   </div>
+   <div class="span6">
+     Stage Manager?
+     Create a new Troupe
+
+     Create a show
+
+   </div>
+  </div>
 
 </div>
