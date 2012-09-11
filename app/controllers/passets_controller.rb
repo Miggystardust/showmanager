@@ -2,7 +2,7 @@ require 'fileutils'
 
 class PassetsController <  ApplicationController
 
-  protect_from_forgery
+  protect_from_forgery :except => :create
 
   before_filter :authenticate_user!
   before_filter :verify_admin, :only => [:update, :edit]
