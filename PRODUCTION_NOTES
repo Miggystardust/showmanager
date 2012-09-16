@@ -1,0 +1,23 @@
+These are show production notes for Hubba Hubba. They probably won't
+be relevant to you, but might be of some interest nonetheless.
+
+Hubba is produced by having all performers upload their music to the
+system. When that's completed, our stage manager, Joyce, creates the
+show and adds the acts to the system.
+
+Then, I take the show and download all the MP3s and associated
+formats.
+
+Important: I then convert all of the files to AIFF using Max
+(http://sbooth.org/Max/) and then load them in to QLab
+(http://figure53.com/qlab/) for show playback. 
+
+I then arrange video or whatever else is part of the show, test
+everything once by running through the show and we're good to go.
+
+Note: 
+
+There is a long-standing bug in QLab that breaks playback of
+long MP3s. Always use AIFF for shows to avoid this. Never play back
+MP3s as part of the show with QLab. With iTunes, no problems, but with
+QLab, you're hosed.
