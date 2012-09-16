@@ -96,14 +96,14 @@ class ShowItemsController < ApplicationController
     @show_items = ShowItem.where(show_id: params[:show_id]).asc(:seq)
 
     if (@row_id.to_i == @show_items[0].seq and @direction == "up") or
-        params[:direction].is_empty? or
-        params[:row_id].is_empty?
+        params[:direction].empty? or
+        params[:row_id].empty?
       # criteria not met
       render json: {}, :status => 400
       return
     end
 
-    if @showitems.length == 0
+    if @show_items.length == 0
       render json: {}, :status => 404
       return
     end
