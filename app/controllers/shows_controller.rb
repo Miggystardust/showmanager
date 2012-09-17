@@ -176,9 +176,10 @@ class ShowsController < ApplicationController
           editact = ""
           editdur = ""
           removeme = ""
-          moveme = "<button class=\"btn btn-inverse btn-mini moveup\" id=\"#{s._id}\"><i class=\"icon-arrow-up icon-white\"></i></button>&nbsp;<button class=\"btn btn-inverse btn-mini movedown\" id=\"#{s._id}\"><i class=\"icon-arrow-down icon-white\"></i></button>&nbsp;"
+          moveme = ""
 
           if params[:m] == nil
+            moveme = "<button class=\"btn btn-inverse btn-mini moveup\" id=\"#{s._id}\"><i class=\"icon-arrow-up icon-white\"></i></button>&nbsp;<button class=\"btn btn-inverse btn-mini movedown\" id=\"#{s._id}\"><i class=\"icon-arrow-down icon-white\"></i></button>&nbsp;"
             removeme = "<button class=\"btn btn-danger btn-mini siremove\" id=\"#{s._id}\"><i class=\"icon-trash icon-white\"></i></button>&nbsp;"
             editact = "<button class=\"btn btn-success btn-mini editact\" id=\"#{s.act_id}\"><i class=\"icon-pencil icon-white\"></i></button>&nbsp;"
             editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s._id}\"><i class=\"icon-time icon-white\"></i></button>&nbsp;"
