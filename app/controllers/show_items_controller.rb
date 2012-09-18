@@ -88,6 +88,68 @@ class ShowItemsController < ApplicationController
 
   end
 
+  # POST /show_items/id/move.json
+  def move
+    # move a show item up or down in the setlist
+    @row_id = params[:row_id]
+    @direction = params[:direction]
+    @show_items = ShowItem.where(show_id: params[:show_id]).asc(:seq)
+
+    if (@row_id.to_i == @show_items[0].seq and @direction == "up") or
+        params[:direction].empty? or
+        params[:row_id].empty?
+      # criteria not met
+      render json: {}, :status => 400
+      return
+    end
+
+    if @show_items.length == 0
+      render json: {}, :status => 404
+      return
+    end
+
+    last_item = nil
+    the_item = nil
+
+    if @direction == "up"
+      @show_items.each { |si| 
+        logger.debug si.seq
+        if si.seq.to_i == @row_id.to_i
+          # swap the items
+          the_item = si
+          logger.debug "found item"
+          stash = the_item.seq
+          the_item.seq = last_item.seq
+          last_item.seq = stash
+          the_item.save!
+          last_item.save!
+        end
+        last_item = si 
+      }
+    else
+      @show_items.reverse.each { |si| 
+        logger.debug si.seq
+        if si.seq.to_i == @row_id.to_i
+          # swap
+          the_item = si
+          logger.debug "found item"
+          stash = the_item.seq
+          the_item.seq = last_item.seq
+          last_item.seq = stash
+          the_item.save!
+          last_item.save!
+        end
+        last_item = si 
+      }
+    end
+
+    if the_item == nil
+      render json: {}, :status => 404
+    else
+      render json: @the_item, :status => 200
+    end
+  end
+
   # POST /show_items
   # POST /show_items.json
   def create

@@ -164,13 +164,10 @@ $(document).ready(function() {
     });
 
   $("#showlist").delegate("button", "click", function() {
+      var clicked_id = $(this).attr("id");
+      var actdata = { "authenticity_token" : AUTH_TOKEN };
+
       if ($(this).attr("class").indexOf("siremove") != -1) { 
-        var clicked_id = $(this).attr("id");
-
-        var actdata = {
-          "authenticity_token" : AUTH_TOKEN
-        };
-
         $.ajax({
           type: 'DELETE',
               dataType: 'json',
@@ -186,6 +183,29 @@ $(document).ready(function() {
        if ($(this).attr("class").indexOf("editact") != -1) { 
          var clicked_id = $(this).attr("id");
          window.location.href="/acts/" + clicked_id + "/edit?return_to=<%=@show.id%>";
+       }
+
+       if ($(this).attr("class").indexOf("move") != -1) { 
+        /* handle move up or down */
+        var direction = "up";
+        var rowId = $(this).parent().siblings(":first").text();
+
+        if ($(this).attr("class").indexOf("movedown") != -1) { direction = "down" };
+
+        actdata['direction'] = direction;
+        actdata['show_id'] = '<%=@show.id%>';
+        actdata['row_id'] = rowId;
+
+        $.ajax({
+          type: 'POST',
+              dataType: 'json',
+              url: '/show_items/' + clicked_id + '/move.json',
+              contentType: 'application/json',
+              data: JSON.stringify(actdata),
+              success: function() { 
+                showDT.fnReloadAjax();
+              }
+          });
        }
 
        if ($(this).attr("class").indexOf("editduration") != -1) { 

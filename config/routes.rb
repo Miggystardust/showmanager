@@ -62,6 +62,9 @@ Rails3MongoidDevise::Application.routes.draw do
     :controller => "show_items",
     :action => "update_seq"
 
+  post "/show_items/:id/move.json",
+    :controller => "show_items",
+    :action => "move"
 
   get "/s/:uuid-:dims.jpg",
     :controller => "images",

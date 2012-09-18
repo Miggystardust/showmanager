@@ -143,6 +143,14 @@ class ShowsController < ApplicationController
 
       logexec("cp #{UPLOADS_DIR}/#{id} #{Rails.root}/tmp/#{@safe_title}/#{sprintf("%02d",seq)}_#{fn}")
     end
+
+    # make sure our zipdir is there.
+    begin
+      File.stat("#{Rails.root}/public/zips")
+    rescue Errno::ENOENT
+      logexec("mkdir #{Rails.root}/public/zips")
+    end
+
     logexec("cd #{Rails.root}/tmp; zip -9 -r #{@safe_title}.zip #{@safe_title}")
     logexec("mv #{Rails.root}/tmp/#{@safe_title}.zip #{Rails.root}/public/zips")
     logexec("rm -rf #{Rails.root}/tmp/#{@safe_title}")
@@ -168,11 +176,13 @@ class ShowsController < ApplicationController
           editact = ""
           editdur = ""
           removeme = ""
+          moveme = ""
 
           if params[:m] == nil
-            removeme = "<button class=\"btn btn-danger btn-mini siremove\" id=\"#{s._id}\"><i class=\"icon-minus icon-white\"></i> Remove</button>&nbsp;"
-            editact = "<button class=\"btn btn-success btn-mini editact\" id=\"#{s.act_id}\"><i class=\"icon-pencil icon-white\"></i> Edit</button>&nbsp;"
-            editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s._id}\"><i class=\"icon-time icon-white\"></i> Length</button>&nbsp;"
+            moveme = "<button class=\"btn btn-inverse btn-mini moveup\" id=\"#{s._id}\"><i class=\"icon-arrow-up icon-white\"></i></button>&nbsp;<button class=\"btn btn-inverse btn-mini movedown\" id=\"#{s._id}\"><i class=\"icon-arrow-down icon-white\"></i></button>&nbsp;"
+            removeme = "<button class=\"btn btn-danger btn-mini siremove\" id=\"#{s._id}\"><i class=\"icon-trash icon-white\"></i></button>&nbsp;"
+            editact = "<button class=\"btn btn-success btn-mini editact\" id=\"#{s.act_id}\"><i class=\"icon-pencil icon-white\"></i></button>&nbsp;"
+            editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s._id}\"><i class=\"icon-time icon-white\"></i></button>&nbsp;"
           else
             if s.id.to_s == @show.highlighted_row.to_s
               markact = "<button class=\"btn btn-info btn-mini unmarkitem\" id=\"#{s._id}\"><i class=\"icon-ban-circle icon-white\"></i> Unmark</button>&nbsp;"
@@ -257,7 +267,7 @@ class ShowsController < ApplicationController
                 "3" => sound,
                 "4" => stage,
                 "5" => act.extra_notes,
-                "6" => removeme + editact + editdur + markact
+                "6" => moveme + removeme + editact + editdur + markact
               }
 
               if s.duration != nil
@@ -274,7 +284,7 @@ class ShowsController < ApplicationController
               "3" => "--",
               "4" => "--",
               "5" => "<B>" + s.note + "</B>",
-              "6" => removeme + editdur + markact
+              "6" => moveme + removeme + editdur + markact 
             }
 
             if s.duration != nil

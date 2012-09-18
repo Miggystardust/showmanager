@@ -1,6 +1,9 @@
 development:
   host: localhost
-  database: showmanager_development
+  database: hsm_production
+
+# temporarily use hsm_prod so we can look at production problems in staging.
+#  database: showmanager_development
 
 test:
   host: localhost
