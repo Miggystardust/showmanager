@@ -8,6 +8,7 @@ class User
 
   has_many :acts
   has_many :passets
+  has_many :troupes
 
   # Role-Based Access Control
   references_and_referenced_in_many :roles
