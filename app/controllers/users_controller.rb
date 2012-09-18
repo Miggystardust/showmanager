@@ -12,7 +12,7 @@ class UsersController < ApplicationController
           # drive datatables
           @usersarray = []
           @users.each { |user|
-            @usersarray << [user.username, user.email, number_to_phone(user.phone_number), user.last_sign_in_at.strftime(SHORT_TIME_FMT), user.provider, user.admin, user.id]
+            @usersarray << [user.username, user.email, number_to_phone(user.phone_number), user.last_sign_in_at.strftime(SHORT_TIME_FMT), user.provider, user.admin.yesno, user.id]
           }
           render json: { 'aaData' => @usersarray }
         }

@@ -1,6 +1,9 @@
 # Load the rails application
 require File.expand_path('../application', __FILE__)
 
+# true/false monkeypatch
+require "#{Rails.root}/lib/yesno.rb"
+
 if ENV['RAILS_ENV'] == 'production'
   UPLOADS_DIR = "/retina/hubba/showmanager-data/uploads"
   THUMBS_DIR = "/retina/hubba/showmanager-data/thumbs"
