@@ -81,9 +81,8 @@ class User
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
       logger.debug("need to create.")
-      logger.debug("Username will be #{auth.extra.raw_info.name}")
       user = User.create(username:auth.extra.raw_info.name.clone,
-                         name:auth.extra.raw_info.name,
+                         name:auth.extra.raw_info.name.clone,
                          provider:auth.provider,
                          uid:auth.uid,
                          email:auth.info.email,
@@ -91,8 +90,6 @@ class User
                          )
       user.save!
     end
-    logger.debug("Saved username: #{user.username}")
-    logger.debug("Saved name: #{user.name}")
     user
   end
 
