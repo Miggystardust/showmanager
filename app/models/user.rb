@@ -82,7 +82,7 @@ class User
     unless user
       logger.debug("need to create.")
       user = User.create(username:auth.extra.raw_info.name.clone,
-                         name:auth.extra.raw_info.name.clone,
+                         name:auth.extra.raw_info.name,
                          provider:auth.provider,
                          uid:auth.uid,
                          email:auth.info.email,
