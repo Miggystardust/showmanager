@@ -54,9 +54,9 @@
       $('#duration-modal-submit').on('click', function(e){
         e.preventDefault();
 
-        dur = show_item_duration[1].value
-        durm = -1
-        durs = -1
+        dur = $("#show_item_duration").value;
+        durm = -1;
+        durs = -1;
 
         if (dur.indexOf(":") > -1) {
           dpart = dur.split(":");
