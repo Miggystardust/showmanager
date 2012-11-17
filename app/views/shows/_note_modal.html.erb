@@ -63,8 +63,8 @@
           'show_id':'<%=@show.id%>',
           'kind' : 0,
           'act_id' : 0 ,
-          'note': show_item_note.value,
-          'duration': show_item_duration[0].value
+          'note': $('#show_item_note').val()
+          'duration': $('#show_item_duration').val()
         };
 
         $("#noteModal").modal('hide');
