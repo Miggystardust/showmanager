@@ -6,6 +6,9 @@
 
   <%= form_for @show_item, :html => { :class => "form-horiziontal" } do |f| -%>
   <div class='modal-body'>
+    <div class="alert alert-danger" style='display: none' id='noteflash'>
+      Length must be in the form MM:SS
+    </div>
     <div class="control-group">
       <%= f.label :duration, "Length in the form (MM:SS)", :class=>"control-label" %>
       <div class="controls">
@@ -57,17 +60,39 @@
       // We don't want this to act as a link so cancel the link action
         e.preventDefault();
 
+        dur = $('#show_item_duration').val();
+        durm = -1;
+        durs = -1;
+
+        if (dur.indexOf(":") > -1) {
+          dpart = dur.split(":");
+          durm_i = parseInt(dpart[0]);
+          durs_i = parseInt(dpart[1]);
+
+          if ((durs_i >= 0) && (durs_i <= 59)) { 
+            durm = durm_i; 
+            durs = durs_i;
+          }
+        }
+
+        if ((durm == -1) || (durs == -1)) { 
+          $("#noteflash").show();
+          return;
+        }
+
+        // passed validations
+        $("#noteflash").modal('hide');
+        $("#noteModal").modal('hide');
+
         // first instance is  the add box, second instance is the length box.
         var actdata = {
           "authenticity_token" : AUTH_TOKEN,
           'show_id':'<%=@show.id%>',
           'kind' : 0,
           'act_id' : 0 ,
-          'note': $('#show_item_note').val()
-          'duration': $('#show_item_duration').val()
+          'note': $('#show_item_note').val(),
+          'duration':  (durm * 60) + durs,
         };
-
-        $("#noteModal").modal('hide');
 
         console.log(actdata);
 
