@@ -15,6 +15,25 @@ describe User do
     User.create!(@attr)
   end
 
+  it "should not downcase user name case when created through facebook" do
+    fake_auth = OpenStruct.new
+    fake_auth.extra = OpenStruct.new
+    fake_auth.extra.raw_info = OpenStruct.new
+    fake_auth.info = OpenStruct.new
+
+    fake_auth.provider = "facebook"
+    fake_auth.uid = "12345678"
+    fake_auth.info.email = @attr[:email]
+
+    user_names = %w[bobjones BOBJONES BobJones bObJoNeS]
+    user_names.each do |user_name|
+      fake_auth.extra.raw_info.name = user_name.clone
+      user = User.find_for_facebook_oauth(fake_auth)
+      user.name.should eq(user_name)
+      user.destroy
+    end
+  end
+
   it "should require an email address" do
     no_email_user = User.new(@attr.merge(:email => ""))
     no_email_user.should_not be_valid

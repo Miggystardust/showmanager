@@ -81,7 +81,7 @@ class User
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
       logger.debug("need to create.")
-      user = User.create(username:auth.extra.raw_info.name,
+      user = User.create(username:auth.extra.raw_info.name.clone,
                          name:auth.extra.raw_info.name,
                          provider:auth.provider,
                          uid:auth.uid,
