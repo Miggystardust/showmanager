@@ -1,0 +1,50 @@
+<%= form_for(@troupe, :html => { :class => "form-horizontal" } ) do |f| %>
+<fieldset>
+  <% if @troupe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@troupe.errors.count, "error") %> prohibited this troupe from being saved:</h2>
+
+      <ul>
+      <% @troupe.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="well">
+    <P>
+      Provide a new name and a short description about your troupe.
+    </p>
+    <P>
+      If your troupe is private, it will not appear in the 
+      public troupe directory.
+    </p>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :name, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :name, :class => "input-xxlarge"  %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :description, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :description, :class => "input-xxlarge"  %>
+    </div>
+  </div>
+
+
+  <div class="control-group">
+    <%= f.label :private, :class => "control-label" %>
+    <div class="controls">
+      <%= f.check_box :private %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

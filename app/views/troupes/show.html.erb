@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @troupe.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @troupe.description %>
+</p>
+
+<p>
+  <b>Private:</b>
+  <%= @troupe.private %>
+</p>
+
+
+<%= link_to 'Edit', edit_troupe_path(@troupe) %> |
+<%= link_to 'Back', troupes_path %>

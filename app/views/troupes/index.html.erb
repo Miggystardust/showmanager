@@ -1,0 +1,158 @@
+<h1>Troupes You're Part Of</h1>
+
+<P>
+Troupes are a collection of people involved with one or more shows.
+Members in a troupe can see each other's music, show invites and 
+share the same schedule boards.
+</p>
+
+<P>
+<a href="/troupes/new" class="btn btn-primary"><i class="icon-white icon-plus-sign"></i>&nbsp;Create a New Troupe</a>
+</P>
+
+<% if @troupes.length > 0 -%>
+<div id="troupeTable">
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="troupeslist">
+<thead>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Private</th>
+    <th>Owner</th>
+    <th>Actions</th>
+</thead>
+<tbody>
+<!-- data -->
+</tbody>
+</table>
+</div>
+<br />
+<script>
+
+/* set up troupes datatable */
+$.extend( $.fn.dataTableExt.oStdClasses, {
+  "sSortAsc": "header headerSortDown",
+  "sSortDesc": "header headerSortUp",
+  "sSortable": "header"
+} );
+
+$.extend( $.fn.dataTableExt.oStdClasses, {
+  "sWrapper": "dataTables_wrapper form-inline"
+} );
+
+$(document).ready(function() {
+
+  troupesDT = $('#troupeslist').dataTable( {
+      "sDom": "<'row'<'span6'l><'span12'f>r>t<'row'<'span12'i><'span12'p>>",
+      "sAjaxSource": "/troupes.json",
+      "sPaginationType": "bootstrap",
+      "iDisplayLength": 10,
+      "oLanguage": {
+      "sLengthMenu": "Show&nbsp;<select size=1 name=\"troupeslist_length\" aria-controls=\"troupeslist\"><option value='5'>5</option><option \
+value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;troupes per page"
+    },
+     "fnServerData": function ( sSource, aoData, fnCallback ) {
+        $.ajax({'datatype':'json',
+                'type':'GET',
+                'url':sSource,
+                'data':aoData,
+                'success':function(json) {
+                   fnCallback(json);
+            }})
+          },
+     "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+      var id = $('td:eq(3)',nRow).html();
+      var content = $('td:eq(3)',nRow).html();
+      
+      if (content.indexOf("btn") == -1) { 
+        $('td:eq(4)', nRow).html('&nbsp;<a class="btn btn-primary btn-mini" href="/troupes/' + id + '/edit"><i class="icon-white icon-pencil"></i> Edit</a>' +
+        '&nbsp;<a class="btn btn-danger btn-mini" href="/troupes/' + id + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="icon-remove icon-white"></i> Delete</a>');
+      }
+     }
+  });
+
+  var fixHelper = function(e, ui) {
+    ui.children().each(function() {
+        $(this).width($(this).width());
+      });
+    return ui;
+  };
+
+
+});
+
+</script>
+
+<% else -%>
+<P>
+You don't below to any troupes yet. <%= link_to "Create one", new_troupe_path %>, or join a public troupe below.
+</p>
+<% end -%>
+
+<h3>Public Troupes</h3>
+<P>
+You can join one or more public troupes. When you join a troupe, you
+can see all of the acts, music, and messages for that troupe.
+</P>
+
+
+
+<div id="publicTable">
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="publiclist">
+<thead>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Private</th>
+    <th>Owner</th>
+    <th>Actions</th>
+</thead>
+<tbody>
+<!-- data -->
+</tbody>
+</table>
+</div>
+<br />
+<script>
+
+$(document).ready(function() {
+
+  publicDT = $('#publiclist').dataTable( {
+      "sDom": "<'row'<'span6'l><'span12'f>r>t<'row'<'span12'i><'span12'p>>",
+      "sAjaxSource": "/troupes.json?type=public",
+      "sPaginationType": "bootstrap",
+      "iDisplayLength": 10,
+      "oLanguage": {
+      "sLengthMenu": "Show&nbsp;<select size=1 name=\"publiclist_length\" aria-controls=\"publiclist\"><option value='5'>5</option><option \
+value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;troupes per page"
+    },
+     "fnServerData": function ( sSource, aoData, fnCallback ) {
+        $.ajax({'datatype':'json',
+                'type':'GET',
+                'url':sSource,
+                'data':aoData,
+                'success':function(json) {
+                   fnCallback(json);
+            }})
+          },
+     "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+      var id = $('td:eq(4)',nRow).html();
+      var content = $('td:eq(4)',nRow).html();
+      
+      if (content.indexOf("btn") == -1) { 
+        $('td:eq(4)', nRow).html('&nbsp;<a class="btn btn-primary btn-small" href="/troupes/' + id + '/join"><i class="icon-white icon-star"></i> Join</a>');
+      }
+     }
+  });
+
+  var fixHelper = function(e, ui) {
+    ui.children().each(function() {
+        $(this).width($(this).width());
+      });
+    return ui;
+  };
+
+
+});
+
+</script>
+
+
