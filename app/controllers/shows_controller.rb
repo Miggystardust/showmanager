@@ -195,7 +195,11 @@ class ShowsController < ApplicationController
           if s.kind != 0
             # this is an asset.
             if s.act_id != 0
-              act = Act.find(s.act_id)
+              begin
+                act = Act.find(s.act_id)
+              rescue Mongoid::Errors::DocumentNotFound
+                act = nil
+              end
             end
 
             if act == nil
