@@ -1,3 +1,6 @@
+# true/false monkeypatch - I had to add this again for this class, no idea why. 
+require "#{Rails.root}/lib/yesno.rb"
+
 include ActionView::Helpers::NumberHelper
 
 class UsersController < ApplicationController
