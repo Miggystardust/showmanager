@@ -28,5 +28,5 @@ gem "newrelic_rpm"
 
 gem "cancan"
 
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+#gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 

@@ -1,0 +1,22 @@
+Under 10.7, Reinstall GCC from osx-gcc-installer. Xcode's gcc is useless under 10.7.
+
+Download passenger-3.0.18. Install it.
+
+As you, not root:
+   rvmsudo passenger-install-apache2-module --apxs=/path/to/apxs
+
+rvm get head
+
+rvm install 1.9.2
+rvm use 1.9.2
+rvmsudo bundle install
+
+Add these lines to the Apache config.
+
+   LoadModule passenger_module /usr/local/rvm/gems/ruby-1.9.2-p320/gems/passenger-3.0.18/ext/apache2/mod_passenger.so
+   PassengerRoot /usr/local/rvm/gems/ruby-1.9.2-p320/gems/passenger-3.0.18
+   PassengerRuby /usr/local/rvm/wrappers/ruby-1.9.2-p320/ruby
+
+Restart apache. Boom, done. 
+
+
