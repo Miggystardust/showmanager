@@ -37,4 +37,23 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    if current_user.try(:admin?)
+      @user = User.find(params[:id])
+      @user.update_attributes(params[:user])
+
+      # This is the only time we permit the admin bit to be flipped.
+      # you must be an admin first. a
+      if params[:user][:admin] == "1" then
+         @user.admin = true
+      end
+      
+      @user.save!
+      flash[:notice] = "User Updated."
+      redirect_to "/users"
+    else
+      flash[:error] = "You must be an administrator to use that function."
+      redirect_to "/"
+    end
+  end
 end
