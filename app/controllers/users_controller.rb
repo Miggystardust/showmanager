@@ -43,11 +43,15 @@ class UsersController < ApplicationController
       @user.update_attributes(params[:user])
 
       # This is the only time we permit the admin bit to be flipped.
-      # you must be an admin first. a
+      # you must be an admin first and we have to set this locally due
+      # to mass assignment protection.  
+
       if params[:user][:admin] == "1" then
-         @user.admin = true
+         @user.admin = true 
+      else 
+         @user.admin = false 
       end
-      
+
       @user.save!
       flash[:notice] = "User Updated."
       redirect_to "/users"
