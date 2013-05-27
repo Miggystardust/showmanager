@@ -36,13 +36,18 @@ class ShowsController < ApplicationController
     # prefetch the acts in this show
     @show_items.each{ |si|
       act = nil
-      if si.kind != 0
-        # this is an asset.
-        if si.act_id != 0
-          act = Act.find(si.act_id)
+      begin
+        if si.kind != 0
+          # this is an asset.
+          if si.act_id != 0
+            act = Act.find(si.act_id)
+          end
         end
+        @si_act[si.act_id] = act
+      rescue
+        # this act is not part of the show and therefore, we do not add it. 
+        @si_act[si.act_id] = nil
       end
-      @si_act[si.act_id] = act
     }
   end
 
@@ -96,6 +101,8 @@ class ShowsController < ApplicationController
 
     @safe_title = @show.title.gsub(" ","_")
     @safe_title = @safe_title.gsub("\\","")
+    @safe_title = @safe_title.gsub(")","")
+    @safe_title = @safe_title.gsub("(","")
     @safe_title = @safe_title.gsub("'","")
     @safe_title = @safe_title.gsub("`","")
     @safe_title = @safe_title.gsub(";","")
@@ -119,7 +126,9 @@ class ShowsController < ApplicationController
           @filelist[p.uuid] = p.filename
           @stat_images += 1
         end
-      rescue BSON::InvalidObjectId
+      rescue BSON::InvalidObjectId, Mongoid::Errors::DocumentNotFound
+        # there is a record associated with this show which doesn't exist anymore.
+
         # we silently skip the item if we can't locate the act or if the
         # ID in question is invalid (i.e. 0 or 1)
       end
@@ -136,6 +145,8 @@ class ShowsController < ApplicationController
       # poor sanitization here.
       fn = fn.gsub(" ","_")
       fn = fn.gsub("\\","")
+      fn = fn.gsub(")","")
+      fn = fn.gsub("(","")
       fn = fn.gsub("'","")
       fn = fn.gsub("`","")
       fn = fn.gsub(";","")
