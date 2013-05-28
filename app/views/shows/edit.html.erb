@@ -1,7 +1,11 @@
 
-<h3>Editing show: <%=@show.title%>, doors @ <%=@show.venue %>: <%=@show.door_time.strftime(SHORT_TIME_FMT)%></h3>
+<h3>Edit: <%=@show.title%></h3>
+<P>
+<I><%=@show.venue%></I><BR>
+Doors <%=@show.door_time.strftime(SHORT_TIME_FMT)%> / 
+Show <%=@show.show_time.strftime(TIME_ONLY_FMT)%>
+</p>
 
-<hr>
 <div id="editFormToggle">
 <% if @show.errors.count > 0 %>
 <P><span class="ui-icon ui-icon-triangle-1-s toggle-icon" style="vertical-align:middle"></span><span id="toggle-txt">Hide Show Details</span></P>
@@ -17,8 +21,8 @@
 
 <%= render 'note_modal' %>
 <%= render 'duration_modal' %>
-
-<h3>Available Acts</h3>
+<hr>
+<h4>Available Acts</h4>
 <div id="actFormToggle">
 <P><span class="ui-icon ui-icon-triangle-1-s toggle-act-icon" style="vertical-align:middle"></span><span id="act-toggle-txt">Hide Act List</span></P>
 </div>
@@ -37,8 +41,8 @@
 <!-- data -->
 </tbody>
 </table>
-<HR>
 </div>
+<HR>
 <h3>Show Schedule</h3>
 Drag and Drop rows to re-order show. Changes will automatically save. Click 'Refresh' to recalculate times.
 <P><button class="btn btn-info btn-small" id="addNoteBtn">
@@ -65,6 +69,42 @@ Drag and Drop rows to re-order show. Changes will automatically save. Click 'Ref
 </TABLE>
 
 <script>
+
+<!-- extend datatables to do ajax reloading correctly -->
+(function($, window, document) {
+if ( typeof $.fn.dataTable == "function" &&
+     typeof $.fn.dataTableExt.fnVersionCheck == "function" &&
+     $.fn.dataTableExt.fnVersionCheck('1.7.0') )
+   {
+     $.fn.dataTableExt.oApi.fnReloadAjax = function(oSettings, oUrl, oData)
+        {
+          // if we're reloading acts, make sure we apply the latest data
+          if (oSettings.sAjaxSource.indexOf("acts.json") !== -1) { 
+            oUrl="/acts.json?latest=" + $('#latestacts').is(':checked');
+          }
+
+          if (oUrl)
+           oSettings.sAjaxSource=oUrl;
+
+          //oSettings.sAjaxSource = sNewSource;
+          this.fnClearTable(this);
+          this.oApi._fnProcessingDisplay(oSettings, true );
+          var that = this;
+       
+          $.getJSON(oSettings.sAjaxSource, oData, function(json){
+          /* Got the data - add it to the table */
+          for (var i=0; i < json.aaData.length; i++)
+          {
+            that.oApi._fnAddData(oSettings, json.aaData[i]);
+          }
+       
+          oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
+          that.fnDraw(that);
+          that.oApi._fnProcessingDisplay(oSettings, false);
+       });
+     }
+   }
+})(jQuery, window, document);
 
 $.extend( $.fn.dataTableExt.oStdClasses, {
     "sSortAsc": "header headerSortDown",
@@ -94,7 +134,7 @@ $(document).ready(function() {
       "sPaginationType": "bootstrap",
       "iDisplayLength": 5,
       "oLanguage": {
-	  	"sLengthMenu": "Show&nbsp;<select size=1 name=actslist_length aria-controls=\"actslist\"><option value='5'>5</option><option value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;acts per page"
+	  	"sLengthMenu": "Show&nbsp;<select size=1 name=actslist_length aria-controls=\"actslist\"><option value='5'>5</option><option value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;acts per page&nbsp;&nbsp;<input type='checkbox' name='latestacts' id='latestacts' value='1' onchange='actsDT.fnReloadAjax(); return(true);'> Only show latest acts"
 	  },
      "fnServerData": function ( sSource, aoData, fnCallback ) {
         $.ajax({'datatype':'json',

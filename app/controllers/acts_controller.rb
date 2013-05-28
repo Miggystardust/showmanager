@@ -50,7 +50,25 @@ class ActsController < ApplicationController
   # GET /acts.json
   def index
     if current_user.admin
-      @acts = Act.all
+      # an admin can request "latest" acts, which gives only the latest acts per performer.
+      # the dirty hack here is to reverse-sort by id, to give 'latest', and then to only
+      # append it to the array if it's not the same as the last id we appended. O(n). boo.
+      if params[:latest] == 'true' then
+        @acts = []
+        @origacts = Act.desc(:user_id, :_id)
+        lastuid = nil
+
+        @origacts.each { |a| 
+#          logger.info a.to_json()
+
+          if a.user_id != lastuid then 
+            @acts << a
+          end
+          lastuid = a.user_id
+        }
+      else
+        @acts = Act.all
+      end
       @showowner = true
     else
       @acts = current_user.acts.all
