@@ -27,7 +27,7 @@ class ShowsController < ApplicationController
   end
 
   # GET /shows/1/perfindex...
-  # this is list of all performers in this show
+  # this is list of all performers in this show, for the setlist. 
   def perfindex
     @show = Show.find(params[:id])
     @show_items = ShowItem.where(show_id: params[:id]).asc(:seq)
