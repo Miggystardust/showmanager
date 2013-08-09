@@ -1,3 +1,4 @@
+<script src="/mejs/mediaelement-and-player.min.js"></script>
 <% if defined? @adminindex -%>
 <h1>Admin: All files, all accounts</h1>
 <% else -%>
@@ -41,6 +42,25 @@ $(document).ready(function() {
     'speedOut':200, 
     'overlayShow':false
   });
+
+  /* turn on player */
+  $('video,audio').mediaelementplayer({
+    // initial volume when the player starts
+    startVolume: 0.8,
+    // useful for <audio> player loops
+    loop: false,
+    // the order of controls you want on the control bar (and other plugins below)
+    features: ['playpause','progress','current','duration'],
+    alwaysShowHours: false,
+    // used when showTimecodeFrameCount is set to true
+    framesPerSecond: 25,
+    // turns keyboard support on and off for this instance
+    enableKeyboard: true,
+    // when this player starts, it will pause other players
+    pauseOtherPlayers: true,
+    // array of keyboard commands
+    keyActions: []
+   });
 
 });
 </script>

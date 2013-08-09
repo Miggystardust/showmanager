@@ -83,7 +83,9 @@ Rails3MongoidDevise::Application.routes.draw do
     :controller => "images",
     :action => "servethumb"
 
+
   get 'uploads/download/:fn' => 'uploads#download'
+  get 'uploads/download/:fn.:discard' => 'uploads#download'
 
   # policy wonking
   get '/about/privacy'

@@ -11,33 +11,15 @@
     <% end -%>
     </TD>
     <% end -%>
-		<TD ALIGN=CENTER>
+		<TD>
 			<% if passet.is_audio? -%>
-      
-      <% if passet.kind.match(/mp4$/) -%>
-
-      <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" height="24" width="240"> 
-
-      <param name="src" value="/uploads/download/<%=passet.uuid%>"/>
-      <param name="AUTOPLAY" value="0"/>
-      <param name="AUTOSTART" value="0"/>
-      <param name="type" value="<%=passet.kind%>" height="24" width="240"/>
-
-      </object>
-      <embed src="/uploads/download/<%=passet.uuid%>" height="24" width="240" type="<%=passet.kind%>" pluginspage="http://www.apple.com/quicktime/download/" autoplay="0" autostart="0">
-      <param name="src" value="/uploads/download/<%=passet.uuid%>"/>
-      <param name="AUTOPLAY" value="0"/>
-      <param name="AUTOSTART" value="0"/>
-      <param name="type" value="<%=passet.kind%>" height="24" width="240"/>
-      </embed> 
-
-      <% else -%>
-			<object type="application/x-shockwave-flash" data="/dewplayer/dewplayer-rect.swf" width="240" height="20" id="dewplayer" name="dewplayer">
-				<param name="wmode" value="transparent" />
-				<param name="movie" value="/dewplayer/dewplayer-rect.swf" /> 
-				<param name="flashvars" value="mp3=/uploads/download/<%=passet.uuid%>&amp;showtime=1" /> 
-			</object>
-      <% end -%>
+      <!-- so this is very stupid. Our plugin relies on extensions -->
+      <audio src="/uploads/downloads/<%=passet.uuid%>.mp3" controls="controls" preload="none">
+        <object width="100" height="30" type="application/x-shockwave-flash" data="/mejs/flashmediaelement.swf">
+          <param name="movie" value="/mejs/flashmediaelement.swf" />
+          <param name="flashvars" value="controls=true&file=/test.mp3" />
+        </object>
+      </audio>
 			<% end -%>
 			<% if passet.is_image? -%>
       <a id="single_image" href="/sf/<%=passet.uuid%>.jpg" rel="">

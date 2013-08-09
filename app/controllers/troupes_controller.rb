@@ -2,6 +2,11 @@
 require "#{Rails.root}/lib/yesno.rb"
 
 class TroupesController < ApplicationController
+
+  protect_from_forgery
+
+  before_filter :authenticate_user!
+
   # GET /troupes
   # GET /troupes.json
   def index
