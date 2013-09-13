@@ -21,3 +21,8 @@ There is a long-standing bug in QLab that breaks playback of
 long MP3s. Always use AIFF for shows to avoid this. Never play back
 MP3s as part of the show with QLab. With iTunes, no problems, but with
 QLab, you're hosed.
+
+
+MAKE SURE all songs are on the right audio output
+I have gotten fucked by this many times
+

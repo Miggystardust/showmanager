@@ -18,8 +18,10 @@ set :runner, "ubuntu"
 
 set :use_sudo, true
 
-role :web, "hubba.retina.net"
-role :app, "hubba.retina.net"
+#role :web, "hubba.retina.net"
+#role :app, "hubba.retina.net"
+role :web, "ec2-184-73-139-5.compute-1.amazonaws.com"
+role :app, "ec2-184-73-139-5.compute-1.amazonaws.com"
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
