@@ -26,3 +26,7 @@ QLab, you're hosed.
 MAKE SURE all songs are on the right audio output
 I have gotten fucked by this many times
 
+VERIFY THAT NO SONGS TRUNCATE.
+Idea: if the time typed in doesn't match length of mp3, WARN the user
+
+Need unit tests during Anything - > mp3 conversion
