@@ -196,9 +196,9 @@ class ShowsController < ApplicationController
             editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s._id}\"><i class=\"icon-time icon-white\"></i></button>&nbsp;"
           else
             if s.id.to_s == @show.highlighted_row.to_s
-              markact = "<button class=\"btn btn-info btn-mini unmarkitem\" id=\"#{s._id}\"><i class=\"icon-ban-circle icon-white\"></i> Unmark</button>&nbsp;"
+              markact = "<button class=\"btn btn-info btn-mini noprint unmarkitem\" id=\"#{s._id}\"><i class=\"icon-ban-circle icon-white\"></i> Unmark</button>&nbsp;"
             else
-              markact = "<button class=\"btn btn-info btn-mini markitem\" id=\"#{s._id}\"><i class=\"icon-flag icon-white\"></i> Mark</button>&nbsp;"
+              markact = "<button class=\"btn btn-info btn-mini noprint markitem\" id=\"#{s._id}\"><i class=\"icon-flag icon-white\"></i> Mark</button>&nbsp;"
             end
           end
 

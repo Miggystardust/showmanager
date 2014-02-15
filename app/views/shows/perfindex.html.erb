@@ -1,6 +1,28 @@
 <%
 itemtime = @show.door_time
 %>
+<span class="noprint">
+ <div class="row">
+   <P align="right"><input type="checkbox" id="mcmode" name="mcmode">Show MC Notes</p>
+ </div>
+</span>
+
+<script type="text/javascript"> 
+$( document ).ready(function() { 
+  $(".mcnotes").hide();
+
+  $( 'input#mcmode' ).click(function(){
+     if ($(this).is(':checked')) {
+       $(".mcnotes").show();
+     } else {
+       $(".mcnotes").hide();
+     }
+  });
+});
+
+</script>
+
+
 <div class="perfindex">
 <P><%= @show.title %> - <%= @show.door_time.strftime("%A, %B %e")%></P>
 
@@ -12,9 +34,13 @@ itemtime = @show.door_time
 <P>
 <% if @si_act[s.act_id] -%>
 <B><%=itemtime.strftime(TIME_ONLY_FMT) %></b> - <%=@si_act[s.act_id].stage_name %>
-<% else %>
+<div class='mcnotes'>
+<P><I><%=@si_act[s.act_id].mc_intro %></I></P>
+<P>&nbsp;</P>
+</div>
+<% else -%>
 <B><%=itemtime.strftime(TIME_ONLY_FMT) %></b> - <I><%=s.note %></I>
-<% end %>
+<% end -%>
 </p>
 
 <% 

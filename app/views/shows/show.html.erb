@@ -37,11 +37,11 @@ $(window).scroll(function(e){
 });
 </script>
 
-<P>
+<P class='noprint'>
 <button class="btn btn-success btn-small" id="refreshBtn">
-<i class="icon-refresh icon-white"></i> Refresh </button>
+<span class="icon-refresh icon-white"></span> Refresh </button>
 <button class="btn btn-danger btn-small" id="emergBtn">
-<i class="icon-fire icon-white"></i> Emergency Msg </button>
+<span class="icon-fire icon-white"></span> Emergency Msg </button>
 </p>
 <h3>Show Schedule</h3>
 
@@ -108,18 +108,34 @@ $.extend( true, $.fn.DataTable.TableTools.DEFAULTS.oTags, {
 $(document).ready(function() {
   var intervalId;
 
+  var closePrintView = function(e) {
+    if(e.which == 27) {
+        printViewClosed(); 
+    }
+  };
+
+  function printViewClosed() {
+    showDT.fnSetColumnVis(6, true);
+    $(window).unbind('keyup', closePrintView);
+  }
+
   showDT = $('#showlist').dataTable( {
       "sDom": "T <'row'<'span12'l><'span12'f>r>t<'row'<'span6'i><'span12'p>>",
         "oTableTools": {
           "sSwfPath": "/assets/copy_csv_xls_pdf.swf",
           "aButtons": [
                        "copy",
-                       "print",
                        {
                          "sExtends": "pdf",
-                           "sPdfOrientation": "landscape",
-                           "sPdfMessage": "<%= @show.title %> @ <%= @show.venue %> Doors: <%= @show.door_time.strftime(SHORT_TIME_FMT) %> / Show: <%= @show.show_time.strftime(SHORT_TIME_FMT)%>"
-                           },
+                         "sPdfOrientation": "landscape",
+                         "sPdfMessage": "<%= @show.title %> @ <%= @show.venue %> Doors: <%= @show.door_time.strftime(SHORT_TIME_FMT) %> / Show: <%= @show.show_time.strftime(SHORT_TIME_FMT)%>",
+                         "mColumns": [1,2,3,4,5],
+                       },
+                       {
+                         "sExtends": "print",
+                         "mColumns": [1,2,3,4,5],
+                       }
+
                        ]
             },
       "sAjaxSource": "/shows/<%=@show.id%>/show_items.json?m=1",
