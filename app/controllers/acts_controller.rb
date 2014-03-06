@@ -15,13 +15,13 @@ class ActsController < ApplicationController
 
     if current_user.try(:admin?)
       # admins get to see everything.
-      ui = Passet.where(kind: /^image\//)
-      um = Passet.where(kind: /^audio\//)
-      ua = Passet.where(kind: /^application\/octet-stream$/) # ew!
+      ui = Passet.where(kind: /^image\//).order_by(:filename)
+      um = Passet.where(kind: /^audio\//).order_by(:song_title)
+      ua = Passet.where(kind: /^application\/octet-stream$/).order_by(:filename) # ew!
     else
-      ui = current_user.passets.where(kind: /^image\//)
-      um = current_user.passets.where(kind: /^audio\//)
-      ua = current_user.passets.where(kind: /^application\/octet-stream$/)
+      ui = current_user.passets.where(kind: /^image\//).order_by(:filename)
+      um = current_user.passets.where(kind: /^audio\//).order_by(:song_title)
+      ua = current_user.passets.where(kind: /^application\/octet-stream$/).order_by(:filename)
     end
 
     ui.each do |u|

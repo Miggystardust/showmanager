@@ -46,14 +46,18 @@
      elsif self.music == "1"
        return "No Playback"
      else
-       p = Passet.find(self.music)
-       if p
-         if p.song_artist.blank? or p.song_title.blank?
-           return p.filename
+       begin 
+         p = Passet.find(self.music)
+         if p
+           if p.song_artist.blank? or p.song_title.blank?
+             return p.filename
+           else
+             return "#{p.song_artist} - #{p.song_title}"
+           end
          else
-           return "#{p.song_artist} - #{p.song_title}"
+           return "Asset not found"
          end
-       else
+       rescue Mongoid::Errors::DocumentNotFound
          return "Asset not found"
        end
      end
@@ -66,11 +70,14 @@
        if self.image == "0"
          return "None"
        end
-
-       p = Passet.find(self.image)
-       if p
-         return p.filename
-       else
+       begin
+         p = Passet.find(self.image)
+         if p
+           return p.filename
+         else
+           return "Asset not found"
+         end
+       rescue Mongoid::Errors::DocumentNotFound
          return "Asset not found"
        end
      end
