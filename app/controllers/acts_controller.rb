@@ -15,12 +15,12 @@ class ActsController < ApplicationController
 
     if current_user.try(:admin?)
       # admins get to see everything.
-      ui = Passet.where(kind: /^image\//).order_by(:filename)
-      um = Passet.where(kind: /^audio\//).order_by(:song_title)
+      ui = Passet.where(kind: /^image\//).order_by(filename: 1)
+      um = Passet.where(kind: /^audio\//).order_by(filename: 1)
       ua = Passet.where(kind: /^application\/octet-stream$/).order_by(:filename) # ew!
     else
-      ui = current_user.passets.where(kind: /^image\//).order_by(:filename)
-      um = current_user.passets.where(kind: /^audio\//).order_by(:song_title)
+      ui = current_user.passets.where(kind: /^image\//).order_by(filename: 1)
+      um = current_user.passets.where(kind: /^audio\//).order_by(filename: 1)
       ua = current_user.passets.where(kind: /^application\/octet-stream$/).order_by(:filename)
     end
 
@@ -32,7 +32,9 @@ class ActsController < ApplicationController
       name = u.filename
 
       if u.song_title and u.song_artist
-        name = "#{u.song_artist}: #{u.song_title} (#{u.filename})"
+        if u.song_title != "" and u.song_artist != "" 
+          name = "#{u.filename}: #{u.song_artist} / #{u.song_title}"
+        end
       end
 
       @user_musics << [name,u.id]
