@@ -12,7 +12,7 @@
     </TD>
     <% end -%>
 		<TD>
-			<% if passet.is_audio? -%>
+      <% if passet.is_audio? -%>
       <!-- so this is very stupid. Our plugin relies on extensions -->
       <audio type="<%=passet.kind%>"  src="/sf/<%=passet.uuid%>" controls="controls" preload="none">
         <object width="100" height="30" type="application/x-shockwave-flash" data="/mejs/flashmediaelement.swf">

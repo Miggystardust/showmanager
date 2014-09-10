@@ -100,7 +100,7 @@ class PassetsController <  ApplicationController
     logger.debug("Got: #{song_artist},#{song_title}")
 
     # TODO: Additional filename sanitization
-    # TODO: Use md5 to find out if we've seen this before, don't allow dupes?
+    # TODO: Use hash to find out if we've seen this before, don't allow dupes?
 
     # build the object
     @p = Passet.new(uuid: @uuid,
