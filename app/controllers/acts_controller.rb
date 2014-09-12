@@ -32,7 +32,7 @@ class ActsController < ApplicationController
       name = u.filename
 
       if u.song_title and u.song_artist
-        if u.song_title != "" and u.song_artist != "" 
+        if not u.song_title.blank? and not u.song_artist.blank?
           name = "#{u.filename}: #{u.song_artist} / #{u.song_title}"
         end
       end
@@ -94,7 +94,15 @@ class ActsController < ApplicationController
           if a.music != '0' and a.music != '1' and a.music != nil
             p = Passet.where(_id:a.music)[0]
             if p != nil
-              musicinfo = "<BR><I>#{p.song_artist} - #{p.song_title} (#{sec_to_mmss(p.song_length)})</I>"
+              if not p.song_artist.blank? and not p.song_title.blank?
+                musicinfo = "#{p.song_artist} - #{p.song_title}"
+              else
+                musicinfo = p.filename
+              end
+
+              if p.song_length > 0
+                  musicinfo = "#{musicinfo} (#{sec_to_mmss(p.song_length)})"
+              end
             end
           end
 
