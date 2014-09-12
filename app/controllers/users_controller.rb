@@ -15,7 +15,7 @@ class UsersController < ApplicationController
           # drive datatables
           @usersarray = []
           @users.each { |user|
-            @usersarray << [user.username, user.email, number_to_phone(user.phone_number), user.last_sign_in_at.strftime(SHORT_TIME_FMT), user.provider, user.admin.yesno, user.id]
+            @usersarray << [user.username, user.email, number_to_phone(user.phone_number), user.last_sign_in_at.strftime(SHORT_TIME_FMT), user.provider, user.admin.yesno, user.id.to_s]
           }
           render json: { 'aaData' => @usersarray }
         }
@@ -60,4 +60,12 @@ class UsersController < ApplicationController
       redirect_to "/"
     end
   end
+
+  private
+
+
+  def user_params
+    params.require(:user).permit( :name, :username, :email, :password, :password_confirmation, :remember_me, :uid, :provider )
+  end
+
 end

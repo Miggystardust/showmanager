@@ -1,3 +1,4 @@
+
 class ShowsController < ApplicationController
   protect_from_forgery
 
@@ -19,7 +20,7 @@ class ShowsController < ApplicationController
         # drive datatables
         @showarray = []
         @shows.each { |show|
-            @showarray << [show.title, show.venue, show.door_time.strftime(SHORT_TIME_FMT), show.show_time.strftime(SHORT_TIME_FMT),show.id]
+            @showarray << [show.title, show.venue, show.door_time.strftime(SHORT_TIME_FMT), show.show_time.strftime(SHORT_TIME_FMT),show._id.to_s]
         }
         render json: { 'aaData' => @showarray }
       }
@@ -190,15 +191,15 @@ class ShowsController < ApplicationController
           moveme = ""
 
           if params[:m] == nil
-            moveme = "<button class=\"btn btn-inverse btn-mini moveup\" id=\"#{s._id}\"><i class=\"icon-arrow-up icon-white\"></i></button>&nbsp;<button class=\"btn btn-inverse btn-mini movedown\" id=\"#{s._id}\"><i class=\"icon-arrow-down icon-white\"></i></button>&nbsp;"
-            removeme = "<button class=\"btn btn-danger btn-mini siremove\" id=\"#{s._id}\"><i class=\"icon-trash icon-white\"></i></button>&nbsp;"
-            editact = "<button class=\"btn btn-success btn-mini editact\" id=\"#{s.act_id}\"><i class=\"icon-pencil icon-white\"></i></button>&nbsp;"
-            editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s._id}\"><i class=\"icon-time icon-white\"></i></button>&nbsp;"
+            moveme = "<button class=\"btn btn-inverse btn-mini moveup\" id=\"#{s._id.to_s}\"><i class=\"icon-arrow-up icon-white\"></i></button>&nbsp;<button class=\"btn btn-inverse btn-mini movedown\" id=\"#{s._id.to_s}\"><i class=\"icon-arrow-down icon-white\"></i></button>&nbsp;"
+            removeme = "<button class=\"btn btn-danger btn-mini siremove\" id=\"#{s._id.to_s}\"><i class=\"icon-trash icon-white\"></i></button>&nbsp;"
+            editact = "<button class=\"btn btn-success btn-mini editact\" id=\"#{s.act_id.to_s}\"><i class=\"icon-pencil icon-white\"></i></button>&nbsp;"
+            editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s._id.to_s}\"><i class=\"icon-time icon-white\"></i></button>&nbsp;"
           else
             if s.id.to_s == @show.highlighted_row.to_s
-              markact = "<button class=\"btn btn-info btn-mini noprint unmarkitem\" id=\"#{s._id}\"><i class=\"icon-ban-circle icon-white\"></i> Unmark</button>&nbsp;"
+              markact = "<button class=\"btn btn-info btn-mini noprint unmarkitem\" id=\"#{s._id.to_s}\"><i class=\"icon-ban-circle icon-white\"></i> Unmark</button>&nbsp;"
             else
-              markact = "<button class=\"btn btn-info btn-mini noprint markitem\" id=\"#{s._id}\"><i class=\"icon-flag icon-white\"></i> Mark</button>&nbsp;"
+              markact = "<button class=\"btn btn-info btn-mini noprint markitem\" id=\"#{s._id.to_s}\"><i class=\"icon-flag icon-white\"></i> Mark</button>&nbsp;"
             end
           end
 
@@ -215,7 +216,7 @@ class ShowsController < ApplicationController
 
             if act == nil
               # something is seriously wrong.
-              actinfo = "<B>Cannot find Act ID #{s.act_id}, record #{s._id}</B>"
+              actinfo = "<B>Cannot find Act ID #{s.act_id.to_s}, record #{s._id.to_s}</B>"
               @si << [s.seq,s.time,'--',0,'--','--',actinfo,'']
             else
               actinfo = "<B>#{act.stage_name}</B><BR>#{act.short_description}"
@@ -275,7 +276,7 @@ class ShowsController < ApplicationController
                 stage += "<B>CLEANUP:</B> #{act.clean_up}<BR>"
               end
 
-              @si << { "DT_RowId" => s._id,
+              @si << { "DT_RowId" => s._id.to_s,
                 "0" => s.seq,
                 "1" => "#{itemtime.strftime("%l:%M %P")}<BR>+#{sec_to_time(s.duration.to_i)}",
                 "2" => actinfo,
@@ -292,7 +293,7 @@ class ShowsController < ApplicationController
 
           else
             # note
-            @si << { "DT_RowId" => s._id,
+            @si << { "DT_RowId" => s._id.to_s,
               "0" => s.seq,
               "1" => "#{itemtime.strftime("%l:%M %P")}<BR>+#{sec_to_time(s.duration.to_i)}",
               "2" => "--",

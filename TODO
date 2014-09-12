@@ -5,6 +5,11 @@ https://github.com/netik/showmanager/issues
 Please create an account and add things there, not to this file.
 
 
+Too embarassing -- Rails4 breakage
+
+* Dependent deletes might be fucked up (removed the deps from models)
+* Dependent Acts are not loading right.
+
 SECURITY
 ------------------------------------------------------------------------------
 

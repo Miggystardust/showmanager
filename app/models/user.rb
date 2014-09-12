@@ -11,7 +11,8 @@ class User
   has_many :troupes
 
   # Role-Based Access Control
-  references_and_referenced_in_many :roles
+# removing for rails4 ? 
+#  references_and_referenced_in_many :roles
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
@@ -40,7 +41,7 @@ class User
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
 
-  field :username, :type => String, :unique => true
+  field :username, :type => String
 
   field :admin, :type => Boolean, :default => false
 
@@ -58,15 +59,14 @@ class User
   ## Token authenticatable
   # field :authentication_token, :type => String
   # run 'rake db:mongoid:create_indexes' to create indexes
-  index :email, unique: true
-  index :username, unique: true
+
+  index( { username: 1 }, { unique: true })
+  index( { email: 1 }, { unique: true })
+
   field :name
 
   validates_presence_of :name
   validates_presence_of :username
-
-  attr_accessible :name, :username, :email, :password, :password_confirmation, :remember_me, :uid, :provider
-  attr_protected :admin, :roles
 
   def has_role?(role_sym)
     roles.each { |r|
@@ -101,5 +101,6 @@ class User
       end
     end
   end
+
 
 end

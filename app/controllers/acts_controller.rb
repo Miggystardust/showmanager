@@ -17,11 +17,11 @@ class ActsController < ApplicationController
       # admins get to see everything.
       ui = Passet.where(kind: /^image\//).order_by(filename: 1)
       um = Passet.where(kind: /^audio\//).order_by(filename: 1)
-      ua = Passet.where(kind: /^application\/octet-stream$/).order_by(:filename) # ew!
+      ua = Passet.where(kind: /^application\/octet-stream$/).order_by(filename: 0) # ew!
     else
       ui = current_user.passets.where(kind: /^image\//).order_by(filename: 1)
       um = current_user.passets.where(kind: /^audio\//).order_by(filename: 1)
-      ua = current_user.passets.where(kind: /^application\/octet-stream$/).order_by(:filename)
+      ua = current_user.passets.where(kind: /^application\/octet-stream$/).order_by(filename: 0)
     end
 
     ui.each do |u|
@@ -51,19 +51,22 @@ class ActsController < ApplicationController
   # GET /acts
   # GET /acts.json
   def index
-    if current_user.admin
+    # TODO: This routine breaks if you request /acts/self.  The logic is inverted and needs help.
+    #       admin access should not change this thing's output. admin should be moved to /adminindex or
+    #       similar
+    if current_user.admin then
+      logger.info "acts: loading for admin"
       # an admin can request "latest" acts, which gives only the latest acts per performer.
       # the dirty hack here is to reverse-sort by id, to give 'latest', and then to only
       # append it to the array if it's not the same as the last id we appended. O(n). boo.
       if params[:latest] == 'true' then
+        logger.info "acts: loading latest only"
         @acts = []
         @origacts = Act.desc(:user_id, :_id)
         lastuid = nil
 
-        @origacts.each { |a| 
-#          logger.info a.to_json()
-
-          if a.user_id != lastuid then 
+        @origacts.each { |a|
+          if a.user_id != lastuid then
             @acts << a
           end
           lastuid = a.user_id
@@ -73,7 +76,8 @@ class ActsController < ApplicationController
       end
       @showowner = true
     else
-      @acts = current_user.acts.all
+      logger.info "acts: loading for non admin or self"
+      logger.info current_user.acts
     end
 
     respond_to do |format|
@@ -161,7 +165,8 @@ class ActsController < ApplicationController
   def create
     @act = Act.new(params[:act])
 
-    current_user.passets.where()
+    #jna: removing for rails4, not sure what this adds.
+    #current_user.passets.where()
 
     respond_to do |format|
       if @act.save

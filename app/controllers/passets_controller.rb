@@ -18,7 +18,36 @@ class PassetsController <  ApplicationController
     if current_user.try(:admin?)
       @assets = Passet.all.desc(:created_at)
       @adminindex = true
-      render :index
+      respond_to do | format|
+        format.html { render :index }
+        format.json {
+          @filesarray = []
+          @assets.each { |a|
+             begin
+               @u = User.find(a.created_by)
+               userstring = "<a href=\"/users/#{a.created_by}\">#{@u.name}</a><BR><a href=\"mailto:#{@u.email}\">#{@u.email}</a>"
+             rescue
+               userstring = "<font color=\"#ff0000\">Deleted User</font>"
+             end
+
+
+             objectstring = ""
+
+             if a.is_audio?
+               objectstring = "audio"
+             end
+
+             if a.is_image?
+               objectstring = "<a id=\"single_image\" href=\"/sf/#{a.uuid}.jpg\" rel=\"\">" +
+                              "<IMG SRC=\"/s/#{a.thumb_path(100,100)}\" WIDTH=100 HEIGHT=100></a>"
+             end
+
+
+             @filesarray << [ userstring, objectstring, "file", a.id.to_s ]
+          }
+          render json: { 'aaData' => @filesarray }
+       }
+      end
     else
       flash[:error] = "You must be an administrator to use that function."
       redirect_to "/"
