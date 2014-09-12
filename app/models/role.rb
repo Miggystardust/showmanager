@@ -4,9 +4,11 @@ class Role
   field :name, :type => String
   field :description, :type => String
 
-  attr_accessible :name, :description
+# jna: remove for rails4
+#  attr_accessible :name, :description
 
-  references_and_referenced_in_many :users
+# jna: removing for rails4
+#  references_and_referenced_in_many :users
 end
 
 

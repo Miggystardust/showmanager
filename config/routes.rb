@@ -1,7 +1,4 @@
 Rails3MongoidDevise::Application.routes.draw do
-  authenticated :user do
-    root :to => 'home#index'
-  end
 
   root :to => "home#index"
 
@@ -31,6 +28,12 @@ Rails3MongoidDevise::Application.routes.draw do
   post "/acts/new",
     :controller => "acts",
     :action => "create";
+
+  # override 
+  get "/acts/self",
+    :controller => "acts",
+    :action => "index",
+    :id => "self";
 
   resources :acts do
     collection do
