@@ -1,5 +1,15 @@
 Rails3MongoidDevise::Application.routes.draw do
 
+  resources :entry_techinfos
+
+  resources :entries
+
+  resources :apps do
+   collection do
+     get 'enter'
+   end
+  end
+
   root :to => "home#index"
 
   devise_scope :user do
@@ -89,6 +99,11 @@ Rails3MongoidDevise::Application.routes.draw do
 
   get 'uploads/download/:fn' => 'uploads#download'
   get 'uploads/download/:fn.:discard' => 'uploads#download'
+
+  # policy wonking
+  get "/about/bhof/:id",
+    :controller => "about",
+    :action => "bhof"
 
   # policy wonking
   get '/about/privacy'

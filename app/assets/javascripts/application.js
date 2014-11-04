@@ -12,9 +12,8 @@
 //
 // jna note: Order here is very important, do not use require_tree, it's worthless.
 //
-//= require jquery-1.7.2.min.js
-//= require jquery-ui-1.8.21.custom.min.js
-//= require jquery.ui.widget.js
+//= require jquery-1.11.1.min.js
+//= require jquery-ui.min.js
 //= require jquery-ui-timepicker-addon.js
 //= require tmpl.min.js
 //= require load-image.min.js
@@ -25,8 +24,6 @@
 //= require jquery.fileupload.js
 //= require jquery.fileupload-fp.js
 //= require jquery.fileupload-ui.js
-//= require jquery.fancybox.js
-//= require jquery.fancybox.pack.js
 //= require jquery.form.js
 //= require jquery.mousewheel-3.0.6.pack.js
 //= require locale.js

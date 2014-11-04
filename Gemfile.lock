@@ -215,6 +215,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack-action_caching
   actionpack-page_caching
+  activesupport
   bson_ext
   cancan
   capybara (>= 1.1.2)
