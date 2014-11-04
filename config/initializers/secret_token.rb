@@ -1,0 +1,4 @@
+# config/initializers/secret_token.rb
+Rails3MongoidDevise::Application.config.secret_token = 'pia3he7heyt5cick7e7ok9tem8ben5yef6kadd4etch5af5ealcoadd2ov9fe5geip2few6et2jof2na9hep3ag6ap6qui2ok9oc'
+Rails3MongoidDevise::Application.config.secret_key_base = 'CUDyntmzfTHkerBXZwbW9jFpgMYo6GuQ2icK7qhs'
+

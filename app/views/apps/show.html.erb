@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Legal name:</strong>
+  <%= @app.legal_name %>
+</p>
+
+<p>
+  <strong>Mailing address:</strong>
+  <%= @app.mailing_address %>
+</p>
+
+<p>
+  <strong>Phone primary:</strong>
+  <%= @app.phone_primary %>
+</p>
+
+<p>
+  <strong>Phone alt:</strong>
+  <%= @app.phone_alt %>
+</p>
+
+<p>
+  <strong>Phone primary has sms:</strong>
+  <%= @app.phone_primary_has_sms %>
+</p>
+
+<%= link_to 'Edit', edit_app_path(@app) %> |
+<%= link_to 'Back', apps_path %>

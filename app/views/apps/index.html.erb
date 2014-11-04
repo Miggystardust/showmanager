@@ -1,0 +1,35 @@
+<h1>Listing apps</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Legal name</th>
+      <th>Mailing address</th>
+      <th>Phone primary</th>
+      <th>Phone alt</th>
+      <th>Phone primary has sms</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @apps.each do |app| %>
+      <tr>
+        <td><%= app.legal_name %></td>
+        <td><%= app.mailing_address %></td>
+        <td><%= app.phone_primary %></td>
+        <td><%= app.phone_alt %></td>
+        <td><%= app.phone_primary_has_sms %></td>
+        <td><%= link_to 'Show', app %></td>
+        <td><%= link_to 'Edit', edit_app_path(app) %></td>
+        <td><%= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New App', new_app_path %>
