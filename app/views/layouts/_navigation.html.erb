@@ -54,7 +54,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="divider-vertical"></li>
-              <LI class="pull-right"><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></LI>
+              <LI class="pull-right"><%= link_to 'Logout', destroy_user_session_path, :method=>:delete %></LI>
               <LI CLASS="pull-right">
                   <span class="navbar-text">
                   <% if current_user.try(:admin?) -%>

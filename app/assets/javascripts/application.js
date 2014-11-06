@@ -14,6 +14,7 @@
 //
 //= require jquery-1.11.1.min.js
 //= require jquery-ui.min.js
+//= require jquery_ujs
 //= require jquery-ui-timepicker-addon.js
 //= require tmpl.min.js
 //= require load-image.min.js
