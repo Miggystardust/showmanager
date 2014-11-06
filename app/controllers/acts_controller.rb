@@ -115,10 +115,10 @@ class ActsController < ApplicationController
           # type 2 is standard index. which shows the owner and edit/update buttons
           if params[:type].to_i == 2
             @actarray << [un, a.stage_name, a.short_description + " (" + sec_to_time(a.length) + ")", musicinfo,
-                          "<a class=\"btn btn-mini btn-success\" href=\"/acts/#{a._id}/edit\" id=\"#{a._id}\"><i class=\"icon-pencil icon-white\"></i> Edit</a>&nbsp;<a class=\"btn btn-mini btn-danger\" href=\"/acts/#{a._id}\" data-confirm=\"Are you sure?\" data-method=\"delete\" rel=\"nofollow\"><i class=\"icon-remove icon-white\"></i> Delete</a>",
+                          "<a class=\"btn btn-mini btn-success\" href=\"/acts/#{a._id}/edit\" id=\"#{a._id}\"><i class=\"glyphicon glyphicon-pencil white\"></i> Edit</a>&nbsp;<a class=\"btn btn-mini btn-danger\" href=\"/acts/#{a._id}\" data-confirm=\"Are you sure?\" data-method=\"delete\" rel=\"nofollow\"><i class=\"glyphicon glyphicon-remove white\"></i> Delete</a>",
                          ]
           else
-            @actarray << [un, a.stage_name, a.short_description + " (" + sec_to_time(a.length) + ")", musicinfo, a.id.generation_time.getlocal.strftime(SHORT_TIME_FMT), "<button class=\"btn btn-success actadder\" id=\"#{a._id}\"><i class=\"icon-plus icon-white\"></i> Add</button>"]
+            @actarray << [un, a.stage_name, a.short_description + " (" + sec_to_time(a.length) + ")", musicinfo, a.id.generation_time.getlocal.strftime(SHORT_TIME_FMT), "<button class=\"btn btn-success actadder\" id=\"#{a._id}\"><i class=\"glyphicon glyphicon-plus white\"></i> Add</button>"]
           end
         }
         render json: { 'aaData' => @actarray }

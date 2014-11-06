@@ -22,17 +22,17 @@
 //= require bootstrap-image-gallery.min.js
 //= require jquery.iframe-transport.js
 //= require jquery.fileupload.js
-//= require jquery.fileupload-fp.js
 //= require jquery.fileupload-ui.js
+//= require jquery.fileupload-process.js
 //= require jquery.form.js
 //= require jquery.mousewheel-3.0.6.pack.js
 //= require locale.js
 //= require main.js
-//= require jquery_ujs
 //= require jquery.dataTables.min.js
 //= require jquery.dataTables.rowReordering.js
 //= require TableTools.min.js
 //= require DT_bootstrap.js
+//= require datatables.bootstrap.js
 
 // extend datatables with reload
 // can put these on settimer later on if need be.

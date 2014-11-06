@@ -191,15 +191,15 @@ class ShowsController < ApplicationController
           moveme = ""
 
           if params[:m] == nil
-            moveme = "<button class=\"btn btn-inverse btn-mini moveup\" id=\"#{s._id.to_s}\"><i class=\"icon-arrow-up icon-white\"></i></button>&nbsp;<button class=\"btn btn-inverse btn-mini movedown\" id=\"#{s._id.to_s}\"><i class=\"icon-arrow-down icon-white\"></i></button>&nbsp;"
-            removeme = "<button class=\"btn btn-danger btn-mini siremove\" id=\"#{s._id.to_s}\"><i class=\"icon-trash icon-white\"></i></button>&nbsp;"
-            editact = "<button class=\"btn btn-success btn-mini editact\" id=\"#{s.act_id.to_s}\"><i class=\"icon-pencil icon-white\"></i></button>&nbsp;"
-            editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s._id.to_s}\"><i class=\"icon-time icon-white\"></i></button>&nbsp;"
+            moveme = "<button class=\"btn btn-inverse btn-mini moveup\" id=\"#{s._id.to_s}\"><i class=\"glyphicon glyphicon-arrow-up white\"></i></button>&nbsp;<button class=\"btn btn-inverse btn-mini movedown\" id=\"#{s._id.to_s}\"><i class=\"glyphicon glyphicon-arrow-down white\"></i></button>&nbsp;"
+            removeme = "<button class=\"btn btn-danger btn-mini siremove\" id=\"#{s._id.to_s}\"><i class=\"glyphicon glyphicon-trash white\"></i></button>&nbsp;"
+            editact = "<button class=\"btn btn-success btn-mini editact\" id=\"#{s.act_id.to_s}\"><i class=\"glyphicon glyphicon-pencil white\"></i></button>&nbsp;"
+            editdur = "<button class=\"btn btn-info btn-mini editduration\" id=\"#{s._id.to_s}\"><i class=\"glyphicon glyphicon-time white\"></i></button>&nbsp;"
           else
             if s.id.to_s == @show.highlighted_row.to_s
-              markact = "<button class=\"btn btn-info btn-mini noprint unmarkitem\" id=\"#{s._id.to_s}\"><i class=\"icon-ban-circle icon-white\"></i> Unmark</button>&nbsp;"
+              markact = "<button class=\"btn btn-info btn-mini noprint unmarkitem\" id=\"#{s._id.to_s}\"><i class=\"glyphicon-ban-circle white\"></i> Unmark</button>&nbsp;"
             else
-              markact = "<button class=\"btn btn-info btn-mini noprint markitem\" id=\"#{s._id.to_s}\"><i class=\"icon-flag icon-white\"></i> Mark</button>&nbsp;"
+              markact = "<button class=\"btn btn-info btn-mini noprint markitem\" id=\"#{s._id.to_s}\"><i class=\"glyphicon-flag white\"></i> Mark</button>&nbsp;"
             end
           end
 

@@ -7,7 +7,7 @@ share the same schedule boards.
 </p>
 
 <P>
-<a href="/troupes/new" class="btn btn-primary"><i class="icon-white icon-plus-sign"></i>&nbsp;Create a New Troupe</a>
+<a href="/troupes/new" class="btn btn-primary"><i class="glyphicon white glyphicon-plus-sign"></i>&nbsp;Create a New Troupe</a>
 </P>
 
 <% if @troupes.length > 0 -%>
@@ -64,8 +64,8 @@ value='10'>10</option><option value='15'>15</option><option value='30'>30</optio
       var content = $('td:eq(3)',nRow).html();
       
       if (content.indexOf("btn") == -1) { 
-        $('td:eq(4)', nRow).html('&nbsp;<a class="btn btn-primary btn-mini" href="/troupes/' + id + '/edit"><i class="icon-white icon-pencil"></i> Edit</a>' +
-        '&nbsp;<a class="btn btn-danger btn-mini" href="/troupes/' + id + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="icon-remove icon-white"></i> Delete</a>');
+        $('td:eq(4)', nRow).html('&nbsp;<a class="btn btn-primary btn-mini" href="/troupes/' + id + '/edit"><i class="glyphicon white glyphicon-pencil"></i> Edit</a>' +
+        '&nbsp;<a class="btn btn-danger btn-mini" href="/troupes/' + id + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="glyphicon-remove glyphicon white"></i> Delete</a>');
       }
      }
   });
@@ -138,7 +138,7 @@ value='10'>10</option><option value='15'>15</option><option value='30'>30</optio
       var content = $('td:eq(4)',nRow).html();
       
       if (content.indexOf("btn") == -1) { 
-        $('td:eq(4)', nRow).html('&nbsp;<a class="btn btn-primary btn-small" href="/troupes/' + id + '/join"><i class="icon-white icon-star"></i> Join</a>');
+        $('td:eq(4)', nRow).html('&nbsp;<a class="btn btn-primary btn-small" href="/troupes/' + id + '/join"><i class="glyphicon white glyphicon-star"></i> Join</a>');
       }
      }
   });

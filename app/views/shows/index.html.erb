@@ -1,7 +1,7 @@
 <h1>Shows</h1>
 
 <P>
-<a href="/shows/new" class="btn btn-primary"><i class="icon-white icon-plus-sign"></i>&nbsp;Create Show</a>
+<a href="/shows/new" class="btn btn-primary"><i class="glyphicon glyphicon-plus-sign white"></i>&nbsp;Create Show</a>
 </p>
 
 <% if @shows.length == 0 -%>
@@ -38,7 +38,7 @@ $.extend( $.fn.dataTableExt.oStdClasses, {
 
 $(document).ready(function() {
   showsDT = $('#showslist').dataTable( {
-      "sDom": "<'row'<'span6'l><'span12'f>r>t<'row'<'span12'i><'span12'p>>",
+      "sDom": "<'row'<'col-6'l><'col-12'f>r>t<'row'<'col-12'i><'col-12'p>>",
       "sAjaxSource": "/shows.json",
       "sPaginationType": "bootstrap",
       "iDisplayLength": 30,
@@ -60,11 +60,11 @@ value='10'>10</option><option value='15'>15</option><option value='30'>30</optio
       var content = $('td:eq(4)',nRow).html();
 
       if (content.indexOf("btn") == -1) { 
-        $('td:eq(4)', nRow).html('<a class="btn btn-success btn-mini" href="/shows/' + id + '"><i class="icon-white icon-eye-open"></i> Live View</a>' + 
-        '&nbsp;<a class="btn btn-success btn-mini" href="/shows/' + id + '/perfindex"><i class="icon-white icon-list"></i> List</a>' +
-        '&nbsp;<a class="btn btn-warning btn-mini" href="/shows/' + id + '/download"><i class="icon-white icon-download"></i> Download</a>' +
-        '&nbsp;<a class="btn btn-primary btn-mini" href="/shows/' + id + '/edit"><i class="icon-white icon-pencil"></i> Edit</a>' +
-        '&nbsp;<a class="btn btn-danger btn-mini" href="/shows/' + id + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="icon-remove icon-white"></i> Delete</a>');
+        $('td:eq(4)', nRow).html('<a class="btn btn-success btn-mini" href="/shows/' + id + '"><i class="glyphicon white glyphicon-eye-open"></i> Live View</a>' + 
+        '&nbsp;<a class="btn btn-success btn-mini" href="/shows/' + id + '/perfindex"><i class="glyphicon white glyphicon-list"></i> List</a>' +
+        '&nbsp;<a class="btn btn-warning btn-mini" href="/shows/' + id + '/download"><i class="glyphicon white glyphicon-download"></i> Download</a>' +
+        '&nbsp;<a class="btn btn-primary btn-mini" href="/shows/' + id + '/edit"><i class="glyphicon white glyphicon-pencil"></i> Edit</a>' +
+        '&nbsp;<a class="btn btn-danger btn-mini" href="/shows/' + id + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="glyphicon-remove glyphicon white"></i> Delete</a>');
       }
      }
   });

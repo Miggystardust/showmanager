@@ -20,55 +20,55 @@
 
 <fieldset>
 <div class="form-group">
- <%= f.label :username, "Username", :class=>"form-label" %>
- <div class="controls">
-   <%= f.text_field :username, :class=>"input-xlarge"  %>
+   <%= f.label :username, "Username", :class=>"col-sm-2 control-label" %>
+   <div class="col-sm-10">
+     <%= f.text_field :username, :class=>"form-control"  %>
+   </div>
+</div>
+<div class="form-group">
+ <%= f.label :name, :class=>"col-sm-2 control-label" %>
+ <div class="col-sm-10">
+  <%= f.text_field :name, :class => "form-control" %>
  </div>
 </div>
 <div class="form-group">
- <%= f.label :name, :class=>"form-label" %>
- <div class="controls">
-  <%= f.text_field :name, :class => "input-xlarge" %>
+ <%= f.label :email, :class=>"col-sm-2 control-label" %>
+ <div class="col-sm-10">
+  <%= f.email_field :email, :class => "form-control" %>
  </div>
 </div>
 <div class="form-group">
- <%= f.label :email, :class=>"form-label" %>
- <div class="controls">
-  <%= f.email_field :email, :class => "input-xlarge" %>
- </div>
-</div>
-<div class="form-group">
-  <%= f.label :phone_number, "Phone Number", :class=>"form-label" %>
-  <div class="controls">
-  <%= f.text_field :phone_number, :class=>"input-xlarge"  %>
+  <%= f.label :phone_number, "Phone Number", :class=>"col-sm-2 control-label" %>
+  <div class="col-sm-10">
+  <%= f.text_field :phone_number, :class=>"form-control"  %>
   </div>
 </div>
 <% if @user.provider.blank? == true -%>
 <div class="form-group">
- <%= f.label :password, :class => "form-label" %>
- <div class="controls">
-  <%= f.password_field :password, :autocomplete => "off", :class => "input-xlarge" %>
+ <%= f.label :password, :class => "col-sm-2 control-label" %>
+ <div class="col-sm-10">
+  <%= f.password_field :password, :autocomplete => "off", :class => "form-control" %>
   <P>Leave blank if you don't want to change your password.</p>
 </div>
 </div>
 
 <div class="form-group">
- <%= f.label :password_confirmation, :class=>"form-label" %>
- <div class="controls">
- <%= f.password_field :password_confirmation, :class => "input-xlarge" %>
+ <%= f.label :password_confirmation, :class=>"col-sm-2 control-label" %>
+ <div class="col-sm-10">
+ <%= f.password_field :password_confirmation, :class => "form-control" %>
  </div>
 </div>
 
 <div class="form-group">
- <label for="current_password" class="form-label">Current Password</label>
- <div class="controls">
-  <%= f.password_field :current_password, :class => "input-xlarge" %>
+ <label for="current_password" class="col-sm-2 control-label">Current Password</label>
+ <div class="col-sm-10">
+  <%= f.password_field :current_password, :class => "form-control" %>
  <p>We need your current password to confirm your changes.</p>
  </div>
 </div>
 <% end -%>
 <div class="form-group">
- <div class="controls">
+ <div class="col-sm-10">
  <%= f.submit "Update", :class=>"btn-primary" %>
 </div>
 </div>

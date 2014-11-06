@@ -1,3 +1,25 @@
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, :class => "alert alert-#{name}" if msg.is_a?(String) %>
-<% end %>
+<% flash.each do |name, msg| -%>
+  <%
+     if msg.is_a?(String)
+       # map types to our css classes
+       case name.to_s
+         when "success"
+           msgclass = name
+         when "info"
+           msgclass = name
+         when "warning"
+           msgclass = name
+         when "danger"
+           msgclass = name
+         when "alert"
+           # it sort of sucks that we have such limited data back from flashHash now
+           # default to danger
+           msgclass='danger'
+         else
+           msgclass='info'
+        end
+  -%>
+   <%= content_tag :div, msg, :class => "alert alert-#{msgclass}" %>
+  <% end -%>
+<% end -%>
+

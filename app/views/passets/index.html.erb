@@ -7,7 +7,7 @@
 <P>
 </p>
 <P>
-<a href="/passets/new" class="btn btn-primary"><i class="icon-white icon-arrow-up"></i>&nbsp;Upload</a>
+<a href="/passets/new" class="btn btn-primary"><i class="glyphicon white glyphicon-arrow-up"></i>&nbsp;Upload</a>
 </P>
 
 <% if @assets.count > 0 -%>
@@ -43,7 +43,7 @@ $.extend( $.fn.dataTableExt.oStdClasses, {
 
 $(document).ready(function() {
   filesDT = $('#fileslist').dataTable( {
-      "sDom": "<'row'<'span6'l><'span12'f>r>t<'row'<'span12'i><'span12'p>>",
+      "sDom": "<'row'<'col-6'l><'col-12'f>r>t<'row'<'col-12'i><'col-12'p>>",
       "sAjaxSource": "/passets/adminindex.json",
       "sPaginationType": "bootstrap",
       "iDisplayLength": 10,
@@ -64,9 +64,9 @@ $(document).ready(function() {
       var content = $('td:eq(3)',nRow).html();
 
       if (content.indexOf("btn") == -1) { 
-        $('td:eq(3)', nRow).html('<a class="btn btn-warning btn-mini" href="/passets/' + id + '/download"><i class="icon-white icon-download"></i> Download</a>' +
-        '&nbsp;<a class="btn btn-primary btn-mini" href="/passets/' + id + '/edit"><i class="icon-white icon-pencil"></i> Edit</a>' +
-        '&nbsp;<a class="btn btn-danger btn-mini" href="/shows/' + id + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="icon-remove icon-white"></i> Delete</a>');
+        $('td:eq(3)', nRow).html('<a class="btn btn-warning btn-mini" href="/passets/' + id + '/download"><i class="glyphicon white glyphicon-download"></i> Download</a>' +
+        '&nbsp;<a class="btn btn-primary btn-mini" href="/passets/' + id + '/edit"><i class="glyphicon white glyphicon-pencil"></i> Edit</a>' +
+        '&nbsp;<a class="btn btn-danger btn-mini" href="/shows/' + id + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="glyphicon-remove glyphicon white"></i> Delete</a>');
      }}});
 
   var fixHelper = function(e, ui) {

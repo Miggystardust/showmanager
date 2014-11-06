@@ -17,6 +17,7 @@ $.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
 	};
 }
 
+
 /* fix for bootstrap 3? unsure what this is doing... jna 11/1 */
 $.extend( true, $.fn.dataTable.defaults, {
         "sDom": "<'row'<'col-6'f><'col-6'l>r>t<'row'<'col-6'i><'col-6'p>>",

@@ -140,3 +140,6 @@ body{
  }
 }
 
+.white, .white a {
+  color: #fff;
+}

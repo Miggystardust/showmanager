@@ -14,7 +14,6 @@
     <!--[if lt IE 7]><link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-ie6.min.css"><![endif]-->
 <!--    <%= stylesheet_link_tag "bootstrap-image-gallery.min.css", :media => "all"  %> -->
     <%= stylesheet_link_tag "jquery.fileupload-ui.css", :media => "all"  %>
-    <%= stylesheet_link_tag "blitzer/jquery-ui-1.8.21.custom", :media => "all"  %>
     <%= stylesheet_link_tag "DT_bootstrap", :media => "all"  %>
 
     <%= stylesheet_link_tag "/mejs/mediaelementplayer.css", :media => "all" %>
@@ -25,7 +24,7 @@
     <!-- Add fancyBox -->
     <%= stylesheet_link_tag "jquery.fancybox" %>
     <%= csrf_meta_tags %>
-	<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+  	<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
   </head>  
   <body>
   <div class="noprint">

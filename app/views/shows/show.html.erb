@@ -39,9 +39,9 @@ $(window).scroll(function(e){
 
 <P class='noprint'>
 <button class="btn btn-success btn-small" id="refreshBtn">
-<span class="icon-refresh icon-white"></span> Refresh </button>
+<span class="glyphicon-refresh glyphicon white"></span> Refresh </button>
 <button class="btn btn-danger btn-small" id="emergBtn">
-<span class="icon-fire icon-white"></span> Emergency Msg </button>
+<span class="glyphicon-fire glyphicon white"></span> Emergency Msg </button>
 </p>
 <h3>Show Schedule</h3>
 
@@ -120,7 +120,7 @@ $(document).ready(function() {
   }
 
   showDT = $('#showlist').dataTable( {
-      "sDom": "T <'row'<'span12'l><'span12'f>r>t<'row'<'span6'i><'span12'p>>",
+      "sDom": "T <'row'<'col-12'l><'col-12'f>r>t<'row'<'col-6'i><'col-12'p>>",
         "oTableTools": {
           "sSwfPath": "/assets/copy_csv_xls_pdf.swf",
           "aButtons": [
