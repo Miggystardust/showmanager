@@ -30,12 +30,6 @@
 
 /* set up acts datatable */
 $.extend( $.fn.dataTableExt.oStdClasses, {
-  "sSortAsc": "header headerSortDown",
-  "sSortDesc": "header headerSortUp",
-  "sSortable": "header"
-} );
-
-$.extend( $.fn.dataTableExt.oStdClasses, {
   "sWrapper": "dataTables_wrapper form-inline"
 } );
 
@@ -43,7 +37,7 @@ $(document).ready(function() {
     actsDT = $('#actslist').dataTable( {
         "sDom": "<'row'<'col-6'l><'col-12'f>r>t<'row'<'col-12'i><'col-12'p>>",
         "sAjaxSource": "/acts.json?type=2",
-        "sPaginationType": "bootstrap",
+        "paging_type": "full_numbers",
         "iDisplayLength": 10,
         "oLanguage": {
             "sLengthMenu": "Show&nbsp;<select size=1 name=actslist_length aria-controls=\"actslist\"><option value='5'>5</option><option \

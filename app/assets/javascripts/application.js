@@ -31,7 +31,6 @@
 //= require main.js
 //= require jquery.dataTables.min.js
 //= require jquery.dataTables.rowReordering.js
-//= require DT_bootstrap.js
 //= require datatables.bootstrap.js
 //= require dataTables.tableTools.js
 

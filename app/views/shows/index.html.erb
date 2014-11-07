@@ -27,12 +27,6 @@ There are no shows on file. Create one.
 
 <script>
 $.extend( $.fn.dataTableExt.oStdClasses, {
-  "sSortAsc": "header headerSortDown",
-  "sSortDesc": "header headerSortUp",
-  "sSortable": "header"
-} );
-
-$.extend( $.fn.dataTableExt.oStdClasses, {
   "sWrapper": "dataTables_wrapper form-inline"
 } );
 
@@ -40,7 +34,7 @@ $(document).ready(function() {
   showsDT = $('#showslist').dataTable( {
       "sDom": "<'row'<'col-6'l><'col-12'f>r>t<'row'<'col-12'i><'col-12'p>>",
       "sAjaxSource": "/shows.json",
-      "sPaginationType": "bootstrap",
+      "sPaginationType": "full_numbers",
       "iDisplayLength": 30,
       "oLanguage": {
       "sLengthMenu": "Show&nbsp;<select size=1 name=actslist_length aria-controls=\"actslist\"><option value='5'>5</option><option \
