@@ -116,7 +116,8 @@ $(document).ready(function() {
               }});
         }
     }).rowReordering({
-		sURL:"/show_items/update_seq"
+		sURL: "/show_items/update_seq",
+        sData: {"authenticity_token" : AUTH_TOKEN }
 	});
 
   /* set up the lower table */

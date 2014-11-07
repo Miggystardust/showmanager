@@ -151,6 +151,7 @@
             iIndexColumn: 0,
             iStartPosition: 1,
             sURL: null,
+            sData: null,
             sRequestType: "POST",
             iGroupingLevel: 0,
             fnAlert: _fnAlert,
@@ -206,15 +207,23 @@
 
                     if (properties.sURL != null) {
                         properties.fnStartProcessingMode();
+
+                        var dataToSend = {id: ui.item.context.id,
+                            fromPosition: oState.iCurrentPosition,
+                            toPosition: oState.iNewPosition,
+                            direction: oState.sDirection,
+                            group: sGroup};
+
+                        if (properties.sData != null) {
+                            // merge the data from the user with our data if any for our ajax request
+                            // this can be used for csrf tokens, id numbers, etc.
+                            dataToSend = $.extend(dataToSend, properties.sData)
+                        }
+
                         $.ajax({
                             url: properties.sURL,
                             type: properties.sRequestType,
-                            data: { id: ui.item.context.id,
-                                fromPosition: oState.iCurrentPosition,
-                                toPosition: oState.iNewPosition,
-                                direction: oState.sDirection,
-                                group: sGroup
-                            },
+                            data: dataToSend,
                             success: function () {
                                 fnMoveRows(sSelector, oState.iCurrentPosition, oState.iNewPosition, oState.sDirection, ui.item.context.id, sGroup);
                                 properties.fnEndProcessingMode();
