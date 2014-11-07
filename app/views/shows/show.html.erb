@@ -25,7 +25,7 @@
   <%= @show.show_time.strftime(SHORT_TIME_FMT) %>
 </p>
 
-<div class="alert alert-error emergmsg" id="emergdiv" style="display: none;">
+<div class="alert alert-danger emergmsg" id="emergdiv" style="display: none;">
 <div id="emergmsg"></div>
 </div>
 <script>
@@ -121,7 +121,7 @@ $(document).ready(function() {
 
   showDT = $('#showlist').dataTable( {
       "sDom": "T <'row'<'col-12'l><'col-12'f>r>t<'row'<'col-6'i><'col-12'p>>",
-        "oTableTools": {
+        "tableTools": {
           "sSwfPath": "/assets/copy_csv_xls_pdf.swf",
           "aButtons": [
                        "copy",

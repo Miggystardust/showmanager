@@ -113,7 +113,7 @@ $.extend( $.fn.dataTableExt.oStdClasses, {
 } );
 
 $.extend( $.fn.dataTableExt.oStdClasses, {
-    "sWrapper": "dataTables_wrapper form-inline"
+    "sWrapper": "dataTables_wrapper form-horizontal"
 } );
 
 /* set up acts datatable */
@@ -134,7 +134,7 @@ $(document).ready(function() {
       "sPaginationType": "bootstrap",
       "iDisplayLength": 5,
       "oLanguage": {
-	  	"sLengthMenu": "Show&nbsp;<select size=1 name=actslist_length aria-controls=\"actslist\"><option value='5'>5</option><option value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;acts per page&nbsp;&nbsp;<input type='checkbox' name='latestacts' id='latestacts' value='1' onchange='actsDT.fnReloadAjax(); return(true);'> Only show latest acts"
+	  	"sLengthMenu": "Show _MENU_ acts per page&nbsp;&nbsp;<input type='checkbox' name='latestacts' id='latestacts' value='1' onchange='actsDT.fnReloadAjax(); return(true);'> Only show latest acts"
 	  },
      "fnServerData": function ( sSource, aoData, fnCallback ) {
         $.ajax({'datatype':'json',
@@ -152,8 +152,8 @@ $(document).ready(function() {
         "sAjaxSource": "/shows/<%=@show.id%>/show_items.json",
         "sPaginationType": "bootstrap",
         "iDisplayLength": 15,
-        "oLanguage": {
-        "sLengthMenu": "Show&nbsp;<select size=1 name=actslist_length aria-controls=\"actslist\"><option value='5'>5</option><option value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;items per page"
+        "oLanguage": 
+{        "sLengthMenu": "Show&nbsp;<select size=1 name=actslist_length aria-controls=\"actslist\"><option value='5'>5</option><option value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;items per page"
           },
         "fnServerData": function ( sSource, aoData, fnCallback ) {
           $.ajax({'datatype':'json',

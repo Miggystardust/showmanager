@@ -1,7 +1,9 @@
-<div class='modal' id='emergModal' style='display: none;'>
-  <div class='modal-header'>
-    <a class='close' data-dismiss='modal'>×</a>
-    <h3>Emergency Message</h3>
+<div class='modal' id='emergModal' style='display: none' tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">Emergency Message</h4>
   </div>
 
   <%= form_for :show, :html => { :class => "form-horiziontal" } do |f| -%>
@@ -20,9 +22,12 @@
     <%= f.hidden_field :show_id, :value=> @show.id  %>
     <button class="btn btn-primary" id="emerg-form-submit">Update Message</button>
     <button class="btn btn-primary" id="emerg-form-remove">Remove Message</button>
-  </div>
+
+  </div> <!-- /.modal-footer --> 
   <% end -%>
-</div>
+  </div> <!-- /.modal-content --> 
+ </div>  <!-- /.modal-dialog --> 
+</div> <!-- /.modal --> 
 
 <script>
   //<![CDATA[
