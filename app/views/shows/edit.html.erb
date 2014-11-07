@@ -24,7 +24,6 @@ Show <%=@show.show_time.strftime(TIME_ONLY_FMT)%>
 <div id="actFormToggle">
 <P><span style="float: left" class="ui-icon ui-icon-triangle-1-s toggle-act-icon" style="vertical-align:middle"></span><span id="act-toggle-txt">Hide Act List</span></P>
 </div>
-
 <div id="actTable">
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="actslist">
 <thead>
@@ -85,7 +84,6 @@ $(document).ready(function() {
   actsDT = $('#actslist').dataTable( {
       "sDom": "<'row'<'col-6'l><'col-12'f>r>t<'row'<'col-12'i><'col-12'p>>",
       "sAjaxSource": "/acts.json",
-      "sPaginationType": "full_numbers",
       "iDisplayLength": 5,
       "oLanguage": {
 	  	"sLengthMenu": "Show _MENU_ acts per page&nbsp;&nbsp;<input type='checkbox' name='latestacts' id='latestacts' value='1' onchange='actsDT.fnReloadAjax(); return(true);'> Only show latest acts"
@@ -102,9 +100,8 @@ $(document).ready(function() {
   });
   
   showDT = $('#showlist').dataTable( {
-      "sDom": "<'row'<'col-12'l><'col-12'f>r>t<'row'<'col-6'i><'col-12'p>>",
+        "sDom": "<'row'<'col-12'l><'col-12'f>r>t<'row'<'col-6'i><'col-12'p>>",
         "sAjaxSource": "/shows/<%=@show.id%>/show_items.json",
-        "sPaginationType": "full_numbers",
         "iDisplayLength": 15,
         "oLanguage": 
 {        "sLengthMenu": "Show&nbsp;<select size=1 name=actslist_length aria-controls=\"actslist\"><option value='5'>5</option><option value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;items per page"

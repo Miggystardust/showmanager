@@ -58,8 +58,8 @@ value='10'>10</option><option value='15'>15</option><option value='30'>30</optio
       var content = $('td:eq(6)',nRow).html();
       console.log(content);
       if (content.indexOf("btn") == -1) { 
-        $('td:eq(6)', nRow).html('&nbsp;<a class="btn btn-primary btn-mini" href="/users/' + id + '"><i class="glyphicon white glyphicon-eye-open"></i> Show</a>' +
-        '&nbsp;<a class="btn btn-danger btn-mini" href="/users/' + id + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="glyphicon glyphicon-remove white"></i> Delete</a>');
+        $('td:eq(6)', nRow).html('&nbsp;<a class="btn btn-primary btn-sm" href="/users/' + id + '"><i class="glyphicon white glyphicon-eye-open"></i> Show</a>' +
+        '&nbsp;<a class="btn btn-danger btn-sm" href="/users/' + id + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="glyphicon glyphicon-remove white"></i> Delete</a>');
      }
      }
   });

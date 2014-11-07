@@ -14,12 +14,11 @@
 //
 //= require jquery-1.11.1.min.js
 //= require jquery-ui.min.js
-//= require jquery_ujs
 //= require jquery-ui-timepicker-addon.js
 //= require tmpl.min.js
 //= require load-image.min.js
 //= require canvas-to-blob.min.js
-//= require bootstrap.min.js
+//= require bootstrap-3.2.0.min.js
 //= require bootstrap-image-gallery.min.js
 //= require jquery.iframe-transport.js
 //= require jquery.fileupload.js
@@ -31,7 +30,7 @@
 //= require main.js
 //= require jquery.dataTables.min.js
 //= require jquery.dataTables.rowReordering.js
-//= require datatables.bootstrap.js
+//= require dataTables.bootstrap.js
 //= require dataTables.tableTools.js
 
 // the entire API for datatables has changed, but we're on legacy 1.9 code, support the reload method here

@@ -26,6 +26,12 @@ body{
   opacity: 0.9;
 }
 
+/* unsure why bootstrap does this, but we have to fix it as it interfers with tables. -- jna */
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+/* --- end jna changes -- */ 
 
 /* Jumbotrons
 -------------------------------------------------- */
