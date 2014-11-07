@@ -7,9 +7,9 @@ Show <%=@show.show_time.strftime(TIME_ONLY_FMT)%>
 
 <div id="editFormToggle">
 <% if @show.errors.count > 0 %>
-<P><span class="ui-icon ui-icon-triangle-1-s toggle-icon" style="vertical-align:middle"></span><span id="toggle-txt">Hide Show Details</span></P>
+<span style="float: left" class="ui-icon ui-icon-triangle-1-s toggle-icon" style="vertical-align:middle"></span><span id="toggle-txt">Hide Show Details</span>
 <% else %>
-<P><span class="ui-icon ui-icon-triangle-1-e toggle-icon" style="vertical-align:middle"></span><span id="toggle-txt">Edit Show Details</span></P>
+<span style="float: left" class="ui-icon ui-icon-triangle-1-e toggle-icon" style="vertical-align:middle"></span><span id="toggle-txt">Edit Show Details</span>
 <% end %>
 </div>
 
@@ -22,7 +22,7 @@ Show <%=@show.show_time.strftime(TIME_ONLY_FMT)%>
 <hr>
 <h4>Available Acts</h4>
 <div id="actFormToggle">
-<P><span class="ui-icon ui-icon-triangle-1-s toggle-act-icon" style="vertical-align:middle"></span><span id="act-toggle-txt">Hide Act List</span></P>
+<P><span style="float: left" class="ui-icon ui-icon-triangle-1-s toggle-act-icon" style="vertical-align:middle"></span><span id="act-toggle-txt">Hide Act List</span></P>
 </div>
 
 <div id="actTable">
