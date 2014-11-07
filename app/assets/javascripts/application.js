@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 // jna note: Order here is very important, do not use require_tree, it's worthless.
+// fancybox is used on the image page for preview.
 //
 //= require jquery-1.11.1.min.js
 //= require jquery-ui.min.js
@@ -18,7 +19,7 @@
 //= require tmpl.min.js
 //= require load-image.min.js
 //= require canvas-to-blob.min.js
-//= require bootstrap-3.2.0.min.js
+//= require bootstrap.min.js
 //= require bootstrap-image-gallery.min.js
 //= require jquery.iframe-transport.js
 //= require jquery.fileupload.js
@@ -30,6 +31,7 @@
 //= require main.js
 //= require jquery.dataTables.min.js
 //= require jquery.dataTables.rowReordering.js
+//= require jquery.fancybox.js
 //= require dataTables.bootstrap.js
 //= require dataTables.tableTools.js
 
