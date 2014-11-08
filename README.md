@@ -13,7 +13,13 @@ Other personnell, benefit from the system in many ways once a show has been crea
 * The MC/Announcer notes are available in the LIST view via "Show MC Notes"
 * During the show, the MARK feature on the LIVE VIEW can be used to synchronize everyone together so people know where the show is at.
 
-Best of all, it's good for the environment because performers don't have to burn single-use CD-Rs for their music.
+Best of all, it's good for the environment because performers don't have to burn single-use CD-Rs for their music. The software has a battle-proven track record, running since 2012 on over 80 shows. It has recently been upgraded to Ruby2, Rails4, and Bootstrap3. Deployment is via Capistrano3. 
+
+We also audit the software for security issues with Hakiri (https://hakiri.io) upon every commit.
+
+Future
+=======
+The next feature that we will support is multiple-troupe support and show-signup. Right now the software can only handle one Troupe at a time. In the future we hope to support custom forms, payment integration, and show-signup applications so that people can apply to shows and belong to multiple troupes in the system.
 
 Dependencies
 ============
