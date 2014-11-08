@@ -1,6 +1,22 @@
-Hubba Show Manager
-==================
+TroupeIt Show Manager
+=====================
 
+TroupeIT is a collaboration tool for managing a stage show. We use it primarily to manage the Hubba Hubba Revue at the DNA Lounge and other bay area venues. We're a Burlesque troupe, so our use case may be very different from yours, but you can use the software easily to manage a school or community theater. 
+
+Our shows largely consist of people performing to prerecorded music. This system allows the performer to upload their music to the system and specify their "Act". After that, a stage manager creates a "Show" and adds the "Acts" to the "Show". 
+
+Other personnell, benefit from the system in many ways once a show has been created...
+
+* The sound techs, can download the show as a single ZIP file for playback (I usually use Figure53's qLab for this purpose)
+* Lighting and Stage cues are right there on the Live view screen
+* Stage managers can print backstage schedules with the "LIST" view.
+* The MC/Announcer notes are available in the LIST view via "Show MC Notes"
+* During the show, the MARK feature on the LIVE VIEW can be used to synchronize everyone together so people know where the show is at.
+
+Best of all, it's good for the environment because performers don't have to burn single-use CD-Rs for their music.
+
+Dependencies
+============
 Tested under Phusion Passenger, Rails 4.0.9,  Ruby 2.1.3p242 , nginx 1.62, and mongoDB 2.0.7-rc0
 This project is largely based on rails3-mongoid-devise for authentication. 
 It also uses Bootstrap3 extensively for layout (getbootstrap.com)
