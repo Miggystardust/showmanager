@@ -1,6 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
+group :development do
+      gem 'capistrano', '~> 3.0', require: false
+      gem 'capistrano-rails',   '~> 1.1', require: false
+      gem 'capistrano-bundler', '~> 1.1', require: false
+end
+
+gem 'rails', '4.0.9'
+
 group :assets do
   gem 'sass-rails', '4.0.0'
   gem 'coffee-rails', '4.0.0'

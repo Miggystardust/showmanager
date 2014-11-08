@@ -1,6 +1,7 @@
 class EntryTechinfo
   include Mongoid::Document
-  field :entry_id, type: Id
+
+  field :entry_id, type: String
   field :song_title, type: String
   field :song_artist, type: String
   field :act_duration_secs, type: Integer
