@@ -40,3 +40,5 @@ gem 'rails-observers'
 gem 'actionpack-page_caching'
 gem 'actionpack-action_caching'
 gem 'activesupport'
+
+gem 'jquery-fileupload-rails'

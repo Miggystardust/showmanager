@@ -31,14 +31,9 @@ class PassetsController <  ApplicationController
           objectstring = embed_for(a)
           @filesarray << [ userstring, objectstring, a.to_html, a.id.to_s ]
         }
-
-        logger.debug(@filesarray)
         render json: { 'aaData' => @filesarray }
       }
     end
-
-
-
   end
 
   def adminindex
@@ -106,48 +101,41 @@ class PassetsController <  ApplicationController
   end
 
   def create
-    if params[:files] == nil
-      flash[:error] = "You must specify a file to upload."
-      redirect_to :action => :new
-      @response = {"error" => "No Files specified"}
-      render :json => [@response].to_json
-    end
-
     # this id is used for tracking the current upload
+    # TODO: remove external dependency here
     @uuid = `uuidgen`.strip
 
-    tmp = params[:files][0].tempfile
+    if params[:files]
+      tmp = params[:files][0].tempfile    
+      logger.debug("Got file #{tmp.path}")
+      filename = FileTools.sanitize_filename(params[:files][0].original_filename)
+      fileinfo = determine_mime_type(filename)
 
-    logger.debug("Got file #{tmp.path}")
+      @file = "#{UPLOADS_DIR}/#{@uuid}"
 
-    filename = FileTools.sanitize_filename(params[:files][0].original_filename)
-    fileinfo = determine_mime_type(filename)
+      song_artist = ""
+      song_title = ""
+      song_length = 0
+      song_bitrate = 0
 
-    @file = "#{UPLOADS_DIR}/#{@uuid}"
-
-    song_artist = ""
-    song_title = ""
-    song_length = 0
-    song_bitrate = 0
-
-    if fileinfo.match(/^audio\//)
-      title = TagLib::MPEG::File.open(tmp.path) do |file|
-        tag = file.tag
-        prop = file.audio_properties
-        song_artist = tag.artist
-        song_title = tag.title
-        song_length = prop.length
-        song_bitrate = prop.bitrate
+      if fileinfo.match(/^audio\//)
+        title = TagLib::MPEG::File.open(tmp.path) do |file|
+          tag = file.tag
+          prop = file.audio_properties
+          song_artist = tag.artist
+          song_title = tag.title
+          song_length = prop.length
+          song_bitrate = prop.bitrate
+        end
       end
-    end
 
-    logger.debug("Got: #{song_artist},#{song_title}")
+      logger.debug("Got: #{song_artist},#{song_title}")
 
-    # TODO: Additional filename sanitization
-    # TODO: Use md5 to find out if we've seen this before, don't allow dupes?
+      # TODO: Additional filename sanitization
+      # TODO: Use md5 to find out if we've seen this before, don't allow dupes?
 
-    # build the object
-    @p = Passet.new(uuid: @uuid,
+      # build the object
+      @p = Passet.new(uuid: @uuid,
                     filename: filename,
                     kind: fileinfo,
                     created_at: Time.now(),
@@ -157,27 +145,41 @@ class PassetsController <  ApplicationController
                     song_length: song_length,
                     song_bitrate: song_bitrate
                     )
+                        
+      if @p.save
+        current_user.passets << @p
+        # move it into place
+        # TODO: Distribute data across directories
+        FileUtils.cp tmp.path, @file
+        fsize = File.size(tmp.path)
+        FileUtils.rm tmp.path
 
-    current_user.passets << @p
+        logger.debug("copy #{tmp.path} to #{@file} size = #{fsize}")
 
-    # move it into place
-    # TODO: Distribute data across directories
-    FileUtils.cp tmp.path, @file
-    fsize = File.size(tmp.path)
-    FileUtils.rm tmp.path
+        @response = {
+          "name" => filename,
+          "size" => fsize,
+          "url" => "/sf/#{@p.uuid}",
+          "thumbnail_url" => @p.icon,
+          "delete_url" => " /", 
+          "delete_type" => "DELETE"
+        }
 
-    logger.debug("copy #{tmp.path} to #{@file} size = #{fsize}")
-
-    @response = {
-      "name" => filename,
-      "size" => fsize,
-      "url" => "/sf/#{@p.uuid}",
-      "thumbnail_url" => @p.icon,
-      "delete_url" => " /", #picture_path(:id => id),
-      "delete_type" => "DELETE"
-    }
-
-    render :json => [@response].to_json
+        respond_to do |format| 
+          format.html { 
+            render layout: false
+            render html: { files: [@response], status: :created  } 
+          }
+          format.json { 
+            render json: { files: [@response], status: :created } 
+          }
+        end
+      else 
+        render :json => [{:error => "custom_failure"}], :status => 304
+      end
+    else
+     logger.debug "Files array was blank"
+    end
   end
 
   def search

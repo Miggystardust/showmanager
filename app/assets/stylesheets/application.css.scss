@@ -9,12 +9,13 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
 *= require bootstrap.min.css
-*= require jquery.dataTables.css
-*= require jquery.fileupload-ui.css
 *= require jquery-ui.css
 *= require jquery.fancybox.css
 *= require dataTables.bootstrap.css
 *= require mejs/mediaelementplayer.css
 *= require mejs/mejs-skins.css
+*= require jquery.fileupload
+*= require jquery.fileupload-ui
+*= require jquery.fileupload-ui-noscript
 *= require main
  */
