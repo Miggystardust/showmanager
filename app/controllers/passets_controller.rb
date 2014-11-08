@@ -5,13 +5,40 @@ class PassetsController <  ApplicationController
   protect_from_forgery :except => :create
 
   before_filter :authenticate_user!
-  before_filter :verify_admin, :only => [:update, :edit]
+  before_filter :verify_admin, :only => [:update, :edit, :adminindex]
 
   # this tends to explode on file upload, turning it off.
   skip_before_filter :verify_authenticity_token,  :only => [:new]
 
   def index
     @assets = current_user.passets.all.desc(:created_at)
+
+    # TODO: portions of this code duplicate adminindex.
+    # TODO: We are attempting for privilege separation here but i hate repeating code
+
+    respond_to do | format|
+      format.html { render :index }
+      format.json {
+        @filesarray = []
+        @assets.each { |a|
+          begin
+            @u = User.find(a.created_by)
+            userstring = "<a href=\"/users/#{a.created_by}\">#{@u.name}</a><BR><a href=\"mailto:#{@u.email}\">#{@u.email}</a>"
+          rescue
+            userstring = "<font color=\"#ff0000\">Deleted User</font>"
+          end
+
+          objectstring = embed_for(a)
+          @filesarray << [ userstring, objectstring, a.to_html, a.id.to_s ]
+        }
+
+        logger.debug(@filesarray)
+        render json: { 'aaData' => @filesarray }
+      }
+    end
+
+
+
   end
 
   def adminindex
@@ -29,21 +56,9 @@ class PassetsController <  ApplicationController
              rescue
                userstring = "<font color=\"#ff0000\">Deleted User</font>"
              end
+             objectstring = embed_for(a)
 
-
-             objectstring = ""
-
-             if a.is_audio?
-               objectstring = "audio"
-             end
-
-             if a.is_image?
-               objectstring = "<a id=\"single_image\" href=\"/sf/#{a.uuid}.jpg\" rel=\"\">" +
-                              "<IMG SRC=\"/s/#{a.thumb_path(100,100)}\" WIDTH=100 HEIGHT=100></a>"
-             end
-
-
-             @filesarray << [ userstring, objectstring, "file", a.id.to_s ]
+             @filesarray << [ userstring, objectstring, a.to_html, a.id.to_s ]
           }
           render json: { 'aaData' => @filesarray }
        }
@@ -182,6 +197,26 @@ class PassetsController <  ApplicationController
   end
 
   private
+
+  def embed_for(asset)
+    if asset.is_audio?
+     embed_html = "
+      <audio src=\"/sf/" + asset.uuid + "\" controls=\"controls\" preload=\"none\">
+         <object width=\"100\" height=\"30\" type=\"application/x-shockwave-flash\" data=\"/mejs/flashmediaelement.swf\">
+         <param name=\"movie\" value=\"/mejs/flashmediaelement.swf\" />
+         <param name=\"flashvars\" value=\"controls=true&file=/test.mp3\" />
+         </object>
+      </audio>
+      "
+    end
+
+    if asset.is_image?
+      embed_html = "<a id=\"single_image\" href=\"/sf/<%=passet.uuid%>.jpg\" rel=\"\">
+       <IMG SRC=\"/s/" + asset.thumb_path(100,100) + "\" WIDTH=100 HEIGHT=100>\"</a>"
+    end
+
+    embed_html
+  end
 
   def determine_mime_type(filename)
     ext = filename.split(".")[1].downcase()

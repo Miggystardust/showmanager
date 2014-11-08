@@ -278,7 +278,7 @@ class ShowsController < ApplicationController
 
               @si << { "DT_RowId" => s._id.to_s,
                 "0" => s.seq,
-                "1" => "#{itemtime.strftime("%l:%M %P")}<BR>+#{sec_to_time(s.duration.to_i)}",
+                "1" => "#{itemtime.strftime("%l:%M %P")}<BR>+#{TimeTools.sec_to_time(s.duration.to_i)}",
                 "2" => actinfo,
                 "3" => sound,
                 "4" => stage,
@@ -295,7 +295,7 @@ class ShowsController < ApplicationController
             # note
             @si << { "DT_RowId" => s._id.to_s,
               "0" => s.seq,
-              "1" => "#{itemtime.strftime("%l:%M %P")}<BR>+#{sec_to_time(s.duration.to_i)}",
+              "1" => "#{itemtime.strftime("%l:%M %P")}<BR>+#{TimeTools.sec_to_time(s.duration.to_i)}",
               "2" => "--",
               "3" => "--",
               "4" => "--",

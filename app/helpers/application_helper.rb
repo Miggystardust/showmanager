@@ -1,20 +1,5 @@
 module ApplicationHelper
-
-  def sec_to_time(n)
-    if n == nil
-      return -1
-    end
-
-    (Time.mktime(0) + n).strftime("%H:%M:%S")
-  end
-
-  def sec_to_mmss(n)
-    if n == nil
-      return -1
-    end
-
-    (Time.mktime(0) + n).strftime("%M:%S")
-  end
+  include TimeTools
 
   def bytes_to_bp(sz)
     # return a file size in binary prefix notation, SI units

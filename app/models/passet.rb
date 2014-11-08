@@ -1,6 +1,8 @@
 class Passet
    # individual assets assigned to a user
    include Mongoid::Document
+   include TimeTools
+   include ActionView::Helpers::DateHelper
 
    belongs_to :user
 
@@ -45,11 +47,35 @@ class Passet
    end
 
    def is_image?
-     return  self.kind.starts_with?("image/")
+     self.kind.starts_with?("image/")
    end
 
    def is_audio?
-     return  self.kind.starts_with?("audio/")
+     self.kind.starts_with?("audio/")
    end
 
+   def to_html
+      # return a textual description of this asset for use on many pages.
+      # I don't like conflicting the view and the model here but this seems sensible.
+      out = self.filename + "<BR>"
+      if self.song_artist != nil
+        out = out + self.song_artist + " - "
+        end
+
+      if self.song_title != nil
+        out = out + self.song_title + " <BR> "
+      end
+
+      out = out + "<div class=\"greyed\">"
+      out = out + self.kind
+
+      if self.is_audio? and self.song_length > 0
+        out = out + ", " + TimeTools.sec_to_mmss(self.song_length) + " long, " + self.song_bitrate.to_s + " Kbit bitrate<BR>"
+      end
+
+      out = out + "</div>" + self.created_at.asctime + " "
+      out = out + "<I>(" + time_ago_in_words(self.created_at) + " ago)</I>"
+
+      out
+   end
 end

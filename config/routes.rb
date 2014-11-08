@@ -55,6 +55,7 @@ Rails3MongoidDevise::Application.routes.draw do
    collection do
      get :search
      get :adminindex
+     get :index
    end
   end
 

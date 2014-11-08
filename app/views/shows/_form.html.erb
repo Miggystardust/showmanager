@@ -24,38 +24,39 @@ $(function() {
   <% logger.debug ("did show errors") 
      end %>
 
-  <div class="control-group">
-    <%= f.label :title, "Title", :class=>"control-label" %>
-    <div class="controls">
-    <%= f.text_field :title, :class=>"input-xlarge" %>
+  <div class="form-group">
+    <%= f.label :title, "Title", :class=>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_field :title, :class=>"form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :venue, "Venue", :class => "control-label" %>
-    <div class="controls">
-     <%= f.text_field :venue, :class => "input-xlarge" %>
+  <div class="form-group">
+    <%= f.label :venue, "Venue", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+     <%= f.text_field :venue, :class => "form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :door_time, "Door Time", :class => "control-label" %>
-    <div class="controls">
-    <%= f.text_field :door_time, :class => "input-xlarge datepicker" %>
+  <div class="form-group">
+    <%= f.label :door_time, "Door Time", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_field :door_time, :class => "form-control datepicker" %>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.label :show_time, "Show Time", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_field :show_time, :class => "form-control datepicker" %>
+    </div>
   </div>
 <BR>
-  <div class="control-group">
-    <%= f.label :show_time, "Show Time", :class => "control-label" %>
-    <div class="controls">
-    <%= f.text_field :show_time, :class => "input-xlarge datepicker" %>
-    </div>
-  </div>
+    <%= link_to 'Cancel', shows_path, :class => "btn btn-danger" %>
+    <%= f.submit "Save Details", :class => "btn btn-primary" %>
 
-  <div class="control-group">
-    <div class="controls">
-    <%= f.submit "Save Details", :class => "btn-primary" %>
-    </div>
-  </div>
+
 </fieldset>
 <% end %>
 </div>
