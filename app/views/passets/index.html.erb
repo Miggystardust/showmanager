@@ -1,105 +1,106 @@
 <script src="/mejs/mediaelement-and-player.min.js"></script>
 <% if defined? @adminindex -%>
-<h1>Admin: All files, all accounts</h1>
+    <h1>Admin: All files, all accounts</h1>
 <% else -%>
-<h1>Files in Your Account</h1>
+    <h1>Files in Your Account</h1>
 <% end -%>
 <P>
 </p>
 <P>
-<a href="/passets/new" class="btn btn-primary"><i class="glyphicon white glyphicon-arrow-up"></i>&nbsp;Upload</a>
+  <a href="/passets/new" class="btn btn-primary"><i class="glyphicon white glyphicon-arrow-up"></i>&nbsp;Upload</a>
 </P>
 
 <% if @assets.count > 0 -%>
-<div id="filesTable">
-<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="fileslist">
-<thead>
-<% if defined? @adminindex -%>
-<TH>Owner</TH>
-<% end -%>
-<TH WIDTH=200>Preview</TH>
-<TH>File</TH>
-<TH COLSPAN=1>Actions</TH>
-</THEAD>
+    <div id="filesTable">
+      <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="fileslist">
+        <thead>
+        <% if defined? @adminindex -%>
+            <TH>Owner</TH>
+        <% end -%>
+        <TH WIDTH=200>Preview</TH>
+        <TH>File</TH>
+        <TH COLSPAN=1>Actions</TH>
+        </THEAD>
 <% end -%>
 <TBODY>
-<!-- data --> 
+<!-- data -->
 </TBODY>
 </TABLE>
 </DIV>
-<BR />
+<BR/>
 
 <script>
-$(document).ready(function() {
-  filesDT = $('#fileslist').dataTable( {
-      "sDom": "<'row'<'col-6'l><'col-12'f>r>t<'row'<'col-12'i><'col-12'p>>",
-      "sAjaxSource": "/passets/adminindex.json",
-      "sPaginationType": "bootstrap",
-      "iDisplayLength": 10,
-      "oLanguage": {
-      "sLengthMenu": "Show&nbsp;<select size=1 name=fileslist_length aria-controls=\"fileslist\"><option value='5'>5</option><option value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;files per page"
-    },
-     "fnServerData": function ( sSource, aoData, fnCallback ) {
-        $.ajax({'datatype':'json',
-                'type':'GET',
-                'url':sSource,
-                'data':aoData,
-                'success':function(json) {
-                   fnCallback(json);
-        }})
-     },
-     "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
-      var id = $('td:eq(3)',nRow).html();
-      var content = $('td:eq(3)',nRow).html();
+    $(document).ready(function () {
+        filesDT = $('#fileslist').dataTable({
+            "sDom": "<'row'<'col-6'l><'col-12'f>r>t<'row'<'col-12'i><'col-12'p>>",
+            "sAjaxSource": "/passets/adminindex.json",
+            "sPaginationType": "bootstrap",
+            "iDisplayLength": 10,
+            "oLanguage": {
+                "sLengthMenu": "Show&nbsp;<select size=1 name=fileslist_length aria-controls=\"fileslist\"><option value='5'>5</option><option value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;files per page"
+            },
+            "fnServerData": function (sSource, aoData, fnCallback) {
+                $.ajax({'datatype': 'json',
+                    'type': 'GET',
+                    'url': sSource,
+                    'data': aoData,
+                    'success': function (json) {
+                        fnCallback(json);
+                    }})
+            },
+            "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+                var id = $('td:eq(3)', nRow).html();
+                var content = $('td:eq(3)', nRow).html();
 
-      if (content.indexOf("btn") == -1) { 
-        $('td:eq(3)', nRow).html('<a class="btn btn-warning btn-sm" href="/passets/' + id + '/download"><i class="glyphicon white glyphicon-download"></i> Download</a>' +
-        '&nbsp;<a class="btn btn-primary btn-sm" href="/passets/' + id + '/edit"><i class="glyphicon white glyphicon-pencil"></i> Edit</a>' +
-        '&nbsp;<a class="btn btn-danger btn-sm" href="/shows/' + id + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="glyphicon-remove glyphicon white"></i> Delete</a>');
-     }}});
+                if (content.indexOf("btn") == -1) {
+                    $('td:eq(3)', nRow).html('<a class="btn btn-warning btn-sm" href="/passets/' + id + '/download"><i class="glyphicon white glyphicon-download"></i> Download</a>' +
+                            '&nbsp;<a class="btn btn-primary btn-sm" href="/passets/' + id + '/edit"><i class="glyphicon white glyphicon-pencil"></i> Edit</a>' +
+                            '&nbsp;<a class="btn btn-danger btn-sm" href="/shows/' + id + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="glyphicon-remove glyphicon white"></i> Delete</a>');
+                }
+            }});
 
-  var fixHelper = function(e, ui) {
-    ui.children().each(function() {
-        $(this).width($(this).width());
-      });
-    return ui;
-  };
+        var fixHelper = function (e, ui) {
+            ui.children().each(function () {
+                $(this).width($(this).width());
+            });
+            return ui;
+        };
 
-  /* This is basic - uses default settings */
-  $("a#single_image").fancybox();
+        /* This is basic - uses default settings */
+        $("a#single_image").fancybox();
 
-  /* Using custom settings */
-  $("a#inline").fancybox({
-    'hideOnContentClick': true
-  });
+        /* Using custom settings */
+        $("a#inline").fancybox({
+            'hideOnContentClick': true
+        });
 
-  /* Apply fancybox to multiple items */
-  $("a.group").fancybox({
-    'transitionIn':'elastic',
-    'transitionOut':'elastic',
-    'speedIn':600, 
-    'speedOut':200, 
-    'overlayShow':false
-  });
+        /* Apply fancybox to multiple items */
+        $("a.group").fancybox({
+            'transitionIn': 'elastic',
+            'transitionOut': 'elastic',
+            'speedIn': 600,
+            'speedOut': 200,
+            'overlayShow': false
+        });
 
-  /* turn on player */
-  $('video,audio').mediaelementplayer({
-    // initial volume when the player starts
-    startVolume: 0.8,
-    // useful for <audio> player loops
-    loop: false,
-    // the order of controls you want on the control bar (and other plugins below)
-    features: ['playpause','progress','current','duration'],
-    alwaysShowHours: false,
-    // used when showTimecodeFrameCount is set to true
-    framesPerSecond: 25,
-    // turns keyboard support on and off for this instance
-    enableKeyboard: true,
-    // when this player starts, it will pause other players
-    pauseOtherPlayers: true,
-    // array of keyboard commands
-    keyActions: []
-   });
+        /* turn on player */
+        $('video,audio').mediaelementplayer({
+            // initial volume when the player starts
+            startVolume: 0.8,
+            // useful for <audio> player loops
+            loop: false,
+            // the order of controls you want on the control bar (and other plugins below)
+            features: ['playpause', 'progress', 'current', 'duration'],
+            alwaysShowHours: false,
+            // used when showTimecodeFrameCount is set to true
+            framesPerSecond: 25,
+            // turns keyboard support on and off for this instance
+            enableKeyboard: true,
+            // when this player starts, it will pause other players
+            pauseOtherPlayers: true,
+            // array of keyboard commands
+            keyActions: []
+        });
 
-});
+    });
 </script>
