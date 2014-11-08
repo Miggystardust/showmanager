@@ -90,7 +90,11 @@ class PassetsController <  ApplicationController
     if p != nil
       logger.debug("Delete requested for Asset #{p.uuid}, #{request.referer}")
       p.destroy
-      FileUtils.rm "#{UPLOADS_DIR}/#{p.uuid}"
+      begin
+        FileUtils.rm "#{UPLOADS_DIR}/#{p.uuid}"
+      rescue Errno::ENOENT => e 
+        logger.debug("I tried to delete this file but it wasn't there: #{p.uuid}, #{request.referer}")
+      end
     end
 
     if request.referer.match(/\/adminindex$/)
@@ -160,9 +164,9 @@ class PassetsController <  ApplicationController
           "name" => filename,
           "size" => fsize,
           "url" => "/sf/#{@p.uuid}",
-          "thumbnail_url" => @p.icon,
-          "delete_url" => " /", 
-          "delete_type" => "DELETE"
+          "thumbnailUrl" => @p.icon,
+          "deleteUrl" => "/passets/#{@p.id.to_s}", 
+          "deleteType" => "DELETE"
         }
 
         respond_to do |format| 
@@ -213,8 +217,8 @@ class PassetsController <  ApplicationController
     end
 
     if asset.is_image?
-      embed_html = "<a id=\"single_image\" href=\"/sf/<%=passet.uuid%>.jpg\" rel=\"\">
-       <IMG SRC=\"/s/" + asset.thumb_path(100,100) + "\" WIDTH=100 HEIGHT=100>\"</a>"
+      embed_html = "<a id=\"single_image\" href=\"/sf/" + asset.uuid + ".jpg\" rel=\"\">
+       <IMG SRC=\"/s/" + asset.thumb_path(100,100) + "\" WIDTH=100 HEIGHT=100></a>"
     end
 
     embed_html
