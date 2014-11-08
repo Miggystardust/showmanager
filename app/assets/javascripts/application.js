@@ -32,6 +32,8 @@
 //= require jquery.dataTables.min.js
 //= require jquery.dataTables.rowReordering.js
 //= require jquery.fancybox.js
+//= require jquery.fancybox.pack.js
+//= require jquery.mousewheel.pack.js
 //= require dataTables.bootstrap.js
 //= require dataTables.tableTools.js
 

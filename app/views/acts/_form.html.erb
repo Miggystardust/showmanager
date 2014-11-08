@@ -1,156 +1,164 @@
-<%= form_for(@act,  :html => {  :class=>"form-horizontal" } ) do |f| %>
-<fieldset>
-  <% if @act.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@act.errors.count, "error") %> prohibited this act from being saved:</h2>
+<%= form_for(@act, :html => {:class => "form-horizontal"}) do |f| %>
+    <fieldset>
+      <% if @act.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@act.errors.count, "error") %> prohibited this act from being saved:</h2>
 
-      <ul>
-      <% @act.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+            <ul>
+              <% @act.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-<div class="well">
-<P>
-This for might look long, but it's not that bad!
-</P>
-<P>
-The more information you can provide the better, but only a few fields are
-required. If you need more room, just drag and make the boxes
-bigger. We'll save all your info. 
-</p>
-<P>
-	Starred files (*) are required.
-</p>
-</div>
+      <div class="well">
+        <P>
+          This for might look long, but it's not that bad!
+        </P>
 
-<div class="form-group">
- <%= f.label :stage_name, "Act/Stage Name *", :class=>"col-sm-2 control-label required" %>
- <div class="col-sm-10">
-   <%= f.text_field :stage_name, :class=>"input-xlarge" %>
-   <P>A simple word or two here related to your song will do. (i.e. "Bunny Pistol - Fever")</p>
- </div>
-</div>
+        <P>
+          The more information you can provide the better, but only a few fields are
+          required. If you need more room, just drag and make the boxes
+          bigger. We'll save all your info.
+        </p>
 
-<div class="form-group">
- <%= f.label :short_description, "Short Description *", :class=>"col-sm-2 control-label" %>
- <div class="col-sm-10">
-   <%= f.text_area :short_description, :class=>"form-control", :rows=>2, :cols=>200 %>
- </div>
-</div>
+        <P>
+          Starred files (*) are required.
+        </p>
+      </div>
 
-<div class="form-group">
- <%= f.label :length, "Length of Act *", :class=>"col-sm-2 control-label" %>
- <div class="col-sm-10">
-   <%= f.text_field :length, :class=>"form-control" %>
-   <P>How long your act is, in the form MM:SS. Required.</p>
- </div>
-</div>
+      <div class="form-group">
+        <%= f.label :stage_name, "Act/Stage Name *", :class => "col-sm-2 control-label required" %>
+        <div class="col-sm-10">
+          <%= f.text_field :stage_name, :class => "input-xlarge" %>
+          <P>A simple word or two here related to your song will do. (i.e. "Bunny Pistol - Fever")</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :short_description, "Short Description *", :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.text_area :short_description, :class => "form-control", :rows => 2, :cols => 200 %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :length, "Length of Act *", :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.text_field :length, :class => "form-control" %>
+          <P>How long your act is, in the form MM:SS. Required.</p>
+        </div>
+      </div>
 
 
-<div class="form-group">
- <%= f.label :names_of_performers, "Performer Names", :class=>"col-sm-2 control-label" %>
- <div class="col-sm-10"> 
-   <%= f.text_area  :names_of_performers, :class=>"form-control", :rows=>2, :cols=>200 %> 
-   <P>The names of other performers in your act, if any</p>
- </div>
-</div>
+      <div class="form-group">
+        <%= f.label :names_of_performers, "Performer Names", :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.text_area :names_of_performers, :class => "form-control", :rows => 2, :cols => 200 %>
+          <P>The names of other performers in your act, if any</p>
+        </div>
+      </div>
 
-<div class="form-group">
- <%= f.label :music, "Audio", :class=>"col-sm-2 control-label" %>
- <div class="col-sm-10">
-	<%= f.select :music, @user_musics, :class =>"input-xxlarge" %>
-	<P>Upload your music <%= link_to "here", passets_new_path %> before creating your act and it will appear in the list above.
-    <BR>Remember, one track per act.
- </div>
-</div>
+      <div class="form-group">
+        <%= f.label :music, "Audio", :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.select :music, @user_musics, :class => "form-control" %>
+          <P>Upload your music <%= link_to "here", passets_new_path %> before creating your act and it will appear in
+            the list above.
+            <BR>Remember, one track per act.
+        </div>
+      </div>
 
-<div class="form-group">
- <%= f.label :image, "Image/Video", :class=>"col-sm-2 control-label" %>
- <div class="controls input-xxlarge">
-	<%= f.select :image, @user_imgs %>
-	<P>Upload images or video <%= link_to "here", passets_new_path %> before creating your act and they will appear in the list above.
- </div>
-</div>
+      <div class="form-group">
+        <%= f.label :image, "Image/Video", :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.select :image, @user_imgs %>
+          <P>Upload images or video <%= link_to "here", passets_new_path %> before creating your act and they will
+            appear in the list above.
+        </div>
+      </div>
 
-<div class="form-group">
- <%= f.label :sound_cue, "Sound Cue: When should we start your music?", :class=>"col-sm-2 control-label" %>
- <div class="col-sm-10">
-   <%= f.text_area :sound_cue, :class=>"form-control", :rows=>2, :cols=>200 %>
+      <div class="form-group">
+        <%= f.label :sound_cue, "Sound Cue: When should we start your music?", :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.text_area :sound_cue, :class => "form-control", :rows => 2, :cols => 200 %>
 
-   <P>(i.e. "When Posed", "On Stairs", "Enter to Music".)<BR>
-   <B>Remember:</B>
-   The cue that you list here is exactly what our tech people will do.<BR>
-   Don't change your mind after the fact without updating the system, or fail to follow this cue. <VR>
-If you change your mind, update the system! </p>
+          <P>(i.e. "When Posed", "On Stairs", "Enter to Music".)<BR>
+            <B>Remember:</B>
+            The cue that you list here is exactly what our tech people will do.<BR>
+            Don't change your mind after the fact without updating the system, or fail to follow this cue.
+            <VR>
+              If you change your mind, update the system!
+          </p>
 
- </div>
-</div>
+        </div>
+      </div>
 
-<div class="form-group">
- <%= f.label :prop_placement, "Prop Notes? What and where should they be placed?", :class=>"col-sm-2 control-label" %>
- <div class="col-sm-10">
-   <%= f.text_area :prop_placement, :class=>"form-control", :rows=>2, :cols=>200 %>
-   <P>
-   Use stage directions here.<BR>
-   Stage left and Stage Right refer
-   to the perspective of being on stage and facing the
-   audience.<BR>
-   Stage Left and House Right mean the same thing.<BR>
+      <div class="form-group">
+        <%= f.label :prop_placement, "Prop Notes? What and where should they be placed?", :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.text_area :prop_placement, :class => "form-control", :rows => 2, :cols => 200 %>
+          <P>
+            Use stage directions here.<BR>
+            Stage left and Stage Right refer
+            to the perspective of being on stage and facing the
+            audience.<BR>
+            Stage Left and House Right mean the same thing.<BR>
 
-   Upstage is further away from the audience and downstage
-   closer.<BR>
-   </p>
- </div>
-</div>
+            Upstage is further away from the audience and downstage
+            closer.<BR>
+          </p>
+        </div>
+      </div>
 
-<div class="form-group">
- <%= f.label :lighting_info, "Lighting Notes", :class=>"col-sm-2 control-label" %>
- <div class="col-sm-10">
-   <%= f.text_area :lighting_info, :class=>"form-control", :rows=>2, :cols=>200 %>
- </div>
-</div>
+      <div class="form-group">
+        <%= f.label :lighting_info, "Lighting Notes", :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.text_area :lighting_info, :class => "form-control", :rows => 2, :cols => 200 %>
+        </div>
+      </div>
 
-<div class="form-group">
- <%= f.label :clean_up, "Clean-up notes after your act", :class=>"col-sm-2 control-label" %>
- <div class="col-sm-10">
-   <%= f.text_area :clean_up, :class=>"form-control", :rows=>2, :cols=>200 %>
- </div>
-</div>
+      <div class="form-group">
+        <%= f.label :clean_up, "Clean-up notes after your act", :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.text_area :clean_up, :class => "form-control", :rows => 2, :cols => 200 %>
+        </div>
+      </div>
 
-<div class="form-group">
- <%= f.label :mc_intro, "MC Intro: How would you like to be introduced?", :class=>"col-sm-2 control-label" %>
- <div class="col-sm-10">
-   <%= f.text_area :mc_intro, :class=>"form-control", :rows=>2, :cols=>200 %>
- </div>
-</div>
+      <div class="form-group">
+        <%= f.label :mc_intro, "MC Intro: How would you like to be introduced?", :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.text_area :mc_intro, :class => "form-control", :rows => 2, :cols => 200 %>
+        </div>
+      </div>
 
-<div class="form-group">
- <%= f.label :run_through, "Do you need a Run Through? ", :class=>"col-sm-2 control-label" %>
- <div class="col-sm-10">
-   <%= f.text_area :run_through, :class=>"form-control", :rows=>2, :cols=>200 %>
- </div>
-</div>
+      <div class="form-group">
+        <%= f.label :run_through, "Do you need a Run Through? ", :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.text_area :run_through, :class => "form-control", :rows => 2, :cols => 200 %>
+        </div>
+      </div>
 
-<div class="form-group">
- <%= f.label :extra_notes, "Any extra notes for our crew?", :class=>"col-sm-2 control-label" %>
- <div class="col-sm-10">
-   <%= f.text_area :extra_notes, :class=>"form-control", :rows=>2, :cols=>200 %>
- </div>
-</div>
+      <div class="form-group">
+        <%= f.label :extra_notes, "Any extra notes for our crew?", :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.text_area :extra_notes, :class => "form-control", :rows => 2, :cols => 200 %>
+        </div>
+      </div>
 
-<div class="form-group">
-  <div class="col-sm-10">
-	<% if @act.id != nil %>
-    <INPUT TYPE="HIDDEN" NAME="return_to" VALUE="<%=@return_to%>">
-    <%= f.submit "Update Act", :class => "btn-primary" %>
-	<% else %>
-    <%= f.submit "Create Act", :class => "btn-primary" %>
-	<% end %>
-  </div>
-</div>
+      <div class="form-group">
+        <div class="col-sm-10">
+          <%= link_to 'Cancel', acts_path, :class => "btn btn-danger" %>
 
-</fieldset>
+          <% if @act.id != nil %>
+              <INPUT TYPE="HIDDEN" NAME="return_to" VALUE="<%= @return_to %>">
+              <%= f.submit "Update Act", :class => "btn btn-success" %>
+          <% else %>
+              <%= f.submit "Create Act", :class => "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+
+    </fieldset>
 <% end %>
