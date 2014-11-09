@@ -5,9 +5,9 @@ Rails3MongoidDevise::Application.routes.draw do
   resources :entries
 
   resources :apps do
-   collection do
-     get 'enter'
-   end
+    member do
+      get :dashboard
+    end
   end
 
   root :to => "home#index"
@@ -22,7 +22,9 @@ Rails3MongoidDevise::Application.routes.draw do
 
   resources :troupes
 
-  resources :bhof
+  # bhof routes
+  get "/appdashboard", :to => "bhof#dashboard"
+  resources :bhof, :only => [:index]
 
   # overriding devise here to deal with users w/o passwords
   get "/settings/edit",

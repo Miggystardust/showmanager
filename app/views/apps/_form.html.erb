@@ -1,63 +1,76 @@
 <%= form_for(@app) do |f| %>
-  <% if @app.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@app.errors.count, "error") %> prohibited this app from being saved:</h2>
+    <% if @app.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@app.errors.count, "error") %> prohibited this app from being saved:</h2>
 
-      <ul>
-      <% @app.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @app.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :description %>
+      <br>
+      <%= f.text_field :description %>
     </div>
-  <% end %>
+    <div class="field">
+      <%= f.label :legal_name %>
+      <br>
+      <%= f.text_field :legal_name %>
+    </div>
+    <div class="field">
+      <%= f.label :mailing_address %>
+      <br>
+      <%= f.text_field :mailing_address %>
+    </div>
+    <div class="field">
+      <%= f.label :phone_primary %>
+      <br>
+      <%= f.text_field :phone_primary %>
+    </div>
+    <div class="field">
+      <%= f.label :phone_alt %>
+      <br>
+      <%= f.text_field :phone_alt %>
+    </div>
+    <div class="field">
+      <%= f.label :phone_primary_has_sms %>
+      <br>
+      <%= f.check_box :phone_primary_has_sms %>
+    </div>
 
-  <div class="field">
-    <%= f.label :legal_name %><br>
-    <%= f.text_field :legal_name %>
-  </div>
-  <div class="field">
-    <%= f.label :mailing_address %><br>
-    <%= f.text_field :mailing_address %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_primary %><br>
-    <%= f.text_field :phone_primary %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_alt %><br>
-    <%= f.text_field :phone_alt %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_primary_has_sms %><br>
-    <%= f.check_box :phone_primary_has_sms %>
-  </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        Basic panel example
 
-  <div class="panel panel-default">
-    <div class="panel-body">
-    Basic panel example
+        In order to submit your application, you must agree to the <a href="/about/bhof/rules" target="_blank">complete
+        rules for entry</a>. Please initial below to indicate your agreement:</strong></h3>
 
-    In order to submit your application, you must agree to the <a href="/about/bhof/rules" target="_blank">complete 
-    rules for entry</a>. Please initial below to indicate your agreement:</strong></h3>
+        <p align="left"><font size="3"><em>As the Main Contact Person, my initials below indicate
+          my agreement in full to the following:</em></font></p>
 
-    <p align="left"><font size="3"><em>As the Main Contact Person, my initials below indicate 
-      my agreement in full to the following:</em></font></p>
-    <div align="left">
-      <ul>
-        <li><em> I agree that I meet age requirements and agree to 
-          abide by all Nevada state laws;</em></li>
-        <li><em> I agree to take full responsibility for myself and 
-          the act(s) I represent;</em></li>
-        <li><em><font size="3">I agree that if offered a spot to perform in the Weekender (in any capacity) to not perform in any capacity in the Las Vegas metropolitan area for a period of ten days before the start of the Weekend and seven 
-          days after the end of the Weekend; </font></em></li>
-        <li><font size="3"><em> I agree to hold <?php echo $bh_name_long;?> free from 
-          liability as spelled out in the complete rules for entry.</em></font></li>
-        <li><em><font size="3">I agree to abide by the rest of the &quot;Complete 
-          Rules for Entry for the Weekend.</font></em></li>
-     </ul>
-   </div>
-   </div>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+        <div align="left">
+          <ul>
+            <li><em> I agree that I meet age requirements and agree to
+              abide by all Nevada state laws;</em></li>
+            <li><em> I agree to take full responsibility for myself and
+              the act(s) I represent;</em></li>
+            <li><em><font size="3">I agree that if offered a spot to perform in the Weekender (in any capacity) to not
+              perform in any capacity in the Las Vegas metropolitan area for a period of ten days before the start of
+              the Weekend and seven
+              days after the end of the Weekend; </font></em></li>
+            <li><font size="3"><em> I agree to hold <?php echo $bh_name_long;?> free from
+              liability as spelled out in the complete rules for entry.</em></font></li>
+            <li><em><font size="3">I agree to abide by the rest of the &quot;Complete
+              Rules for Entry for the Weekend.</font></em></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

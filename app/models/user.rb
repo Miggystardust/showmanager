@@ -9,6 +9,7 @@ class User
   has_many :acts
   has_many :passets
   has_many :troupes
+  has_many :apps
 
   # Role-Based Access Control
 # removing for rails4 ? 

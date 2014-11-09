@@ -4,23 +4,11 @@ class AppsController < ApplicationController
   before_action :set_app, only: [:show, :edit, :update, :destroy]
 
   protect_from_forgery
-  
-  def enter
-    # upon entrance, cookie the user so we don't ask again about the rules.
-    cookies[:seen_intro] = {
-      :value => "true",
-      :expires => 6.months.from_now()
-    }
-
-    # TODO: have a way of reversing this via a checkbox or otherwise.
-    
-    redirect_to apps_url
-  end 
 
   # GET /apps
   def index
     # force the intro rules if necessary...
-    if cookies[:seen_intro] == nil
+    if cookies[:seenintro] == nil
       redirect_to "/about/bhof/1"
     end
     
@@ -29,6 +17,12 @@ class AppsController < ApplicationController
 
   # GET /apps/1
   def show
+  end
+
+  # get /apps/updateme
+  def updateme
+    @app = Apps.where(user_id: current_user.__id__)
+
   end
 
   # GET /apps/new
@@ -43,9 +37,13 @@ class AppsController < ApplicationController
   # POST /apps
   def create
     @app = App.new(app_params)
+    @app.created_at=Time.now
 
     if @app.save
-      redirect_to @app, notice: 'App was successfully created.'
+      current_user.apps << @app
+      current_user.save!
+
+      redirect_to apps_path, notice: 'Application was successfully created.'
     else
       render action: 'new'
     end
@@ -53,8 +51,9 @@ class AppsController < ApplicationController
 
   # PATCH/PUT /apps/1
   def update
+
     if @app.update(app_params)
-      redirect_to @app, notice: 'App was successfully updated.'
+      redirect_to @app, notice: 'Application was successfully updated.'
     else
       render action: 'edit'
     end
@@ -63,7 +62,34 @@ class AppsController < ApplicationController
   # DELETE /apps/1
   def destroy
     @app.destroy
-    redirect_to apps_url, notice: 'App was successfully destroyed.'
+    redirect_to apps_url, notice: 'Application was successfully destroyed.'
+  end
+
+  def dashboard
+
+    begin
+      @application = App.find(params[:id])
+    rescue Mongoid::Errors::DocumentNotFound
+      @application = nil
+    end
+
+    begin
+      @entry = Entry.find(params[:id])
+    rescue Mongoid::Errors::DocumentNotFound
+      @entry = nil
+    end
+
+    begin
+      @entry_tech = EntryTechinfo.find(params[:id])
+    rescue Mongoid::Errors::DocumentNotFound
+      @entry_tech = nil
+    end
+
+    if @application == nil
+      redirect_to apps_path, :notice => "That application doesn't exist."
+    end
+    # draw the table
+
   end
 
   private
@@ -74,6 +100,7 @@ class AppsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def app_params
-      params.require(:app).permit(:legal_name, :mailing_address, :phone_primary, :phone_alt, :phone_primary_has_sms)
+      params.require(:app).permit(:legal_name, :mailing_address, :phone_primary, :phone_alt, :phone_primary_has_sms, :description)
     end
+
 end

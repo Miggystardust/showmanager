@@ -1,6 +1,8 @@
 class EntryTechinfo
   include Mongoid::Document
 
+  belongs_to :app
+
   field :entry_id, type: String
   field :song_title, type: String
   field :song_artist, type: String
@@ -20,4 +22,9 @@ class EntryTechinfo
   field :lighting_needs, type: String
   field :mc_intro, type: String
   field :aerial_needs, type: String
+
+  def is_complete?
+    false
+  end
+
 end

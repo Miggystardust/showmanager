@@ -1,35 +1,54 @@
-<h1>Listing apps</h1>
+<h1>BHOF: Your Applications</h1>
 
-<table>
+<% if @apps.count > 0 %>
+<div class="alert alert-info">
+  <!-- only show if apps exist ? -->
+  <strong>Heads Up!</strong> Applications will not be accepted until they are submitted. You have N incomplete applications.
+</div>
+<% end %>
+
+<div class="well">
+  <p>
+    You may submit up to four (4) acts per account, no more than two solo, and two group acts.
+  </p>
+
+  <p>
+    On each of your applications, clicking "Dashboard" will take you to the application's dashboard, where you can see the
+    status of your applications and submit all of the required information.
+    </p>
+  </p>
+</div>
+
+
+<P>
+  <a href="/apps/new" class="btn btn-primary"><i class="glyphicon glyphicon-plus-sign white"></i>&nbsp;Create a new
+    Application</a>
+</p>
+
+<% if @apps.count > 0 %>
+<table class="table table-striped">
   <thead>
-    <tr>
-      <th>Legal name</th>
-      <th>Mailing address</th>
-      <th>Phone primary</th>
-      <th>Phone alt</th>
-      <th>Phone primary has sms</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
+  <tr>
+    <th>Created</th>
+    <th>Description</th>
+    <TH>Status</TH>
+    <th></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @apps.each do |app| %>
+  <% @apps.each do |app| %>
       <tr>
-        <td><%= app.legal_name %></td>
-        <td><%= app.mailing_address %></td>
-        <td><%= app.phone_primary %></td>
-        <td><%= app.phone_alt %></td>
-        <td><%= app.phone_primary_has_sms %></td>
-        <td><%= link_to 'Show', app %></td>
-        <td><%= link_to 'Edit', edit_app_path(app) %></td>
-        <td><%= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= app.created_at.strftime(SHORT_TIME_FMT) %></td>
+        <td><%= app.description %></td>
+        <td><I>Not submitted</I></td>
+        <td><a href="/apps/<%=app.id.to_s%>/dashboard" class="btn btn-success btn-sm" %>Dashboard
+          </a>&nbsp;<%= link_to 'Destroy', app, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger btn-sm" %>
+        </td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New App', new_app_path %>
+<% else %>
+<h4>You currently have no applications. Create one!</h4>
+<% end %>
