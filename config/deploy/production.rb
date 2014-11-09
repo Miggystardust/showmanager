@@ -35,6 +35,8 @@ set :ssh_options, {
 
 set :tests, []
 
+set :linked_files, %w{config/initializers/secret_token.rb}
+
 namespace :deploy do
   desc "Make sure local git is in sync with remote."
   task :check_revision do
