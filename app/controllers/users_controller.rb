@@ -63,11 +63,17 @@ class UsersController < ApplicationController
 
   def destroy
     if current_user.try(:admin?)
-      @user = User.find(params[:id])
+      begin
+        @user = User.find(params[:id])
+      rescue Mongoid::Errors::DocumentNotFound
+        redirect_to users_url, error: "The requested user doesn't exist."
+        return
+      end
+
       @user.destroy
 
       if @user.destroy
-        redirect_to users_url, notice: "User deleted."
+        redirect_to users_url, notice: "User #{@user.username} (#{@user.name}) deleted."
       end
     else
       redirect_to root_url, error: "You must be an Administrator to do that."
