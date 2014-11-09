@@ -8,6 +8,7 @@ role :web, "hubba.retina.net"
 role :app, "hubba.retina.net"
 
 set :log_level, :debug
+set :branch, ENV["REVISION"] || ENV["BRANCH_NAME"] || "master"
 
 #set :rbenv_type, :user # or :system, depends on your rbenv setup
 #set :rbenv_ruby, '2.1.4-p265'
@@ -35,10 +36,20 @@ set :ssh_options, {
 set :tests, []
 
 namespace :deploy do
+  desc "Make sure local git is in sync with remote."
+  task :check_revision do
+    unless `git rev-parse HEAD` == `git rev-parse origin/#{fetch(:branch)}`
+      puts "WARNING: HEAD is not the same as origin/#{fetch(:branch)}"
+      puts "Run `git push` to sync changes."
+      exit
+    end
+  end
+
+  # only allow a deploy with passing tests to deployed
   # make sure we're deploying what we think we're deploying
   before :deploy, "deploy:check_revision"
 
-  # only allow a deploy with passing tests to deployed
+  # we don't need any stinking tests.
   #before :deploy, "deploy:run_tests"
 
   # compile assets locally then rsync
