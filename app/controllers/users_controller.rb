@@ -61,6 +61,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user.try(:admin?)
+      @user = User.find(params[:id])
+      @user.destroy
+
+      if @user.destroy
+        redirect_to users_url, notice: "User deleted."
+      end
+    else
+      redirect_to root_url, error: "You must be an Administrator to do that."
+    end
+
+  end
+
   private
 
 

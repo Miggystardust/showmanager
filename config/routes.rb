@@ -18,9 +18,11 @@ Rails3MongoidDevise::Application.routes.draw do
 
   devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
 
-  resources :users, :only => [:show, :index, :edit, :update]
+  resources :users, :only => [:show, :index, :edit, :update, :destroy]
 
   resources :troupes
+
+  resources :bhof
 
   # overriding devise here to deal with users w/o passwords
   get "/settings/edit",
@@ -100,11 +102,6 @@ Rails3MongoidDevise::Application.routes.draw do
 
   get 'uploads/download/:fn' => 'uploads#download'
   get 'uploads/download/:fn.:discard' => 'uploads#download'
-
-  # policy wonking
-  get "/about/bhof/:id",
-    :controller => "about",
-    :action => "bhof"
 
   # policy wonking
   get '/about/privacy'

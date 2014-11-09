@@ -110,7 +110,7 @@ class PassetsController <  ApplicationController
     @uuid = `uuidgen`.strip
 
     if params[:files]
-      tmp = params[:files][0].tempfile    
+      tmp = params[:files][0].tempfile
       logger.debug("Got file #{tmp.path}")
       filename = FileTools.sanitize_filename(params[:files][0].original_filename)
       fileinfo = determine_mime_type(filename)
