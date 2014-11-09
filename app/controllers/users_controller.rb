@@ -29,7 +29,12 @@ class UsersController < ApplicationController
 
   def show
     if current_user.try(:admin?)
-      @user = User.find(params[:id])
+      begin
+        @user = User.find(params[:id])
+      rescue Mongoid::Errors::DocumentNotFound
+        redirect_to root_url, error: "The requested user does not exist."
+        return
+      end
       render :show
     else
       flash[:error] = "You must be an administrator to use that function."
@@ -39,9 +44,14 @@ class UsersController < ApplicationController
 
   def update
     if current_user.try(:admin?)
-      @user = User.find(params[:id])
-      @user.update_attributes(params[:user])
-
+      begin
+        @user = User.find(params[:id])
+        @user.update_attributes(params[:user])
+      rescue Mongoid::Errors::DocumentNotFound
+        redirect_to root_url, error: "The requested user does not exist."
+        return
+      end
+      
       # This is the only time we permit the admin bit to be flipped.
       # you must be an admin first and we have to set this locally due
       # to mass assignment protection.  
