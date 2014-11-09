@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       begin
         @user = User.find(params[:id])
       rescue Mongoid::Errors::DocumentNotFound
-        redirect_to root_url, error: "The requested user does not exist."
+        redirect_to root_url, notice: "The requested user does not exist."
         return
       end
       render :show
@@ -48,10 +48,10 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
         @user.update_attributes(params[:user])
       rescue Mongoid::Errors::DocumentNotFound
-        redirect_to root_url, error: "The requested user does not exist."
+        redirect_to root_url, notice: "The requested user does not exist."
         return
       end
-      
+
       # This is the only time we permit the admin bit to be flipped.
       # you must be an admin first and we have to set this locally due
       # to mass assignment protection.  
@@ -86,7 +86,7 @@ class UsersController < ApplicationController
         redirect_to users_url, notice: "User #{@user.username} (#{@user.name}) deleted."
       end
     else
-      redirect_to root_url, error: "You must be an Administrator to do that."
+      redirect_to root_url, notice: "You must be an Administrator to do that."
     end
 
   end
