@@ -4,6 +4,7 @@ group :development do
       gem 'capistrano', '~> 3.1', require: false
       gem 'capistrano-rails',   '~> 1.1', require: false
       gem 'capistrano-rvm', require: false
+      gem 'capistrano-rbenv', require: false
       gem 'capistrano-bundler', '~> 1.1.2', require: false
       gem 'capistrano3-nginx', '~> 2.0', require: false
 end
