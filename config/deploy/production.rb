@@ -17,11 +17,6 @@ set :log_level, :debug
 
 server 'hubba.retina.net', user: 'deploy', roles: %w{web app}
 
-# Custom SSH Options
-# ==================
-# You may pass any option but keep in mind that net/ssh understands a
-# limited set of options, consult[net/ssh documentation](http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start).
-#
 # Global options
 # --------------
 set :ssh_options, {
@@ -30,16 +25,19 @@ set :ssh_options, {
    user: 'deploy',
    auth_methods: %w(publickey)
 }
-#
-# And/or per server (overrides global)
-# ------------------------------------
-# server 'example.com',
-#   user: 'user_name',
-#   roles: %w{web app},
-#   ssh_options: {
-#     user: 'user_name', # overrides user setting above
-#     keys: %w(/home/user_name/.ssh/id_rsa),
-#     forward_agent: false,
-#     auth_methods: %w(publickey password)
-#     # password: 'please use keys'
-#   }
+
+set :tests, []
+
+namespace :deploy do
+  # make sure we're deploying what we think we're deploying
+  before :deploy, "deploy:check_revision"
+
+  # only allow a deploy with passing tests to deployed
+  #before :deploy, "deploy:run_tests"
+
+  # compile assets locally then rsync
+  #after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
+  #after :finishing, 'deploy:cleanup'
+
+  after 'deploy:publishing', 'nginx:restart'
+end

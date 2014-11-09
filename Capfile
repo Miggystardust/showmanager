@@ -19,8 +19,8 @@ require 'capistrano/nginx'
 #   https://github.com/capistrano/bundler
 #   https://github.com/capistrano/rails
 #
-# require 'capistrano/rvm'
-# require 'capistrano/rbenv'
+require 'capistrano/rvm'
+require 'capistrano/rbenv'
 # require 'capistrano/chruby'
 
 # require 'capistrano/rails/assets'
