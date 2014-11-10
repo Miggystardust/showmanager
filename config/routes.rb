@@ -4,6 +4,13 @@ Rails3MongoidDevise::Application.routes.draw do
 
   resources :entries
 
+  resources :payments, only: [:show, :create, :destroy] do
+    collection do
+      get :success
+      get :cancel
+      post :notify
+    end
+  end
   resources :apps do
     member do
       get :dashboard
