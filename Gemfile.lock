@@ -267,6 +267,7 @@ DEPENDENCIES
   mongoid (~> 4.0.0.beta1)
   mongoid-rspec (>= 1.4.4)
   newrelic_rpm
+  nokogiri
   omniauth-facebook
   protected_attributes
   rails (= 4.0.9)

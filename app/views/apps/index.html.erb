@@ -1,9 +1,10 @@
 <h1>BHOF: Your Applications</h1>
 
-<% if @apps.count > 0 %>
+<% if @apps_incomplete  > 0 %>
 <div class="alert alert-info">
   <!-- only show if apps exist ? -->
-  <strong>Heads Up!</strong> Applications will not be accepted until they are submitted. You have N incomplete applications.
+  <strong>Heads Up!</strong> Applications will not be accepted until they are submitted. You have
+   <%=pluralize(@apps_incomplete,"incomplete application")%>.
 </div>
 <% end %>
 
@@ -43,7 +44,10 @@
         <td><%= app.description %></td>
         <td><I>Not submitted</I></td>
         <td><a href="/apps/<%=app.id.to_s%>/dashboard" class="btn btn-success btn-sm" %>Dashboard
-          </a>&nbsp;<%= link_to 'Destroy', app, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger btn-sm" %>
+          </a>
+          <%= link_to 'Edit', edit_app_path(app), class: "btn btn-primary btn-sm" %>
+          <%= link_to 'Destroy', app, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger btn-sm" %>
+
         </td>
       </tr>
   <% end %>

@@ -1,76 +1,84 @@
-<%= form_for(@app) do |f| %>
-    <% if @app.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@app.errors.count, "error") %> prohibited this app from being saved:</h2>
 
-          <ul>
-            <% @app.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
+<%= form_for(@app, :html => {:class => "form-horizontal"}) do |f| %>
+
+      <% if @app.errors.any? %>
+        <div class="alert alert-danger">
+          <%= pluralize(@app.errors.count, "error") %> prohibited your application from being saved. Please
+          correct the errors below and try again.
         </div>
-    <% end %>
+      <% end %>
 
-    <div class="field">
-      <%= f.label :description %>
-      <br>
-      <%= f.text_field :description %>
+    <fieldset>
+
+    <div class="form-group">
+      <%= f.label :description, :class => "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :description, :class => "form-control required" %>
+        <P>A simple word or two that describes your act, so that you can remember which act you're working with</P>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :legal_name %>
-      <br>
-      <%= f.text_field :legal_name %>
+
+    <div class="form-group">
+      <%= f.label :legal_name, :class => "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :legal_name, :class => "form-control required" %>
+        <P>Your full legal name</P>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :mailing_address %>
-      <br>
-      <%= f.text_field :mailing_address %>
+    <div class="form-group">
+      <%= f.label :mailing_address, :class => "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :mailing_address, :class => "form-control required" %>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :phone_primary %>
-      <br>
-      <%= f.text_field :phone_primary %>
+    <div class="form-group">
+      <%= f.label :phone_primary, "Primary Phone Number", :class => "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :phone_primary, :class => "form-control required" %>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :phone_alt %>
-      <br>
-      <%= f.text_field :phone_alt %>
+    <div class="form-group">
+      <%= f.label :phone_alt, "Alternate Phone Number", :class => "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :phone_alt, :class => "form-control" %>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :phone_primary_has_sms %>
-      <br>
-      <%= f.check_box :phone_primary_has_sms %>
+    <div class="form-group">
+      <%= f.label :phone_primary_has_sms, "SMS Ok?", :class => "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.check_box :phone_primary_has_sms %>
+        <P>Check this box if your primary phone number can receive SMS text messages.</P>
+      </div>
     </div>
 
     <div class="panel panel-default">
       <div class="panel-body">
-        Basic panel example
+        <P>
+          <strong>In order to submit your application, you must agree to the <a href="/bhof/help/rules" target="_blank">complete
+          rules for entry</a>. Please initial below to indicate your agreement:</strong>
 
-        In order to submit your application, you must agree to the <a href="/about/bhof/rules" target="_blank">complete
-        rules for entry</a>. Please initial below to indicate your agreement:</strong></h3>
-
-        <p align="left"><font size="3"><em>As the Main Contact Person, my initials below indicate
-          my agreement in full to the following:</em></font></p>
-
-        <div align="left">
+        </P>
+        <P>
+        As the Main Contact Person, I agree, in full, to the following:
+      </P>
           <ul>
-            <li><em> I agree that I meet age requirements and agree to
-              abide by all Nevada state laws;</em></li>
-            <li><em> I agree to take full responsibility for myself and
-              the act(s) I represent;</em></li>
-            <li><em><font size="3">I agree that if offered a spot to perform in the Weekender (in any capacity) to not
+            <li> I agree that I meet age requirements and agree to abide by all Nevada state laws</li>
+            <li> I agree to take full responsibility for myself and
+              the act(s) I represent</li>
+            <li>I agree that if offered a spot to perform in the Weekender (in any capacity) to not
               perform in any capacity in the Las Vegas metropolitan area for a period of ten days before the start of
-              the Weekend and seven
-              days after the end of the Weekend; </font></em></li>
-            <li><font size="3"><em> I agree to hold <?php echo $bh_name_long;?> free from
-              liability as spelled out in the complete rules for entry.</em></font></li>
-            <li><em><font size="3">I agree to abide by the rest of the &quot;Complete
-              Rules for Entry for the Weekend.</font></em></li>
+              the Weekend and seven days after the end of the Weekend</li>
+            <li>I agree to hold Burlesque Hall of Fame free fromliability as spelled out in the complete rules for entry.
+            <li>I agree to abide by the rest of the &quot;Complete Rules for Entry&quot; for the Weekend.</li>
           </ul>
-        </div>
+          <strong>I agree to the above rules</strong>&nbsp;&nbsp;<%= f.check_box :legal_accepted %>
       </div>
     </div>
+
     <div class="actions">
-      <%= f.submit %>
+      <%= link_to 'Cancel', apps_path, :class => "btn btn-danger" %>
+      <%= f.submit :class=>"btn btn-primary" %>
     </div>
+
+</fieldset>
 <% end %>

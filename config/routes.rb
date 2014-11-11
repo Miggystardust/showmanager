@@ -24,7 +24,8 @@ Rails3MongoidDevise::Application.routes.draw do
 
   # bhof routes
   get "/appdashboard", :to => "bhof#dashboard"
-  resources :bhof, :only => [:index]
+
+  resources :bhof, :only => [:show, :index]
 
   # overriding devise here to deal with users w/o passwords
   get "/settings/edit",

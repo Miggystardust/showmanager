@@ -1,14 +1,9 @@
 <%= form_for(@act, :html => {:class => "form-horizontal"}) do |f| %>
     <fieldset>
       <% if @act.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@act.errors.count, "error") %> prohibited this act from being saved:</h2>
-
-            <ul>
-              <% @act.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-              <% end %>
-            </ul>
+          <div class="alert alert-danger">
+            <%= pluralize(@act.errors.count, "error") %> prohibited your application from being saved. Please
+            correct the errors below and try again.
           </div>
       <% end %>
 

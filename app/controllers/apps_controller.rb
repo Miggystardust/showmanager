@@ -13,6 +13,15 @@ class AppsController < ApplicationController
     end
     
     @apps = App.all
+
+    @apps_incomplete = 0
+
+    if @apps
+      @apps.each { |a|
+          # TODO: example entry info and techinfo for each application then increment this number.
+          @apps_incomplete = @apps_incomplete + 1
+      }
+    end
   end
 
   # GET /apps/1
@@ -53,7 +62,7 @@ class AppsController < ApplicationController
   def update
 
     if @app.update(app_params)
-      redirect_to @app, notice: 'Application was successfully updated.'
+      redirect_to apps_url, notice: 'Application was successfully updated.'
     else
       render action: 'edit'
     end
@@ -100,7 +109,7 @@ class AppsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def app_params
-      params.require(:app).permit(:legal_name, :mailing_address, :phone_primary, :phone_alt, :phone_primary_has_sms, :description)
+      params.require(:app).permit(:legal_name, :mailing_address, :phone_primary, :phone_alt, :phone_primary_has_sms, :description, :legal_accepted)
     end
 
 end

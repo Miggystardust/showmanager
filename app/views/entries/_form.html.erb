@@ -1,4 +1,5 @@
-<%= form_for(@entry) do |f| %>
+<%= form_for(@entry, :html => {:class => "form-horizontal"}) do |f| %>
+
   <% if @entry.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
@@ -10,72 +11,107 @@
       </ul>
     </div>
   <% end %>
+<fieldset>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name, "Name", :class => "col-sm-2 control-label"%>
+    <div class="col-sm-10">
+      <%= f.text_field :name, :class => "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :type %><br>
-    <%= f.text_field :type %>
+  <div class="form-group">
+    <%= f.label :type, "type", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :type, :class => "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :city_from %><br>
-    <%= f.text_field :city_from %>
+  <div class="form-group">
+    <%= f.label :city_from, "city_from", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :city_from %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :country_from %><br>
-    <%= f.text_field :country_from %>
+  <div class="form-group">
+    <%= f.label :country_from, "country_from", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :country_from %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :performer_url %><br>
-    <%= f.text_field :performer_url %>
+  <div class="form-group">
+    <%= f.label :performer_url, "performer_url", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :performer_url %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :category %><br>
-    <%= f.text_field :category %>
+  <div class="form-group">
+    <%= f.label :category, "category", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :category %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :compete_preference %><br>
-    <%= f.text_field :compete_preference %>
+  <div class="form-group">
+    <%= f.label :compete_preference, "compete_preference", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :compete_preference %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :video_url %><br>
-    <%= f.text_field :video_url %>
+  <div class="form-group">
+    <%= f.label :video_url, "video_url", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :video_url %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :years_applied %><br>
-    <%= f.text_field :years_applied %>
+  <div class="form-group">
+    <%= f.label :years_applied, "years_applied", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :years_applied %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :years_performed %><br>
-    <%= f.text_field :years_performed %>
+  <div class="form-group">
+    <%= f.label :years_performed, "years_performed", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :years_performed %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :other_stage_names %><br>
-    <%= f.text_field :other_stage_names %>
+  <div class="form-group">
+    <%= f.label :other_stage_names, "other_stage_names", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :other_stage_names %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :years_experience %><br>
-    <%= f.text_field :years_experience %>
+  <div class="form-group">
+    <%= f.label :years_experience, "years_experience", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :years_experience %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :style %><br>
-    <%= f.text_field :style %>
+  <div class="form-group">
+    <%= f.label :style, "style", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :style %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :why_act_unique %><br>
-    <%= f.text_field :why_act_unique %>
+  <div class="form-group">
+    <%= f.label :why_act_unique, "why_act_unique", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :why_act_unique %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :outside_work %><br>
-    <%= f.text_field :outside_work %>
+  <div class="form-group">
+    <%= f.label :outside_work, "outside_work", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :outside_work %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :comments %><br>
-    <%= f.text_field :comments %>
+  <div class="form-group">
+    <%= f.label :comments, "comments", :class => "col-sm2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :comments %>
+    </div>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+
+</fieldset>
 <% end %>

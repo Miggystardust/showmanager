@@ -43,6 +43,8 @@ gem "newrelic_rpm"
 
 gem "cancan"
 
+gem 'nokogiri'
+
 #gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 gem 'protected_attributes'
