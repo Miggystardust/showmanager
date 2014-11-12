@@ -7,6 +7,7 @@ class ActsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_cache_buster
   before_filter :build_user_selects, :except => [ :destroy ]
+  before_filter :length_to_seconds, :only => [:update, :create]
 
   def build_user_selects
     # we build this every pass because we use them in most operations
@@ -54,6 +55,8 @@ class ActsController < ApplicationController
     # TODO: This routine breaks if you request /acts/self.  The logic is inverted and needs help.
     #       admin access should not change this thing's output. admin should be moved to /adminindex or
     #       similar
+
+    @showowner = false 
     if current_user.admin then
       logger.info "acts: loading for admin"
       # an admin can request "latest" acts, which gives only the latest acts per performer.
@@ -78,6 +81,7 @@ class ActsController < ApplicationController
     else
       logger.info "acts: loading for non admin or self"
       logger.info current_user.acts
+      @acts = current_user.acts
     end
 
     respond_to do |format|
@@ -193,6 +197,7 @@ class ActsController < ApplicationController
   # PUT /acts/1
   # PUT /acts/1.json
   def update
+    logger.debug("update with #{params[:act][:length]}")
     @act = Act.find(params[:id])
 
     if params[:return_to]
@@ -237,4 +242,38 @@ class ActsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def length_to_seconds
+    if params[:act][:length] == nil
+      # we'll let rails complain about this for us.
+      logger.debug("length was nil")
+      return
+    end
+
+    if params[:act][:length].is_a?(Fixnum)
+      logger.debug("length was fixnum #{self.length}")
+      return 0
+    end
+
+    if params[:act][:length].is_a?(Float)
+      return 0
+    end
+
+    if params[:act][:length].match(/\A\d+:\d+\z/)
+      p = params[:act][:length].split(":")
+
+      if p[1].to_i > 59
+        return 0
+      end
+
+      t = (p[0].to_i * 60) + p[1].to_i
+
+      params[:act][:length] = t
+    else
+      return 0
+    end
+  end
+
 end

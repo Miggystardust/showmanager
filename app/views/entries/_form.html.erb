@@ -1,117 +1,130 @@
-<%= form_for(@entry, :html => {:class => "form-horizontal"}) do |f| %>
-
+<%= form_for(@entry, :html => {:class => "form-horizontal", :role => "form"}) do |f| %>
+  <input type=hidden name="for_app" value="<%=@app.id.to_s%>">
   <% if @entry.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
-
-      <ul>
-      <% @entry.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="alert alert-danger">
+      <%= pluralize(@entry.errors.count, "error") %> prohibited
+      your entry from being saved. Please correct the errors below
+      and try again.
     </div>
   <% end %>
-<fieldset>
 
   <div class="form-group">
-    <%= f.label :name, "Name", :class => "col-sm-2 control-label"%>
-    <div class="col-sm-10">
-      <%= f.text_field :name, :class => "form-control" %>
+    <%= f.label :name, "Name", :class => "control-label col-xs-4"%>
+    <div class="col-xs-4">
+      <%= f.text_field :name, :class => "form-control" %>   
+      <P class="help-block">Name your act</p>
     </div>
   </div>
+
   <div class="form-group">
-    <%= f.label :type, "type", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
+    <%= f.label :type, "type", :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
       <%= f.text_field :type, :class => "form-control" %>
     </div>
   </div>
+
   <div class="form-group">
-    <%= f.label :city_from, "city_from", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :city_from %>
+    <%= f.label :city_from, "city_from", :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
+      <%= f.text_field :city_from, :class => "form-control" %>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :country_from, "country_from", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :country_from %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :performer_url, "performer_url", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :performer_url %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :category, "category", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :category %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :compete_preference, "compete_preference", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :compete_preference %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :video_url, "video_url", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :video_url %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :years_applied, "years_applied", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :years_applied %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :years_performed, "years_performed", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :years_performed %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :other_stage_names, "other_stage_names", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :other_stage_names %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :years_experience, "years_experience", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :years_experience %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :style, "style", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :style %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :why_act_unique, "why_act_unique", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :why_act_unique %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :outside_work, "outside_work", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :outside_work %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :comments, "comments", :class => "col-sm2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :comments %>
-    </div>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
   </div>
 
-</fieldset>
+  <div class="form-group">
+    <%= f.label :country_from, "country_from", :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
+      <%= f.text_field :country_from, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :performer_url, "performer_url", :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
+      <%= f.text_field :performer_url, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :category, "category", :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
+      <%= f.text_field :category, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :compete_preference, "compete_preference", :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
+      <%= f.text_field :compete_preference, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :video_url, "video_url", :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
+      <%= f.text_field :video_url, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :years_applied, "years_applied", :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
+      <%= f.text_field :years_applied, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :years_performed, "years_performed", :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
+      <%= f.text_field :years_performed, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :other_stage_names, "other_stage_names", :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
+      <%= f.text_field :other_stage_names, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :years_experience, "years_experience", :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
+      <%= f.text_field :years_experience, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :style, "style", :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
+      <%= f.text_field :style, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :why_act_unique, "why_act_unique", :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
+      <%= f.text_field :why_act_unique, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :outside_work, "outside_work", :class => "control-label col-xs-4" %>
+    <div class="col-xs-4">
+      <%= f.text_field :outside_work, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :comments, "comments", :class => "control-label col-xs-4" %>
+    <div class="col-sm-4">
+      <%= f.text_field :comments, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= link_to 'Cancel', apps_path, :class => "btn btn-danger" %>
+    <%= f.submit :class => "btn btn-primary" %> 
+  </div>
+
 <% end %>
+

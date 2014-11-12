@@ -14,6 +14,16 @@ class EntriesController < ApplicationController
 
   # GET /entries/new
   def new
+    if ! params.has_key?(:app_id)
+      redirect_to apps_url, notice: 'Cannot find that App ID'
+      return
+    end
+    begin
+      @app = App.find(params[:app_id])
+    rescue Mongoid::Errors::DocumentNotFound
+      redirect_to apps_url, error: 'Invalid App ID'
+    end
+
     @entry = Entry.new
   end
 
@@ -34,6 +44,16 @@ class EntriesController < ApplicationController
 
   # PATCH/PUT /entries/1
   def update
+    if ! params.has_key?(:app_id)
+      redirect_to apps_url, notice: 'Cannot find that App ID'
+      return
+    end
+    begin
+      @app = App.find(params[:app_id])
+    rescue Mongoid::Errors::DocumentNotFound
+      redirect_to apps_url, error: 'Invalid App ID'
+    end
+    
     if @entry.update(entry_params)
       redirect_to @entry, notice: 'Entry was successfully updated.'
     else

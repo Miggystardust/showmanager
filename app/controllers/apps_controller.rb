@@ -8,9 +8,9 @@ class AppsController < ApplicationController
   # GET /apps
   def index
     # force the intro rules if necessary...
-    if cookies[:seenintro] == nil
-      redirect_to "/about/bhof/1"
-    end
+    #if cookies[:seenintro] == nil
+    #  redirect_to "/about/bhof/1"
+    #end
     
     @apps = App.all
 
