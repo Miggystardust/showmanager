@@ -92,11 +92,11 @@ body{
   margin-bottom: 12px;
 }
 
-.perfindex_header p,table,td,tr {
+.perfindex_header {
   font-size: 22px;
 }
 
-.perfindex p,table,td,tr {
+.perfindex {
   font-size: 24px;
 }
 
