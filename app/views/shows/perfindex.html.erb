@@ -21,11 +21,13 @@ $( document ).ready(function() {
 });
 
 </script>
-<div class="perfindex">
+<div class="perfindex_header">
 <P><%= @show.title %><BR>
 <%= @show.door_time.strftime("%A, %B %e")%>
  / Doors at <%= @show.door_time.strftime(TIME_ONLY_FMT) %> / Show at <%= @show.show_time.strftime(TIME_ONLY_FMT) %></P>
+</div>
 
+<div class="perfindex">
 <P>&nbsp;</p>
 <TABLE class="table table-nolines">
 <% @show_items.each { |s| -%>
