@@ -210,6 +210,17 @@ class ActsController < ApplicationController
       if @act.update_attributes(params[:act])
         format.html {
           if @return_to
+
+            # if they came here from a return-to link, the user was in the show editor
+            # so, we have to make sure the show syncs up
+
+            @sis_to_update = ShowItem.where(:act_id => @act.id.to_s)
+            @sis_to_update.each { |si|
+              si.duration = @act.length
+              si.save
+            }
+
+
             redirect_to "/shows/#{@return_to}/edit", notice: 'Act was successfully updated.'
             return
           end

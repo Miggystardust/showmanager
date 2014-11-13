@@ -52,6 +52,29 @@ class ShowsController < ApplicationController
     }
   end
 
+  def refresh_act_times
+    # walk through a show and for each act in the show reload the time from the Act
+    # itself
+    @show = Show.find(params[:id])
+    @show_items = ShowItem.where(show_id: params[:id]).asc(:seq)
+    logger.debug "updating act times for show #{@show.id}"
+
+    @show_items.each { |si|
+      if si.act_id != 0
+        begin
+           act = Act.find(si.act_id)
+           logger.debug "#{act.id} fix time was: #{si.duration} now: #{act.length}"
+           si.duration = act.length
+           si.save
+        rescue Mongoid::Errors::DocumentNotFound
+           # Not an act
+        end
+        end
+    }
+
+    redirect_to edit_show_path(@show), :notice => "Times for this show have been refreshed from Act data"
+  end
+
   # GET /shows/1
   # GET /shows/1.json
   def show

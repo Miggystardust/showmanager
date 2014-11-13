@@ -1,4 +1,4 @@
-<h3>Edit: <%=@show.title%></h3>
+<h3 xmlns="http://www.w3.org/1999/html">Edit: <%=@show.title%></h3>
 <P>
 <I><%=@show.venue%></I><BR>
 Doors <%=@show.door_time.strftime(SHORT_TIME_FMT)%> / 
@@ -47,6 +47,10 @@ Drag and Drop rows to re-order show. Changes will automatically save. Click 'Ref
 </button>
 <button class="btn btn-success btn-small" id="refreshBtn">
 <i class="glyphicon glyphicon-refresh glyphicon-white"></i> Refresh </button>
+
+<a href="/shows/<%=@show.id%>/refresh_act_times"<button class="btn btn-warning btn-small" id="refreshBtn">
+<i class="glyphicon glyphicon-refresh glyphicon-white"></i> Refresh Act Times </button>
+</a>
 </p>
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="showlist">
 <thead>

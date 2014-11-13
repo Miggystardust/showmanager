@@ -70,6 +70,7 @@ Rails3MongoidDevise::Application.routes.draw do
       get 'items'
       get 'show_items'
       get 'download'
+      get 'refresh_act_times'
    end
   end
 
