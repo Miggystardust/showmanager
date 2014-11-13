@@ -85,18 +85,19 @@ body{
 
 .perfindex h1,
 .perfindex p {
-  text-align: center;
+  text-align: left;
 }
 
 .perfindex h1 {
   margin-bottom: 12px;
 }
 
-.perfindex p {
-  margin-left: 5%;
-  margin-right: 5%;
-  line-height: 28px;
+.perfindex p,table,td,tr {
   font-size: 24px;
+}
+
+.table-nolines th,td {
+  border-top: none; 
 }
 
 .DTTT_Print { 

@@ -21,27 +21,29 @@ $( document ).ready(function() {
 });
 
 </script>
-
-
 <div class="perfindex">
-<P><%= @show.title %> - <%= @show.door_time.strftime("%A, %B %e")%></P>
-
-<P>Doors at <%= @show.door_time.strftime(TIME_ONLY_FMT) %> / Show at <%= @show.show_time.strftime(TIME_ONLY_FMT) %></P>
+<P><%= @show.title %><BR>
+<%= @show.door_time.strftime("%A, %B %e")%>
+ / Doors at <%= @show.door_time.strftime(TIME_ONLY_FMT) %> / Show at <%= @show.show_time.strftime(TIME_ONLY_FMT) %></P>
 
 <P>&nbsp;</p>
-
+<TABLE class="table table-nolines">
 <% @show_items.each { |s| -%>
-<P>
+<TR>
 <% if @si_act[s.act_id] -%>
-<B><%=itemtime.strftime(TIME_ONLY_FMT) %></b> - <%=@si_act[s.act_id].stage_name %>
+<TD width=200><B><%=itemtime.strftime(TIME_ONLY_FMT) %></b></TD>
+<TD><%=@si_act[s.act_id].stage_name %>
 <div class='mcnotes'>
+<% if @si_act[s.act_id].mc_intro.length > 0 -%>
 <P><I><%=@si_act[s.act_id].mc_intro %></I></P>
-<P>&nbsp;</P>
-</div>
-<% else -%>
-<B><%=itemtime.strftime(TIME_ONLY_FMT) %></b> - <I><%=s.note %></I>
 <% end -%>
-</p>
+</div>
+</TD>
+<% else -%>
+<TD><B><%=itemtime.strftime(TIME_ONLY_FMT) %></b></TD>
+<TD><I><%=s.note %></I></TD>
+<% end -%>
+</TR>
 
 <% 
   if s.duration != nil 
