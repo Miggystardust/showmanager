@@ -23,3 +23,4 @@ FACEBOOK_APP_ID = '308336679243664'
 # Initialize the rails application
 Rails3MongoidDevise::Application.initialize!
 
+

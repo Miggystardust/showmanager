@@ -77,9 +77,9 @@ class AppsController < ApplicationController
   def dashboard
 
     begin
-      @application = App.find(params[:id])
+      @app = App.find(params[:id])
     rescue Mongoid::Errors::DocumentNotFound
-      @application = nil
+      @app = nil
     end
 
     begin
@@ -94,11 +94,66 @@ class AppsController < ApplicationController
       @entry_tech = nil
     end
 
-    if @application == nil
+    if @app == nil
       redirect_to apps_path, :notice => "That application doesn't exist."
     end
     # draw the table
 
+  end
+
+  def payment_paid 
+
+    # paypal sends a get request to here, when done,
+    #  but we're not done yet, we have to capture funds.
+    # 
+    # sample callback...
+    # http://hubba-dev.retina.net/apps/54615c637265747d8a000000/payment_paid?token=EC-47X445308L645073U&PayerID=F9BZ2FNUEB95N
+    begin
+      @app = App.find(params[:id])
+    rescue Mongoid::Errors::DocumentNotFound
+      @error = "Application went away during processing. Please contact support"
+      redirect_to apps_url, notice: @error
+      return
+    end        
+    
+    # have to stash this away for purchase use later. An order is only complete if
+    # purchased_at not nil
+    @app.purchase_ip = request.remote_ip
+    @app.express_token = params[:token]
+    @app.express_payer_id = params[:PayerID]
+    @app.save             
+
+    if @app.purchase
+      @app.purchased_at = Time.now
+      @app.save
+      redirect_to dashboard_app_path(@app), :notice => "Thank you for your payment!"
+    else
+      redirect_to dashboard_app_path(@app), :notice => "Your payment failed."
+    end
+  end
+
+  def express_checkout
+    begin
+      @app = App.find(params[:id])
+    rescue Mongoid::Errors::DocumentNotFound
+      redirect_to "/apps", :notice => "You must specify an application for payment"
+    rescue Mongoid::Errors::InvalidFind
+      redirect_to "/apps", :notice => "You must specify an application for payment"
+    end
+
+    @app.purchase_price = 100
+    @app.save
+
+    response = EXPRESS_GATEWAY.setup_purchase(@app.purchase_price, 
+      ip: request.remote_ip,
+      return_url: "http://hubba-dev.retina.net/apps/#{@app.id}/payment_paid",
+      cancel_return_url: "http://hubba-dev.retina.net/apps/#{@app.id}/payment_cancel",
+      currency: "USD",
+      allow_guest_checkout: true,
+      items: [{name: "BHOF 2015", description: "BHOF 2015 Application", quantity: "1", amount: 100}]
+  )
+  logger.debug(response.token)
+  redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
   end
 
   private

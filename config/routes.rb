@@ -7,6 +7,9 @@ Rails3MongoidDevise::Application.routes.draw do
   resources :apps do
     member do
       get :dashboard
+      get :express_checkout
+      get :payment_cancel
+      get :payment_paid
     end
   end
 

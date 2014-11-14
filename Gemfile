@@ -54,3 +54,5 @@ gem 'actionpack-action_caching'
 gem 'activesupport'
 
 gem 'jquery-fileupload-rails'
+
+gem 'activemerchant'

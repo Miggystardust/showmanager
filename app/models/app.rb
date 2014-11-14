@@ -12,6 +12,13 @@ class App
   field :created_by, :type => String
   field :description, :type => String
 
+  # paypal integration
+  field :purchase_ip, :type => String
+  field :purchased_at, :type => DateTime
+  field :express_token, :type => String
+  field :express_payer_id, :type => String
+  field :app_purchase_price, :type => Float
+
   field :is_group, :type => Mongoid::Boolean # false if solo
 
   validates_presence_of :legal_name, :mailing_address, :phone_primary, :phone_primary_has_sms, :description, :message => "This field is required"
@@ -35,6 +42,31 @@ class App
     end
 
     false
+  end
+
+  def purchase
+    response = EXPRESS_GATEWAY.purchase(self.app_purchase_price, express_purchase_options)
+    self.update_attribute(:purchased_at, Time.now) if response.success?
+    response.success?
+  end
+
+  def express_token=(token)
+    self[:express_token] = token
+    if new_record? && !token.blank?
+      # you can dump details var if you need more info from buyer
+      details = EXPRESS_GATEWAY.details_for(token)
+      self.express_payer_id = details.payer_id
+    end
+  end
+
+  private
+
+  def express_purchase_options
+    {
+      :ip => purchase_ip,
+      :token => express_token,
+      :payer_id => express_payer_id
+    }
   end
 
 end

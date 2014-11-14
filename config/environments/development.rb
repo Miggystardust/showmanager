@@ -31,8 +31,6 @@ Rails3MongoidDevise::Application.configure do
     password: ENV["GMAIL_PASSWORD"]
   }
 
-
-
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
@@ -45,4 +43,5 @@ Rails3MongoidDevise::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
 end
