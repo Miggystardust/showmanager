@@ -36,6 +36,7 @@ set :ssh_options, {
 set :tests, []
 
 set :linked_files, %w{config/initializers/secret_token.rb}
+set :linked_files, %w{keys/paypal.yaml}
 
 namespace :deploy do
   desc "Make sure local git is in sync with remote."
