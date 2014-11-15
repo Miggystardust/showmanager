@@ -1,4 +1,3 @@
-
 class ShowsController < ApplicationController
   protect_from_forgery
 
@@ -150,9 +149,9 @@ class ShowsController < ApplicationController
           @filelist[p.uuid] = p.filename
           @stat_images += 1
         end
-      rescue BSON::InvalidObjectId, Mongoid::Errors::DocumentNotFound
-        # there is a record associated with this show which doesn't exist anymore.
-
+      rescue Mongoid::Errors::DocumentNotFound
+        # there is a record associated with this show which doesn't exist anymore
+        logger.debug("warning: act id #{s.act_id.to_s} doesn't exist but show #{@show.id.to_s} still references it.")
         # we silently skip the item if we can't locate the act or if the
         # ID in question is invalid (i.e. 0 or 1)
       end
