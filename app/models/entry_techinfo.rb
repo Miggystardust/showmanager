@@ -3,6 +3,9 @@ class EntryTechinfo
 
   belongs_to :app
 
+  field :created_at, :type => DateTime
+  field :updated_at, type: DateTime
+
   field :entry_id, type: String
   field :song_title, type: String
   field :song_artist, type: String

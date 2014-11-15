@@ -22,9 +22,12 @@
 
   <tr>
     <td><strong>Part 1</strong></td>
-    <td width="210"><a href="/entries/new">
-       Act information
-      </a>
+    <td width="210">
+      <% if @entry -%>
+      <%=link_to "Act Information",  edit_app_entry_path({app_id: @app.id, id: @entry.id}) %>
+      <% else -%>
+      <%=link_to "Act Information",  new_app_entry_path({app_id: @app.id}) %>
+      <% end -%>
     </td>
     <td align="center">5-10 mins</td>
     <td align="center">
@@ -39,24 +42,28 @@
     <td>
       <div align="center"><strong>Part 2</strong></div>
     </td>
-    <td><a style="color: #781428; text-decoration: underline" href="/apps/<%=@app.id%>/express_checkout">Payment
-      of application fee</a></td>
+    <td>
+    <% if @app.purchased_at.nil? -%>      
+    <a style="color: #781428; text-decoration: underline" href="/apps/<%=@app.id%>/express_checkout">
+    <% end -%>
+     Payment of application fee
+    <% if @app.purchased_at.nil? -%>      
+    </a>
+    <% end -%>
+    </td>
     <td>
       <div align="center"><font color="#781428" size="-1">3 mins</font></div>
     </td>
     <td align="center">
-      <% if ! @app.express_token.nil? -%>
-      <BUTTON type="button" CLASS="btn btn-success">Payment Accepted</BUTTON>
+      <% if ! @app.purchased_at.nil? -%>
+      <BUTTON type="button" CLASS="btn btn-success">Payment Complete</BUTTON>
+      <BR>$<%='%.2f' % (@app.app_purchase_price.to_i/100.0) %><BR><%=@app.purchased_at.strftime(SHORT_TIME_FMT)%>
       <% else -%> 
       <BUTTON type="button" CLASS="btn disabled btn-default">Cannot Submit Yet</BUTTON>
       <% end -%>
     </td>
     <td><p><font color="#781428" size="-1">Fee is due via credit card or PayPal account on
-      the PayPal website. <font color="#FF0000"><strong>We have to update these
-      manually so please do Part 1 FIRST, then do the
-      payment NEXT, then work on the rest of the application. Please allow up to 12 hours to see it updated here,
-      although we try to process them a few times a day. As the deadline nears, we'll be doing them more frequently to
-      make sure everyone can get their application submitted.</strong></font></font></p>
+      the PayPal website. You may pay once Part 1 is complete, but not before. </p>
 
       <p><strong><font color="#781428" size="-1">Payment is $29 and partially refundable if made before December 15,
         2014; then $29 and nonrefundable until January 5, 2015; then $39 and nonrefundable until the application closes.

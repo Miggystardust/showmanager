@@ -12,7 +12,7 @@ class AppsController < ApplicationController
     #  redirect_to "/about/bhof/1"
     #end
     
-    @apps = App.all
+    @apps = current_user.apps.all
 
     @apps_incomplete = 0
 
@@ -23,6 +23,8 @@ class AppsController < ApplicationController
       }
     end
   end
+
+  # TODO: ADMIN AND JUDGE INDEXES
 
   # GET /apps/1
   def show
@@ -101,8 +103,7 @@ class AppsController < ApplicationController
 
   end
 
-  def payment_paid 
-
+  def payment_paid
     # paypal sends a get request to here, when done,
     #  but we're not done yet, we have to capture funds.
     # 
@@ -111,7 +112,7 @@ class AppsController < ApplicationController
     begin
       @app = App.find(params[:id])
     rescue Mongoid::Errors::DocumentNotFound
-      @error = "Application went away during processing. Please contact support"
+      @error = "Application went away during processing. Please try again."
       redirect_to apps_url, notice: @error
       return
     end        
@@ -125,8 +126,12 @@ class AppsController < ApplicationController
 
     if @app.purchase
       @app.purchased_at = Time.now
-      @app.save
-      redirect_to dashboard_app_path(@app), :notice => "Thank you for your payment!"
+      if @app.save
+        redirect_to dashboard_app_path(@app), :notice => "Thank you for your payment!"
+      else
+        redirect_to dashboard_app_path(@app), :notice => "Payment failed to process. Please try again."
+        logger.notice("Application #{@app.id.to_s} failed to save after payment processed.")
+      end
     else
       redirect_to dashboard_app_path(@app), :notice => "Your payment failed."
     end
@@ -141,6 +146,7 @@ class AppsController < ApplicationController
       redirect_to "/apps", :notice => "You must specify an application for payment"
     end
 
+    # purchase price is in cents, per paypal's API, USD ($1.00 = 100 cents)
     @app.purchase_price = 100
     @app.save
 

@@ -1,18 +1,20 @@
-class EntriesController < ApplicationController
+class EntryController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_cache_buster
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
 
-  # GET /entries
+  before_filter :authenticate_user!
+
+  # GET /entry
   def index
     @entries = Entry.all
   end
 
-  # GET /entries/1
+  # GET /entry/1
   def show
   end
 
-  # GET /entries/new
+  # GET /entry/new
   def new
     if ! params.has_key?(:app_id)
       redirect_to apps_url, notice: 'Cannot find that App ID'
@@ -27,11 +29,11 @@ class EntriesController < ApplicationController
     @entry = Entry.new
   end
 
-  # GET /entries/1/edit
+  # GET /entry/1/edit
   def edit
   end
 
-  # POST /entries
+  # POST /entry
   def create
     @entry = Entry.new(entry_params)
 
@@ -42,7 +44,7 @@ class EntriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /entries/1
+  # PATCH/PUT /entry/1
   def update
     if ! params.has_key?(:app_id)
       redirect_to apps_url, notice: 'Cannot find that App ID'
@@ -61,7 +63,7 @@ class EntriesController < ApplicationController
     end
   end
 
-  # DELETE /entries/1
+  # DELETE /entry/1
   def destroy
     @entry.destroy
     redirect_to entries_url, notice: 'Entry was successfully destroyed.'

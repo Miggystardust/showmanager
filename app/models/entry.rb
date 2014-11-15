@@ -3,6 +3,9 @@ class Entry
 
   belongs_to :app
 
+  field :created_at, type: DateTime
+  field :updated_at, type: DateTime
+
   field :name, type: String
 
   field :type, type: Integer  # 1 if solo, 2 if group

@@ -1,4 +1,5 @@
 class ImagesController < ActionController::Base
+  before_filter :authenticate_user!
 
   # for development use, serve thumbs via ruby. We'd normally route
   # these via apache

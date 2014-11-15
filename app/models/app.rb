@@ -9,6 +9,8 @@ class App
   field :legal_accepted, type: Mongoid::Boolean
 
   field :created_at, :type => DateTime
+  field :updated_at, type: DateTime
+
   field :created_by, :type => String
   field :description, :type => String
 
@@ -17,7 +19,7 @@ class App
   field :purchased_at, :type => DateTime
   field :express_token, :type => String
   field :express_payer_id, :type => String
-  field :app_purchase_price, :type => Float
+  field :app_purchase_price, :type => Float  # this is in cents!! Not dollars! 
 
   field :is_group, :type => Mongoid::Boolean # false if solo
 

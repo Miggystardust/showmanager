@@ -18,7 +18,7 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe EntriesController do
+describe EntryController do
 
   # This should return the minimal set of attributes required to create a valid
   # Entry. As you add validations to Entry, be sure to
@@ -27,14 +27,14 @@ describe EntriesController do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # EntriesController. Be sure to keep this updated too.
+  # EntryController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET index" do
-    it "assigns all entries as @entries" do
+    it "assigns all entry as @entry" do
       entry = Entry.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:entries).should eq([entry])
+      assigns(:entry).should eq([entry])
     end
   end
 
@@ -102,7 +102,7 @@ describe EntriesController do
     describe "with valid params" do
       it "updates the requested entry" do
         entry = Entry.create! valid_attributes
-        # Assuming there are no other entries in the database, this
+        # Assuming there are no other entry in the database, this
         # specifies that the Entry created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
@@ -150,7 +150,7 @@ describe EntriesController do
       }.to change(Entry, :count).by(-1)
     end
 
-    it "redirects to the entries list" do
+    it "redirects to the entry list" do
       entry = Entry.create! valid_attributes
       delete :destroy, {:id => entry.to_param}, valid_session
       response.should redirect_to(entries_url)

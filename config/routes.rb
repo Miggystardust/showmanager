@@ -11,6 +11,12 @@ Rails3MongoidDevise::Application.routes.draw do
       get :payment_cancel
       get :payment_paid
     end
+
+     # /apps/:app_id/entry/:id(.:format)
+     resources :entry
+
+     # /apps/:app_id/entry_techinfo(.:format)
+     resources :entry_techinfo
   end
 
   root :to => "home#index"

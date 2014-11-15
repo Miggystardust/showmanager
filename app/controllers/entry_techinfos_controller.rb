@@ -3,6 +3,7 @@ class EntryTechinfosController < ApplicationController
   before_filter :set_cache_buster
   
   before_action :set_entry_techinfo, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   # GET /entry_techinfos
   def index
