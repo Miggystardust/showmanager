@@ -12,8 +12,7 @@ Rails3MongoidDevise::Application.routes.draw do
       get :payment_paid
     end
 
-     # /apps/:app_id/entry/:id(.:format)
-     resources :entry
+     resources :entries
 
      # /apps/:app_id/entry_techinfo(.:format)
      resources :entry_techinfo

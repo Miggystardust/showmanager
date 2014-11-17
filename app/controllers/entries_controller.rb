@@ -1,4 +1,4 @@
-class EntryController < ApplicationController
+class EntriesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_cache_buster
   before_action :set_entry, only: [:show, :edit, :update, :destroy]

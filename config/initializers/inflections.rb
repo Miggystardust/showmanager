@@ -14,6 +14,6 @@
 #   inflect.acronym 'RESTful'
 # end
 
-ActiveSupport::Inflector.inflections do |inflect|
-  inflect.irregular 'entry', 'entry'
+ActiveSupport::Inflector.inflections do |inflect|#
+  inflect.irregular 'entry', 'entries'
 end
