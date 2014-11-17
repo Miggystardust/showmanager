@@ -35,9 +35,17 @@ class EntriesController < ApplicationController
 
   # POST /entry
   def create
+    begin
+      @app = App.find(params[:for_app])
+    rescue Mongoid::Errors::DocumentNotFound
+      redirect_to apps_url, error: 'Invalid App ID'
+    end
+
     @entry = Entry.new(entry_params)
 
     if @entry.save
+      @app.entry = @entry
+      @app.save
       redirect_to @entry, notice: 'Entry was successfully created.'
     else
       render action: 'new'
