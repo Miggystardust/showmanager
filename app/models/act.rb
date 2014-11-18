@@ -9,6 +9,7 @@
    validates_presence_of :stage_name, :short_description, :length
    validates_numericality_of :length, :greater_than  => 0, :message => "Length must be in the form MM:SS and not be zero."
 
+   # these fields required for part (1)
    field :stage_name, :type => String
    field :names_of_performers, :type => String
    field :contact_phone_number, :type => String

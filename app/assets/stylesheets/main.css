@@ -1,156 +1,282 @@
 @charset 'UTF-8';
 
-body{
-  padding-top: 60px;
+body {
+    padding-top: 60px;
 }
 
-.logocontainer { 
-  width:760px;
-  text-decoration:none;
-  position:relative;
-  display:block;
-  border:1px solid #666;
-  padding:3px;
-  margin-right:5px;
-  float:left;
+.logocontainer {
+    width: 760px;
+    text-decoration: none;
+    position: relative;
+    display: block;
+    border: 1px solid #666;
+    padding: 3px;
+    margin-right: 5px;
+    float: left;
 }
 
 .logocontainer span.logotitle {
-  position:absolute;
-  top:40px;
-  right:20px;
-  align:right;
-  filter:alpha(opacity=90);
-  -moz-opacity:0.9;
-  -khtml-opacity: 0.9;
-  opacity: 0.9;
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    align: right;
+    filter: alpha(opacity=90);
+    -moz-opacity: 0.9;
+    -khtml-opacity: 0.9;
+    opacity: 0.9;
 }
 
 /* unsure why bootstrap does this, but we have to fix it as it interfers with tables. -- jna */
 .row {
-  margin-right: 0;
-  margin-left: 0;
+    margin-right: 0;
+    margin-left: 0;
 }
-/* --- end jna changes -- */ 
+
+/* --- end jna changes -- */
 
 /* Jumbotrons
 -------------------------------------------------- */
 .jumbotron {
-  position: relative;
+    position: relative;
 }
+
 .jumbotron h1 {
-  margin-bottom: 9px;
-  font-size: 81px;
-  font-weight: bold;
-  letter-spacing: -1px;
-  line-height: 1;
+    margin-bottom: 9px;
+    font-size: 81px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
 }
+
 .jumbotron p {
-  margin-bottom: 18px;
-  font-weight: 300;
+    margin-bottom: 18px;
+    font-weight: 300;
 }
+
 .jumbotron .btn-large {
-  font-size: 20px;
-  font-weight: normal;
-  padding: 14px 24px;
-  margin-right: 10px;
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
+    font-size: 20px;
+    font-weight: normal;
+    padding: 14px 24px;
+    margin-right: 10px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
 }
+
 .jumbotron .btn-large small {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 /* Masthead (docs home) */
 .masthead {
-  padding-top: 36px;
-  margin-bottom: 72px;
+    padding-top: 36px;
+    margin-bottom: 72px;
 }
 
 .masthead h1,
 .masthead p {
-  text-align: center;
+    text-align: center;
 }
+
 .masthead h1 {
-  margin-bottom: 18px;
+    margin-bottom: 18px;
 
 }
+
 .masthead p {
-  margin-left: 5%;
-  margin-right: 5%;
-  font-size: 30px;
-  line-height: 36px;
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 30px;
+    line-height: 36px;
 }
 
 .perfindex h1,
 .perfindex p {
-  text-align: left;
+    text-align: left;
 }
 
 .perfindex h1 {
-  margin-bottom: 12px;
+    margin-bottom: 12px;
 }
 
 .perfindex_header {
-  font-size: 22px;
+    font-size: 22px;
 }
 
 .perfindex {
-  font-size: 24px;
+    font-size: 24px;
 }
 
-.table-nolines th,td {
-  border-top: none; 
+.table-nolines th, td {
+    border-top: none;
 }
 
-.DTTT_Print { 
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-  color: #333;
+.DTTT_Print {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #333;
 }
 
 /* Marketing section of Overview
 -------------------------------------------------- */
 
 .marketing {
-  text-align: center;
-  color: #5a5a5a;
-}
-.marketing h1 {
-  margin: 60px 0 10px;
-  font-size: 60px;
-  font-weight: 200;
-  line-height: 1;
-  letter-spacing: -1px;
-}
-.marketing h2 {
-  font-weight: 200;
-  margin-bottom: 5px;
-}
-.marketing p {
-  font-size: 16px;
-  line-height: 1.5;
-}
-.marketing .marketing-byline {
-  margin-bottom: 40px;
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 25px;
-  color: #999;
-}
-.marketing img {
-  display: block;
-  margin: 0 auto 30px;
+    text-align: center;
+    color: #5a5a5a;
 }
 
-@media print { 
- .noprint { 
-    display: none;
- }
+.marketing h1 {
+    margin: 60px 0 10px;
+    font-size: 60px;
+    font-weight: 200;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.marketing h2 {
+    font-weight: 200;
+    margin-bottom: 5px;
+}
+
+.marketing p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.marketing .marketing-byline {
+    margin-bottom: 40px;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 25px;
+    color: #999;
+}
+
+.marketing img {
+    display: block;
+    margin: 0 auto 30px;
+}
+
+@media print {
+    .noprint {
+        display: none;
+    }
 }
 
 .white, .white a {
-  color: #fff;
+    color: #fff;
+}
+
+.bs-docs-sidenav {
+    margin-top: 20px;
+    margin-bottom: 20px
+}
+
+.bs-docs-sidebar .nav > li > a {
+    display: block;
+    padding: 4px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #999
+}
+
+.bs-docs-sidebar .nav > li > a:hover, .bs-docs-sidebar .nav > li > a:focus {
+    padding-left: 19px;
+    color: #563d7c;
+    text-decoration: none;
+    background-color: transparent;
+    border-left: 1px solid #563d7c
+}
+
+.bs-docs-sidebar .nav > .active > a, .bs-docs-sidebar .nav > .active:hover > a, .bs-docs-sidebar .nav > .active:focus > a {
+    padding-left: 18px;
+    font-weight: 700;
+    color: #563d7c;
+    background-color: transparent;
+    border-left: 2px solid #563d7c
+}
+
+.bs-docs-sidebar .nav .nav {
+    display: none;
+    padding-bottom: 10px
+}
+
+.bs-docs-sidebar .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 12px;
+    font-weight: 400
+}
+
+.bs-docs-sidebar .nav .nav > li > a:hover, .bs-docs-sidebar .nav .nav > li > a:focus {
+    padding-left: 29px
+}
+
+.bs-docs-sidebar .nav .nav > .active > a, .bs-docs-sidebar .nav .nav > .active:hover > a, .bs-docs-sidebar .nav .nav > .active:focus > a {
+    padding-left: 28px;
+    font-weight: 500
+}
+
+.back-to-top, .bs-docs-theme-toggle {
+    display: none;
+    padding: 4px 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #999
+}
+
+.back-to-top:hover, .bs-docs-theme-toggle:hover {
+    color: #563d7c;
+    text-decoration: none
+}
+
+.bs-docs-theme-toggle {
+    margin-top: 0
+}
+
+@media (min-width: 768px) {
+    .back-to-top, .bs-docs-theme-toggle {
+        display: block
+    }
+}
+
+@media (min-width: 992px) {
+    .bs-docs-sidebar .nav > .active > ul {
+        display: block
+    }
+
+    .bs-docs-sidebar.affix, .bs-docs-sidebar.affix-bottom {
+        width: 213px
+    }
+
+    .bs-docs-sidebar.affix {
+        position: fixed;
+        top: 20px
+    }
+
+    .bs-docs-sidebar.affix-bottom {
+        position: absolute
+    }
+
+    .bs-docs-sidebar.affix-bottom .bs-docs-sidenav, .bs-docs-sidebar.affix .bs-docs-sidenav {
+        margin-top: 0;
+        margin-bottom: 0
+    }
+}
+
+@media (min-width: 1200px) {
+    .bs-docs-sidebar.affix-bottom, .bs-docs-sidebar.affix {
+        width: 263px
+    }
+}
+
+.bs-docs-section {
+    margin-bottom: 60px
+}
+
+.bs-docs-section:last-child {
+    margin-bottom: 0
 }

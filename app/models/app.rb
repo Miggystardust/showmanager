@@ -32,9 +32,9 @@ class App
         :with => /\A[\(\)0-9\- \+\.]{10,20} *[extension\.]{0,9} *[0-9]{0,5}\z/
 
   belongs_to :user
-  embeds_one :entry
-  embeds_one :entry_techinfo
-  
+  embeds_one :entry, autobuild: true
+  embeds_one :entry_techinfo, autobuild: true
+
   has_one :entry
   has_one :entry_techinfo
 

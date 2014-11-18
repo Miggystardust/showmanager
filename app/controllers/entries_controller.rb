@@ -31,6 +31,17 @@ class EntriesController < ApplicationController
 
   # GET /entry/1/edit
   def edit
+    if ! params.has_key?(:app_id)
+      redirect_to apps_url, notice: 'Cannot find that App ID'
+      return
+    end
+    begin
+      @app = App.find(params[:app_id])
+    rescue Mongoid::Errors::DocumentNotFound
+      redirect_to apps_url, error: 'Invalid App ID'
+    end
+
+    @entry = @app.entry
   end
 
   # POST /entry

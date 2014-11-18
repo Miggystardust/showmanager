@@ -84,22 +84,11 @@ class AppsController < ApplicationController
       @app = nil
     end
 
-    begin
-      @entry = Entry.find(params[:id])
-    rescue Mongoid::Errors::DocumentNotFound
-      @entry = nil
-    end
-
-    begin
-      @entry_tech = EntryTechinfo.find(params[:id])
-    rescue Mongoid::Errors::DocumentNotFound
-      @entry_tech = nil
-    end
-
     if @app == nil
       redirect_to apps_path, :notice => "That application doesn't exist."
     end
-    # draw the table
+    @entry = @app.entry
+    @entry_tech = @app.entry_techinfo
 
   end
 
