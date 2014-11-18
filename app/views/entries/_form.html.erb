@@ -1,130 +1,147 @@
-<%= form_for([@app,@entry], :html => {:class => "form-horizontal", :role => "form"}) do |f| %>
-  <input type=hidden name="for_app" value="<%=@app.id.to_s%>">
-  <% if @entry.errors.any? %>
-    <div class="alert alert-danger">
-      <%= pluralize(@entry.errors.count, "error") %> prohibited
-      your entry from being saved. Please correct the errors below
-      and try again.
-    </div>
-  <% end %>
 
-  <div class="form-group">
-    <%= f.label :name, "Name", :class => "control-label col-xs-4"%>
-    <div class="col-xs-4">
-      <%= f.text_field :name, :class => "form-control" %>   
-      <P class="help-block">Name your act</p>
-    </div>
-  </div>
+<div class="alert"><B>Heads up!</B> If any of these fields are blank, this page will show up as "incomplete" on the main dashboard. So for any that you aren't answering, such as optional ones, enter "n/a" in the form for "Not Applicable."</div>
 
-  <div class="form-group">
-    <%= f.label :type, "type", :class => "control-label col-xs-4" %>
-    <div class="col-xs-4">
-      <%= f.text_field :type, :class => "form-control" %>
-    </div>
-  </div>
+<%= form_for([@app, @entry], :html => {:class => "form-horizontal", :role => "form"}) do |f| %>
+    <input type=hidden name="for_app" value="<%= @app.id.to_s %>">
+    <% if @entry.errors.any? %>
+        <div class="alert alert-danger">
+          <%= pluralize(@entry.errors.count, "error") %> prohibited
+          your entry from being saved. Please correct the errors below
+          and try again.
+        </div>
+    <% end %>
 
-  <div class="form-group">
-    <%= f.label :city_from, "city_from", :class => "control-label col-xs-4" %>
-    <div class="col-xs-4">
-      <%= f.text_field :city_from, :class => "form-control" %>
+    <div class="form-group">
+      <%= f.label :name, "Act Name", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :name, :class => "form-control" %>
+        <P class="help-block">Performer name for your act (with no by-line)</p>
+      </div>
     </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :country_from, "country_from", :class => "control-label col-xs-4" %>
-    <div class="col-xs-4">
-      <%= f.text_field :country_from, :class => "form-control" %>
+    <div class="form-group">
+      <%= f.label :type, "type", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :type, :class => "form-control" %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :performer_url, "performer_url", :class => "control-label col-xs-4" %>
-    <div class="col-xs-4">
-      <%= f.text_field :performer_url, :class => "form-control" %>
+    <div class="form-group">
+      <%= f.label :city_from, "Home City", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :city_from, :class => "form-control" %>
+        <P>Your home city (as it would be listed in a printed program)</P>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :category, "category", :class => "control-label col-xs-4" %>
-    <div class="col-xs-4">
-      <%= f.text_field :category, :class => "form-control" %>
+    <div class="form-group">
+      <%= f.label :country_from, "Home Country", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :country_from, :class => "form-control" %>
+        <P>Your home country (as it would be listed in a printed program)</P>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :compete_preference, "compete_preference", :class => "control-label col-xs-4" %>
-    <div class="col-xs-4">
-      <%= f.text_field :compete_preference, :class => "form-control" %>
+    <div class="form-group">
+      <%= f.label :category, "Category", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :category, :class => "form-control" %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :video_url, "video_url", :class => "control-label col-xs-4" %>
-    <div class="col-xs-4">
-      <%= f.text_field :video_url, :class => "form-control" %>
+    <div class="form-group">
+      <%= f.label :compete_preference, "Competitive / Non-Competitive", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :compete_preference, :class => "form-control" %>
+        <P>We are planning to offer both competitive spots (for a title) and noncompetitive showcase spots. Please indicate your preference.</P>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :years_applied, "years_applied", :class => "control-label col-xs-4" %>
-    <div class="col-xs-4">
-      <%= f.text_field :years_applied, :class => "form-control" %>
+    <div class="form-group">
+      <%= f.label :video_url, "Video URL", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :video_url, :class => "form-control" %>
+        <P>
+          Weblink of footage of the solo act you are submitting-- we highly recommend using a free URL-shortening
+          service like http://bit.ly or Tinyurl.com, but be sure to test it first
+          (Link must be viewable until the full lineup is published. See the <a href="/bhof/rules">rules</a> for more
+          info.)
+        </P>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :years_performed, "years_performed", :class => "control-label col-xs-4" %>
-    <div class="col-xs-4">
-      <%= f.text_field :years_performed, :class => "form-control" %>
+    <div class="form-group">
+      <%= f.label :performer_url, "Your Website", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :performer_url, :class => "form-control" %>
+        <P>Your website (if none, please write N/A)</P>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :other_stage_names, "other_stage_names", :class => "control-label col-xs-4" %>
-    <div class="col-xs-4">
-      <%= f.text_field :other_stage_names, :class => "form-control" %>
+    <div class="form-group">
+      <%= f.label :years_performed, "Years Performed at BHOF", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :years_performed, :class => "form-control" %>
+        <P>List any previous years that you have performed at the pageant (either competitive or noncompetitive) and the category, if applicable. If none, please put "N/A"</P>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :years_experience, "years_experience", :class => "control-label col-xs-4" %>
-    <div class="col-xs-4">
-      <%= f.text_field :years_experience, :class => "form-control" %>
+    <div class="form-group">
+      <%= f.label :years_applied, "Years Applied at BHOF", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :years_applied, :class => "form-control" %>
+        <P>List any previous years that you have applied, regardless of whether you were accepted or not. (Just list the years only. If none, please put "N/A")</P>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :style, "style", :class => "control-label col-xs-4" %>
-    <div class="col-xs-4">
-      <%= f.text_field :style, :class => "form-control" %>
+
+    <div class="form-group">
+      <%= f.label :other_stage_names, "Other Stage Names", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :other_stage_names, :class => "form-control" %>
+
+<P>List any other stage names you have previously used in performing. If none, please put "N/A"
+</P>      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :why_act_unique, "why_act_unique", :class => "control-label col-xs-4" %>
-    <div class="col-xs-4">
-      <%= f.text_field :why_act_unique, :class => "form-control" %>
+    <div class="form-group">
+      <%= f.label :years_experience, "years_experience", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :years_experience, :class => "form-control" %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :outside_work, "outside_work", :class => "control-label col-xs-4" %>
-    <div class="col-xs-4">
-      <%= f.text_field :outside_work, :class => "form-control" %>
+    <div class="form-group">
+      <%= f.label :style, "style", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :style, :class => "form-control" %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :comments, "comments", :class => "control-label col-xs-4" %>
-    <div class="col-sm-4">
-      <%= f.text_field :comments, :class => "form-control" %>
+    <div class="form-group">
+      <%= f.label :why_act_unique, "why_act_unique", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :why_act_unique, :class => "form-control" %>
+      </div>
     </div>
-  </div>
 
-  <div class="actions">
-    <%= link_to 'Cancel', dashboard_app_path(@app), :class => "btn btn-danger" %>
-    <%= f.submit :class => "btn btn-primary" %> 
-  </div>
+    <div class="form-group">
+      <%= f.label :outside_work, "outside_work", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :outside_work, :class => "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :comments, "comments", :class => "control-label col-xs-4" %>
+      <div class="col-sm-4">
+        <%= f.text_field :comments, :class => "form-control" %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= link_to 'Cancel', dashboard_app_path(@app), :class => "btn btn-danger" %>
+      <%= f.submit :class => "btn btn-primary" %>
+    </div>
 
 <% end %>
 
