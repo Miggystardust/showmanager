@@ -8,19 +8,16 @@
   <div class="panel-body">
 
     <p>This online application consists of four parts, with EVERYTHING due by electronic submission at
-      <strong><span class="rulepageheaders"><?php echo
-      $deadline_with_time;?> </span></strong>This year's application
+      <strong><span class="rulepageheaders"><%= BHOF_FINAL_DEADLINE.strftime(SHORT_TIME_FMT) %></strong>This year's application
       is a bit shorter than last year's. If you have your act and
       video link ready, the application can be done in less than an
       hour. </p>
 
     <p>
       <strong>As with last year, we're offering a $10 discount on the
-        application fee if you do parts 1 and 2 (the quick parts)
-        early!</strong></span> We want you to spend time on the
+        application fee if you start the application early!</strong></span> We want you to spend time on the
         application and not rush. And also to have time to make
-        changes if you need to. To encourage this, we're offering this
-        discount if you start and pay the fee early. Once you've paid it, you can
+        changes if you need to. We offer the discount to encourage this, which will help you submit the best application possible. Once you've paid it, you can
         still have until
         <%=BHOF_FINAL_DEADLINE.strftime(SHORT_DATE_FMT)%> to complete
         the rest of your application and fully submit it. The discount
@@ -30,7 +27,7 @@
 
      <p>The four parts of the application are:</p>
      <OL>
-      <LI>QUICK basic info (estimated 5-10 minutes)</LI>
+      <LI>Basic info (estimated 5-10 minutes)</LI>
       <LI>Payment of application fee (3 minutes)</LI>
       <LI>Additional info about the act (15-45 minutes)</LI>
       <LI>Submit application</LI>
@@ -39,7 +36,7 @@
      <P>
      </strong>
      To get the earlybird discount: just complete the payment early. Then
-     you can work on the rest and submit it all by <%= BHOF_DISCOUNT_DEADLINE.strftime(SHORT_TIME_FMT) %>
+     you can work on the rest and submit it all by <%= BHOF_FINAL_DEADLINE.strftime(SHORT_TIME_FMT) %>
      </strong>
      </p>
 
