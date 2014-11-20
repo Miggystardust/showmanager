@@ -91,6 +91,20 @@ class AppsController < ApplicationController
     @entry_tech = @app.entry_techinfo
 
   end
+  
+  def payment_cancel
+    begin
+      @app = App.find(params[:id])
+    rescue Mongoid::Errors::DocumentNotFound
+      @error = "Application went away during processing. Please try again."
+      redirect_to apps_url, notice: @error
+      return
+    end
+
+    # TODO: Clear the token here? Not sure if it matters at all.     
+    redirect_to dashboard_app_path(@app), :notice => "Payment has been cancelled."
+  end
+
 
   def payment_paid
     # paypal sends a get request to here, when done,
@@ -136,7 +150,7 @@ class AppsController < ApplicationController
     end
 
     # purchase price is in cents, per paypal's API, USD ($1.00 = 100 cents)
-    @app.purchase_price = 100
+    @app.purchase_price = @app.get_current_price()
     @app.save
 
     response = EXPRESS_GATEWAY.setup_purchase(@app.purchase_price, 
@@ -145,13 +159,14 @@ class AppsController < ApplicationController
       cancel_return_url: "http://hubba-dev.retina.net/apps/#{@app.id}/payment_cancel",
       currency: "USD",
       allow_guest_checkout: true,
-      items: [{name: "BHOF 2015", description: "BHOF 2015 Application", quantity: "1", amount: 100}]
+      items: [{name: "BHOF 2015", description: "BHOF 2015 Application", quantity: "1", amount: @app.get_current_price()}]
   )
   logger.debug(response.token)
   redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_app
       @app = App.find(params[:id])

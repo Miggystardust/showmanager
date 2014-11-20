@@ -1,0 +1,61 @@
+
+<div class="alert alert-warning"><B>Heads up!</B> If any of these
+fields are blank, this page will show up as "incomplete" on the main
+dashboard. So for any that you aren't answering, such as optional
+ones, enter "n/a" in the form for "Not Applicable."</div>
+
+<%= form_for([@app, @entry], :html => {:class => "form-horizontal", :role => "form"}) do |f| %>
+    <input type=hidden name="for_app" value="<%= @app.id.to_s %>">
+    <% if @entry.errors.any? %>
+        <div class="alert alert-danger">
+          <%= pluralize(@entry.errors.count, "error") %> prohibited
+          your entry from being saved. Please correct the errors below
+          and try again.
+        </div>
+    <% end %>
+
+
+    <div class="form-group">
+      <%= f.label :years_experience, "
+How long has your act been performing? Where do you perform at? (2 to 4 sentences)", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_area :years_experience, :class => "form-control"%>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :style, "How would you describe your act's performance style? (1-4 sentences)", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_area :style, :class => "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :why_act_unique, "What makes the act unique or notable? (1-4 sentences)", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_area :why_act_unique, :class => "form-control" %>
+      </div>
+    </div>
+
+    <!-- solo acts only --->
+    <div class="form-group">
+      <%= f.label :outside_work, "What do you do when you're not performing?", :class => "control-label col-xs-4" %>
+      <div class="col-xs-4">
+        <%= f.text_field :outside_work, :class => "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :comments, "Any additional comments, thoughts, or suggestions? (This question is optional; if none, please put \"n/a\". You can answer up to a few sentences.)", :class => "control-label col-xs-4" %>
+      <div class="col-sm-4">
+        <%= f.text_area :comments, :class => "form-control" %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= link_to 'Go back Without Saving', dashboard_app_path(@app), :class => "btn btn-danger" %>
+      <%= f.submit :class => "btn btn-primary" %>
+    </div>
+
+<% end %>
+

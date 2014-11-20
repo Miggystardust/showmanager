@@ -1,6 +1,6 @@
 Rails3MongoidDevise::Application.routes.draw do
 
-  resources :entry_techinfos
+  resources :entry_techinfo
 
   resources :entries
 

@@ -16,4 +16,5 @@
 
 ActiveSupport::Inflector.inflections do |inflect|#
   inflect.irregular 'entry', 'entries'
+  inflect.irregular 'entry_techinfo', 'entry_techinfo'
 end

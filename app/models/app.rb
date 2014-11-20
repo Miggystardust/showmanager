@@ -19,7 +19,7 @@ class App
   field :purchased_at, :type => DateTime
   field :express_token, :type => String
   field :express_payer_id, :type => String
-  field :app_purchase_price, :type => Float  # this is in cents!! Not dollars! 
+  field :purchase_price, :type => Float  # this is in cents!! Not dollars! 
 
   field :is_group, :type => Mongoid::Boolean # false if solo
 
@@ -62,6 +62,19 @@ class App
       details = EXPRESS_GATEWAY.details_for(token)
       self.express_payer_id = details.payer_id
     end
+  end
+
+  # calculate the purchase price for this app based on the current time
+  def get_current_price
+    #  Safety: We'll never charge less than $29.00. I'd set this to zero, but um, no.
+    rate = 2900
+
+    BHOF_RATES.each { |bh|
+      if Time.now() >= bh[:deadline]
+        rate = bh[:rate]
+      end
+    }
+    rate
   end
 
   private

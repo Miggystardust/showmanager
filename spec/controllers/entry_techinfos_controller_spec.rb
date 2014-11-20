@@ -31,10 +31,10 @@ describe EntryTechinfosController do
   let(:valid_session) { {} }
 
   describe "GET index" do
-    it "assigns all entry_techinfos as @entry_techinfos" do
+    it "assigns all entry_techinfo as @entry_techinfo" do
       entry_techinfo = EntryTechinfo.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:entry_techinfos).should eq([entry_techinfo])
+      assigns(:entry_techinfo).should eq([entry_techinfo])
     end
   end
 
@@ -102,7 +102,7 @@ describe EntryTechinfosController do
     describe "with valid params" do
       it "updates the requested entry_techinfo" do
         entry_techinfo = EntryTechinfo.create! valid_attributes
-        # Assuming there are no other entry_techinfos in the database, this
+        # Assuming there are no other entry_techinfo in the database, this
         # specifies that the EntryTechinfo created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
@@ -150,7 +150,7 @@ describe EntryTechinfosController do
       }.to change(EntryTechinfo, :count).by(-1)
     end
 
-    it "redirects to the entry_techinfos list" do
+    it "redirects to the entry_techinfo list" do
       entry_techinfo = EntryTechinfo.create! valid_attributes
       delete :destroy, {:id => entry_techinfo.to_param}, valid_session
       response.should redirect_to(entry_techinfos_url)

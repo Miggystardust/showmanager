@@ -1,6 +1,7 @@
-<h1>Editing entry</h1>
-
+<% if @part == 1 -%>
+<h1>Edit Act Information: <%=@app.description%></h1>
 <%= render 'form' %>
-
-<%= link_to 'Show', @entry %> |
-<%= link_to 'Back', entries_path %>
+<% else -%>
+<h1>Edit Short Answers: <%=@app.description%></h1>
+<%= render 'form_part2' %>
+<% end -%>

@@ -1,0 +1,197 @@
+<%= form_for([@app, @entry_techinfo], :html => {:class => "form-horizontal"}) do |f| %>
+  <% if @entry_techinfo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entry_techinfo.errors.count, "error") %> prohibited this entry_techinfo from being saved:</h2>
+    </div>
+  <% end %>
+  <fieldset> 
+  <input type=hidden name="for_app" value="<%= @app.id.to_s %>">
+  <div class="form-group">
+    <%= f.label :song_title, "Song Title", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :song_title, :class => "form-control" %>
+    <P>
+      Song title. (If multiple titles, please include all song titles;
+      and you will be asked to mix them all into one track.)
+    </P>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :song_artist, "Song Artist(s)", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :song_artist, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :act_duration, "Duration", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_field :act_duration, :class => "form-control" %>
+    <P>
+    Duration of music and duration of act (from the time you enter the
+    stage until you exit). If the video is longer than 4:15, please
+    indicate that you can trim the act.
+    </P>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :act_name, "Name of Act", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :act_name, :class => "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :act_description, "Description", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :act_description, :class => "form-control" %>
+    <P>
+    Please give a brief description of your piece, such as overall
+    concept, theme, era or musical style (so that we can be sure to
+    appropriately space similar acts): (up to a few sentences)
+    </P>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :costume_Description, "Costume", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :costume_Description, :class => "form-control" %>
+    <P>Briefly describe your costume:</P>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :costume_colors, "Costume Colors", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :costume_colors, :class => "form-control" %>
+    <P>
+    Costume colors at beginning of act and end of act
+    </P>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :props, "Props", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :props, :class => "form-control" %> 
+    <P>
+    Please list all props (including humans), tech needs, specialty
+    equipment, potential hazards and prep/clean-up required before,
+    during or after your act
+    </p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :other_tech_info, "Other special technical info", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :other_tech_info, :class => "form-control" %>
+    <P>If None, please put "n/a"</P>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :setup_needs, "Setup Needs", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :setup_needs, :class => "form-control" %>
+    <P>
+    Set-up (what needs to be preset onstage before your entrance; Ex: "one chair downstage right")
+    </P>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :setup_time, "Setup Time", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_field :setup_time, :class => "form-control" %>
+    <P>Estimated Set-up time needed for your act</P>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :breakdown_needs, "Breakdown Needs", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :breakdown_needs, :class => "form-control" %>
+    <P>
+    Pick-up/breakdown needs (please include all props and costume
+    pieces that the stagehands need to clear at the end of your act)
+    </p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :breakdown_time, "Breakdown Time",  :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :breakdown_time, :class => "form-control" %>
+    <P>Estimated time to break down your act and remove it from the stage</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :sound_cue, "Sound Cue", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :sound_cue, :class => "form-control" %>
+    <P>Sound Cue (Example: "Enter to Music",  "Performer in place onstage", etc.)</P>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :microphone_needs, "Microphone Needs", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :microphone_needs, :class => "form-control" %>
+    <P>
+    Do you have any microphone needs? (If so, please include
+    information about placement and stands.)
+    </p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :lighting_needs, "Lighting Needs", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :lighting_needs, :class => "form-control" %>
+    <P>
+    Please describe your lighting needs such as colors or spotlights, etc. 
+    </P>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :mc_intro, "MC Intro", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :mc_intro, :class => "form-control" %>
+    <P>
+    Please give a brief (25 words or less) stage introduction,
+    including a phonetic spelling of your name
+    </P>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :aerial_needs, "Aerial/Rigging", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_area :aerial_needs, :class => "form-control" %>
+    <P> 
+    Does your act require any aerial rigging? (The venue DOES allow for
+    aerial; however, anyone wishing to perform an aerial act must assume
+    all expenses associated with their rigging, and sign a waiver
+    releasing the BHOF, production crew, and venue from any liability
+    relating to their act.)
+    </P>
+
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= link_to 'Cancel', apps_path, :class => "btn btn-danger" %>
+    <%= f.submit "Update Technical Information", :class=>"btn btn-primary" %>
+  </div>
+
+</fieldset>
+<% end %>
+<P>
+&nbsp;
+</P>

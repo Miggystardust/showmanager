@@ -1,20 +1,20 @@
-class EntriesController < ApplicationController
+class EntryTechinfoController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_cache_buster
-  before_action :set_entry, only: [:show, :edit, :update, :destroy]
-
+  
+  before_action :set_entry_techinfo, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
 
-  # GET /entry
+  # GET /entry_techinfo
   def index
-    @entries = Entry.all
+    @entry_techinfos = EntryTechinfo.all
   end
 
-  # GET /entry/1
+  # GET /entry_techinfo/1
   def show
   end
 
-  # GET /entry/new
+  # GET /entry_techinfo/new
   def new
     if ! params.has_key?(:app_id)
       redirect_to apps_url, notice: 'Cannot find that App ID'
@@ -26,10 +26,10 @@ class EntriesController < ApplicationController
       redirect_to apps_url, error: 'Invalid App ID'
     end
 
-    @entry = Entry.new
+    @entry_techinfo = EntryTechinfo.new
   end
 
-  # GET /entry/1/edit
+  # GET /entry_techinfo/1/edit
   def edit
     if ! params.has_key?(:app_id)
       redirect_to apps_url, notice: 'Cannot find that App ID'
@@ -40,15 +40,11 @@ class EntriesController < ApplicationController
     rescue Mongoid::Errors::DocumentNotFound
       redirect_to apps_url, error: 'Invalid App ID'
     end
-    if params[:part] == "2"
-      @part = 2
-    else
-      @part = 1
-    end
-    @entry = @app.entry
+    
+    @entry_techinfo = @app.entry_techinfo
   end
 
-  # POST /entry
+  # POST /entry_techinfo
   def create
     begin
       @app = App.find(params[:for_app])
@@ -56,18 +52,18 @@ class EntriesController < ApplicationController
       redirect_to apps_url, error: 'Invalid App ID'
     end
 
-    @entry = Entry.new(entry_params)
+    @entry_techinfo = EntryTechinfo.new(entry_techinfo_params)
 
-    if @entry.save
-      @app.entry = @entry
+    if @entry_techinfo.save
+      @app.entry_techinfo = @entry_techinfo
       @app.save
-      redirect_to dashboard_app_path(@app), notice: 'Entry was successfully created.'
+      redirect_to dashboard_app_path(@app), notice: 'Technical information saved'
     else
       render action: 'new'
     end
   end
 
-  # PATCH/PUT /entry/1
+  # PATCH/PUT /entry_techinfo/1
   def update
     if ! params.has_key?(:app_id)
       redirect_to apps_url, notice: 'Cannot find that App ID'
@@ -78,28 +74,28 @@ class EntriesController < ApplicationController
     rescue Mongoid::Errors::DocumentNotFound
       redirect_to apps_url, error: 'Invalid App ID'
     end
-    
-    if @entry.update(entry_params)
-      redirect_to dashboard_app_path(@app), notice: 'Entry was successfully updated.'
+
+    if @entry_techinfo.update(entry_techinfo_params)
+      redirect_to dashboard_app_path(@app), notice: 'Technical Information was successfully updated.'
     else
       render action: 'edit'
     end
   end
 
-  # DELETE /entry/1
+  # DELETE /entry_techinfo/1
   def destroy
-    @entry.destroy
-    redirect_to entries_url, notice: 'Entry was successfully destroyed.'
+    @entry_techinfo.destroy
+    redirect_to entry_techinfos_url, notice: 'Entry techinfo was successfully destroyed.'
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_entry
-      @entry = Entry.find(params[:id])
+    def set_entry_techinfo
+      @entry_techinfo = EntryTechinfo.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
-    def entry_params
-      params.require(:entry).permit(:name, :type, :city_from, :country_from, :performer_url, :category, :compete_preference, :video_url, :years_applied, :years_performed, :other_stage_names, :favorite_thing, :years_experience, :style, :why_act_unique, :outside_work, :comments)
+    def entry_techinfo_params
+      params.require(:entry_techinfo).permit(:entry_id, :song_title, :song_artist, :act_duration_secs, :act_name, :act_description, :costume_Description, :costume_colors, :props, :other_tech_info, :setup_needs, :setup_time_secs, :breakdown_needs, :breakdown_time_secs, :sound_cue, :microphone_needs, :lighting_needs, :mc_intro, :aerial_needs)
     end
 end
