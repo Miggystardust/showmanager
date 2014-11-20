@@ -23,6 +23,9 @@ class App
 
   field :is_group, :type => Mongoid::Boolean # false if solo
 
+  # upon submit, we lock the app.
+  field :locked, :type => Mongoid::Boolean # false if solo
+
   validates_presence_of :legal_name, :mailing_address, :phone_primary, :phone_primary_has_sms, :description, :message => "This field is required"
 
   validates_inclusion_of :legal_accepted, :in => [true], :message => "You must check this box to accept the agreement"
@@ -43,7 +46,7 @@ class App
         self.mailing_address != "" and
         self.phone_primary != "" and
         self.legal_accepted == true
-      true
+      return true
     end
 
     false

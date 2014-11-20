@@ -1,7 +1,14 @@
-<% if @part == 1 -%>
-<h1>Edit Act Information: <%=@app.description%></h1>
+<%=stylesheet_link_tag "bootstrap.icon-large.min.css" %>
+
+<h2> <a href="/apps">Applications</a> <span style="vertical-align:middle" class="icon-large icon-thin-right-arrow"></span><%=link_to "Dashboard", dashboard_app_path(@app) %> <span style="vertical-align:middle" class="icon-large icon-thin-right-arrow"></span>
+<% if @part == 1 -%>Act Information: <%=@app.description%></h1>
 <%= render 'form' %>
-<% else -%>
-<h1>Edit Short Answers: <%=@app.description%></h1>
+<% else -%>Short Answers: <%=@app.description%></h1>
 <%= render 'form_part2' %>
 <% end -%>
+    </h2>
+
+
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>

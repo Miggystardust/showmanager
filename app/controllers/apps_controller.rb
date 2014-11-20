@@ -7,19 +7,14 @@ class AppsController < ApplicationController
 
   # GET /apps
   def index
-    # force the intro rules if necessary...
-    #if cookies[:seenintro] == nil
-    #  redirect_to "/about/bhof/1"
-    #end
-    
     @apps = current_user.apps.all
-
     @apps_incomplete = 0
 
     if @apps
       @apps.each { |a|
-          # TODO: example entry info and techinfo for each application then increment this number.
-          @apps_incomplete = @apps_incomplete + 1
+         if a.entry.nil? or a.entry_techinfo.nil? or a.is_complete? == false or a.entry.is_complete? == false or a.entry_techinfo.is_complete? == false
+            @apps_incomplete = @apps_incomplete + 1
+          end
       }
     end
   end
@@ -33,7 +28,6 @@ class AppsController < ApplicationController
   # get /apps/updateme
   def updateme
     @app = Apps.where(user_id: current_user.__id__)
-
   end
 
   # GET /apps/new
@@ -62,9 +56,11 @@ class AppsController < ApplicationController
 
   # PATCH/PUT /apps/1
   def update
-
     if @app.update(app_params)
-      redirect_to apps_url, notice: 'Application was successfully updated.'
+      respond_to do |format| 
+        format.html { redirect_to apps_url, notice: 'Application was successfully updated.' }
+        format.json { head :ok } 
+      end
     else
       render action: 'edit'
     end
@@ -155,11 +151,11 @@ class AppsController < ApplicationController
 
     response = EXPRESS_GATEWAY.setup_purchase(@app.purchase_price, 
       ip: request.remote_ip,
-      return_url: "http://hubba-dev.retina.net/apps/#{@app.id}/payment_paid",
-      cancel_return_url: "http://hubba-dev.retina.net/apps/#{@app.id}/payment_cancel",
+      return_url: "http://#{BHOF_HOST}/apps/#{@app.id}/payment_paid",
+      cancel_return_url: "http://#{BHOF_HOST}/apps/#{@app.id}/payment_cancel",
       currency: "USD",
       allow_guest_checkout: true,
-      items: [{name: "BHOF 2015", description: "BHOF 2015 Application", quantity: "1", amount: @app.get_current_price()}]
+      items: [{name: "BHOF #{BHOF_YEAR}", description: "BHOF #{BHOF_YEAR} Application", quantity: "1", amount: @app.get_current_price()}]
   )
   logger.debug(response.token)
   redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
@@ -174,7 +170,7 @@ class AppsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def app_params
-      params.require(:app).permit(:legal_name, :mailing_address, :phone_primary, :phone_alt, :phone_primary_has_sms, :description, :legal_accepted)
+      params.require(:app).permit(:legal_name, :mailing_address, :phone_primary, :phone_alt, :phone_primary_has_sms, :description, :legal_accepted, :locked)
     end
 
 end

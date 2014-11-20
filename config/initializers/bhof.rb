@@ -11,5 +11,12 @@ Rails3MongoidDevise::Application.configure do
   ::BHOF_RATES = [ { :deadline => DateTime.new(2000,1,1,0,0,00,'+8'), :rate => 2900 },
                    { :deadline => BHOF_DISCOUNT_DEADLINE, :rate => 3900 }]
 
+
+  if Rails.env == 'development'
+    ::BHOF_HOST = 'hubba-dev.retina.net'
+  else
+    ::BHOF_HOST = 'hubba.retina.net'
+  end
+
   end
 end

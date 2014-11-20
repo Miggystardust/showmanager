@@ -1,11 +1,29 @@
 <%=stylesheet_link_tag "bootstrap.icon-large.min.css" %>
+<%= render 'submit_modal' %>
 
-<h2> <a href="/apps">My Applications</a> <span style="vertical-align:middle" class="icon-large icon-thin-right-arrow"></span>Application Dashboard </h2>
+<script>
+  $(function() {
+      $("#submitModal").modal('hide');
+
+      $("#submitit").click(function() {
+          $("#submitModal").modal('show');
+      });
+  });
+</script>
+
+<h2> <a href="/apps">Applications</a> <span style="vertical-align:middle" class="icon-large icon-thin-right-arrow"></span>Application Dashboard </h2>
 
 <p><strong>Use the following menu to complete your application. </strong>
   <BR>
   <a href="http://www.burlesquehall.com/selection/">How the selection process works</a>
 </P>
+
+<% if @app.locked == true -%> 
+<div class="alert alert-success">
+This application has been submitted. No further changes are possible.
+</div>
+<% end -%> 
+
 <h2 align="center"><%=@app.description%></h2>
 <table class="table table-bordered">
   <THEAD>
@@ -23,11 +41,11 @@
   <tr>
     <td><strong>Part&nbsp;1</strong></td>
     <td width="210">
-      <% if @entry -%>
-      <%=link_to "Act Information",  edit_app_entry_path({app_id: @app.id, id: @entry.id}) %>
-      <% else -%>
-      <%=link_to "Act Information",  new_app_entry_path({app_id: @app.id}) %>
-      <% end -%>
+        <% if @entry -%>
+          <%=link_to "Act Information",  edit_app_entry_path({app_id: @app.id, id: @entry.id}) %>
+        <% else -%>
+          <%=link_to "Act Information",  new_app_entry_path({app_id: @app.id}) %>
+         <% end -%>
     </td>
     <td align="center">5-10 mins</td>
     <td align="center">
@@ -61,13 +79,13 @@
     <td align="center">
       <% if ! @app.purchased_at.nil? -%>
       <BUTTON type="button" CLASS="btn btn-success">Payment Complete</BUTTON>
-      <BR>$<%='%.2f' % (@app.app_purchase_price.to_i/100.0) %><BR><%=@app.purchased_at.strftime(SHORT_TIME_FMT)%>
+      <BR>$<%='%.2f' % (@app.purchase_price.to_i/100.0) %><BR><%=@app.purchased_at.strftime(SHORT_TIME_FMT)%>
       <% else -%>
         <% if (! @entry.nil?) and @entry.is_part1_complete? -%>  
         <BUTTON type="button" CLASS="btn btn-warning">Ready for Payment</BUTTON>
               <BR>$<%='%.2f' % (@app.get_current_price() / 100) %> Due.
         <% else -%> 
-        <BUTTON type="button" CLASS="btn disabled btn-default">Cannot Submit Yet</BUTTON>
+        <BUTTON type="button" CLASS="btn btn-default">Finish Part 1 First!</BUTTON>
         <% end -%>
       <% end -%>
     </td>
@@ -118,9 +136,9 @@
     </td>
     <td align="center">
       <% if @app.entry_techinfo and  @app.entry_techinfo.is_complete? -%>
-         <BUTTON type="button" CLASS="btn btn-success">Payment Complete</BUTTON>
+         <BUTTON type="button" CLASS="btn btn-success">Complete</BUTTON>
       <% else -%>
-         <BUTTON type="button" CLASS="btn disabled btn-danger">Incomplete</BUTTON>
+         <BUTTON type="button" CLASS="btn btn-danger">Incomplete</BUTTON>
       <% end -%>
     </td>
   </tr>
@@ -129,12 +147,27 @@
       <div align="center">Part&nbsp;4</strong></font></div>
     </td>
 
-    <td>Submit Application</td>
+    <td>
+    <% if @app.locked == false -%> 
+    <a href="#" id="submitit">Submit Application</a>
+    <% else -%> 
+    Submit Application
+    <% end -%> 
+    </td>
     <TD>
-      <div align="center">2 mins</div>
+      &nbsp;
     </td>
     <td align="center">
-      <BUTTON type="button" CLASS="btn disabled btn-default">Application Incomplete</BUTTON>
+    <% if @app.locked == true -%> 
+      <BUTTON type="button" CLASS="btn btn-success">Submitted! Good Luck!</BUTTON>
+    <% else -%> 
+      <% if @app.entry and @app.entry_techinfo and @app.is_complete? and @app.entry.is_complete? and @app.entry_techinfo.is_complete? and @app.purchased_at.present? -%>
+
+          <BUTTON type="button" CLASS="btn btn-warning">Ready to Submit</BUTTON>
+      <% else -%>
+          <BUTTON type="button" CLASS="btn btn-default">Application Incomplete</BUTTON>
+      <% end -%>
+    <% end -%>
     </td>
     <td>Final submission must be done before the
       deadline of <strong>11:59pm PST on January 19, 2015</strong>. You will not
