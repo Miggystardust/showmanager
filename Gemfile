@@ -9,7 +9,7 @@ group :development do
       gem 'capistrano3-nginx', '~> 2.0', require: false
 end
 
-gem 'rails', '4.0.9'
+gem 'rails', '4.0.12'
 
 group :assets do
   gem 'sass-rails', '4.0.0'
