@@ -1,3 +1,5 @@
+<div class="alert alert-warning"><B>Heads up!</B> If any of these fields are blank, this page will show up as "incomplete" on the main dashboard. So for any that you aren't answering, such as optional ones, enter "n/a" in the form for "Not Applicable."</div>
+
 <%= form_for([@app, @entry_techinfo], :html => {:class => "form-horizontal"}) do |f| %>
   <% if @entry_techinfo.errors.any? %>
     <div id="error_explanation">

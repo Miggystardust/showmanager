@@ -37,12 +37,16 @@ class Entry
      return false 
    end
 
+   # we only care about this if we're type 1
+   if self.type == 1 and ! self.category.present?
+     return false
+   end
+
    if self.type.present? and
       self.city_from.present? and
       self.country_from.present? and
       self.performer_url.present? and
       self.video_url.present? and
-      self.category.present? and
       self.compete_preference.present? and
       self.years_applied.present? and
       self.years_performed.present? and

@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+# needed to fix rails3/4 conversion
+gem "bson"
+gem "moped", github: "mongoid/moped"
+
+
 group :development do
       gem 'capistrano', '~> 3.1', require: false
       gem 'capistrano-rails',   '~> 1.1', require: false

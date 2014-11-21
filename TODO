@@ -16,3 +16,43 @@ SECURITY
 - Should probably offer the ability to disable the download box to
   prevent us being used as a warez/free music site
 
+
+From Mig / BHOF:  11/21/2014
+----------------------------------
+Since the paypal now links to the application, we no longer need them
+to do part 1 first. You can remove that restriction and button label.
+
+Buttons look like they're clickable on mouseover, but they don't open anything.
+
+"How the selection process works" should be target="_blank" (I could
+put this in but already submitted an edit that hasn't been merged yet) - DONE
+
+Not critical, but for extra glory: clicking name of application could 
+take you to apps/123456789/edit screen - DONE
+
+New act entry page:
+Make "Act type" the top (first) field, so that the fields below it change. - DONE
+
+Change label of "act name" to "performer or group name". (Or for extra
+glory, "performer name" or "group name" depending on what they chose
+for Act Type) - DONE but not with extras... 
+
+When Act Type = Group, the "category" field should be hidden. - DONE
+and logic fixed
+
+Explanatory text for "Performer names" field: Please list a legal name
+and stage name for each performer. For instance: Jennifer Doe (Creamy 
+Cupcakes), Bruce Wayne (Batman) - DONE
+
+Add a bit of vertical white space below the buttons at the bottom? - DONE
+
+Payment page:
+
+I got an error when paying. Attached. I was going to make an actual
+transaction but it didn't go through. - TBD
+
+Act technical information:
+
+Should include the "heads up, this needs to be complete" part at the 
+top. - DONE
+

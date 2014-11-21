@@ -8,8 +8,10 @@ class User
 
   has_many :acts
   has_many :passets
-  has_many :troupes
   has_many :apps
+
+  has_many :troupe_memberships
+  has_many :troupes
 
   # Role-Based Access Control
 # removing for rails4 ? 
@@ -46,6 +48,9 @@ class User
 
   field :admin, :type => Boolean, :default => false
 
+  ## id number of the last troupe the user used.
+  field :current_troupe, :type => Moped::BSON::ObjectId
+
   ## Confirmable
   # field :confirmation_token,   :type => String
   # field :confirmed_at,         :type => Time
@@ -76,6 +81,10 @@ class User
       end
     }
     false
+  end
+
+  def troupes
+    Troupe.in(user_id: troupe_memberships.map(&:user_id))
   end
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)

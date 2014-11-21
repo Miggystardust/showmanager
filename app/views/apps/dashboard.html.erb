@@ -15,7 +15,7 @@
 
 <p><strong>Use the following menu to complete your application. </strong>
   <BR>
-  <a href="http://www.burlesquehall.com/selection/">How the selection process works</a>
+  <a href="http://www.burlesquehall.com/selection/" target="_blank">How the selection process works</a>
 </P>
 
 <% if @app.locked == true -%> 
@@ -24,7 +24,7 @@ This application has been submitted. No further changes are possible.
 </div>
 <% end -%> 
 
-<h2 align="center"><%=@app.description%></h2>
+<h2 align="center"><%=link_to @app.description, edit_app_path(@app)%></h2>
 <table class="table table-bordered">
   <THEAD>
   <TR>
