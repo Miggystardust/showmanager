@@ -5,11 +5,13 @@
   <fieldset>
 <div class="form-group">
  <div class="col-sm-10">
-  <P>
-    If you have signed in with Facebook before,  just click the Button.<BR>
-    There's no need to enter your password. <BR>
-    We will never spam your wall or post without your permission.
-  </P>
+  <P> Please enter your username and password to continue.</p>
+ <UL>
+    <LI>If you have signed in with Facebook before, just click the Button.</LI>   
+    <LI><strong>Warning:</strong> If you do not see a facebook login button below and you are using Ad Block
+Plus, disable Ad Block Plus. ADP blocks the facebook login button.</LI>
+ </UL>
+
   <a href="<%=omniauth_authorize_path(resource_name, 'facebook') %>" border=0 alt="Sign in with Facebook"><img src="/assets/facebook-login.png"></a>
  </div>
 </div>

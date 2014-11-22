@@ -1,7 +1,7 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-set :application, "hubba.retina.net"
+set :application, "troupeit.com"
 set :repo_url,  "https://github.com/netik/showmanager.git"
 
 # Default branch is :master

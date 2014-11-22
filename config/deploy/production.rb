@@ -4,8 +4,8 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-role :web, "hubba.retina.net"
-role :app, "hubba.retina.net"
+role :web, "troupeit.com"
+role :app, "troupeit.com"
 
 set :log_level, :debug
 set :branch, ENV["REVISION"] || ENV["BRANCH_NAME"] || "master"
@@ -22,7 +22,7 @@ set :branch, ENV["REVISION"] || ENV["BRANCH_NAME"] || "master"
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'hubba.retina.net', user: 'deploy', roles: %w{web app}
+server 'troupeit.com', user: 'deploy', roles: %w{web app}
 
 # Global options
 # --------------

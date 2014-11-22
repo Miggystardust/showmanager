@@ -64,7 +64,7 @@ Rails3MongoidDevise::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.action_mailer.default_url_options = { :host => 'hubba.retina.net' }
+  config.action_mailer.default_url_options = { :host => 'troupeit.com ' }
 
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
@@ -82,7 +82,4 @@ Rails3MongoidDevise::Application.configure do
     user_name: ENV["GMAIL_USERNAME"],
     password: ENV["GMAIL_PASSWORD"]
   }
-
-
-
 end

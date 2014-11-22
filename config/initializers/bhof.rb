@@ -13,9 +13,9 @@ Rails3MongoidDevise::Application.configure do
 
 
   if Rails.env == 'development'
-    ::BHOF_HOST = 'hubba-dev.retina.net'
+    ::BHOF_HOST = 'dev.troupeit.com'
   else
-    ::BHOF_HOST = 'hubba.retina.net'
+    ::BHOF_HOST = 'troupeit.com'
   end
 
   end

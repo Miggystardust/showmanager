@@ -56,3 +56,30 @@ Act technical information:
 Should include the "heads up, this needs to be complete" part at the 
 top. - DONE
 
+TROUPES
+--------
+
+. Revisit entire troupe membership system and replace join/add screens
+. Tag all relevant models with troupe or user ID relationship
+. Fix email sending and receiving such that we can send invites
+.. build invite system and make it work w/ crypto + signing
+. Forumns
+. Scheduling
+. Reminders/Calendaring
+
+Monetization
+------------
+. Bill for usage (where? What is billing?)
+.. More than N in group? Ability to schedule show? Trial period? What?
+.  $29/mo? drop prices like wow ($9.99/mo for 1year...)
+
+FUTURE
+-----
+. Integration with QLab; Disassemble one of their plists and reverse-engineer
+. Talk to figure53
+. Stage plots? 
+.. http://www.stagewritesoftware.com/About-Us.html
+.. http://www.virtualcallboard.com/
+
+broadcast email
+
