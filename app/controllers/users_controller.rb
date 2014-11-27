@@ -6,6 +6,26 @@ include ActionView::Helpers::NumberHelper
 class UsersController < ApplicationController
   before_filter :authenticate_user!
 
+  def become
+    # Oh, hello old friend. We had this feature at Twitter and it was
+    # damn useful for debugging, albeit scary for privacy.
+    #
+    # in the future we may consider https://github.com/flyerhzm/switch_user gem
+
+    return unless current_user.try(:admin?)
+    
+    # bypass stops us from updating their last login / IP address
+    begin
+      u = Users.find(params[:id])
+    rescue Mongoid::Errors::DocumentNotFound
+      redirect_to root_url, notice: "The requested user does not exist."
+      return
+    end
+
+    sign_in(:user, u, { :bypass => true })
+    redirect_to root_url # or user_root_url
+  end
+
   def index
     if current_user.try(:admin?)
       @users = User.all
@@ -84,7 +104,7 @@ class UsersController < ApplicationController
 
       if @user.destroy
         redirect_to users_url, notice: "User #{@user.username} (#{@user.name}) deleted."
-      end
+              end
     else
       redirect_to root_url, notice: "You must be an Administrator to do that."
     end

@@ -13,16 +13,19 @@ class TroupesController < ApplicationController
 
     case params[:type]
     when "all"
-      @troupes = Troupe.find(:all)
+      @trs = Troupe.find(:all)
     when "public"
-      @troupes = Troupe.where(private: false)
+      @trs = Troupe.where(private: false)
     else
-      @troupes = current_user.troupes.all
-    end
+      # troupes you own and stuff you are a member off
+      @trs = Troupe.where(user_id: current_user.id)
 
+    end
+   
     @troupedt = []
-    @troupes.each { |t| 
-      @troupedt << [t.name, t.description, t.private.yesno, t.user.name, t.id]
+    @trs.each { |t| 
+      owner = User.find(t.user_id)
+      @troupedt <<  [t.name, t.description, t.private.yesno, owner.name, t.id.to_s]
     }
 
     respond_to do |format|
@@ -104,4 +107,27 @@ class TroupesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def join
+    begin 
+      @troupe = Troupe.find(params[:id])
+    rescue
+      respond_to do |format|
+        format.html { redirect_to "/troupes/", notice: 'Troupe does not exist.' }
+        format.json { head :no_content }
+      end
+    end
+
+    tm = Troupe_membership.new
+    tm.user_id = current_user.id 
+    tm.troupe_id = 
+    tm.save
+
+    # TODO: private check or auth-code check goes here
+      respond_to do |format|
+        format.html { redirect_to "/troupes/", notice: 'Troupe does not exist.' }
+        format.json { head :no_content }
+      end
+  end
+
 end

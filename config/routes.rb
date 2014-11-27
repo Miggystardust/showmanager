@@ -27,8 +27,17 @@ Rails3MongoidDevise::Application.routes.draw do
   devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
 
   resources :users, :only => [:show, :index, :edit, :update, :destroy]
+  resources :users do 
+    member do
+      get :become
+    end
+  end
 
-  resources :troupes
+  resources :troupes do
+    member do 
+      get :join
+    end
+  end
 
   # bhof routes
   get "/appdashboard", :to => "bhof#dashboard"
