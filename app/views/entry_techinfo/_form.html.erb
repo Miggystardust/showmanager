@@ -27,7 +27,7 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :act_duration, "Duration", :class => "col-sm-2 control-label" %>
+    <%= f.label :act_duration, "Duration of your act", :class => "col-sm-2 control-label" %>
     <div class="col-sm-10">
     <%= f.text_field :act_duration, :class => "form-control" %>
     <P>
@@ -39,20 +39,23 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :act_name, "Name of Act", :class => "col-sm-2 control-label" %>
+    <%= f.label :act_name, "Short Name for Your Act", :class => "col-sm-2 control-label" %>
     <div class="col-sm-10">
     <%= f.text_area :act_name, :class => "form-control" %>
+    <P>
+    What would you call this act if you were referring to it when talking to someone? For example, "my Wonder Woman act", "Stripping Chipmunks", or "The Firebird".)
+    </P>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :act_description, "Description", :class => "col-sm-2 control-label" %>
+    <%= f.label :act_description, "Description of Your Act", :class => "col-sm-2 control-label" %>
     <div class="col-sm-10">
     <%= f.text_area :act_description, :class => "form-control" %>
     <P>
     Please give a brief description of your piece, such as overall
     concept, theme, era or musical style (so that we can be sure to
-    appropriately space similar acts): (up to a few sentences)
+    appropriately space similar acts).  (Up to a few sentences)
     </P>
     </div>
   </div>
@@ -61,7 +64,7 @@
     <%= f.label :costume_Description, "Costume", :class => "col-sm-2 control-label" %>
     <div class="col-sm-10">
     <%= f.text_area :costume_Description, :class => "form-control" %>
-    <P>Briefly describe your costume:</P>
+    <P>Briefly describe your costume.</P>
     </div>
   </div>
 
@@ -82,13 +85,13 @@
     <P>
     Please list all props (including humans), tech needs, specialty
     equipment, potential hazards and prep/clean-up required before,
-    during or after your act
+    during or after your act.
     </p>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :other_tech_info, "Other special technical info", :class => "col-sm-2 control-label" %>
+    <%= f.label :other_tech_info, "Other Special Technical Info", :class => "col-sm-2 control-label" %>
     <div class="col-sm-10">
     <%= f.text_area :other_tech_info, :class => "form-control" %>
     <P>If None, please put "n/a"</P>
@@ -109,7 +112,7 @@
     <%= f.label :setup_time, "Setup Time", :class => "col-sm-2 control-label" %>
     <div class="col-sm-10">
     <%= f.text_field :setup_time, :class => "form-control" %>
-    <P>Estimated Set-up time needed for your act</P>
+    <P>Estimated set-up time needed for your act</P>
     </div>
   </div>
 
@@ -145,7 +148,7 @@
     <div class="col-sm-10">
     <%= f.text_area :microphone_needs, :class => "form-control" %>
     <P>
-    Do you have any microphone needs? (If so, please include
+    Do you have any microphone needs? (If none, put "none". If you do have microphone needs, please include
     information about placement and stands.)
     </p>
     </div>
@@ -167,7 +170,7 @@
     <%= f.text_area :mc_intro, :class => "form-control" %>
     <P>
     Please give a brief (25 words or less) stage introduction,
-    including a phonetic spelling of your name
+    including a phonetic spelling of your name.
     </P>
     </div>
   </div>
@@ -180,7 +183,7 @@
     Does your act require any aerial rigging? (The venue DOES allow for
     aerial; however, anyone wishing to perform an aerial act must assume
     all expenses associated with their rigging, and sign a waiver
-    releasing the BHOF, production crew, and venue from any liability
+    releasing the BHoF, production crew, and venue from any liability
     relating to their act.)
     </P>
 
