@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     
     # bypass stops us from updating their last login / IP address
     begin
-      u = Users.find(params[:id])
+      u = User.find(params[:id])
     rescue Mongoid::Errors::DocumentNotFound
       redirect_to root_url, notice: "The requested user does not exist."
       return
