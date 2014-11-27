@@ -39,7 +39,7 @@
       <tbody>
       <% @apps.each do |app| %>
           <tr>
-            <td><%= app.created_at.strftime(SHORT_TIME_FMT) %></td>
+            <td><%= app.created_at.to_time.strftime(SHORT_TIME_FMT_TZ) %></td>
             <td>
               <% if app.entry -%>
                   <% if app.entry.type == 1 -%>

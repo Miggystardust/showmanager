@@ -79,7 +79,7 @@ This application has been submitted. No further changes are possible.
     <td align="center">
       <% if ! @app.purchased_at.nil? -%>
       <BUTTON type="button" CLASS="btn btn-success">Payment Complete</BUTTON>
-      <BR>$<%='%.2f' % (@app.purchase_price.to_i/100.0) %><BR><%=@app.purchased_at.strftime(SHORT_TIME_FMT)%>
+      <BR>$<%='%.2f' % (@app.purchase_price.to_i/100.0) %><BR><%=@app.purchased_at.to_time.strftime(SHORT_TIME_FMT_TZ)%>
       <% else -%>
         <% if (! @entry.nil?) and @entry.is_part1_complete? -%>  
         <BUTTON type="button" CLASS="btn btn-warning">Ready for Payment</BUTTON>
