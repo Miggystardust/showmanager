@@ -16,9 +16,11 @@ end
 # Sun Jan 1, 2012 5:00 PM
 # we're assuming an english-us locale ho well!
 SHORT_TIME_FMT = "%a %b %d, %Y %I:%M %p"
+SHORT_TIME_FMT_TZ = "%a %b %d, %Y %I:%M %p %Z"
 SHORT_DATE_FMT = "%a %b %d, %Y"
 
 TIME_ONLY_FMT = "%I:%M %p"
+TIME_ONLY_FMT_TZ = "%I:%M %p %Z"
 
 # FB Integration
 FACEBOOK_APP_ID = '308336679243664'
