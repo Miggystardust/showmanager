@@ -78,8 +78,8 @@
       <div class="col-xs-4">
         <%= f.select(:compete_preference, 
             options_for_select([["I'm only interested in competing",1],
-                                ["Either compete or non-compete" , 3],
-                                ["Non-compete", 2]], @entry.compete_preference), 
+                                ["I'll take either! Competing or showcase (non-competitive)" , 3],
+                                ["I'm only interested in showcase (non-competitive)", 2]], @entry.compete_preference), 
             {:include_blank => " -- select one --" }, { :class => "form-control"} )%>
 
         <P>We are planning to offer both competitive spots (for a title) and noncompetitive showcase spots. Please indicate your preference.</P>
@@ -87,7 +87,7 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :video_url, "Video URL", :class => "control-label col-xs-4" %>
+      <%= f.label :video_url, "Web link to video of the act", :class => "control-label col-xs-4" %>
       <div class="col-xs-4">
         <%= f.text_field :video_url, :class => "form-control" %>
         <P>
@@ -108,7 +108,7 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :years_performed, "Years Performed at BHOF", :class => "control-label col-xs-4" %>
+      <%= f.label :years_performed, "List years you have previously performed at BHoF (if any)", :class => "control-label col-xs-4" %>
       <div class="col-xs-4">
         <%= f.text_field :years_performed, :class => "form-control" %>
         <P>List any previous years that you have performed at the pageant (either competitive or noncompetitive) and the category, if applicable. If none, please put "N/A"</P>
@@ -116,7 +116,7 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :years_applied, "Years Applied at BHOF", :class => "control-label col-xs-4" %>
+      <%= f.label :years_applied, "List any years that you have previously applied to perform at BHoF", :class => "control-label col-xs-4" %>
       <div class="col-xs-4">
         <%= f.text_field :years_applied, :class => "form-control" %>
         <P>List any previous years that you have applied, regardless of whether you were accepted or not. (Just list the years only. If none, please put "N/A")</P>
@@ -129,7 +129,7 @@
       <div class="col-xs-4">
         <%= f.text_field :other_stage_names, :class => "form-control" %>
 
-        <P>List any other stage names you have previously used in performing. If none, please put "N/A"
+        <P>List any other stage names you have previously used in performing burlesque. If none, please put "N/A"
          </P>    
       </div>
     </div>
