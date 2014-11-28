@@ -39,7 +39,7 @@
       <tbody>
       <% @apps.each do |app| %>
           <tr>
-            <td><%= app.created_at.to_time.in_time_zone.strftime(SHORT_TIME_FMT_TZ) %></td>
+            <td><%= app.created_at.to_time.in_time_zone('US/Pacific').strftime(SHORT_TIME_FMT_TZ) %></td>
             <td>
               <% if app.entry -%>
                   <% if app.entry.type == 1 -%>
