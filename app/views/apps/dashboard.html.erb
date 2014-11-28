@@ -52,7 +52,13 @@ This application has been submitted. No further changes are possible.
       <% if @entry and @entry.is_part1_complete? -%> 
       <BUTTON type="button" CLASS="btn btn-success">Complete</BUTTON>
       <% else -%>
-      <BUTTON type="button" CLASS="btn btn-danger">Incomplete</BUTTON>
+          <% if @entry -%>
+             <a href="<%=edit_app_entry_path({app_id: @app.id, id: @entry.id})%>">
+          <% else -%>
+             <a href="<%= new_app_entry_path({app_id: @app.id})%>">
+          <% end -%>
+          <BUTTON type="button" CLASS="btn btn-danger">Incomplete</BUTTON>
+          </a>
       <% end -%> 
     </td>
 
@@ -115,8 +121,15 @@ This application has been submitted. No further changes are possible.
       <% if @entry and @entry.is_part2_complete? -%> 
       <BUTTON type="button" CLASS="btn btn-success">Complete</BUTTON>
       <% else -%>
+        <% if @entry -%>
+          <a href ="<%=edit_app_entry_path({app_id: @app.id, id: @entry.id, part: 2})%>">
+        <% else -%>
+          <a href ="<%=new_app_entry_path({app_id: @app.id, part: 2})%>">
+        <% end -%>
       <BUTTON type="button" CLASS="btn btn-danger">Incomplete</BUTTON>
-      <% end -%> 
+      </a>
+      <% end -%>
+
     </td>
     <td rowspan="2">
       Shortened for 2015! Additional information about your act. This part will take the
@@ -138,7 +151,13 @@ This application has been submitted. No further changes are possible.
       <% if @app.entry_techinfo and  @app.entry_techinfo.is_complete? -%>
          <BUTTON type="button" CLASS="btn btn-success">Complete</BUTTON>
       <% else -%>
-         <BUTTON type="button" CLASS="btn btn-danger">Incomplete</BUTTON>
+         <% if @app.entry_techinfo -%>
+            <a href="<%=edit_app_entry_techinfo_path({app_id: @app.id, id: @app.entry_techinfo.id}) %>">
+         <% else -%>
+            <a href="<%=new_app_entry_techinfo_path({app_id: @app.id}) %>"
+         <% end -%>
+            <BUTTON type="button" CLASS="btn btn-danger">Incomplete</BUTTON>
+         </a>
       <% end -%>
     </td>
   </tr>

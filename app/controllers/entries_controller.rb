@@ -2,8 +2,9 @@ class EntriesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_cache_buster
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
-
   before_filter :authenticate_user!
+
+  before_filter :determine_part, only: [:edit, :new]
 
   # GET /entry
   def index
@@ -101,5 +102,16 @@ class EntriesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def entry_params
       params.require(:entry).permit(:name, :type, :num_performers, :all_performer_names, :city_from, :country_from, :performer_url, :category, :compete_preference, :video_url, :years_applied, :years_performed, :other_stage_names, :favorite_thing, :years_experience, :style, :why_act_unique, :outside_work, :comments)
+    end
+
+    def determine_part
+      # based on the incoming parameter, pick the right default form (used by new and edit)
+      if params.has_key?(:part)
+        @part = params[:part].to_i
+        if @part <= 1 or @part >= 3
+          @part = 1
+        end
+      end
+
     end
 end

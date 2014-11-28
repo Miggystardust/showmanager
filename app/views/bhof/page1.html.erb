@@ -8,7 +8,7 @@
   <div class="panel-body">
 
     <p>This online application consists of four parts, with EVERYTHING due by electronic submission at
-      <strong><span class="rulepageheaders"><%= BHOF_FINAL_DEADLINE.to_time.strftime(SHORT_TIME_FMT_TZ) %></strong>. This year's application
+      <strong><span class="rulepageheaders"><%= BHOF_FINAL_DEADLINE.to_time.in_time_zone.strftime(SHORT_TIME_FMT_TZ) %></strong>. This year's application
       is a bit shorter than last year's. If you have your act and
       video link ready, the application can be done in less than an
       hour. </p>
@@ -19,7 +19,7 @@
         application and not rush. And also to have time to make
         changes if you need to. We offer the discount to encourage this, which will help you submit the best application possible. Once you've paid it, you can
         still have until
-        <%=BHOF_FINAL_DEADLINE.to_time.strftime(SHORT_DATE_FMT)%> to complete
+        <%=BHOF_FINAL_DEADLINE.to_time.in_time_zone.strftime(SHORT_DATE_FMT)%> to complete
         the rest of your application and fully submit it. The discount
         cutoff dates are December 15th (SUPER earlybird) and January
         5th (regular earlybird). You'll see more info on that once you
@@ -36,7 +36,7 @@
      <P>
      </strong>
      To get the earlybird discount: just complete the payment early. Then
-     you can work on the rest and submit it all by <%= BHOF_FINAL_DEADLINE.to_time.strftime(SHORT_TIME_FMT) %>
+     you can work on the rest and submit it all by <%= BHOF_FINAL_DEADLINE.to_time.in_time_zone.strftime(SHORT_TIME_FMT) %>
      </strong>
      </p>
 

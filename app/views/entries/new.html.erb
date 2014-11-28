@@ -1,3 +1,6 @@
-<h1>New entry</h1>
-
-<%= render 'form' %>
+<h2> <a href="/apps">Applications</a> <span style="vertical-align:middle" class="icon-large icon-thin-right-arrow"></span><%=link_to "Dashboard", dashboard_app_path(@app) %> <span style="vertical-align:middle" class="icon-large icon-thin-right-arrow"></span>
+  <% if @part == 1 or @part.nil? -%>Act Information: <%=@app.description%></h2>
+      <%= render 'form' %>
+  <% else -%>Short Answers: <%=@app.description%></h2>
+      <%= render 'form_part2' %>
+  <% end -%>
