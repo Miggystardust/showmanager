@@ -10,16 +10,85 @@
 
 <div class="well">
   <p>
-    You may submit up to four (4) acts per account, no more than two solo, and two group acts.
+    You may submit up to four (4) acts per account, no more than two solo, and two group acts.<BR>
+    Click "Dashboard" below to 
+    go to your application's dashboard, where you acn see the status of each of your applications and submit all of the
+    required information. 
   </p>
 
+<style>
+div#clock { color: white; margin: 20px auto; width: 600px; overflow: hidden; text-align: center; }
+div#clock p { background: #333; float: left; height: 100px; width: 88px; }
+div#clock p span { display: block; font-size: 50px; font-weight: bold; padding: 5px 0 0; }
+div#clock div.space { color: #ccc; display: block; line-height: 1.7em; font-size: 50px; float: left; height: 100px; width: 30px; }
+div.coupon{ color: #333 !important; font-size: 50px; font-weight: bold; }
+div.multi_clock{ border: 1px solid #666; color: #333; float: left; margin: 10px; padding: 5px; }
+pre{background-color: #eee; border: 1px solid #ccc; line-height: 1.4em; padding: 10px; margin: 0;}
+</style>
+<%= javascript_include_tag "jquery.countdown.js" %>
+<script type="text/javascript" charset="utf-8">
+$(function() {
+  // TODO: don't hardcode this date. Derive from BHOF_DEADLINE
+  var deadlineDate = new Date(
+<%=BHOF_FINAL_DEADLINE.to_time.in_time_zone('US/Pacific').strftime("%Y") %>,
+<%=BHOF_FINAL_DEADLINE.to_time.in_time_zone('US/Pacific').strftime("%-m") %>,
+<%=BHOF_FINAL_DEADLINE.to_time.in_time_zone('US/Pacific').strftime("%-d") %>,
+<%=BHOF_FINAL_DEADLINE.to_time.in_time_zone('US/Pacific').strftime("%H") %>,
+<%=BHOF_FINAL_DEADLINE.to_time.in_time_zone('US/Pacific').strftime("%S") %>);
+  $('div#clock').countdown(deadlineDate, function(event) {
+    $this = $(this);
+    switch(event.type) {
+      case "seconds":
+      case "minutes":
+      case "hours":
+      case "days":
+      case "weeks":
+      case "daysLeft":
+        $this.find('span#'+event.type).html(event.value);
+        break;
+      case "finished":
+        $this.fadeTo('slow', .5);
+        break;
+    }
+  });
+});
+</script>
+<!-- HTML -->
+<P ALIGN=CENTER><strong>Deadline: <%=BHOF_FINAL_DEADLINE.to_time.in_time_zone('US/Pacific').strftime(SHORT_TIME_FMT_TZ) %>
+
+
+
+<%=BHOF_FINAL_DEADLINE.to_time.in_time_zone('US/Pacific').strftime("%D") %>
+<%=BHOF_FINAL_DEADLINE.to_time.in_time_zone('US/Pacific').strftime("%H") %>
+<%=BHOF_FINAL_DEADLINE.to_time.in_time_zone('US/Pacific').strftime("%M") %>
+</strong></P>
+<div id="clock">
   <p>
-    On each of your applications, clicking "Dashboard" will take you to the application's dashboard, where you can see
-    the
-    status of your applications and submit all of the required information.
+    <span id="weeks"></span>
+    Weeks
+  </p>
+  <div class="space">:</div>
+  <p>
+    <span id="daysLeft"></span>
+    Days
+  </p>
+  <div class="space">:</div>
+  <p>
+    <span id="hours"></span>
+    Hours
+  </p>
+  <div class="space">:</div>
+  <p>
+    <span id="minutes"></span>
+    Minutes
+  </p>
+  <div class="space">:</div>
+  <p>
+    <span id="seconds"></span>
+    Seconds
   </p>
 </div>
-
+</div>
 <P>
   <a href="/apps/new" class="btn btn-primary"><i class="glyphicon glyphicon-plus-sign white"></i>&nbsp;Create a new
     Application</a>
