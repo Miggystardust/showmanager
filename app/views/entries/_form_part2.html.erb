@@ -4,7 +4,7 @@ fields are blank, this page will show up as "incomplete" on the main
 dashboard. So for any that you aren't answering, such as optional
 ones, enter "n/a" in the form for "Not Applicable."</div>
 
-<%= form_for([@app, @entry], :html => {:class => "form-horizontal", :role => "form"}) do |f| %>
+<%= form_for([@app, @entry], :html => {:class => "form-vertical", :role => "form"}) do |f| %>
     <input type=hidden name="for_app" value="<%= @app.id.to_s %>">
     <% if @entry.errors.any? %>
         <div class="alert alert-danger">
@@ -16,40 +16,30 @@ ones, enter "n/a" in the form for "Not Applicable."</div>
 
 
     <div class="form-group">
-      <%= f.label :years_experience, "
-How long have you (or your group, if this is a group application) been performing? Where do you perform at? (2 to 4 sentences)", :class => "control-label col-xs-4" %>
-      <div class="col-xs-4">
+      <%= f.label :years_experience, "How long have you (or your group, if this is a group application) been performing? Where do you perform at? (2 to 4 sentences)", :class => "control-label" %>
+
         <%= f.text_area :years_experience, :class => "form-control"%>
-      </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :style, "How would you describe your performance style? (Or your group's performance style, if this is a group application.) (1-4 sentences)", :class => "control-label col-xs-4" %>
-      <div class="col-xs-4">
+      <%= f.label :style, "How would you describe your performance style? (Or your group's performance style, if this is a group application.) (1-4 sentences)", :class => "control-label" %>
         <%= f.text_area :style, :class => "form-control" %>
-      </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :why_act_unique, "What makes this particular act unique or notable? (1-4 sentences)", :class => "control-label col-xs-4" %>
-      <div class="col-xs-4">
+      <%= f.label :why_act_unique, "What makes this particular act unique or notable? (1-4 sentences)", :class => "control-label" %>
         <%= f.text_area :why_act_unique, :class => "form-control" %>
-      </div>
     </div>
 
     <!-- solo acts only --->
     <div class="form-group">
-      <%= f.label :outside_work, "What do you do when you're not performing?", :class => "control-label col-xs-4" %>
-      <div class="col-xs-4">
+      <%= f.label :outside_work, "What do you do when you're not performing?", :class => "control-label" %>
         <%= f.text_field :outside_work, :class => "form-control" %>
-      </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :comments, "Any additional comments, thoughts, or suggestions? (This question is optional; if none, please put \"n/a\". You can answer up to a few sentences.)", :class => "control-label col-xs-4" %>
-      <div class="col-sm-4">
+      <%= f.label :comments, "Any additional comments, thoughts, or suggestions? (This question is optional; if none, please put \"n/a\". You can answer up to a few sentences.)", :class => "control-label" %>
         <%= f.text_area :comments, :class => "form-control" %>
-      </div>
     </div>
 
     <% if @app.locked == true -%> 
