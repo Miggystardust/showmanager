@@ -11,11 +11,12 @@ Rails3MongoidDevise::Application.configure do
   ::BHOF_RATES = [ { :deadline => DateTime.new(2000,1,1,0,0,00,'-08:00'), :rate => 2900 },
                    { :deadline => BHOF_DISCOUNT_DEADLINE, :rate => 3900 }]
 
-
   if Rails.env == 'development'
     ::BHOF_HOST = 'dev.troupeit.com'
+    ::BHOF_URL  = "http://#{BHOF_HOST}"
   else
     ::BHOF_HOST = 'troupeit.com'
+    ::BHOF_URL  = "https://#{BHOF_HOST}"
   end
 
   end

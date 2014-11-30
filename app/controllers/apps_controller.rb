@@ -151,8 +151,8 @@ class AppsController < ApplicationController
 
     response = EXPRESS_GATEWAY.setup_purchase(@app.purchase_price, 
       ip: request.remote_ip,
-      return_url: "http://#{BHOF_HOST}/apps/#{@app.id}/payment_paid",
-      cancel_return_url: "http://#{BHOF_HOST}/apps/#{@app.id}/payment_cancel",
+      return_url: "#{BHOF_URL}/apps/#{@app.id}/payment_paid",
+      cancel_return_url: "#{BHOF_URL}/apps/#{@app.id}/payment_cancel",
       currency: "USD",
       allow_guest_checkout: true,
       items: [{name: "BHOF #{BHOF_YEAR}", description: "BHOF #{BHOF_YEAR} Application", quantity: "1", amount: @app.get_current_price()}]
