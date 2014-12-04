@@ -48,7 +48,7 @@ $(document).ready(function() {
       "iDisplayLength": 10,
       "oLanguage": {
       "sLengthMenu": "Show&nbsp;<select size=1 name=\"troupeslist_length\" aria-controls=\"troupeslist\"><option value='5'>5</option><option \
-value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;troupes per page"
+value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;troupes"
     },
      "fnServerData": function ( sSource, aoData, fnCallback ) {
         $.ajax({'datatype':'json',
@@ -61,11 +61,19 @@ value='10'>10</option><option value='15'>15</option><option value='30'>30</optio
           },
      "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
       var id = $('td:eq(4)',nRow).html();
+      var idparts = id.split('|');
       var content = $('td:eq(3)',nRow).html();
       
       if (content.indexOf("btn") == -1) { 
-        $('td:eq(4)', nRow).html('&nbsp;<a class="btn btn-primary btn-sm" href="/troupes/' + id + '/edit"><i class="glyphicon white glyphicon-pencil"></i> Edit</a>' +
-        '&nbsp;<a class="btn btn-danger btn-sm" href="/troupes/' + id + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="glyphicon-remove glyphicon white"></i> Delete</a>');
+        var newhtml = ""
+        newhtml = '&nbsp;<a class="btn btn-primary btn-sm" data-method="post" rel="nofollow" href="/troupes/' + idparts[0] + '/edit"><i class="glyphicon white glyphicon-pencil"></i> Edit</a>';
+        if (idparts[1] == 'M') { 
+          newhtml = newhtml + '&nbsp;<a class="btn btn-warning btn-sm" href="/troupes/' + idparts[0] + '/leave" data-confirm="Are you sure?" data-method="post" rel="nofollow"><i class="glyphicon-remove glyphicon white"></i> Leave</a>';
+        } else { 
+          newhtml = newhtml + '&nbsp;<a class="btn btn-danger btn-sm" href="/troupes/' + idparts[0] + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="glyphicon-remove glyphicon white"></i> Delete</a>';
+        }
+
+        $('td:eq(4)', nRow).html(newhtml);
       }
      }
   });
@@ -122,7 +130,7 @@ $(document).ready(function() {
       "iDisplayLength": 10,
       "oLanguage": {
       "sLengthMenu": "Show&nbsp;<select size=1 name=\"publiclist_length\" aria-controls=\"publiclist\"><option value='5'>5</option><option \
-value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;troupes per page"
+value='10'>10</option><option value='15'>15</option><option value='30'>30</option></select>&nbsp;troupes"
     },
      "fnServerData": function ( sSource, aoData, fnCallback ) {
         $.ajax({'datatype':'json',
@@ -135,10 +143,11 @@ value='10'>10</option><option value='15'>15</option><option value='30'>30</optio
           },
      "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
       var id = $('td:eq(4)',nRow).html();
+      var idparts = id.split('|');
       var content = $('td:eq(4)',nRow).html();
       
       if (content.indexOf("btn") == -1) { 
-        $('td:eq(4)', nRow).html('&nbsp;<a class="btn btn-primary btn-small" href="/troupes/' + id + '/join"><i class="glyphicon white glyphicon-star"></i> Join</a>');
+        $('td:eq(4)', nRow).html('&nbsp;<a class="btn btn-primary btn-small" rel="nofollow" data-method="post" href="/troupes/' + idparts[0] + '/join"><i class="glyphicon white glyphicon-star"></i> Join</a>');
       }
      }
   });
@@ -154,5 +163,3 @@ value='10'>10</option><option value='15'>15</option><option value='30'>30</optio
 });
 
 </script>
-
-

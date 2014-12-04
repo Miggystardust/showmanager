@@ -35,7 +35,8 @@ Rails3MongoidDevise::Application.routes.draw do
 
   resources :troupes do
     member do 
-      get :join
+      post :join
+      post :leave
     end
   end
 
