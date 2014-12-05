@@ -54,6 +54,13 @@
     </div>
   </div>
 
+  <div class="control-group">
+    <%= f.label :members_can_invite, "Allow members of the troupe to invite others?", :class => "control-label" %>
+    <div class="controls">
+      <%= f.check_box :members_can_invite %>
+    </div>
+  </div>
+
   <P>&nbsp;</P>
   <div class="actions">
     <a class="btn btn-danger" href="/troupes/">Cancel</a>

@@ -11,6 +11,7 @@ class Troupe
   field :description, :type => String
   field :private, :type => Boolean, :default => false
   field :invite_required, :type => Boolean, :default => false
+  field :members_can_invite, :type => Boolean, :default => false
 
   #
   # careful here; Troupe.users = users that belong to the troupe.

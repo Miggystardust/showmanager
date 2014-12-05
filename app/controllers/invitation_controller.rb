@@ -1,20 +1,22 @@
 class InvitationController < ApplicationController
-def new
-  @invitation = Invitation.new
+
+protect_from_forgery
+
+before_filter :authenticate_user!
+
+def index
+  # get all of the pending invites for a particular user to allow for retractions, etc.
+  @invites = Invitation.where(sender: current_user)
 end
 
 def create
   @invitation = Invitation.new(params[:invitation])
   @invitation.sender = current_user
+
   if @invitation.save
-    if logged_in?
       Mailer.deliver_invitation(@invitation, signup_url(@invitation.token))
       flash[:notice] = "Thank you, invitation sent."
-      redirect_to projects_url
-    else
-      flash[:notice] = "Thank you, we will notify when we are ready."
-      redirect_to root_url
-    end
+      redirect_to troupes_url
   else
     render :action => 'new'
   end
