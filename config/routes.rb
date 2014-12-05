@@ -45,6 +45,8 @@ Rails3MongoidDevise::Application.routes.draw do
 
   resources :bhof, :only => [:show, :index]
 
+  resources :invitation, :only => [ :index, :destroy, :create ]
+
   # overriding devise here to deal with users w/o passwords
   get "/settings/edit",
     :controller => "settings",

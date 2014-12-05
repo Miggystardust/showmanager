@@ -13,6 +13,8 @@ class User
   has_many :troupe_memberships
   has_many :troupes
 
+  has_many :sent_invitations, :class_name => 'Invitation'
+
   # Role-Based Access Control
 # removing for rails4 ? 
 #  references_and_referenced_in_many :roles

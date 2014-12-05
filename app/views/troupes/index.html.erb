@@ -1,3 +1,5 @@
+<%=render "invite_modal" %>
+
 <h1>Troupes You're Part Of</h1>
 
 <P>
@@ -39,6 +41,13 @@ $.extend( $.fn.dataTableExt.oStdClasses, {
   "sWrapper": "dataTables_wrapper form-inline"
 } );
 
+
+function invitemodal(troupeid) { 
+  // open the invite dialog with the right troupeid
+  $("#invitation_troupe_id").val(troupeid);
+  $("#inviteModal").modal('show');
+};
+
 $(document).ready(function() {
 
   troupesDT = $('#troupeslist').dataTable( {
@@ -63,14 +72,15 @@ value='10'>10</option><option value='15'>15</option><option value='30'>30</optio
       var id = $('td:eq(4)',nRow).html();
       var idparts = id.split('|');
       var content = $('td:eq(3)',nRow).html();
-      
+
       if (content.indexOf("btn") == -1) { 
         var newhtml = ""
-        newhtml = '&nbsp;<a class="btn btn-primary btn-sm" data-method="post" rel="nofollow" href="/troupes/' + idparts[0] + '/edit"><i class="glyphicon white glyphicon-pencil"></i> Edit</a>';
         if (idparts[1] == 'M') { 
           newhtml = newhtml + '&nbsp;<a class="btn btn-warning btn-sm" href="/troupes/' + idparts[0] + '/leave" data-confirm="Are you sure?" data-method="post" rel="nofollow"><i class="glyphicon-remove glyphicon white"></i> Leave</a>';
         } else { 
+          newhtml = '&nbsp;<a class="btn btn-primary btn-sm" data-method="get" rel="nofollow" href="/troupes/' + idparts[0] + '/edit"><i class="glyphicon white glyphicon-pencil"></i> Edit</a>';
           newhtml = newhtml + '&nbsp;<a class="btn btn-danger btn-sm" href="/troupes/' + idparts[0] + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="glyphicon-remove glyphicon white"></i> Delete</a>';
+          newhtml = newhtml + '&nbsp;<a href="#" class="btn btn-success btn-sm" onclick="invitemodal(\'' + idparts[0] + '\'); return false;"><i class="glyphicon-heart glyphicon white"></i> Invite</a>';
         }
 
         $('td:eq(4)', nRow).html(newhtml);
@@ -122,6 +132,7 @@ can see all of the acts, music, and messages for that troupe.
 <script>
 
 $(document).ready(function() {
+  $("#inviteModal").modal('hide');
 
   publicDT = $('#publiclist').dataTable( {
       "sDom": "<'row'<'span6'l><'span12'f>r>t<'row'<'span12'i><'span12'p>>",
