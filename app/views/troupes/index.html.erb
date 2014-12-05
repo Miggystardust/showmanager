@@ -63,13 +63,13 @@ value='10'>10</option><option value='15'>15</option><option value='30'>30</optio
       var id = $('td:eq(4)',nRow).html();
       var idparts = id.split('|');
       var content = $('td:eq(3)',nRow).html();
-      
+
       if (content.indexOf("btn") == -1) { 
         var newhtml = ""
-        newhtml = '&nbsp;<a class="btn btn-primary btn-sm" data-method="post" rel="nofollow" href="/troupes/' + idparts[0] + '/edit"><i class="glyphicon white glyphicon-pencil"></i> Edit</a>';
         if (idparts[1] == 'M') { 
           newhtml = newhtml + '&nbsp;<a class="btn btn-warning btn-sm" href="/troupes/' + idparts[0] + '/leave" data-confirm="Are you sure?" data-method="post" rel="nofollow"><i class="glyphicon-remove glyphicon white"></i> Leave</a>';
         } else { 
+          newhtml = '&nbsp;<a class="btn btn-primary btn-sm" data-method="get" rel="nofollow" href="/troupes/' + idparts[0] + '/edit"><i class="glyphicon white glyphicon-pencil"></i> Edit</a>';
           newhtml = newhtml + '&nbsp;<a class="btn btn-danger btn-sm" href="/troupes/' + idparts[0] + '" data-confirm="Are you sure?" data-method="delete" rel="nofollow"><i class="glyphicon-remove glyphicon white"></i> Delete</a>';
         }
 

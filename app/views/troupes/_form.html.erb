@@ -14,11 +14,15 @@
 
   <div class="well">
     <P>
-      Provide a new name and a short description about your troupe.
+      <strong>Help with Troupe Privacy</strong>
+    </P>
+    <P>
+      Private troupes are not visible in public listings. You will
+      have to invite your cast members to your troupe before they can join.
     </p>
     <P>
-      If your troupe is private, it will not appear in the 
-      public troupe directory.
+      Public troupes are visible in the public listing, but you may 
+      require users to request an invite to join.
     </p>
   </div>
 
@@ -30,19 +34,26 @@
   </div>
 
   <div class="control-group">
-    <%= f.label :description, :class => "control-label" %>
+    <%= f.label :description, "Description",  :class => "control-label" %>
     <div class="controls">
       <%= f.text_field :description, :class => "form-control"  %>
     </div>
   </div>
 
-
   <div class="control-group">
-    <%= f.label :private, :class => "control-label" %>
+    <%= f.label :private, "Make this troupe private, and do not show it in public listings?", :class => "control-label" %>
     <div class="controls">
       <%= f.check_box :private %>
     </div>
   </div>
+
+  <div class="control-group">
+    <%= f.label :require_invite, "Require invites to join this troupe?", :class => "control-label" %>
+    <div class="controls">
+      <%= f.check_box :invite_required %>
+    </div>
+  </div>
+
   <P>&nbsp;</P>
   <div class="actions">
     <a class="btn btn-danger" href="/troupes/">Cancel</a>
