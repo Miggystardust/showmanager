@@ -55,6 +55,14 @@ class UsersController < ApplicationController
         redirect_to root_url, notice: "The requested user does not exist."
         return
       end
+      
+      begin
+        @troupes_owned = Troupe.where(user_id: @user._id)
+      rescue Mongoid::Errors::DocumentNotFound            
+        @troupes_owned = nil
+      end
+
+
       render :show
     else
       flash[:error] = "You must be an administrator to use that function."

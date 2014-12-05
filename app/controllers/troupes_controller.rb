@@ -80,7 +80,7 @@ class TroupesController < ApplicationController
     respond_to do |format|
       if @troupe.save
         current_user.troupes << @troupe
-        current_user.save!
+        current_user.save
         
         format.html { redirect_to "/troupes", notice: 'Troupe was successfully created.' }
         format.json { render json: @troupe, status: :created, location: @troupe }
