@@ -1,6 +1,8 @@
 <link href="/assets/bootstrap.icon-large.min.css" rel="stylesheet">
-
-<h3>Welcome to the BHoF <%=BHOF_YEAR%> Application System</h3>
+<P ALIGN=CENTER>
+  <img src="/assets/bhof/bhof-logo-140px11-black.png"><BR>
+  <STRONG>2015 Application System</STRONG>
+</P>
 
 <div class="panel panel-default">
   <!-- Default panel contents -->
@@ -53,12 +55,17 @@
 </div>
 <p align="center">
 
-    <strong> Yes, I understand about the final due date, the earlybird
+  <strong> Yes, I understand about the final due date, the earlybird
     payment discount and<BR>that even if I pay early, I have until
     <%=BHOF_FINAL_DEADLINE.to_time.in_time_zone('US/Pacific').strftime(SHORT_TIME_FMT_TZ)%>
     to submit the application.
   </strong>
 </p>
+
 <p align="center">
+  <% if current_user -%>
   <a class="btn btn-success" href="/bhof/page2">I understand. Take me to the next page.</a>
+  <% else -%>
+  <a class="btn btn-success" href="/bhof/page2">I understand. Take me to sign up so I can create an account.</a>
+  <% end -%>
 </p>
