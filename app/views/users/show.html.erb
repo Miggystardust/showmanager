@@ -17,54 +17,52 @@
 
     <div class="form-group">
        <%= f.label :name, "Name *", :class=>"col-sm-2 control-label required" %>
-      <div class="col-sm-10">
-        <%= f.text_field :name, :class=>"input-xlarge" %>
+      <div class="col-lg-3">
+       <%= f.text_field :name, :class=>"form-control" %>
       </div>
     </div>
 
     <div class="form-group">
         <%= f.label :email, "Email *", :class=>"col-sm-2 control-label required" %>
-      <div class="col-sm-10">
-        <%= f.text_field :email, :class=>"input-xlarge" %>
+      <div class="col-lg-3">
+        <%= f.text_field :email, :class=> "form-control" %>
       </div>
     </div>
 
     <div class="form-group">
-        <%= f.label :provider, "Provider", :class=>"col-sm-2 control-label" %>
-      <div class="col-sm-10">
-        <%= f.text_field :provider, :class=>"input-xlarge" %>
+       <%= f.label :provider, "Provider", :class=>"col-sm-2 control-label" %>
+      <div class="col-lg-3">
+        <%= f.text_field :provider, :class=> "form-control" %>
       </div>
     </div>
 
     <div class="form-group">
         <%= f.label :last_sign_in_ip, "Last IP", :class=>"col-sm-2 control-label" %>
-      <div class="col-sm-10">
-        <%= f.text_field :last_sign_in_ip, :class=>"input-xlarge" %>
+      <div class="col-lg-3">
+        <%= f.text_field :last_sign_in_ip, :class=> "form-control" %>
       </div>
     </div>
 
     <div class="form-group">
         <%= f.label :last_sign_in_at, "Last Sign In", :class=>"col-sm-2 control-label" %>
-      <div class="col-sm-10">
-        <%= f.text_field :last_sign_in_at, :class=>"input-xlarge" %>
+      <div class="col-lg-3">
+        <%= f.text_field :last_sign_in_at, :class=> "form-control" %>
       </div>
     </div>
 
     <div class="form-group">
         <%= f.label :sign_in_count, "Sign In Count", :class=>"col-sm-2 control-label" %>
-      <div class="col-sm-10">
-        <%= f.text_field :sign_in_count, :class=>"input-xlarge" %>
+      <div class="col-lg-3">
+        <%= f.text_field :sign_in_count, :class=> "form-control" %>
       </div>
     </div>
 
     <div class="form-group">
         <%= f.label :admin, "Admin?", :class=>"col-sm-2 control-label" %>
-      <div class="col-sm-10">
-        <%= f.check_box :admin, :class=>"input-xlarge" %>
+      <div class="col-sm-2">
+        <%= f.check_box :admin %>
       </div>
     </div>
-
-
     <div class="form-group">
       <div class="col-sm-10">
         <%= f.submit :class=>"btn btn-primary" %>
