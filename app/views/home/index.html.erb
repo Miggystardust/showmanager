@@ -1,36 +1,219 @@
-<header class="jumbotron masthead">
-<div class="inner">
-  <h1>troupeIt Show Manager</h1>
-  <p>
-    No more CDs. No more mistakes. Simple stage management.
-  </p>
-  <p class="download-info">
-    <% if user_signed_in? == false -%>
-    <a href="/users/sign_in" class="button btn-primary btn-large" rel="nofollow">Login</a>
-    <a href="/users/sign_up" class="button btn-primary btn-large" rel="nofollow">Sign Up</a>
-    <% end %>
-  </p>
-  <div class="row-fluid">
-    <div class="span6">
-      <P class="marketing-byline">For performers...</P>
-      <p class="download-info">
-        <a href="/passets/new" class="button btn-success btn-large" onclick="window.location('/passets/new');" rel="nofollow">Upload Your Music</a>
-      </p>
-      <p class="download-info">
-        <a href="/acts/new" class="button btn-info btn-large" onclick="window.location('/acts/new');" rel="nofollow">Create an Act</a>
-      </p>
-   </div>
-   <div class="span6">
-      <P class="marketing-byline">For Stage Managers...</P>
-      <P class="download-info">
-        <a href="/troupes/new" class="button btn-warning btn-large" onclick="window.location('/troupes/new');" rel="nofollow">Create Troupe</a>
-      </p>
+</div>
+<style>
+  #intro { 
+    background: url(/assets/landing/intro.png) 50% 0 fixed; 
+    height: auto;  
+    margin: 0 auto; 
+    width: 100%; 
+    position: relative; 
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    padding: 100px 0;
+  }
 
-      <P class="download-info">
-        <a href="/troupes/invite" class="button btn-warning btn-large" onclick="window.location('/troupes/invite');" rel="nofollow">Invite the Cast</a>
-      </p>
-      <P>(beta features - might not work yet!)</P>
+  #home { 
+    background: url(/assets/landing/stage-blur.jpg) 50% 0 fixed; 
+    height: auto;  
+    margin: 0 auto; 
+    width: 100%; 
+    position: relative; 
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    padding: 100px 50px;
+  }
+
+  #about { 
+    background: url(/assets/landing/about.png) 50% 0 fixed; 
+    height: auto;
+    margin: 0 auto; 
+    width: 100%; 
+    position: relative; 
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    padding: 100px 0;
+    color: #fff;
+  }
+
+  .media-object { width: 64px; height: 64px; padding-bottom: 30px }
+
+  .lead {
+    margin:0 auto 30px;
+    font-size:20px;
+    color:#0000;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+  }
+
+  .lead h3 {
+    font-size:30px;
+  }
+ 
+  .padded { 
+     padding:10px;
+  }
+
+</style>
+
+<!-- Section 1 -->
+<section id="intro" data-speed="6" data-type="background">
+  <div class="container">
+   <div class="lead">
+    <H3>troupeIT</h3>
+    <P> 
+    troupeIT is a stage management system for Theater, Burlesque, Stage Troupes, and shows of all kinds. <BR>
+    Performers, stage crew, technical teams, and managers can work as one, seamlessly, online. 
+    <% if user_signed_in? == false -%>
+    <% end %>
+    </P>
+    <div class="btn-group-lg">
+    <a href="/users/sign_in" class="btn btn-primary" rel="nofollow">Login</a>
+    <a href="/users/sign_up" class="btn btn-primary" rel="nofollow">Sign Up</a>
+    </div>
    </div>
   </div>
+</section>
+<!-- Section 2 -->
+<section id="home" data-speed="4" data-type="background">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-4">
+       <div class="well padded">
+        <h2>Performers</h2>
+        <p>Upload your music, video, and images with ease, and never carry a CD to a performance again. Apply online for upcoming shows easily.
+           storing your act information safely online for later re-use. </p>
+           <a href="/passets/new" class="btn btn-success btn-large" onclick="window.location('/passets/new');" rel="nofollow">Upload Your Music</a>
+           <a href="/acts/new" class="btn btn-success btn-large" onclick="window.location('/acts/new');" rel="nofollow">Create an Act</a>
+         </div><!-- /.span4 -->
+      </div>
+      <div class="col-xs-4">
+       <div class="well padded">
+        <h2>Stage Managers</h2>
+        <p>Easily create show schedules, incorporate acts and media from your performers, and command the show from your mobile device. 
+        Invite cast members to the show via simple emails, and join</p>
+        <a href="/shows/new" class="btn btn-success btn-large" onclick="window.location('/shows/new');" rel="nofollow">Create Show</a>
+        <a href="/troupes/new" class="btn btn-success btn-large" onclick="window.location('/troupes/new');" rel="nofollow">Create Troupe</a>
+        <a href="/troupes/invite" class="btn btn-success btn-large" onclick="window.location('/troupes/invite');" rel="nofollow">Invite the Cast</a>
+<!--        <p><a class="btn btn-success" href="#">View details &raquo;</a></p> -->
+      </div><!-- /.span4 -->   
+      </div>
+      <div class="col-xs-4">
+      <div class="well padded">
+        <h2>Tech Crew</h2>
+        <p>Download the entire show, pre-checked for file types and errors. During the show, communicate across mobile and desktops in real time, guiding your team through the performance.</p>
+        <a href="/shows/" class="btn btn-success btn-large" onclick="window.location('/shows/');" rel="nofollow">List Shows</a>
+<!--        <p><a class="btn btn-success" href="#">View details &raquo;</a></p> -->
+      </div><!-- /.span4 -->
+      </div>
+    </div>
+    </div>
+</section>
 
-</div>
+<!-- Section 3 -->
+<section id="about" data-speed="2" data-type="background">
+  <div class="container">
+    <div class="page-header">
+      <h1>Why troupeIT? <small>A proven solution.</small></h1>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <h2>We Know Shows</h2>
+        <P>
+         troupeIT has been the solution for the Hubba Hubba Revue on
+         over 75 performances, coordinating over 400 different
+         performers over the last three years.  It's battle-tested,
+         and is now expanding to handle the 2015 Burlesque Hall of
+         Fame, a two day show in Las Vegas. 
+        </p>
+
+<!--        <p><a class="btn btn-success">View details &raquo;</a></p> -->
+      </div><!-- /.span4 -->
+      <div class="col-md-4">
+        <h2>Easy to Use</h2>
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="/assets/landing/check.png">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">No Software</h4>
+            No software to install. Compeltely online, in-the-cloud, hosted  solution. We even provide downloads for you for use when you do not have Internet Access. 
+          </div>
+        </div>
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="/assets/landing/check.png">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">Secure</h4> 
+            We are hosted in a
+            secure data facility, backed up 24/7, and all
+            communication is encrypted over HTTPS. troupeIT integrates
+            with social networks, like Facebook and Twitter to make
+            secure logins easier for cast and crew.
+          </div>
+        </div>
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="/assets/landing/check.png">
+          </a>
+          <div class="media-body">
+           <h4 class="media-heading">Seamless Integration</h4>
+            Exports to major show control software like Figure 53's QLab. You can drag exported shows right into QLab, ready to run.
+          </div>
+        </div>
+      </div><!-- /.span4 -->
+      <div class="col-md-4">
+<h2>Sign in</h2>
+
+<div id="stylized" class="myform">
+<%= form_for(:user, :url => session_path(:user), :html => { :class => "form-vertical" } ) do |f| %>
+  <fieldset>
+  <div class="form-group"> 
+    <%= f.label :email, :class=>"control-label" %>
+    <%= f.email_field :email, :class=>"form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password, :class => "control-label"  %>
+    <%= f.password_field :password, :class=>"form-control" %>
+  </div>
+  <div class="form-group">
+  <%= f.submit "Sign in", :class => "btn btn-primary" %>
+  <BR>
+  <p align=center>&mdash;&nbsp;or&nbsp;&mdash;<BR>
+  <BR>
+  <a href="<%=omniauth_authorize_path(:user, 'facebook') %>" border=0 alt="Sign in with Facebook"><img src="/assets/facebook-login.png"></a>
+  </p>
+  </div>
+  </fieldset>
+<% end %>
+      </div><!-- /.span4 -->
+    </div>
+  </div>
+</section>
+
+
+<script>
+  $(document).ready(function(){
+  // cache the window object
+  $window = $(window);
+  
+  $('section[data-type="background"]').each(function(){
+  // declare the variable to affect the defined data-type
+  var $scroll = $(this);
+  
+  $(window).scroll(function() {
+  // HTML5 proves useful for helping with creating JS functions!
+  // also, negative value because we're scrolling upwards                             
+  var yPos = -($window.scrollTop() / $scroll.data('speed')); 
+  
+  // background position
+  var coords = '50% '+ yPos + 'px';
+  
+  // move the background
+  $scroll.css({ backgroundPosition: coords });    
+  }); // end window scroll
+  });  // end section function
+
+  // for IE
+  document.createElement("section");
+
+  }); // close out script
+
+</script>
