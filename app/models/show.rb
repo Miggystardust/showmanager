@@ -3,6 +3,7 @@ class Show
    # essentially the spreadsheet joyce makes now.
    include Mongoid::Document
 
+   belongs_to :troupe
    has_many :show_items
 # jna: removing this for rails4 ? 
 #   references_many :show_items, :dependent => :delete
@@ -11,6 +12,7 @@ class Show
    validates_presence_of :show_time
    validates_presence_of :door_time
    validates_presence_of :venue
+   validates_presence_of :troupe_id
 
    field :title, :type => String
    field :venue, :type => String

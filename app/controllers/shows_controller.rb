@@ -7,7 +7,9 @@ class ShowsController < ApplicationController
   before_filter do
      redirect_to new_user_session_path unless current_user && current_user.admin?
   end
-
+  
+  before_filter :build_troupe_select, :only => [ :new, :edit, :update, :create ]
+  
   # GET /shows
   # GET /shows.json
   def index
@@ -340,6 +342,13 @@ class ShowsController < ApplicationController
   # POST /shows.json
   def create
     @show = Show.new(params[:show])
+    begin
+      @tr = Troupe.find(params[:troupe_id])
+      @show.troupe_id = @tr.id
+    rescue Mongoid::Errors::DocumentNotFound
+      # If we can't find it, we leave it blank. 
+      @show.troupe_id = nil
+    end
 
     respond_to do |format|
     begin
@@ -360,6 +369,14 @@ class ShowsController < ApplicationController
   # PUT /shows/1.json
   def update
     @show = Show.find(params[:id])
+    begin
+      @tr = Troupe.find(params[:troupe_id])
+      @show.troupe_id = @tr.id
+    rescue Mongoid::Errors::DocumentNotFound
+      # If we can't find it, we leave it blank. 
+      @show.troupe_id = nil
+    end
+
     @show_items = ShowItem.where(show_id: params[:id])
     @show_item = ShowItem.new
 
@@ -391,6 +408,21 @@ class ShowsController < ApplicationController
   def logexec(command)
     r = system(command)
     logger.info("#{command} / result=#{r}")
+  end
+
+  def build_troupe_select
+    @troupesel = Array.new
+
+    current_user.troupes.each { |t|
+      @troupesel << t
+    }
+
+    current_user.troupe_memberships.each { |tm|
+      if tm.troupe
+        @troupesel << tm.troupe
+      end
+    }
+
   end
 
 end

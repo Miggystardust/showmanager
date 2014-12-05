@@ -25,6 +25,13 @@ $(function() {
      end %>
 
   <div class="form-group">
+    <%= f.label :troupe_id, "Troupe", :class=>"col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%=select_tag "troupe_id", options_from_collection_for_select(@troupesel, "id", "name", @show.troupe_id), prompt: "-- select a troupe --" %>
+    </div>
+  </div>
+
+  <div class="form-group">
     <%= f.label :title, "Title", :class=>"col-sm-2 control-label" %>
     <div class="col-sm-10">
     <%= f.text_field :title, :class=>"form-control" %>

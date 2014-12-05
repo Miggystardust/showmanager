@@ -13,7 +13,7 @@ Rails3MongoidDevise::Application.configure do
 
   if Rails.env == 'development'
     ::BHOF_HOST = 'dev.troupeit.com'
-    ::BHOF_URL  = "http://#{BHOF_HOST}"
+    ::BHOF_URL  = "https://#{BHOF_HOST}"
   else
     ::BHOF_HOST = 'troupeit.com'
     ::BHOF_URL  = "https://#{BHOF_HOST}"
