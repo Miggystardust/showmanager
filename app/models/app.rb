@@ -53,7 +53,7 @@ class App
   end
 
   def purchase
-    response = EXPRESS_GATEWAY.purchase(self.app_purchase_price, express_purchase_options)
+    response = EXPRESS_GATEWAY.purchase(self.purchase_price, express_purchase_options)
     self.update_attribute(:purchased_at, Time.now) if response.success?
     response.success?
   end
