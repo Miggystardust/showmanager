@@ -25,14 +25,14 @@
   <div class="control-group">
     <%= f.label :name, "Short Name *", :class=>"control-label required" %>
     <div class="controls">
-      <%= f.text_field :name, :class => "input-xxlarge"  %>
+      <%= f.text_field :name, :class => "form-control"  %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :description, :class => "control-label" %>
     <div class="controls">
-      <%= f.text_field :description, :class => "input-xxlarge"  %>
+      <%= f.text_field :description, :class => "form-control"  %>
     </div>
   </div>
 
@@ -43,8 +43,9 @@
       <%= f.check_box :private %>
     </div>
   </div>
-
+  <P>&nbsp;</P>
   <div class="actions">
-    <%= f.submit %>
+    <a class="btn btn-danger" href="/troupes/">Cancel</a>
+    <%= f.submit :class=>"btn btn-primary" %>
   </div>
 <% end %>
