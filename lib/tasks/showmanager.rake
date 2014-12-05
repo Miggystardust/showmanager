@@ -19,7 +19,7 @@ namespace :showmanager do
   end
 
   task :move_to_hubba => :environment do
-    # covert every show in the system to hubba hubba's troupe_id
+    # convert every show in the system to hubba hubba's troupe_id
 
     hubba_troupe = Troupe.where(name: 'Hubba Hubba Revue')[0]
     if hubba_troupe
@@ -33,4 +33,18 @@ namespace :showmanager do
       print "can't find hubba troupe."
     end
   end
+
+  task :add_users_to_hubba => :environment do
+    # for every user that we have write a membership record in troupemanagement
+    hubba_troupe = Troupe.where(name: 'Hubba Hubba Revue')[0]
+
+    users = User.all
+    users.each { |u|
+       tm = TroupeMembership.new
+       tm.user_id = u._id
+       tm.troupe_id = hubba_troupe._id
+       tm.save!
+    }
+  end
+  
 end
