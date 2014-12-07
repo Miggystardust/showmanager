@@ -80,6 +80,15 @@ class App
     rate
   end
 
+  def complete?
+    if self.entry and self.entry_techinfo and self.is_complete? and self.entry.is_complete? and self.entry_techinfo.is_complete? and self.purchased_at.present? 
+      true
+    else
+      false
+    end
+  end 
+
+
   private
 
   def express_purchase_options

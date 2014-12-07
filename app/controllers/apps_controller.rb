@@ -12,9 +12,9 @@ class AppsController < ApplicationController
 
     if @apps
       @apps.each { |a|
-         if a.entry.nil? or a.entry_techinfo.nil? or a.is_complete? == false or a.entry.is_complete? == false or a.entry_techinfo.is_complete? == false
-            @apps_incomplete = @apps_incomplete + 1
-          end
+         if not a.complete?
+           @apps_incomplete = @apps_incomplete + 1
+         end
       }
     end
   end

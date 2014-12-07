@@ -180,8 +180,7 @@ This application has been submitted. No further changes are possible.
     <% if @app.locked == true -%> 
       <BUTTON type="button" CLASS="btn btn-success">Submitted! Good Luck!</BUTTON>
     <% else -%> 
-      <% if @app.entry and @app.entry_techinfo and @app.is_complete? and @app.entry.is_complete? and @app.entry_techinfo.is_complete? and @app.purchased_at.present? -%>
-
+      <% if @app.complete? -%>
           <BUTTON type="button" CLASS="btn btn-warning">Ready to Submit</BUTTON>
       <% else -%>
           <BUTTON type="button" CLASS="btn btn-default">Application Incomplete</BUTTON>
