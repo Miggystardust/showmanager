@@ -43,11 +43,11 @@ class App
 
   def is_complete?
     # true if the initial part of the application is complete
-    if self.legal_name != "" and
-        self.mailing_address != "" and
-        self.phone_primary != "" and
+    if self.legal_name.present? and
+        self.mailing_address.present? and
+        self.phone_primary.present? and
         self.legal_accepted == true
-      return true
+     return true
     end
 
     false

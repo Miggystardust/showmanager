@@ -15,7 +15,7 @@ class AppsController < ApplicationController
          # an application is incomplete if both tests fail. 
          # we could check for locked here, as you can only lock when 
          # complete, but we're trying to be complete. 
-         if not a.complete? or a.locked == false 
+         if a.complete? == false or a.locked.present? == false
            @apps_incomplete = @apps_incomplete + 1
          end
       }
