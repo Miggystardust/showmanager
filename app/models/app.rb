@@ -24,7 +24,7 @@ class App
   field :is_group, :type => Mongoid::Boolean # false if solo
 
   # upon submit, we lock the app.
-  field :locked, :type => Mongoid::Boolean # false if solo
+  field :locked, :type => Mongoid::Boolean
 
   validates_presence_of :legal_name, :mailing_address, :phone_primary, :phone_primary_has_sms, :description, :message => "This field is required"
 
@@ -42,6 +42,7 @@ class App
   has_one :entry_techinfo
 
   def is_complete?
+    # true if the initial part of the application is complete
     if self.legal_name != "" and
         self.mailing_address != "" and
         self.phone_primary != "" and
@@ -81,6 +82,7 @@ class App
   end
 
   def complete?
+    # true if the application and it's subcomponents are complete
     if self.entry and self.entry_techinfo and self.is_complete? and self.entry.is_complete? and self.entry_techinfo.is_complete? and self.purchased_at.present? 
       true
     else

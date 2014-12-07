@@ -12,7 +12,10 @@ class AppsController < ApplicationController
 
     if @apps
       @apps.each { |a|
-         if not a.complete?
+         # an application is incomplete if both tests fail. 
+         # we could check for locked here, as you can only lock when 
+         # complete, but we're trying to be complete. 
+         if not a.complete? or a.locked == false 
            @apps_incomplete = @apps_incomplete + 1
          end
       }
