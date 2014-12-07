@@ -49,6 +49,15 @@
      padding:10px;
   }
 
+  .shadow { 
+    color:#ffffff;
+    text-shadow: 2px 2px #222222;
+  }
+
+  .shadow p { 
+    font-size: 20px;
+  }
+
 </style>
 
 <!-- Section 1 -->
@@ -73,33 +82,35 @@
 <section id="home" data-speed="4" data-type="background">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-xs-4">
-       <div class="well padded">
+      <div class="col-xs-6">
+        <div class="shadow">
         <h2>Performers</h2>
         <p>Upload your music, video, and images with ease, and never carry a CD to a performance again. Apply online for upcoming shows easily.
            storing your act information safely online for later re-use. </p>
+        </div>
            <a href="/passets/new" class="btn btn-success btn-large" onclick="window.location('/passets/new');" rel="nofollow">Upload Your Music</a>
            <a href="/acts/new" class="btn btn-success btn-large" onclick="window.location('/acts/new');" rel="nofollow">Create an Act</a>
-         </div><!-- /.span4 -->
       </div>
-      <div class="col-xs-4">
-       <div class="well padded">
+      <div class="col-xs-6">
+        <div class="shadow">
         <h2>Stage Managers</h2>
         <p>Easily create show schedules, incorporate acts and media from your performers, and command the show from your mobile device. 
-        Invite cast members to the show via simple emails, and join</p>
+        Invite cast members to the show via simple emails, and join other troupes with ease.
+        </p>
+        </div>
         <a href="/shows/new" class="btn btn-success btn-large" onclick="window.location('/shows/new');" rel="nofollow">Create Show</a>
         <a href="/troupes/new" class="btn btn-success btn-large" onclick="window.location('/troupes/new');" rel="nofollow">Create Troupe</a>
         <a href="/troupes/" class="btn btn-success btn-large" onclick="window.location('/troupes/invite');" rel="nofollow">See Your Troupes</a>
 <!--        <p><a class="btn btn-success" href="#">View details &raquo;</a></p> -->
       </div><!-- /.span4 -->   
-      </div>
-      <div class="col-xs-4">
-      <div class="well padded">
+      <div class="col-xs-6">
+        <div class="shadow">
         <h2>Tech Crew</h2>
         <p>Download the entire show, pre-checked for file types and errors. During the show, communicate across mobile and desktops in real time, guiding your team through the performance.</p>
+        </div>
         <a href="/shows/" class="btn btn-success btn-large" onclick="window.location('/shows/');" rel="nofollow">List Shows</a>
 <!--        <p><a class="btn btn-success" href="#">View details &raquo;</a></p> -->
-      </div><!-- /.span4 -->
+      </div>
       </div>
     </div>
     </div>
