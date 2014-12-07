@@ -192,11 +192,9 @@ This application has been submitted. No further changes are possible.
       <BUTTON type="button" CLASS="btn btn-success">Submitted! Good Luck!</BUTTON>
     <% else -%> 
       <% if @app.complete? -%>
-          <a href="#" id="submititbtn">
-          <BUTTON type="button" CLASS="btn btn-danger"><strong>Ready to Submit</strong></BUTTON>
-          </a>
+          <BUTTON type="button" CLASS="btn btn-danger" id="submitbtn"><strong>Ready to Submit</strong></BUTTON>
       <% else -%>
-          <BUTTON type="button" CLASS="btn btn-danger">Application Incomplete</BUTTON>
+          <BUTTON type="button" CLASS="btn btn-danger" id="deadsubmitbtn">Application Incomplete</BUTTON>
       <% end -%>
     <% end -%>
     </td>
