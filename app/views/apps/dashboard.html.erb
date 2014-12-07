@@ -8,6 +8,11 @@
       $("#submitit").click(function() {
           $("#submitModal").modal('show');
       });
+
+      $("#submitbtn").click(function() {
+          $("#submitModal").modal('show');
+      });
+
   });
 </script>
 
@@ -50,7 +55,9 @@ This application has been submitted. No further changes are possible.
     <td align="center">5-10 mins</td>
     <td align="center">
       <% if @entry and @entry.is_part1_complete? -%> 
-      <BUTTON type="button" CLASS="btn btn-success">Complete</BUTTON>
+        <a href="<%=edit_app_entry_path({app_id: @app.id, id: @entry.id})%>">
+        <BUTTON type="button" CLASS="btn btn-success">Complete</BUTTON>
+        </a>
       <% else -%>
           <% if @entry -%>
              <a href="<%=edit_app_entry_path({app_id: @app.id, id: @entry.id})%>">
@@ -119,7 +126,9 @@ This application has been submitted. No further changes are possible.
     </td>
     <td align="center">
       <% if @entry and @entry.is_part2_complete? -%> 
-      <BUTTON type="button" CLASS="btn btn-success">Complete</BUTTON>
+        <a href ="<%=edit_app_entry_path({app_id: @app.id, id: @entry.id, part: 2})%>">
+        <BUTTON type="button" CLASS="btn btn-success">Complete</BUTTON>
+        </a>
       <% else -%>
         <% if @entry -%>
           <a href ="<%=edit_app_entry_path({app_id: @app.id, id: @entry.id, part: 2})%>">
@@ -149,7 +158,9 @@ This application has been submitted. No further changes are possible.
     </td>
     <td align="center">
       <% if @app.entry_techinfo and  @app.entry_techinfo.is_complete? -%>
+         <a href="<%=edit_app_entry_techinfo_path({app_id: @app.id, id: @app.entry_techinfo.id}) %>">
          <BUTTON type="button" CLASS="btn btn-success">Complete</BUTTON>
+         </a>
       <% else -%>
          <% if @app.entry_techinfo -%>
             <a href="<%=edit_app_entry_techinfo_path({app_id: @app.id, id: @app.entry_techinfo.id}) %>">
@@ -167,7 +178,7 @@ This application has been submitted. No further changes are possible.
     </td>
 
     <td>
-    <% if @app.locked == false -%> 
+    <% if @app.locked.present? == false -%> 
     <a href="#" id="submitit">Submit Application</a>
     <% else -%> 
     Submit Application
@@ -181,7 +192,9 @@ This application has been submitted. No further changes are possible.
       <BUTTON type="button" CLASS="btn btn-success">Submitted! Good Luck!</BUTTON>
     <% else -%> 
       <% if @app.complete? -%>
+          <a href="#" id="submititbtn">
           <BUTTON type="button" CLASS="btn btn-danger"><strong>Ready to Submit</strong></BUTTON>
+          </a>
       <% else -%>
           <BUTTON type="button" CLASS="btn btn-danger">Application Incomplete</BUTTON>
       <% end -%>
