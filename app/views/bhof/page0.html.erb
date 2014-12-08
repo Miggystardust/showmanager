@@ -49,14 +49,17 @@
     </TR>
    </table>
 </div>
-<p align="center">
-<strong>Next, you will create a troupeIT account so that you can begin your application. </strong>
 
-</p>
-<p align="center">
-  <% if current_user -%>
+ <% if current_user -%>
+  <p align="center">
   <a class="btn btn-success" href="/bhof/page1">I understand. Take me to the next page.</a>
+  </p>
   <% else -%>
+  <p align="center">
+  <strong>Next, you will create a troupeIT account so that you can begin your application. </strong>
+  </p>
+  <p align="center">
   <a class="btn btn-success" href="/bhof/page1">I understand. Take me to sign up so I can create an account.</a>
-  <% end -%>
-</p>
+  </p>
+ <% end -%>
+
