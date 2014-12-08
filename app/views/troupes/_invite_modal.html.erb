@@ -1,0 +1,108 @@
+<div class='modal' id='inviteModal' style='display: none' tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">Invite</h4>
+  </div>
+
+  <%= form_for :invitation, :html => { :class => "form-horiziontal" } do |f| -%>
+  <div class='modal-body'>
+    <P>Enter an e-mail address to send the invitation to:</P>
+
+    <div class="control-group">
+      <%= f.label :email, "E-Mail Address", :class=>"control-label" %>
+      <div class="controls">
+        <%= f.text_field :email, :class=>"input-xlarge" %>
+      </div>
+    </div>
+  </div>
+
+  <div class='modal-footer'>
+    <%= f.hidden_field :troupe_id, :value=> ''  %>
+    <button class="btn btn-primary" id="invite-form-submit">Update Message</button>
+    <button class="btn btn-primary" id="invite-form-remove">Remove Message</button>
+
+  </div> <!-- /.modal-footer --> 
+  <% end -%>
+  </div> <!-- /.modal-content --> 
+ </div>  <!-- /.modal-dialog --> 
+</div> <!-- /.modal --> 
+
+<script>
+  //<![CDATA[
+    $(function() {
+      // wire up the buttons to dismiss the modal when shown
+      $("#inviteModal").bind("show", function() {
+        $("#inviteModal a.btn").click(function(e) {
+          // hide the dialog box
+          $("#inviteModal").modal('hide');
+        });
+
+      });
+      // remove the event listeners when the dialog is hidden
+      $("#inviteModal").bind("hide", function() {
+          // remove event listeners on the buttons
+          $("#inviteModal a.btn").unbind();
+      });
+
+      // finally, wire up the actual modal functionality and show the dialog
+      $("#inviteModal").modal({
+        "backdrop" : "static",
+        "keyboard" : true,
+        "show" : true // this parameter ensures the modal is shown immediately
+      });
+
+      $('#invite-form-submit').on('click', function(e){
+        // We don't want this to act as a link so cancel the link action
+        e.preventDefault();
+
+        // first instance is  the add box, second instance is the length box.
+        var actdata = {
+          "authenticity_token" : AUTH_TOKEN,
+          'inviteency_msg': "INVITEENCY: (<%=current_user.name%>) " + show_inviteency_msg.value,
+        };
+
+        $("#inviteModal").modal('hide');
+
+        // update the record
+        $.ajax({
+          type: 'PUT',
+              dataType: 'json',
+              url: '/invite',
+              contentType: 'application/json',
+              data: JSON.stringify(actdata),
+              success: function() { 
+                 showDT.fnReloadAjax();
+              }
+          });
+        });
+
+      $('#invite-form-remove').on('click', function(e){
+      // We don't want this to act as a link so cancel the link action
+        e.preventDefault();
+
+        // first instance is  the add box, second instance is the length box.
+        var actdata = {
+          "authenticity_token" : AUTH_TOKEN,
+          'inviteency_msg': "",
+        };
+
+        $("#inviteModal").modal('hide');
+
+        // update the record
+        $.ajax({
+          type: 'PUT',
+              dataType: 'json',
+              url: '/invite', // TODO: FIX
+              contentType: 'application/json',
+              data: JSON.stringify(actdata),
+              success: function() { 
+                 showDT.fnReloadAjax();
+              }
+          });
+        });
+
+    });
+  //]]>
+</script>
