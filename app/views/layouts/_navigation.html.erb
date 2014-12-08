@@ -17,11 +17,23 @@
         <a href="/">Home</a>
         </li>
 
+        <% if user_signed_in? -%>
+        <li id="bhofMenu" class="dropdown <% if request.fullpath.start_with?("/bhof") -%> active <% end -%>">
+           <a class="dropdown-toggle" data-toggle="dropdown" href="#bhofMenu">
+           BHOF 2015<span class="caret"></span>
+           </a>
+           <ul class="dropdown-menu" role="menu">
+             <li><a href="/bhof/">Introduction and Rules</a></li>
+             <li><a href="/apps/">Your Applications</a></li>
+           </UL>
+        </li>
+        <% else -%>
         <li <% if request.fullpath.start_with?("/bhof") -%>class="active"<% end -%>>
         <%= link_to 'BHOF 2015', bhof_index_url() %>
         </li>
+        <% end -%>
 
-        <% if user_signed_in? %>
+        <% if user_signed_in? -%>
             <li class="dropdown" id="yourMenu">
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#yourMenu">
                     You<span class="caret"></span>
