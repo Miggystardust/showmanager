@@ -15,7 +15,7 @@ class BhofController < ApplicationController
 
   def index
     # first page does not require authentication
-    render 'page1'
+    render 'page0'
   end
 
 end
